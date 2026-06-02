@@ -1,0 +1,67 @@
+aid: otter
+name: Otter
+description: >-
+  Otter (TryOtter) is a Restaurant Operating System used by hundreds of
+  thousands of restaurants worldwide to aggregate delivery and online orders,
+  consolidate menus, analyze sales, and control third-party delivery services
+  from one place. For developers and integration partners, Otter publishes a
+  Public API and developer guides describing the workflows and business rules
+  for building integrations across account pairing, orders, menus, delivery,
+  finance, reports, reviews, storefront, loyalty, and store management. The
+  integration model is built around Public API endpoints plus webhooks and
+  configuration, with onboarding typically beginning by registering an
+  application, configuring webhooks, and onboarding stores. Specific
+  authentication and base URL details are provided through an account
+  representative and the OpenAPI reference.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Restaurant
+  - Order Management
+  - Delivery
+  - Online Ordering
+  - Menu Management
+  - Analytics
+url: https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/apis.yml
+created: '2026-06-02'
+modified: '2026-06-02'
+specificationVersion: '0.19'
+apis:
+  - aid: otter:public-api
+    name: Otter Public API
+    description: >-
+      The Otter Public API enables integrations across the digital food
+      ecosystem, covering account pairing, orders, menus, delivery, finance,
+      reports, reviews, storefront, loyalty, and store management. Integrations
+      combine API endpoints with webhooks and configuration; onboarding starts
+      by registering an application, configuring webhooks, and onboarding
+      stores. Auth and base URL details are provided via an account
+      representative and the OpenAPI reference.
+    humanURL: https://developer-guides.tryotter.com/docs/
+    tags:
+      - Orders
+      - Menu
+      - Delivery
+      - Webhooks
+      - Reports
+    properties:
+      - type: Documentation
+        url: https://developer-guides.tryotter.com/docs/
+      - type: GettingStarted
+        url: https://developer-guides.tryotter.com/docs/
+common:
+  - type: Website
+    url: https://www.tryotter.com
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: Support
+    url: https://helpdesk.tryotter.com/hc/en-us/articles/22694653065107-API-Documentation
+  - type: Blog
+    url: https://www.tryotter.com/blog
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/try-otter
+  - type: X
+    url: https://twitter.com/try_otter
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
