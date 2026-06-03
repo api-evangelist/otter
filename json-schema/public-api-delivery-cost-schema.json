@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeliveryCost",
+  "description": "Delivery cost details.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-cost-schema.json",
+  "type": "object",
+  "properties": {
+    "baseCost": {
+      "type": "number",
+      "format": "double",
+      "description": "Base delivery cost value.",
+      "example": 4.99
+    },
+    "extraCost": {
+      "type": "number",
+      "format": "double",
+      "description": "Extra delivery cost value.",
+      "example": 0.99
+    }
+  }
+}

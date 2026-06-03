@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-promotion-details-structure.json",
+  "name": "PromotionDetails",
+  "description": "Order promotion details.",
+  "type": "object",
+  "properties": {
+    "externalId": {
+      "type": "string",
+      "description": "External promotion identifier.",
+      "example": "store_123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Promotion name.",
+      "example": "20% off, up to $5"
+    },
+    "value": {
+      "type": "double",
+      "description": "Promotion value.",
+      "example": 2
+    }
+  }
+}

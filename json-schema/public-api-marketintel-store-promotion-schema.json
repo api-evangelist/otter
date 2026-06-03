@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Marketintel_StorePromotion",
+  "description": "The Store Promotion information. At least one of the displayName, promotionType, campaignType or promotionId need to be present.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-promotion-schema.json",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the promotion.",
+      "example": "Flat rate discount on Christmas day"
+    },
+    "promotionType": {
+      "type": "string",
+      "nullable": true,
+      "description": "The type of promotion.",
+      "example": "Flat rate discount"
+    },
+    "campaignType": {
+      "type": "string",
+      "nullable": true,
+      "description": "The type of promotion campaign.",
+      "example": "Christmas"
+    },
+    "promotionId": {
+      "type": "string",
+      "nullable": true,
+      "description": "The external promotion id.",
+      "example": 12345
+    }
+  }
+}

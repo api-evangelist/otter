@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Gtin",
+  "description": "A 14 digit Global Trade Item Number (GTIN). For GTIN values that are shorter than 14 digits, value will be padded with leading zeroes.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-gtin-schema.json",
+  "type": "string",
+  "example": "00049000608779"
+}

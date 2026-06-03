@@ -1,0 +1,117 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Otter
+providerId: otter
+created: '2026-06-03'
+modified: '2026-06-03'
+reconciled: true
+tags:
+  - FinOps
+  - FOCUS
+  - Restaurant
+  - Point Of Sale
+  - Online Ordering
+description: >-
+  FOCUS-aligned FinOps for Otter: monthly POS subscription packages plus
+  per-order transaction processing fees and optional add-on/hardware lines.
+  Public API and webhook access is bundled into the platform relationship rather
+  than billed per call.
+sources:
+  - https://www.tryotter.com/pricing
+  - https://www.tryotter.com/pricing-details-pos
+  - https://developer-guides.tryotter.com/docs/guides-rate-limiting/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Otter (CloudKitchens / TryOtter)
+serviceCategory: Restaurant Operations & Commerce
+billingModel:
+  pricingCategory: Subscription + Take Rate
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Adjustment
+    - Refund
+    - Credit
+focusColumns:
+  ServiceName: Otter Restaurant Operating System
+  ServiceCategory: Restaurant Operations & Commerce
+  ServiceSubcategory: Point of Sale & Online Ordering
+  ProviderName: Otter
+  PublisherName: Otter (CloudKitchens / TryOtter)
+  InvoiceIssuerName: Otter (CloudKitchens / TryOtter)
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: pos_subscription_months
+    unit: month
+    aggregation: sum
+    dimensions:
+      - plan
+      - store
+  - name: order_transactions
+    unit: transaction
+    aggregation: count
+    dimensions:
+      - store
+      - channel
+      - card_present
+  - name: order_processing_volume
+    unit: transaction
+    aggregation: sum
+    dimensions:
+      - store
+      - card_present
+  - name: add_on_subscriptions
+    unit: month
+    aggregation: sum
+    dimensions:
+      - add_on
+      - store
+  - name: hardware_purchases
+    unit: device
+    aggregation: count
+    dimensions:
+      - device_type
+      - lease_or_purchase
+  - name: api_requests
+    unit: request
+    aggregation: count
+    dimensions:
+      - application
+      - store
+      - endpoint
+principles:
+  - name: Visibility
+    description: >-
+      Track POS subscription and per-order processing spend through the Otter
+      dashboard analytics and finance/reporting surfaces of the Public API
+      (Reports endpoints — orders, items, payouts; Finance endpoints —
+      transactions and invoices). API consumption is observable via per-endpoint
+      429 rate-limit signals rather than a billing meter.
+  - name: Allocation
+    description: >-
+      Attribute spend per store and per channel. Subscription and transaction
+      fees are scoped to a store; API usage is scoped to (application, store,
+      endpoint), so integration cost can be allocated to the partner application
+      and the stores it operates.
+  - name: Optimization
+    description: >-
+      Choose the package (Growth vs Pro vs Build Your Own) matching kiosk/QR
+      needs, use cash-discounting on processing fees where offered, lease vs
+      buy hardware, and trim add-ons (gift cards, loyalty, delivery integration)
+      to active use. On the API side, batch webhook callbacks and respect
+      per-endpoint rate tiers to avoid 429 retries.
+  - name: Accountability
+    description: >-
+      Restaurant operators own the POS/processing spend and review payouts via
+      the Finance and Reports APIs; integration partners own API/webhook
+      reliability and escalate persistent throttling to their Otter Technical
+      Account Manager (TAM).

@@ -1,0 +1,22 @@
+{
+  "externalIdentifiers": {},
+  "currencyCode": "EUR",
+  "status": "NEW_ORDER",
+  "items": [
+    {}
+  ],
+  "orderedAt": "2007-12-03T10:15:30+01:00",
+  "customer": {},
+  "customerNote": "Please include extra napkins!",
+  "deliveryInfo": {},
+  "orderTotal": {},
+  "orderTotalV2": {},
+  "customerPayments": [
+    {}
+  ],
+  "fulfillmentInfo": {},
+  "promotionsDetails": [
+    {}
+  ],
+  "preparationTime": {}
+}

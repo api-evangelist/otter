@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-menu-async-job-type-structure.json",
+  "name": "MenuAsyncJobType",
+  "description": "MenuAsyncJobType schema from Public API (Otter Public API).",
+  "enum": [
+    "TEMPLATE_MENU_SYNC"
+  ]
+}

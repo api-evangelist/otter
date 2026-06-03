@@ -1,0 +1,17 @@
+{
+  "updateNames": true,
+  "updatePrices": true,
+  "updateDescriptions": true,
+  "createUnmatchedEntities": true,
+  "deleteMissingEntities": true,
+  "bootstrapPhotosToEntities": true,
+  "copyEntityPaths": true,
+  "updateItemSuspensionStatus": true,
+  "updateHours": true,
+  "assignItemsToLocations": true,
+  "unassignItemsFromLocations": true,
+  "updateMenuOrganization": true,
+  "updateItemArrangement": true,
+  "updateModifierGroupRules": true,
+  "updateTaxes": true
+}

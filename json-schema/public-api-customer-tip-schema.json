@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CustomerTip",
+  "description": "CustomerTip schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-customer-tip-schema.json",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "number",
+      "description": "The amount that the customer tipped.",
+      "example": 2
+    }
+  },
+  "required": [
+    "value"
+  ]
+}

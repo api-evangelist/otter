@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-bootstrap-menu-request-structure.json",
+  "name": "BootstrapMenuRequest",
+  "description": "BootstrapMenuRequest schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "templateName": {
+      "type": "string",
+      "description": "Name for the bootstrapped template menu",
+      "example": "My Store's Menu"
+    },
+    "externalServiceSlug": {
+      "type": "string",
+      "description": "The external service from which to bootstrap menu data",
+      "example": "ubereats-api"
+    },
+    "enableTemplate": {
+      "type": "boolean",
+      "description": "Whether or not to enable the template at the bootstrapped store",
+      "nullable": true,
+      "example": true
+    },
+    "stationId": {
+      "type": "string",
+      "nullable": true,
+      "description": "The id of the station to which to assign bootstrapped items, unnecessary for brick and mortar",
+      "example": "9cc4bb5e-bc97-40d9-af28-c02ef1483610"
+    },
+    "posSlug": {
+      "type": "string",
+      "nullable": true,
+      "description": "The slug for the POS to connect to",
+      "example": "pos-slug"
+    }
+  },
+  "required": [
+    "templateName",
+    "externalServiceSlug"
+  ]
+}

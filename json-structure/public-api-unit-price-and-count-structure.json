@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-unit-price-and-count-structure.json",
+  "name": "UnitPriceAndCount",
+  "description": "Unit price and count for additional charges.",
+  "type": "object",
+  "properties": {
+    "unitPrice": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-money-schema.json"
+    },
+    "count": {
+      "minimum": 1,
+      "type": "int32",
+      "description": "The count for the additional charge.",
+      "example": 3
+    }
+  },
+  "required": [
+    "unitPrice",
+    "count"
+  ],
+  "example": "3 x $25.21"
+}

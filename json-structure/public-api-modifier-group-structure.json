@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-modifier-group-structure.json",
+  "name": "ModifierGroup",
+  "description": "Items are sold on the menu. Modifiers to items are items themselves and their relationship is defined by ModifierGroup.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The identifier that exists in the third party system. During a menu publish event, uuidV4 ids will be generated for new entities that do not yet exist in the internal menu.",
+      "example": "da0e4e94-5670-4175-897a-3b7dde45bed5"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of ModifierGroup.",
+      "example": "Choose your type of bagel"
+    },
+    "minimumSelections": {
+      "minimum": 0,
+      "type": "int32",
+      "description": "Minimum number of selections customers can make in this ModifierGroup. 0 means no min limits.",
+      "example": 0
+    },
+    "maximumSelections": {
+      "minimum": 0,
+      "type": "int32",
+      "description": "Maximum number of selections customers can make in this ModifierGroup. 0 means no max limits.",
+      "example": 0
+    },
+    "maxPerModifierSelectionQuantity": {
+      "minimum": 0,
+      "default": 1,
+      "type": "int32",
+      "description": "Maximum number of selections customers can make for each modifier item in this ModifierGroup. 0 means there is no limit to how many times they can select a single modifier item. If not specified, a value of 1 will be used as the default value.",
+      "example": 0
+    },
+    "defaultModifierSelectionData": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-default-modifier-selection-data-schema.json"
+    },
+    "itemIds": {
+      "type": "array",
+      "default": [],
+      "description": "Identifiers of each Item within this ModifierGroup.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "The description for this modifier group.",
+      "example": "Choose any of these delicious types of bagels"
+    },
+    "type": {
+      "type": "string",
+      "description": "Experimental: The type of this modifier group, for informative purposes. It can be one of the following values: `DEFAULT`, `UPSELL`, `INGREDIENT_REMOVAL`, `INGREDIENT_ADD`, `PREPARE_INSTRUCTIONS`, `SIZE_MODIFICATION`, `PACKAGING_INSTRUCTION` and `CONDIMENT`.",
+      "example": "DEFAULT"
+    },
+    "exposedThirdPartyInfos": {
+      "type": "array",
+      "default": [],
+      "description": "Additional information about the menu that should be exposed to third party",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-exposed-third-party-info-schema.json"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-courier-structure.json",
+  "name": "Courier",
+  "description": "Details about the delivery courier.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The person's name as it should be displayed.",
+      "nullable": true,
+      "example": "Jane Doe"
+    },
+    "phone": {
+      "type": "string",
+      "description": "The person's phone number.",
+      "nullable": true,
+      "example": "+1-555-555-5555"
+    },
+    "phoneCode": {
+      "type": "string",
+      "nullable": true,
+      "description": "A code or extension of the phone number.",
+      "example": "111 11 111"
+    },
+    "email": {
+      "type": "string",
+      "description": "The person's email address.",
+      "nullable": true,
+      "example": "email@email.com"
+    },
+    "personalIdentifiers": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-personal-identifiers-schema.json"
+    }
+  }
+}

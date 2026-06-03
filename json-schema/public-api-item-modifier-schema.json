@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ItemModifier",
+  "description": "ItemModifier schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-modifier-schema.json",
+  "type": "object",
+  "properties": {
+    "quantity": {
+      "minimum": 1,
+      "maximum": 1000,
+      "type": "integer",
+      "description": "The number of times the modifier was applied to the given item.",
+      "format": "int32",
+      "example": 1
+    },
+    "skuPrice": {
+      "type": "number",
+      "nullable": true,
+      "description": "The stored sku price of this item",
+      "readOnly": true,
+      "example": 1
+    },
+    "id": {
+      "type": "string",
+      "nullable": true,
+      "description": "The unique ID of the modifier product.",
+      "example": "d7a21692-9195-43aa-a58f-5395bba8a804"
+    },
+    "lineItemId": {
+      "type": "string",
+      "nullable": true,
+      "description": "The unique ID of the instance of a modifier in an order. Instances of the same modifier across different orders will have different line item IDs. Multiple instances of the same modifier in one order will have different line item IDs if their modifiers are different.",
+      "readOnly": true,
+      "example": "2f91f9f3-2d7e-4898-ae81-00fe06ed7dbf"
+    },
+    "skuId": {
+      "type": "string",
+      "nullable": true,
+      "description": "sku ID of the item.",
+      "example": "867b8fdc-cf7b-4fc3-b7e0-4c7b68d8b1cc"
+    },
+    "name": {
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the modifier as displayed to the customer.",
+      "example": "Avocado"
+    },
+    "price": {
+      "type": "number",
+      "nullable": true,
+      "description": "The price of the sold modifier.",
+      "example": 1
+    },
+    "groupName": {
+      "type": "string",
+      "nullable": true,
+      "description": "The parent group of the modifier item",
+      "example": "Add ons"
+    },
+    "groupId": {
+      "type": "string",
+      "nullable": true,
+      "description": "The unique ID of the parent group",
+      "example": "fb52b138-7ac4-42c1-bfd8-664d57113a41"
+    },
+    "stationId": {
+      "type": "string",
+      "nullable": true,
+      "description": "The ID of the station the modifier item is assigned to.",
+      "readOnly": true,
+      "example": "a49cbd3e-94e2-462d-a6de-1985e5d98d1c"
+    },
+    "modifiers": {
+      "type": "array",
+      "nullable": true,
+      "description": "Nested modifiers applied to the item.",
+      "maxItems": 100,
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-modifier-schema.json"
+      }
+    }
+  },
+  "required": [
+    "quantity"
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-customer-payment-structure.json",
+  "name": "CustomerPayment",
+  "description": "CustomerPayment schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "double",
+      "description": "The portion of the overall amount that needs to be paid.",
+      "example": 2
+    },
+    "processingStatus": {
+      "type": "string",
+      "description": "The processing status of the payment. (PROCESSED is only valid when the payment method is CARD)",
+      "enum": [
+        "COLLECTABLE",
+        "PROCESSED"
+      ],
+      "example": "COLLECTABLE"
+    },
+    "paymentMethod": {
+      "type": "string",
+      "description": "The method of payment.",
+      "enum": [
+        "CASH",
+        "CARD",
+        "UNKNOWN",
+        "OTHER",
+        "CHEQUE",
+        "GIFT_CARD"
+      ],
+      "example": "CASH"
+    },
+    "paymentAuthorizer": {
+      "type": "string",
+      "description": "A payment system type responsible for a card transaction (containing information for payment network and payment type).",
+      "nullable": true,
+      "enum": [
+        "UNKNOWN_TYPE",
+        "OTHER_TYPE",
+        "MASTERCARD",
+        "MASTERCARD_MAESTRO",
+        "MASTERCARD_DEBIT",
+        "VISA",
+        "VISA_DEBIT",
+        "AMEX",
+        "VISA_ELECTORN",
+        "DINERS",
+        "ELO",
+        "ELO_DEBIT",
+        "HIPERCARD",
+        "BANRICOMPRAS",
+        "BANRICOMPRAS_DEBIT",
+        "NUGO",
+        "GOODCARD",
+        "VERDECARD",
+        "CARNET",
+        "CHEF_CARD",
+        "GER_CC_CREDITO",
+        "TERMINAL_BANCARIA",
+        "DEBIT",
+        "QR_CODE",
+        "RAPPI_PAY",
+        "DISCOVER",
+        "VALE_GREEN_CARD_PAPEL",
+        "VALE_GREEN_CARD_CARD",
+        "VALE_REFEISUL",
+        "VALE_VEROCARD",
+        "VALE_VR_SMART",
+        "VALE_SODEXO",
+        "VALE_TICKET_RESTAURANTE",
+        "VALE_ALELO",
+        "VALE_BEN_VIS",
+        "VALE_COOPER_CARD",
+        "NUTRICARD_REFEICAO_E_ALIMENTACAO",
+        "APPLE_PAY_MASTERCARD",
+        "APPLE_PAY_VISA",
+        "APPLE_PAY_AMEX",
+        "GOOGLE_PAY_ELO",
+        "GOOGLE_PAY_MASTERCARD",
+        "GOOGLE_PAY_VISA",
+        "MOVILE_PAY",
+        "MOVILE_PAY_AMEX",
+        "MOVILE_PAY_DINERS",
+        "MOVILE_PAY_ELO",
+        "MOVILE_PAY_HIPERCARD",
+        "MOVILE_PAY_MASTERCARD",
+        "MOVILE_PAY_VISA",
+        "IFOOD_CORP",
+        "LOOP_CLUB",
+        "PAYPAL",
+        "PSE",
+        "PIX"
+      ],
+      "example": "UNKNOWN_TYPE"
+    },
+    "cardInfo": {
+      "nullable": true,
+      "deprecated": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-card-info-schema.json"
+    },
+    "externalPaymentType": {
+      "type": "string",
+      "description": "External payment type string. Should be only used if not mapped by any value of paymentAuthorizer, and it's value is OTHER_TYPE.",
+      "nullable": true,
+      "example": "string"
+    },
+    "paymentRecords": {
+      "type": "array",
+      "nullable": true,
+      "description": "[WIP - in development, not supported yet] List of payment records, including method and card details and ids from payment processing entities.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-payment-record-schema.json"
+      }
+    },
+    "loyaltyInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-loyalty-info-schema.json"
+    }
+  },
+  "required": [
+    "paymentMethod",
+    "processingStatus",
+    "value"
+  ]
+}

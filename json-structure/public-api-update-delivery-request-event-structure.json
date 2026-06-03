@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-update-delivery-request-event-structure.json",
+  "name": "UpdateDeliveryRequestEvent",
+  "description": "UpdateDeliveryRequestEvent schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "deliveryReferenceId": {
+      "type": "string",
+      "description": "Generated delivery reference id.",
+      "example": "d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda"
+    },
+    "provider": {
+      "type": "string",
+      "description": "the pre-configured fulfillment provider slug in the onboarding process.",
+      "example": "doordash"
+    },
+    "currencyCode": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 3,
+      "nullable": true,
+      "description": "The 3-letter currency code (ISO 4217) to use for all monetary values.",
+      "example": "USD"
+    },
+    "customerPayments": {
+      "type": "array",
+      "nullable": true,
+      "description": "Processed and collectible payments from the customer.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-customer-payment-schema.json"
+      }
+    },
+    "customerTip": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-customer-tip-schema.json"
+    },
+    "pickUpInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-pick-up-info-schema.json"
+    }
+  }
+}

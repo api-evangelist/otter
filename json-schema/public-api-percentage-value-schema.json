@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PercentageValue",
+  "description": "Percentage value in decimal format.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-percentage-value-schema.json",
+  "type": "object",
+  "properties": {
+    "decimalValue": {
+      "minimum": 0,
+      "type": "number",
+      "description": "Percentage value in decimal format.",
+      "example": 0.513
+    }
+  },
+  "required": [
+    "decimalValue"
+  ],
+  "example": "A decimalValue of 0.513 will equate to 51.3%"
+}

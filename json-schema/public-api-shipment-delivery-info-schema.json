@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ShipmentDeliveryInfo",
+  "description": "Delivery information for a shipment.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-shipment-delivery-info-schema.json",
+  "type": "object",
+  "oneOf": [
+    {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-courier-service-delivery-info-schema.json"
+    },
+    {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-parcel-carrier-delivery-info-schema.json"
+    },
+    {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-self-drop-delivery-info-schema.json"
+    }
+  ]
+}

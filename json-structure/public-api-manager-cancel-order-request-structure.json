@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-manager-cancel-order-request-structure.json",
+  "name": "ManagerCancelOrderRequest",
+  "description": "The request to cancel an order.",
+  "type": "object",
+  "properties": {
+    "cancellationReason": {
+      "type": "string",
+      "description": "The reason for cancellation.",
+      "enum": [
+        "REASON_UNKNOWN",
+        "DUPLICATE_ORDER",
+        "UNAVAILABLE_ITEM",
+        "FRAUDULENT_EATER",
+        "RESTAURANT_INTERNAL_ISSUE",
+        "KITCHEN_CLOSED",
+        "CUSTOMER_CALLED_TO_CANCEL",
+        "RESTAURANT_TOO_BUSY",
+        "CANNOT_COMPLETE_CUSTOMER_REQUEST",
+        "UNACCEPTED_ORDER",
+        "RESTAURANT_CANCELED",
+        "AUTOMATICALLY_CANCELED",
+        "LATE_DELIVERY",
+        "COURIER_NOT_FOUND",
+        "CUSTOMER_NOT_FOUND",
+        "UNABLE_TO_DELIVER",
+        "ALL_ITEMS_OUT_OF_STOCK",
+        "ALL_ITEMS_EXPIRED",
+        "ALL_ITEMS_DAMAGED",
+        "LABOR_UNAVAILABLE",
+        "REASON_OTHER"
+      ],
+      "example": "REASON_UNKNOWN"
+    },
+    "cancelingParty": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-person-schema.json"
+    }
+  },
+  "required": [
+    "cancellationReason"
+  ]
+}

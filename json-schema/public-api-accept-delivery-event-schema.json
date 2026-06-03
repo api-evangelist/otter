@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AcceptDeliveryEvent",
+  "description": "AcceptDeliveryEvent schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-accept-delivery-event-schema.json",
+  "type": "object",
+  "properties": {
+    "deliveryReferenceId": {
+      "type": "string",
+      "description": "Generated delivery reference id.",
+      "example": "d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda"
+    },
+    "provider": {
+      "type": "string",
+      "description": "the pre-configured fulfillment provider slug in the onboarding process.",
+      "example": "doordash"
+    },
+    "preferredPickupTime": {
+      "type": "string",
+      "description": "Preferred time for courier to arrive to pick up order. If not provided or if the timestamp is in the past, treat it as an ASAP request.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "pickupOrderId": {
+      "type": "string",
+      "description": "An identifier used for picking up order from pickup address.",
+      "example": "19dc56c8-4497-4392-a612-9f81beb5fe5f"
+    },
+    "pickupNote": {
+      "type": "string",
+      "nullable": true,
+      "deprecated": true,
+      "description": "Additional information to instruct couriers how to pickup the order. Deprecated in favor of pickUpInstructions.",
+      "example": "Left side of the restaurant"
+    },
+    "pickupAddress": {
+      "allOf": [
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-required-address-schema.json"
+        }
+      ],
+      "description": "Order pickup address."
+    },
+    "dropoffNote": {
+      "type": "string",
+      "nullable": true,
+      "description": "Additional information to instruct couriers how to dropoff the order.",
+      "example": "Please ring the doorbell"
+    },
+    "dropoffAddress": {
+      "allOf": [
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-required-address-schema.json"
+        }
+      ],
+      "description": "Order drop-off address."
+    },
+    "customer": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-required-person-schema.json"
+    },
+    "customerPayments": {
+      "type": "array",
+      "nullable": true,
+      "description": "Processed and collectible payments from the customer.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-customer-payment-schema.json"
+      }
+    },
+    "currencyCode": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 3,
+      "nullable": true,
+      "description": "The 3-letter currency code (ISO 4217) to use for all monetary values.",
+      "example": "KRW"
+    },
+    "customerTip": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-customer-tip-schema.json"
+    },
+    "orderSubTotal": {
+      "type": "number",
+      "nullable": true,
+      "description": "The sum of all item and modifier pricing",
+      "example": 15
+    },
+    "pickUpLocationId": {
+      "type": "string",
+      "nullable": true,
+      "description": "An identifier for the pick up location",
+      "example": "d197bd64-a037-4b6e-aad7-06918e7e2d75"
+    },
+    "containsAlcoholicItem": {
+      "type": "boolean",
+      "nullable": true,
+      "description": "Whether or not the order contains an alcoholic item.",
+      "example": true
+    },
+    "pickUpInstructions": {
+      "type": "string",
+      "nullable": true,
+      "description": "Additional information to instruct couriers how to pickup the order.",
+      "example": "string"
+    },
+    "store": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-3-schema.json"
+    },
+    "orderItems": {
+      "type": "array",
+      "nullable": true,
+      "description": "Items and modifiers in the order.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-4-schema.json"
+      }
+    },
+    "ofoDisplayId": {
+      "type": "string",
+      "nullable": true,
+      "description": "An identifier used to reference the order in the order source.",
+      "example": 5989
+    },
+    "ofoSlug": {
+      "type": "string",
+      "nullable": true,
+      "description": "Slug to identify the OFO that is the source of order.",
+      "example": "ifood"
+    },
+    "pickUpInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-pick-up-info-schema.json"
+    },
+    "orderExternalIdentifiers": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-external-identifiers-schema.json",
+      "description": "ID info associated with the order in the external system, which is utilized for 3pl integrations."
+    },
+    "dropoffInstructions": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-dropoff-instructions-schema.json",
+      "description": "Information to instruct couriers how to dropoff the order."
+    },
+    "deliveryFee": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-fee-schema.json"
+    }
+  }
+}

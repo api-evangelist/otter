@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HourInterval",
+  "description": "Represents the beginning and ending of operating time for a menu specific to a Day.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-hour-interval-schema.json",
+  "type": "object",
+  "properties": {
+    "day": {
+      "type": "string",
+      "description": "Day of the week.",
+      "example": "Monday",
+      "enum": [
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY",
+        "SUNDAY"
+      ]
+    },
+    "fromHour": {
+      "maximum": 23,
+      "minimum": 0,
+      "type": "integer",
+      "description": "Beginning hour of interval.",
+      "format": "int32",
+      "example": 8
+    },
+    "fromMinute": {
+      "maximum": 59,
+      "minimum": 0,
+      "type": "integer",
+      "description": "Beginning minute of interval.",
+      "format": "int32",
+      "example": 0
+    },
+    "toHour": {
+      "maximum": 23,
+      "minimum": 0,
+      "type": "integer",
+      "description": "Ending hour of interval.",
+      "format": "int32",
+      "example": 20
+    },
+    "toMinute": {
+      "maximum": 59,
+      "minimum": 0,
+      "type": "integer",
+      "description": "Ending minute of interval.",
+      "format": "int32",
+      "example": 45
+    }
+  }
+}

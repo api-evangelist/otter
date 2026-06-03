@@ -1,0 +1,1092 @@
+!!omap
+- vocabulary: 1.0.0
+- info:
+    provider: Otter
+    description: Unified operational (OpenAPI) and capability (Naftiko) vocabulary for the Otter (TryOtter) Public API covering orders, menus, delivery, finance, reports, reviews, storefront, loyalty, organization, inventory, and account pairing.
+    created: '2026-06-03'
+    modified: '2026-06-03'
+- operational:
+    apis:
+    - name: Otter Public API
+      namespace: public-api
+      version: v1
+      baseUrl: https://{public-api-url}
+      status: active
+    resources:
+    - name: orders
+      apis:
+      - Otter Public API
+      actions:
+      - create
+      - update
+      - upload
+    - name: order
+      apis:
+      - Otter Public API
+      actions:
+      - create
+      - get
+      - mark
+      - request
+      - update
+    - name: storefront
+      apis:
+      - Otter Public API
+      actions:
+      - create
+      - get
+      - request
+    - name: menus
+      apis:
+      - Otter Public API
+      actions:
+      - create
+      - get
+      - publish
+      - send
+      - update
+      - upsert
+    - name: menu
+      apis:
+      - Otter Public API
+      actions:
+      - create
+      - get
+    - name: delivery
+      apis:
+      - Otter Public API
+      actions:
+      - accept
+      - cancel
+      - publish
+      - request
+      - update
+    - name: callback
+      apis:
+      - Otter Public API
+      actions:
+      - publish
+    - name: ping
+      apis:
+      - Otter Public API
+      actions:
+      - ping
+    - name: reports
+      apis:
+      - Otter Public API
+      actions:
+      - get
+      - request
+    - name: reviews
+      apis:
+      - Otter Public API
+      actions:
+      - reply
+    - name: auth
+      apis:
+      - Otter Public API
+      actions:
+      - get
+      - request
+    - name: stores
+      apis:
+      - Otter Public API
+      actions:
+      - update
+      - upsert
+    - name: finance
+      apis:
+      - Otter Public API
+      actions:
+      - create
+    - name: inventories
+      apis:
+      - Otter Public API
+      actions:
+      - create
+      - list
+    - name: organization
+      apis:
+      - Otter Public API
+      actions:
+      - create
+      - delete
+      - get
+      - list
+    - name: market-intel
+      apis:
+      - Otter Public API
+      actions:
+      - create
+      - get
+    - name: loyalty
+      apis:
+      - Otter Public API
+      actions:
+      - compute
+      - create
+      - get
+      - redeem
+      - refund
+      - search
+      - simulate
+    - name: eater
+      apis:
+      - Otter Public API
+      actions:
+      - create
+    - name: orderCreate
+      apis:
+      - Otter Public API
+      actions:
+      - create
+    - name: orderUpdate
+      apis:
+      - Otter Public API
+      actions:
+      - update
+    - name: intentToCancelOrder
+      apis:
+      - Otter Public API
+      actions:
+      - cancel
+    - name: orderStatusUpdate
+      apis:
+      - Otter Public API
+      actions:
+      - update
+    - name: posInjectionStateUpdate
+      apis:
+      - Otter Public API
+      actions:
+      - update
+    - name: orderConfirm
+      apis:
+      - Otter Public API
+      actions:
+      - create
+    - name: orderReady
+      apis:
+      - Otter Public API
+      actions:
+      - create
+    - name: orderHandedOff
+      apis:
+      - Otter Public API
+      actions:
+      - create
+    - name: orderFulfilled
+      apis:
+      - Otter Public API
+      actions:
+      - create
+    - name: menuPublish
+      apis:
+      - Otter Public API
+      actions:
+      - publish
+    - name: sendMenu
+      apis:
+      - Otter Public API
+      actions:
+      - send
+    - name: updateMenuEntitiesAvailabilities
+      apis:
+      - Otter Public API
+      actions:
+      - update
+    - name: upsertMenuHours
+      apis:
+      - Otter Public API
+      actions:
+      - upsert
+    - name: pauseStore
+      apis:
+      - Otter Public API
+      actions:
+      - pause
+    - name: unpauseStore
+      apis:
+      - Otter Public API
+      actions:
+      - pause
+    - name: getStoreAvailability
+      apis:
+      - Otter Public API
+      actions:
+      - get
+    - name: getStoreHoursConfiguration
+      apis:
+      - Otter Public API
+      actions:
+      - get
+    - name: deliveryStatusUpdate
+      apis:
+      - Otter Public API
+      actions:
+      - update
+    - name: requestDeliveryQuotes
+      apis:
+      - Otter Public API
+      actions:
+      - request
+    - name: acceptDelivery
+      apis:
+      - Otter Public API
+      actions:
+      - accept
+    - name: cancelDelivery
+      apis:
+      - Otter Public API
+      actions:
+      - cancel
+    - name: updateDeliveryRequest
+      apis:
+      - Otter Public API
+      actions:
+      - update
+    - name: reportGenerated
+      apis:
+      - Otter Public API
+      actions:
+      - generate
+    - name: upsertStore
+      apis:
+      - Otter Public API
+      actions:
+      - upsert
+    - name: removeStore
+      apis:
+      - Otter Public API
+      actions:
+      - remove
+    - name: fetchCredentials
+      apis:
+      - Otter Public API
+      actions:
+      - fetch
+    actions:
+    - verb: create
+      methods:
+      - POST
+      pattern: write
+    - verb: update
+      methods:
+      - POST
+      - PUT
+      pattern: write
+    - verb: upload
+      methods:
+      - POST
+      pattern: write
+    - verb: get
+      methods:
+      - GET
+      - POST
+      pattern: write
+    - verb: request
+      methods:
+      - POST
+      pattern: write
+    - verb: mark
+      methods:
+      - POST
+      pattern: write
+    - verb: upsert
+      methods:
+      - POST
+      pattern: write
+    - verb: publish
+      methods:
+      - POST
+      pattern: write
+    - verb: send
+      methods:
+      - POST
+      pattern: write
+    - verb: accept
+      methods:
+      - POST
+      pattern: write
+    - verb: cancel
+      methods:
+      - POST
+      pattern: write
+    - verb: ping
+      methods:
+      - GET
+      - POST
+      pattern: write
+    - verb: reply
+      methods:
+      - POST
+      pattern: write
+    - verb: list
+      methods:
+      - GET
+      pattern: read
+    - verb: delete
+      methods:
+      - DELETE
+      pattern: destructive
+    - verb: search
+      methods:
+      - GET
+      pattern: read
+    - verb: compute
+      methods:
+      - POST
+      pattern: write
+    - verb: simulate
+      methods:
+      - POST
+      pattern: write
+    - verb: redeem
+      methods:
+      - POST
+      pattern: write
+    - verb: refund
+      methods:
+      - POST
+      pattern: write
+    - verb: pause
+      methods:
+      - POST
+      pattern: write
+    - verb: generate
+      methods:
+      - POST
+      pattern: write
+    - verb: remove
+      methods:
+      - POST
+      pattern: write
+    - verb: fetch
+      methods:
+      - POST
+      pattern: write
+    schemas:
+      count: 319
+      core:
+      - Order
+      - Item
+      - Menu
+      - DeliveryInfo
+      - Payout
+      - FinancialData
+      - Store
+      - OrderTotal
+      - CustomerPayment
+      - Person
+    parameters:
+      identifiers:
+      - orderId
+      - source
+      - requestId
+      - jobId
+      - storeId
+      headers:
+      - X-Store-Id
+      - X-HMAC-SHA256
+      - Authorization
+    enums:
+      authFlows:
+      - client_credentials
+      - authorization_code
+      orderLifecycle:
+      - created
+      - confirmed
+      - ready
+      - fulfilled
+      - handed_off
+      - closed
+      - canceled
+    authentication:
+      scheme: OAuth2.0
+      flows:
+      - clientCredentials
+      - authorizationCode
+      tokenType: Bearer
+      scopes:
+      - catalog
+      - delivery.provider
+      - finance
+      - manager.menus
+      - manager.orders
+      - manager.storefront
+      - menus.async_job.read
+      - menus.entity_suspension
+      - menus.get_current
+      - menus.publish
+      - menus.read
+      - menus.upsert
+      - menus.upsert_hours
+      - orders.create
+      - orders.read
+      - orders.update
+      - ping
+      - reports.generate_report
+      - reviews.reply
+      - storefront.store_pause_unpause
+      - storefront.store_availability
+      - storefront.store_hours_configuration
+      - stores.manage
+      - callback.error.write
+      - manager.loyalty
+      - direct.orders
+      - store.read
+- capability:
+    workflows:
+    - name: Otter Public API — Account Pairing Endpoints
+      file: capabilities/public-api-account-pairing-endpoints.yaml
+      description: 'Account Pairing Endpoints surface of the Otter Public API. 2 operations. Lead operation: Complete Store Onboarding. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 2
+      domains:
+      - Account
+      - Pairing
+    - name: Otter Public API — Account Pairing Webhooks
+      file: capabilities/public-api-account-pairing-webhooks.yaml
+      description: 'Account Pairing Webhooks surface of the Otter Public API. 3 operations. Lead operation: Upsert Store. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 3
+      domains:
+      - Account
+      - Pairing
+    - name: Otter Public API — Auth Endpoints
+      file: capabilities/public-api-auth-endpoints.yaml
+      description: 'Auth Endpoints surface of the Otter Public API. 2 operations. Lead operation: Generate Token. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 2
+      domains:
+      - Auth
+    - name: Otter Public API — Callback Endpoints
+      file: capabilities/public-api-callback-endpoints.yaml
+      description: 'Callback Endpoints surface of the Otter Public API. 1 operations. Lead operation: Publish Callback Error. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 1
+      domains:
+      - Callback
+    - name: Otter Public API — Delivery Endpoints
+      file: capabilities/public-api-delivery-endpoints.yaml
+      description: 'Delivery Endpoints surface of the Otter Public API. 6 operations. Lead operation: Update Delivery Status. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 6
+      domains:
+      - Delivery
+    - name: Otter Public API — Delivery Webhooks
+      file: capabilities/public-api-delivery-webhooks.yaml
+      description: 'Delivery Webhooks surface of the Otter Public API. 5 operations. Lead operation: Update Delivery Status Webhook. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 5
+      domains:
+      - Delivery
+    - name: Otter Public API — Direct Orders Endpoints
+      file: capabilities/public-api-direct-orders-endpoints.yaml
+      description: "Direct Orders Endpoints surface of the Otter Public API. 1 operations. Lead operation: Query Eater's Related History Orders. Self-contained Naftiko capability covering one Otter business surface."
+      apis:
+      - Otter Public API
+      toolCount: 1
+      domains:
+      - Direct
+      - Orders
+    - name: Otter Public API — Finance Endpoints
+      file: capabilities/public-api-finance-endpoints.yaml
+      description: 'Finance Endpoints surface of the Otter Public API. 2 operations. Lead operation: Post Financial Transactions. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 2
+      domains:
+      - Finance
+    - name: Otter Public API — Inventory Endpoints
+      file: capabilities/public-api-inventory-endpoints.yaml
+      description: 'Inventory Endpoints surface of the Otter Public API. 3 operations. Lead operation: List Inventory Summaries. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 3
+      domains:
+      - Inventory
+    - name: Otter Public API — Manager Loyalty Endpoints
+      file: capabilities/public-api-manager-loyalty-endpoints.yaml
+      description: 'Manager Loyalty Endpoints surface of the Otter Public API. 8 operations. Lead operation: Get Enrollment Config for a Loyalty Provider. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 8
+      domains:
+      - Manager
+      - Loyalty
+    - name: Otter Public API — Manager Menu Endpoints
+      file: capabilities/public-api-manager-menu-endpoints.yaml
+      description: 'Manager Menu Endpoints surface of the Otter Public API. 8 operations. Lead operation: Get the Menus for a Store. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 8
+      domains:
+      - Manager
+      - Menu
+    - name: Otter Public API — Manager Order Endpoints
+      file: capabilities/public-api-manager-order-endpoints.yaml
+      description: 'Manager Order Endpoints surface of the Otter Public API. 11 operations. Lead operation: Notify the Result of a Create Order Event. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 11
+      domains:
+      - Manager
+      - Order
+    - name: Otter Public API — Manager Orders Webhooks
+      file: capabilities/public-api-manager-orders-webhooks.yaml
+      description: 'Manager Orders Webhooks surface of the Otter Public API. 6 operations. Lead operation: Order Creation Webhook. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 6
+      domains:
+      - Manager
+      - Orders
+    - name: Otter Public API — Manager Storefront Endpoints
+      file: capabilities/public-api-manager-storefront-endpoints.yaml
+      description: 'Manager Storefront Endpoints surface of the Otter Public API. 4 operations. Lead operation: Request Pausing Storefronts of a Store. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 4
+      domains:
+      - Manager
+      - Storefront
+    - name: Otter Public API — Market Intel Endpoints
+      file: capabilities/public-api-market-intel-endpoints.yaml
+      description: 'Market Intel Endpoints surface of the Otter Public API. 1 operations. Lead operation: Notify Stores Discovered at the Geolocations. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 1
+      domains:
+      - Market
+      - Intel
+    - name: Otter Public API — Menus Endpoints
+      file: capabilities/public-api-menus-endpoints.yaml
+      description: 'Menus Endpoints surface of the Otter Public API. 6 operations. Lead operation: Upsert Menus for a Store. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 6
+      domains:
+      - Menus
+    - name: Otter Public API — Menus Webhooks
+      file: capabilities/public-api-menus-webhooks.yaml
+      description: 'Menus Webhooks surface of the Otter Public API. 4 operations. Lead operation: Menu Publish Webhook. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 4
+      domains:
+      - Menus
+    - name: Otter Public API — Orders Endpoints
+      file: capabilities/public-api-orders-endpoints.yaml
+      description: 'Orders Endpoints surface of the Otter Public API. 6 operations. Lead operation: Create Order. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 6
+      domains:
+      - Orders
+    - name: Otter Public API — Orders Webhooks
+      file: capabilities/public-api-orders-webhooks.yaml
+      description: 'Orders Webhooks surface of the Otter Public API. 3 operations. Lead operation: Intent to Cancel Order Webhook. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 3
+      domains:
+      - Orders
+    - name: Otter Public API — Organization Endpoints
+      file: capabilities/public-api-organization-endpoints.yaml
+      description: 'Organization Endpoints surface of the Otter Public API. 8 operations. Lead operation: Get the Organization Managed by the User.. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 8
+      domains:
+      - Organization
+    - name: Otter Public API — Ping Endpoints
+      file: capabilities/public-api-ping-endpoints.yaml
+      description: 'Ping Endpoints surface of the Otter Public API. 1 operations. Lead operation: Ping the System. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 1
+      domains:
+      - Ping
+    - name: Otter Public API — Ping Webhooks
+      file: capabilities/public-api-ping-webhooks.yaml
+      description: 'Ping Webhooks surface of the Otter Public API. 1 operations. Lead operation: Ping Webhook. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 1
+      domains:
+      - Ping
+    - name: Otter Public API — Reports Endpoints
+      file: capabilities/public-api-reports-endpoints.yaml
+      description: 'Reports Endpoints surface of the Otter Public API. 2 operations. Lead operation: Request Status of the Report Using JobId. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 2
+      domains:
+      - Reports
+    - name: Otter Public API — Reports Webhooks
+      file: capabilities/public-api-reports-webhooks.yaml
+      description: 'Reports Webhooks surface of the Otter Public API. 1 operations. Lead operation: Report Generated Webhook. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 1
+      domains:
+      - Reports
+    - name: Otter Public API — Reviews Endpoints
+      file: capabilities/public-api-reviews-endpoints.yaml
+      description: 'Reviews Endpoints surface of the Otter Public API. 1 operations. Lead operation: Reply or Schedule a Reply to a Review. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 1
+      domains:
+      - Reviews
+    - name: Otter Public API — Storefront Endpoints
+      file: capabilities/public-api-storefront-endpoints.yaml
+      description: 'Storefront Endpoints surface of the Otter Public API. 7 operations. Lead operation: Notify About Store Availability Change. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 7
+      domains:
+      - Storefront
+    - name: Otter Public API — Storefront Webhooks
+      file: capabilities/public-api-storefront-webhooks.yaml
+      description: 'Storefront Webhooks surface of the Otter Public API. 4 operations. Lead operation: Pause Store Webhook. Self-contained Naftiko capability covering one Otter business surface.'
+      apis:
+      - Otter Public API
+      toolCount: 4
+      domains:
+      - Storefront
+    domains:
+    - Account
+    - Auth
+    - Callback
+    - Delivery
+    - Direct
+    - Finance
+    - Intel
+    - Inventory
+    - Loyalty
+    - Manager
+    - Market
+    - Menu
+    - Menus
+    - Order
+    - Orders
+    - Organization
+    - Pairing
+    - Ping
+    - Reports
+    - Reviews
+    - Storefront
+    namespaces:
+    - consumed: public-api-account-pairing-endpoints
+      rest: public-api-account-pairing-endpoints-rest
+      mcp: public-api-account-pairing-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-account-pairing-webhooks
+      rest: public-api-account-pairing-webhooks-rest
+      mcp: public-api-account-pairing-webhooks-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-auth-endpoints
+      rest: public-api-auth-endpoints-rest
+      mcp: public-api-auth-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-callback-endpoints
+      rest: public-api-callback-endpoints-rest
+      mcp: public-api-callback-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-delivery-endpoints
+      rest: public-api-delivery-endpoints-rest
+      mcp: public-api-delivery-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-delivery-webhooks
+      rest: public-api-delivery-webhooks-rest
+      mcp: public-api-delivery-webhooks-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-direct-orders-endpoints
+      rest: public-api-direct-orders-endpoints-rest
+      mcp: public-api-direct-orders-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-finance-endpoints
+      rest: public-api-finance-endpoints-rest
+      mcp: public-api-finance-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-inventory-endpoints
+      rest: public-api-inventory-endpoints-rest
+      mcp: public-api-inventory-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-manager-loyalty-endpoints
+      rest: public-api-manager-loyalty-endpoints-rest
+      mcp: public-api-manager-loyalty-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-manager-menu-endpoints
+      rest: public-api-manager-menu-endpoints-rest
+      mcp: public-api-manager-menu-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-manager-order-endpoints
+      rest: public-api-manager-order-endpoints-rest
+      mcp: public-api-manager-order-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-manager-orders-webhooks
+      rest: public-api-manager-orders-webhooks-rest
+      mcp: public-api-manager-orders-webhooks-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-manager-storefront-endpoints
+      rest: public-api-manager-storefront-endpoints-rest
+      mcp: public-api-manager-storefront-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-market-intel-endpoints
+      rest: public-api-market-intel-endpoints-rest
+      mcp: public-api-market-intel-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-menus-endpoints
+      rest: public-api-menus-endpoints-rest
+      mcp: public-api-menus-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-menus-webhooks
+      rest: public-api-menus-webhooks-rest
+      mcp: public-api-menus-webhooks-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-orders-endpoints
+      rest: public-api-orders-endpoints-rest
+      mcp: public-api-orders-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-orders-webhooks
+      rest: public-api-orders-webhooks-rest
+      mcp: public-api-orders-webhooks-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-organization-endpoints
+      rest: public-api-organization-endpoints-rest
+      mcp: public-api-organization-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-ping-endpoints
+      rest: public-api-ping-endpoints-rest
+      mcp: public-api-ping-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-ping-webhooks
+      rest: public-api-ping-webhooks-rest
+      mcp: public-api-ping-webhooks-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-reports-endpoints
+      rest: public-api-reports-endpoints-rest
+      mcp: public-api-reports-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-reports-webhooks
+      rest: public-api-reports-webhooks-rest
+      mcp: public-api-reports-webhooks-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-reviews-endpoints
+      rest: public-api-reviews-endpoints-rest
+      mcp: public-api-reviews-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-storefront-endpoints
+      rest: public-api-storefront-endpoints-rest
+      mcp: public-api-storefront-endpoints-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: public-api-storefront-webhooks
+      rest: public-api-storefront-webhooks-rest
+      mcp: public-api-storefront-webhooks-mcp
+      restPort: 8080
+      mcpPort: 9090
+    binds:
+    - env: OTTER_API_TOKEN
+      usedBy: all capabilities
+- crossReference:
+  - resource: orders
+    actions:
+    - create
+    - update
+    - upload
+    workflows:
+    - Otter Public API — Direct Orders Endpoints
+    - Otter Public API — Manager Order Endpoints
+    - Otter Public API — Manager Orders Webhooks
+    - Otter Public API — Orders Endpoints
+    - Otter Public API — Orders Webhooks
+  - resource: order
+    actions:
+    - create
+    - get
+    - mark
+    - request
+    - update
+    workflows:
+    - Otter Public API — Direct Orders Endpoints
+    - Otter Public API — Manager Order Endpoints
+    - Otter Public API — Manager Orders Webhooks
+    - Otter Public API — Orders Endpoints
+    - Otter Public API — Orders Webhooks
+  - resource: storefront
+    actions:
+    - create
+    - get
+    - request
+    workflows:
+    - Otter Public API — Manager Storefront Endpoints
+    - Otter Public API — Storefront Endpoints
+    - Otter Public API — Storefront Webhooks
+  - resource: menus
+    actions:
+    - create
+    - get
+    - publish
+    - send
+    - update
+    - upsert
+    workflows:
+    - Otter Public API — Manager Menu Endpoints
+    - Otter Public API — Menus Endpoints
+    - Otter Public API — Menus Webhooks
+  - resource: menu
+    actions:
+    - create
+    - get
+    workflows:
+    - Otter Public API — Manager Menu Endpoints
+    - Otter Public API — Menus Endpoints
+    - Otter Public API — Menus Webhooks
+  - resource: delivery
+    actions:
+    - accept
+    - cancel
+    - publish
+    - request
+    - update
+    workflows:
+    - Otter Public API — Delivery Endpoints
+    - Otter Public API — Delivery Webhooks
+  - resource: callback
+    actions:
+    - publish
+    workflows:
+    - Otter Public API — Callback Endpoints
+  - resource: ping
+    actions:
+    - ping
+    workflows:
+    - Otter Public API — Ping Endpoints
+    - Otter Public API — Ping Webhooks
+  - resource: reports
+    actions:
+    - get
+    - request
+    workflows:
+    - Otter Public API — Reports Endpoints
+    - Otter Public API — Reports Webhooks
+  - resource: reviews
+    actions:
+    - reply
+    workflows:
+    - Otter Public API — Reviews Endpoints
+  - resource: auth
+    actions:
+    - get
+    - request
+    workflows:
+    - Otter Public API — Auth Endpoints
+  - resource: stores
+    actions:
+    - update
+    - upsert
+    workflows: []
+  - resource: finance
+    actions:
+    - create
+    workflows:
+    - Otter Public API — Finance Endpoints
+  - resource: inventories
+    actions:
+    - create
+    - list
+    workflows: []
+  - resource: organization
+    actions:
+    - create
+    - delete
+    - get
+    - list
+    workflows:
+    - Otter Public API — Organization Endpoints
+  - resource: market-intel
+    actions:
+    - create
+    - get
+    workflows:
+    - Otter Public API — Market Intel Endpoints
+  - resource: loyalty
+    actions:
+    - compute
+    - create
+    - get
+    - redeem
+    - refund
+    - search
+    - simulate
+    workflows:
+    - Otter Public API — Manager Loyalty Endpoints
+  - resource: eater
+    actions:
+    - create
+    workflows: []
+  - resource: orderCreate
+    actions:
+    - create
+    workflows:
+    - Otter Public API — Manager Order Endpoints
+  - resource: orderUpdate
+    actions:
+    - update
+    workflows:
+    - Otter Public API — Manager Order Endpoints
+  - resource: intentToCancelOrder
+    actions:
+    - cancel
+    workflows:
+    - Otter Public API — Manager Order Endpoints
+  - resource: orderStatusUpdate
+    actions:
+    - update
+    workflows:
+    - Otter Public API — Direct Orders Endpoints
+    - Otter Public API — Manager Order Endpoints
+    - Otter Public API — Manager Orders Webhooks
+    - Otter Public API — Orders Endpoints
+    - Otter Public API — Orders Webhooks
+  - resource: posInjectionStateUpdate
+    actions:
+    - update
+    workflows: []
+  - resource: orderConfirm
+    actions:
+    - create
+    workflows:
+    - Otter Public API — Manager Order Endpoints
+  - resource: orderReady
+    actions:
+    - create
+    workflows:
+    - Otter Public API — Manager Order Endpoints
+  - resource: orderHandedOff
+    actions:
+    - create
+    workflows:
+    - Otter Public API — Manager Order Endpoints
+  - resource: orderFulfilled
+    actions:
+    - create
+    workflows:
+    - Otter Public API — Manager Order Endpoints
+  - resource: menuPublish
+    actions:
+    - publish
+    workflows:
+    - Otter Public API — Manager Menu Endpoints
+  - resource: sendMenu
+    actions:
+    - send
+    workflows:
+    - Otter Public API — Manager Menu Endpoints
+  - resource: updateMenuEntitiesAvailabilities
+    actions:
+    - update
+    workflows:
+    - Otter Public API — Manager Menu Endpoints
+  - resource: upsertMenuHours
+    actions:
+    - upsert
+    workflows:
+    - Otter Public API — Manager Menu Endpoints
+  - resource: pauseStore
+    actions:
+    - pause
+    workflows: []
+  - resource: unpauseStore
+    actions:
+    - pause
+    workflows: []
+  - resource: getStoreAvailability
+    actions:
+    - get
+    workflows: []
+  - resource: getStoreHoursConfiguration
+    actions:
+    - get
+    workflows: []
+  - resource: deliveryStatusUpdate
+    actions:
+    - update
+    workflows:
+    - Otter Public API — Delivery Endpoints
+    - Otter Public API — Delivery Webhooks
+  - resource: requestDeliveryQuotes
+    actions:
+    - request
+    workflows:
+    - Otter Public API — Delivery Endpoints
+    - Otter Public API — Delivery Webhooks
+  - resource: acceptDelivery
+    actions:
+    - accept
+    workflows:
+    - Otter Public API — Delivery Endpoints
+    - Otter Public API — Delivery Webhooks
+  - resource: cancelDelivery
+    actions:
+    - cancel
+    workflows:
+    - Otter Public API — Delivery Endpoints
+    - Otter Public API — Delivery Webhooks
+  - resource: updateDeliveryRequest
+    actions:
+    - update
+    workflows:
+    - Otter Public API — Delivery Endpoints
+    - Otter Public API — Delivery Webhooks
+  - resource: reportGenerated
+    actions:
+    - generate
+    workflows: []
+  - resource: upsertStore
+    actions:
+    - upsert
+    workflows: []
+  - resource: removeStore
+    actions:
+    - remove
+    workflows: []
+  - resource: fetchCredentials
+    actions:
+    - fetch
+    workflows: []

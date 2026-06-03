@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-request-state-structure.json",
+  "name": "RequestState",
+  "description": "State of the requested operation",
+  "type": "string",
+  "enum": [
+    "UNKNOWN",
+    "QUEUED",
+    "IN_PROGRESS",
+    "PROVIDER_REQUEST_IN_PROGRESS",
+    "VALIDATION",
+    "COMPLETED",
+    "FAILED",
+    "CANCELLED"
+  ]
+}

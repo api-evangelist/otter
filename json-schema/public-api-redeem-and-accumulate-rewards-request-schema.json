@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RedeemAndAccumulateRewardsRequest",
+  "description": "Request body for RedeemAndAccumulateRewards API call.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-redeem-and-accumulate-rewards-request-schema.json",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "string",
+      "description": "The id of the user.",
+      "example": "someidstring"
+    },
+    "order": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-2-schema.json"
+    },
+    "selectedRewards": {
+      "type": "array",
+      "description": "Selected rewards, currently only support one reward, if multiple rewards are passed it will throw an error.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-selected-reward-schema.json"
+      }
+    }
+  },
+  "required": [
+    "userId",
+    "order",
+    "selectedRewards"
+  ]
+}

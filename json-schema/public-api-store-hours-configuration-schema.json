@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StoreHoursConfiguration",
+  "description": "The current store hours configuration of a store.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-hours-configuration-schema.json",
+  "type": "object",
+  "properties": {
+    "deliveryHours": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-hours-schema.json"
+    },
+    "pickupHours": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-hours-schema.json"
+    },
+    "timezone": {
+      "type": "string",
+      "description": "The store time zone identifier. (e.g. America/New_York)",
+      "example": "America/Los_Angeles"
+    }
+  },
+  "required": [
+    "timezone"
+  ]
+}

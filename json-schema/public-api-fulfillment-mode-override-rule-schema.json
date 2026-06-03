@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FulfillmentModeOverrideRule",
+  "description": "FulfillmentModeOverrideRule schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-fulfillment-mode-override-rule-schema.json",
+  "type": "object",
+  "required": [
+    "fulfillmentMode"
+  ],
+  "allOf": [
+    {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-override-rule-3-pd-schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "fulfillmentMode": {
+          "type": "string",
+          "description": "The fulfillment mode for which the override rule should apply."
+        }
+      }
+    }
+  ]
+}

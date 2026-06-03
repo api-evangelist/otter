@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MenusReward",
+  "description": "MenusReward schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menus-reward-schema.json",
+  "type": "object",
+  "properties": {
+    "entityId": {
+      "type": "string",
+      "description": "The id of the entity, currently it's the item id.",
+      "example": "someidstring"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Discount amount, if it's percentage discount, the percentage amount shown is in basis points, ie 1000 = 10% discount.",
+      "example": 20
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of discount, absolute or percentage.",
+      "example": "ABSOLUTE_DISCOUNT",
+      "enum": [
+        "ABSOLUTE_DISCOUNT",
+        "PERCENT_DISCOUNT"
+      ]
+    }
+  }
+}

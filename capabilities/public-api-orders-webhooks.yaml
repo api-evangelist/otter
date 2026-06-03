@@ -1,0 +1,167 @@
+binds:
+- keys:
+    OTTER_API_TOKEN: OTTER_API_TOKEN
+  namespace: env
+capability:
+  consumes:
+  - authentication:
+      token: '{{env.OTTER_API_TOKEN}}'
+      type: bearer
+    baseUri: https://{public-api-url}
+    description: Otter Public API — Orders Webhooks business capability. Self-contained,
+      no shared references.
+    namespace: public-api-orders-webhooks
+    resources:
+    - name: intenttocancelorder
+      operations:
+      - description: Intent to Cancel Order Webhook
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: intentToCancelOrderWebhook
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: intentToCancelOrder
+    - name: orderstatusupdate
+      operations:
+      - description: Order Status Update Webhook
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: orderStatusUpdateWebhook
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: orderStatusUpdate
+    - name: posinjectionstateupdate
+      operations:
+      - description: Pos Injection State Update Webhook
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: posInjectionStateUpdateWebhook
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: posInjectionStateUpdate
+    type: http
+  exposes:
+  - description: REST adapter for Otter Public API — Orders Webhooks. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    namespace: public-api-orders-webhooks-rest
+    port: 8080
+    resources:
+    - description: REST surface for Intent to Cancel Order Webhook.
+      name: intenttocancelorderwebhook
+      operations:
+      - call: public-api-orders-webhooks.intentToCancelOrderWebhook
+        description: Intent to Cancel Order Webhook
+        method: POST
+        name: intentToCancelOrderWebhook
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/intenttocancelorder
+    - description: REST surface for Order Status Update Webhook.
+      name: orderstatusupdatewebhook
+      operations:
+      - call: public-api-orders-webhooks.orderStatusUpdateWebhook
+        description: Order Status Update Webhook
+        method: POST
+        name: orderStatusUpdateWebhook
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/orderstatusupdate
+    - description: REST surface for Pos Injection State Update Webhook.
+      name: posinjectionstateupdatewebhook
+      operations:
+      - call: public-api-orders-webhooks.posInjectionStateUpdateWebhook
+        description: Pos Injection State Update Webhook
+        method: POST
+        name: posInjectionStateUpdateWebhook
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/posinjectionstateupdate
+    type: rest
+  - description: MCP adapter for Otter Public API — Orders Webhooks. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    namespace: public-api-orders-webhooks-mcp
+    port: 9090
+    tools:
+    - call: public-api-orders-webhooks.intentToCancelOrderWebhook
+      description: Intent to Cancel Order Webhook
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: intent-cancel-order-webhook
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-orders-webhooks.orderStatusUpdateWebhook
+      description: Order Status Update Webhook
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: true
+      name: order-status-update-webhook
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-orders-webhooks.posInjectionStateUpdateWebhook
+      description: Pos Injection State Update Webhook
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: pos-injection-state-update-webhook
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    transport: http
+    type: mcp
+info:
+  created: '2026-06-03'
+  description: 'Orders Webhooks surface of the Otter Public API. 3 operations. Lead
+    operation: Intent to Cancel Order Webhook. Self-contained Naftiko capability covering
+    one Otter business surface.'
+  label: Otter Public API — Orders Webhooks
+  modified: '2026-06-03'
+  tags:
+  - Otter
+  - Public API
+  - Orders
+naftiko: 1.0.0-alpha2

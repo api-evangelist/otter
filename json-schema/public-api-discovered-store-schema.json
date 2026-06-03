@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DiscoveredStore",
+  "description": "The discovered store information.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-discovered-store-schema.json",
+  "type": "object",
+  "properties": {
+    "storeDetails": {
+      "type": "object",
+      "description": "The store details.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-details-schema.json"
+    },
+    "locationBasedInformation": {
+      "type": "object",
+      "nullable": true,
+      "description": "The location information of the store.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-location-based-information-schema.json"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EaterOrderHistoryRequest",
+  "description": "Request parameters to fetch eater's order history",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-eater-order-history-request-schema.json",
+  "type": "object",
+  "properties": {
+    "limit": {
+      "type": "number",
+      "description": "Max number of orders to retrieve per page",
+      "format": 10,
+      "example": 1.0
+    },
+    "pageToken": {
+      "type": "string",
+      "description": "Opaque token used for paging. Query parameters must be URL encoded.",
+      "example": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+    },
+    "eaterId": {
+      "type": "string",
+      "description": "External eater's Id",
+      "example": "eater-12345"
+    },
+    "source": {
+      "type": "string",
+      "description": "Order placed from which source",
+      "example": "venmo"
+    }
+  },
+  "required": [
+    "limit",
+    "eaterId"
+  ]
+}

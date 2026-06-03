@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PongObject",
+  "description": "PongObject schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-pong-object-schema.json",
+  "type": "object",
+  "properties": {
+    "response": {
+      "type": "string",
+      "description": "A text response.",
+      "example": "pong"
+    },
+    "currentTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The current timestamp.",
+      "example": "2007-12-03T10:15:30+01:00"
+    }
+  }
+}

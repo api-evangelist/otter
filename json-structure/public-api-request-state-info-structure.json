@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-request-state-info-structure.json",
+  "name": "RequestStateInfo",
+  "description": "Request state details",
+  "type": "object",
+  "properties": {
+    "startedAt": {
+      "type": "datetime",
+      "nullable": true,
+      "description": "The time at which the request was started.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "state": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-request-state-schema.json"
+    },
+    "status": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-status-schema.json"
+    },
+    "finishedAt": {
+      "type": "datetime",
+      "nullable": true,
+      "description": "The time at which the request was completed.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "action": {
+      "type": "array",
+      "minItems": 0,
+      "description": "List of request actions.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-request-action-schema.json"
+      }
+    },
+    "error": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-storefront-error-schema.json"
+    }
+  }
+}

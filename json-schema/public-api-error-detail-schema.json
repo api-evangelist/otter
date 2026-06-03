@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ErrorDetail",
+  "description": "The error detail response object.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-error-detail-schema.json",
+  "type": "object",
+  "properties": {
+    "attribute": {
+      "type": "string",
+      "description": "The error attribute.",
+      "example": "Order Currency Code"
+    },
+    "message": {
+      "type": "string",
+      "description": "The error detail description.",
+      "example": "Order Currency Code must be exactly 3 characters"
+    }
+  }
+}

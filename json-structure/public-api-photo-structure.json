@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-photo-structure.json",
+  "name": "Photo",
+  "description": "All data required to represent a Photo for an entity in menus.",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "description": "URL of the photo.",
+      "example": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+    },
+    "fileName": {
+      "type": "string",
+      "description": "File name",
+      "example": "image.jpg"
+    },
+    "id": {
+      "type": "string",
+      "description": "Identifier of the Photo.",
+      "example": "e9174f75-a293-4908-bba7-9db69871ad81"
+    },
+    "contentType": {
+      "type": "string",
+      "description": "The media type of the file. Deprecated: Use the media type served from the photo URL instead.",
+      "example": "image/jpeg, image/png",
+      "deprecated": true
+    }
+  },
+  "required": [
+    "contentType",
+    "fileName",
+    "id",
+    "url"
+  ]
+}

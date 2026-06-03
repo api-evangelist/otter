@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-subtotal-structure.json",
+  "name": "Subtotal",
+  "description": "Subtotal schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "double",
+      "description": "The amount that was discounted.",
+      "example": 19.07
+    }
+  }
+}

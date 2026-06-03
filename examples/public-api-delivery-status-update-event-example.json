@@ -1,0 +1,16 @@
+{
+  "provider": "doordash",
+  "courier": {},
+  "estimatedDeliveryTime": "2007-12-03T10:15:30+01:00",
+  "estimatedPickupTime": "2007-12-03T10:15:30+01:00",
+  "status": {},
+  "deliveryStatus": {},
+  "currencyCode": "EUR",
+  "baseFee": 1.0,
+  "extraFee": 1.0,
+  "totalFee": 1.0,
+  "distance": {},
+  "updatedTime": "2007-12-03T10:15:30+01:00",
+  "deliveryTrackingUrl": "https://www.doordash.com/delivery/track/1234567890",
+  "dropoffInfo": {}
+}

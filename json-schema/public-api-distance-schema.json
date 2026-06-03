@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Distance",
+  "description": "Delivery distance.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-distance-schema.json",
+  "type": "object",
+  "properties": {
+    "unit": {
+      "type": "string",
+      "description": "Distance unit value.",
+      "enum": [
+        "KILOMETERS",
+        "MILES"
+      ],
+      "example": "KILOMETERS"
+    },
+    "value": {
+      "type": "number",
+      "description": "Distance value.",
+      "example": 1.0
+    }
+  }
+}

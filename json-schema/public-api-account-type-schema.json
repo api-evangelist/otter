@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AccountType",
+  "description": "The type of ACH account.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-account-type-schema.json",
+  "type": "string",
+  "enum": [
+    "CHECKING",
+    "SAVINGS"
+  ],
+  "example": "CHECKING"
+}

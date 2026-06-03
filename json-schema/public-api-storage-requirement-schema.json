@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StorageRequirement",
+  "description": "Storage requirements for the product.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-storage-requirement-schema.json",
+  "type": "object",
+  "properties": {
+    "tag": {
+      "type": "string",
+      "description": "Storage requirements for the product.",
+      "enum": [
+        "FROZEN",
+        "COLD",
+        "DRY",
+        "ROOM_TEMPERATURE",
+        "AVOID_SUNLIGHT"
+      ],
+      "example": "FROZEN"
+    }
+  }
+}

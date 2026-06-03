@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-order-total-v2-structure.json",
+  "name": "OrderTotalV2",
+  "description": "V2 for details about values of the order, provides richer objects allowing to capture taxes, misc charges, payments more precisely.",
+  "type": "object",
+  "properties": {
+    "customerTotal": {
+      "nullable": false,
+      "allOf": [
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-financial-data-schema.json"
+        }
+      ]
+    },
+    "customerPayment": {
+      "nullable": true,
+      "description": "The customer perspective, each price field in this model is meant to represent the values the customer paid/received and how. Values must match amounts and payment methods described in customerPayments.",
+      "allOf": [
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-customer-payment-v2-schema.json"
+        }
+      ]
+    },
+    "payout": {
+      "nullable": true,
+      "description": "Breakdown of net payout received by the store. Optional object, should be provided when payout information is available during the order lifecycle.",
+      "allOf": [
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-payout-schema.json"
+        }
+      ]
+    }
+  },
+  "required": [
+    "customerTotal"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-pause-request-structure.json",
+  "name": "PauseRequest",
+  "description": "Pause request parameters",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "datetime",
+      "nullable": true,
+      "description": "Start time for the pause. Executed immediately if not set.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "end": {
+      "type": "datetime",
+      "nullable": true,
+      "description": "Time when the pause should expire. If not provided, uses the default which is 4 AM at store timezone.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "comment": {
+      "type": "string",
+      "nullable": true,
+      "description": "Comment for the pause",
+      "example": "Some comment"
+    },
+    "reason": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-pause-reason-schema.json"
+    }
+  }
+}

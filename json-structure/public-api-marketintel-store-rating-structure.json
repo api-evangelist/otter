@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-marketintel-store-rating-structure.json",
+  "name": "Marketintel_StoreRating",
+  "description": "The Store rating information. At least one of the ratingScore, estimatedRatingCount or displayRatingCount need to be present.",
+  "type": "object",
+  "properties": {
+    "ratingScore": {
+      "type": "double",
+      "nullable": true,
+      "description": "The normalized rating score of the store.",
+      "example": 2
+    },
+    "estimatedRatingCount": {
+      "type": "int32",
+      "nullable": true,
+      "description": "The estimated number of scores in the rating.",
+      "example": 100
+    },
+    "displayRatingCount": {
+      "type": "string",
+      "nullable": true,
+      "description": "The display text of the number of scores in the rating.",
+      "example": [
+        "20+",
+        20
+      ]
+    }
+  }
+}

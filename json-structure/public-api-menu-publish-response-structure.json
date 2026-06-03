@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-menu-publish-response-structure.json",
+  "name": "MenuPublishResponse",
+  "description": "MenuPublishResponse schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "requestSubmitted": {
+      "type": "boolean",
+      "description": "Whether the request was submitted or not.",
+      "example": true
+    },
+    "jobId": {
+      "type": "uuid",
+      "nullable": true,
+      "description": "Only present if the request succeeds. Job ID to check on the status with the MenuAsyncJob endpoint.",
+      "example": "c75d9460-5d48-423d-8d01-f825fd5b1672"
+    },
+    "menuPublishTargets": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-publish-response-menu-publish-targets-schema.json"
+    }
+  }
+}

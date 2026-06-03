@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MenuJobPublishState",
+  "description": "Only present if the MenuJobType is PUBLISH. Contains a map of MenuPublishTarget services to their corresponding statuses.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-job-publish-state-schema.json",
+  "type": "object",
+  "additionalProperties": {
+    "x-additionalPropertiesName": "menuPublishTarget",
+    "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-publish-job-state-schema.json"
+  },
+  "example": {
+    "rappi": {
+      "status": "FAILED",
+      "message": "Failed to publish menu due to error ..."
+    }
+  }
+}

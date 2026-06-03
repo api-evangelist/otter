@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-payment-details-card-structure.json",
+  "name": "PaymentDetailsCard",
+  "description": "Details of a card payment method.",
+  "type": "object",
+  "properties": {
+    "brandType": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-card-brand-type-schema.json"
+    },
+    "expiration": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "int32",
+          "description": "The expiration year of the card.",
+          "example": 2025
+        },
+        "month": {
+          "type": "int32",
+          "description": "The expiration month of the card.",
+          "example": 12
+        }
+      }
+    },
+    "fundingType": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-card-funding-type-schema.json"
+    },
+    "walletType": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-card-wallet-type-schema.json"
+    },
+    "lastFour": {
+      "type": "string",
+      "description": "The last four digits of the card.",
+      "example": "1234"
+    },
+    "walletLastFour": {
+      "type": "string",
+      "description": "The last four digits of the wallet account.",
+      "example": "5678"
+    },
+    "authorizationCode": {
+      "type": "string",
+      "description": "The authorization code for the card.",
+      "example": "auth_code_123"
+    },
+    "applicationPreferredName": {
+      "type": "string",
+      "description": "The preferred name of the application.",
+      "example": "MyApp"
+    },
+    "fingerprint": {
+      "type": "string",
+      "description": "The fingerprint of the card.",
+      "example": "fingerprint_abc123"
+    },
+    "readMethod": {
+      "type": "string",
+      "description": "The method used to read the card.",
+      "example": "chip"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ManagerItemIssues",
+  "description": "Manager item or modifier issues",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-manager-item-issues-schema.json",
+  "type": "object",
+  "properties": {
+    "externalId": {
+      "type": "string",
+      "description": "External id of the item",
+      "example": "external-item-id"
+    },
+    "itemIssues": {
+      "type": "array",
+      "description": "The specific issues with this item",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-manager-item-issue-schema.json"
+      }
+    }
+  }
+}

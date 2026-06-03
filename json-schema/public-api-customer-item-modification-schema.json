@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CustomerItemModification",
+  "description": "One modification to apply. Exactly one of quantityUpdated, priceAdjusted, or itemAdded must be set.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-customer-item-modification-schema.json",
+  "type": "object",
+  "properties": {
+    "quantityUpdated": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-quantity-updated-modification-schema.json",
+      "description": "Change quantity for existing item(s). Set quantity to 0 to remove."
+    },
+    "priceAdjusted": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-price-adjusted-modification-schema.json",
+      "description": "Adjust order subtotal (positive = up charge, negative = refund)."
+    },
+    "itemAdded": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-added-modification-schema.json",
+      "description": "Add a new item to the order."
+    }
+  },
+  "oneOf": [
+    {
+      "required": [
+        "quantityUpdated"
+      ]
+    },
+    {
+      "required": [
+        "priceAdjusted"
+      ]
+    },
+    {
+      "required": [
+        "itemAdded"
+      ]
+    }
+  ]
+}

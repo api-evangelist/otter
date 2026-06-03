@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-vehicle-information-structure.json",
+  "name": "VehicleInformation",
+  "description": "VehicleInformation schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "vehicleType": {
+      "type": "string",
+      "description": "The type of vehicle used to fulfill the delivery.",
+      "enum": [
+        "WALKER",
+        "MOTORCYCLE",
+        "BICYCLE",
+        "CAR",
+        "VAN"
+      ],
+      "example": "WALKER"
+    },
+    "licensePlate": {
+      "type": "string",
+      "nullable": true,
+      "description": "The license plate of the vehicle used to fulfill the delivery.",
+      "example": "ABCD 123"
+    },
+    "makeModel": {
+      "type": "string",
+      "nullable": true,
+      "description": "The make and model of the vehicle used to fulfill the delivery.",
+      "example": "Honda Civic"
+    }
+  }
+}

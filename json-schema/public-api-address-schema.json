@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Address",
+  "description": "Order delivery address.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-address-schema.json",
+  "type": "object",
+  "properties": {
+    "fullAddress": {
+      "type": "string",
+      "nullable": true,
+      "description": "Full, human comprehensible address. It is usually formatted in the order appropriate for your locale.",
+      "example": "123 Sample Street Ste 100, San Francisco, CA 94103"
+    },
+    "postalCode": {
+      "type": "string",
+      "description": "Postal code of the address.",
+      "example": "20500"
+    },
+    "city": {
+      "type": "string",
+      "description": "The city/town portion of the address.",
+      "example": "Washington"
+    },
+    "state": {
+      "type": "string",
+      "description": "Highest administrative subdivision which is used for postal addresses of a country or region. For example, this can be a state, a province, or a prefecture.",
+      "example": "DC"
+    },
+    "countryCode": {
+      "type": "string",
+      "description": "CLDR country code. See http://cldr.unicode.org/",
+      "example": "US"
+    },
+    "addressLines": {
+      "type": "array",
+      "nullable": true,
+      "description": "Address lines (e.g. street, PO Box, or company name) or the full single line address (e.g. street, city, state, country, zip).",
+      "example": [
+        "1600 Pennsylvania Avenue NW",
+        "123 Sample Street Ste 100, San Francisco, CA 94103"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "linesOfAddress": {
+      "type": "array",
+      "nullable": true,
+      "deprecated": true,
+      "description": "Deprecated: use addressLines. Address lines (e.g. street, PO Box, or company name) or the full single line address (e.g. street, city, state, country, zip).",
+      "example": [
+        "1600 Pennsylvania Avenue NW",
+        "123 Sample Street Ste 100, San Francisco, CA 94103"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "location": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-location-schema.json"
+    }
+  }
+}

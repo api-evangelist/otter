@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-override-rule-structure.json",
+  "name": "OverrideRule",
+  "description": "Override rule for when to apply price overrides",
+  "type": "object",
+  "properties": {
+    "externalServiceSlug": {
+      "type": "string",
+      "description": "The service slug for which this rule should apply. E.g.: If externalServiceSlug is UberEats, then the priceOverride should be applied to UberEats.",
+      "example": "ubereats"
+    }
+  },
+  "required": [
+    "externalServiceSlug"
+  ]
+}

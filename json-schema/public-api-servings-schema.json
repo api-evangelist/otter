@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Servings",
+  "description": "The number of people an item serves. If only one serving value is known, set both min and max to that value.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-servings-schema.json",
+  "type": "object",
+  "properties": {
+    "min": {
+      "type": "integer",
+      "description": "The minimum value of servings.",
+      "example": 1
+    },
+    "max": {
+      "type": "integer",
+      "description": "The maximum value of servings.",
+      "example": 2
+    }
+  }
+}

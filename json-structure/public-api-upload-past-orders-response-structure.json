@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-upload-past-orders-response-structure.json",
+  "name": "UploadPastOrdersResponse",
+  "description": "The response to create a past order (read only).",
+  "type": "object",
+  "properties": {
+    "orderReferences": {
+      "type": "array",
+      "description": "References for orders that were successfully uploaded.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-reference-schema.json"
+      }
+    }
+  },
+  "required": [
+    "orderReferences"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-marketintel-store-sales-structure.json",
+  "name": "Marketintel_StoreSales",
+  "description": "The Store Sales information. At least one of the periodType, numberOfSales or displayNumberOfSales need to be present.",
+  "type": "object",
+  "properties": {
+    "periodType": {
+      "type": "string",
+      "nullable": true,
+      "description": "The period type of the sales data",
+      "example": null
+    },
+    "numberOfSales": {
+      "type": "int32",
+      "nullable": true,
+      "description": "The number of sales.",
+      "example": 100
+    },
+    "displayNumberOfSales": {
+      "type": "string",
+      "nullable": true,
+      "description": "The display text of the number of sales.",
+      "example": [
+        20,
+        "20+"
+      ]
+    }
+  }
+}

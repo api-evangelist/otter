@@ -1,0 +1,5 @@
+{
+  "entityId": "someidstring",
+  "entityType": "ITEM",
+  "minimumPurchaseQuantity": 1
+}

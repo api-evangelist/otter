@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderDeliveryInfoUpdateRequest",
+  "description": "The request to update an order delivery info status.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-delivery-info-update-request-schema.json",
+  "type": "object",
+  "properties": {
+    "deliveryInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-required-delivery-info-schema.json"
+    }
+  },
+  "required": [
+    "deliveryInfo"
+  ]
+}

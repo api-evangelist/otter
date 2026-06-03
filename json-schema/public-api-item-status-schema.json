@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ItemStatus",
+  "description": "Represents whether an Item is for sale, indefinitely not for sale, or not for sale until a specific time.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-status-schema.json",
+  "type": "object",
+  "properties": {
+    "saleStatus": {
+      "type": "string",
+      "description": "The sale status of the item.",
+      "example": "TEMPORARILY_NOT_FOR_SALE",
+      "enum": [
+        "FOR_SALE",
+        "INDEFINITELY_NOT_FOR_SALE",
+        "TEMPORARILY_NOT_FOR_SALE"
+      ]
+    },
+    "suspendedUntil": {
+      "type": "string",
+      "nullable": true,
+      "description": "ISO-8601 timestamp representing the time the saleStatus value is supposed to change to FOR_SALE. Set only when current saleStatus value is TEMPORARILY_NOT_FOR_SALE. E.g.: 2020-11-23T21:33:51Z, 2007-12-03T10:15:30+01:00",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    }
+  },
+  "required": [
+    "saleStatus"
+  ]
+}

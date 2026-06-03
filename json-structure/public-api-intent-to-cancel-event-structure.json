@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-intent-to-cancel-event-structure.json",
+  "name": "IntentToCancelEvent",
+  "description": "Event that request the intent to cancel an order.",
+  "type": "object",
+  "properties": {
+    "externalIdentifiers": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-external-identifiers-schema.json"
+    },
+    "cancellationReason": {
+      "type": "string",
+      "description": "The reason for a cancellation.",
+      "enum": [
+        "REASON_UNKNOWN",
+        "DUPLICATE_ORDER",
+        "UNAVAILABLE_ITEM",
+        "FRAUDULENT_EATER",
+        "RESTAURANT_INTERNAL_ISSUE",
+        "KITCHEN_CLOSED",
+        "CUSTOMER_CALLED_TO_CANCEL",
+        "CANNOT_COMPLETE_CUSTOMER_REQUEST",
+        "RESTAURANT_TOO_BUSY",
+        "UNACCEPTED_ORDER",
+        "RESTAURANT_CANCELED",
+        "AUTOMATICALLY_CANCELED",
+        "LATE_DELIVERY",
+        "COURIER_NOT_FOUND",
+        "CUSTOMER_NOT_FOUND",
+        "UNABLE_TO_DELIVER"
+      ],
+      "example": "REASON_UNKNOWN"
+    }
+  }
+}

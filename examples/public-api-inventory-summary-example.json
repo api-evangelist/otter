@@ -1,0 +1,10 @@
+{
+  "id": "ZDlhYTc1NjUtMzU3Z",
+  "gtin": {},
+  "name": "Coca-Cola Classic Coke Soft Drink 12 oz. can",
+  "slug": "coca-cola-classic-soft-drink-12-oz-can",
+  "externalId": "some-id-from-a-vendor-123",
+  "sellableQuantity": 42,
+  "unsellableQuantity": 42,
+  "inboundQuantity": 8
+}

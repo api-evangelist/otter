@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SignatureRequirement",
+  "description": "Enables and configure the signature requirement.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-signature-requirement-schema.json",
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Marks the signature requirement as required.",
+      "example": true
+    },
+    "collectSignerName": {
+      "type": "boolean",
+      "description": "Whether the signer's name should be collected.",
+      "example": true
+    },
+    "collectSignerRelationship": {
+      "type": "boolean",
+      "description": "Whether the signer's relationship with the intended recipient should be collected.",
+      "example": true
+    }
+  }
+}

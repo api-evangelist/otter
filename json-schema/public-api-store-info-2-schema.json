@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StoreInfo-2",
+  "description": "Useful information about the store.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-info-2-schema.json",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The store name.",
+      "example": "Sample Name"
+    },
+    "address": {
+      "type": "string",
+      "description": "The store address.",
+      "example": "string"
+    },
+    "currencyCode": {
+      "type": "string",
+      "description": "The currency code for the store.",
+      "example": "USD"
+    },
+    "timezone": {
+      "type": "string",
+      "description": "The store timezone.",
+      "example": "string"
+    },
+    "internalStoreId": {
+      "type": "string",
+      "description": "Our internal store identifier, also known as \"SkuSku ID\".",
+      "example": "store_123"
+    }
+  },
+  "required": [
+    "name",
+    "address",
+    "currencyCode",
+    "timezone",
+    "internalStoreId"
+  ],
+  "example": {
+    "name": "Store Public Name",
+    "address": "Some Street, 1234",
+    "currencyCode": "USD",
+    "timezone": "America/Los_Angeles",
+    "internalStoreId": "51608e41-5d9e-477f-ae02-8c0c68036d5d"
+  }
+}

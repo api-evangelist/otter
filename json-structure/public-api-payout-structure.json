@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-payout-structure.json",
+  "name": "Payout",
+  "description": "Details on payout.",
+  "type": "object",
+  "properties": {
+    "payoutFromServiceProvider": {
+      "type": "double",
+      "nullable": true,
+      "description": "Payout amount that will be received from service provider (usually the order source).",
+      "example": 1
+    },
+    "payoutFrom3rdParty": {
+      "type": "double",
+      "nullable": true,
+      "description": "Payout amount that will be received from any 3rd party organization involved.",
+      "example": 1
+    },
+    "cashPayout": {
+      "type": "double",
+      "nullable": true,
+      "description": "Payout amount received from orders paid in cash directly to the store.",
+      "example": 1
+    }
+  }
+}

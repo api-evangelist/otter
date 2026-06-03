@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-servings-structure.json",
+  "name": "Servings",
+  "description": "The number of people an item serves. If only one serving value is known, set both min and max to that value.",
+  "type": "object",
+  "properties": {
+    "min": {
+      "type": "int32",
+      "description": "The minimum value of servings.",
+      "example": 1
+    },
+    "max": {
+      "type": "int32",
+      "description": "The maximum value of servings.",
+      "example": 2
+    }
+  }
+}

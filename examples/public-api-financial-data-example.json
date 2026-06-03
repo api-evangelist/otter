@@ -1,0 +1,23 @@
+{
+  "foodSales": {},
+  "feeForRestaurantProvidedDelivery": {},
+  "restaurantFundedDiscount": {},
+  "voucherDiscount": {},
+  "promotionDiscount": {},
+  "operatorDiscount": {},
+  "loyaltyDiscount": {},
+  "tipForRestaurant": {},
+  "adjustments": {},
+  "packingFee": {},
+  "bagFee": {},
+  "serviceProviderDiscount": {},
+  "tipForServiceProviderCourier": {},
+  "feeForServiceProviderDelivery": {},
+  "smallOrderFee": {},
+  "serviceFee": {},
+  "otherFee": {},
+  "netPayout": {},
+  "couponCodes": [
+    "TACOWED5OFF"
+  ]
+}

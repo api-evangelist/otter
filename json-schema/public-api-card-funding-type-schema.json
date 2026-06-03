@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CardFundingType",
+  "description": "The funding type of the card.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-card-funding-type-schema.json",
+  "type": "string",
+  "enum": [
+    "UNKNOWN",
+    "CREDIT",
+    "DEBIT",
+    "PREPAID"
+  ],
+  "example": "CREDIT"
+}

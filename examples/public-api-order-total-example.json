@@ -1,0 +1,10 @@
+{
+  "subtotal": 11.97,
+  "claimedSubtotal": 1.0,
+  "discount": 1,
+  "tax": 1.1,
+  "tip": 2,
+  "deliveryFee": 5,
+  "total": 19.07,
+  "couponCode": "VWXYZ98765"
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-refund-rewards-request-structure.json",
+  "name": "RefundRewardsRequest",
+  "description": "Request body for RefundRewards API call.",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "string",
+      "description": "The id of the user.",
+      "example": "someidstring"
+    },
+    "orderId": {
+      "type": "string",
+      "description": "The id of the order.",
+      "example": "someidstring"
+    }
+  },
+  "required": [
+    "userId",
+    "orderId"
+  ]
+}

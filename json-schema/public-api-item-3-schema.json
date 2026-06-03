@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Item-3",
+  "description": "Item-3 schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-3-schema.json",
+  "type": "object",
+  "properties": {
+    "quantity": {
+      "minimum": 1,
+      "maximum": 1000,
+      "type": "integer",
+      "description": "The quantity of the item ordered by the customer.",
+      "format": "int32",
+      "example": 1
+    },
+    "id": {
+      "type": "string",
+      "nullable": true,
+      "description": "The unique ID of the item.",
+      "example": "33e0418f-3d56-4360-ba03-18fc5f8844a3"
+    },
+    "name": {
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the item as displayed to the customer.",
+      "example": "Juicy Cheeseburger"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

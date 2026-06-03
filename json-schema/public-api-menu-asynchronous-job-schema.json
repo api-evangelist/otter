@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MenuAsynchronousJob",
+  "description": "The job created to process the menu request.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-asynchronous-job-schema.json",
+  "type": "object",
+  "properties": {
+    "jobReference": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-job-reference-schema.json"
+    },
+    "jobType": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-job-type-schema.json"
+    },
+    "publishJobState": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-job-publish-state-schema.json"
+    }
+  }
+}

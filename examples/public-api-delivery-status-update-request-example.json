@@ -1,0 +1,14 @@
+{
+  "deliveryStatus": {},
+  "estimatedDeliveryTime": "2007-12-03T10:15:30+01:00",
+  "estimatedPickupTime": "2007-12-03T10:15:30+01:00",
+  "courier": {},
+  "location": {},
+  "createdAt": "2007-12-03T10:15:30+01:00",
+  "vehicleInformation": {},
+  "currencyCode": "EUR",
+  "cost": {},
+  "providerDeliveryId": "store_123",
+  "dropoffInfo": {},
+  "deliveryTrackingUrl": "https://example.com/resource"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-energy-kcal-structure.json",
+  "name": "EnergyKcal",
+  "description": "The calorie range of the item. If only one calorie value is known, set both low and high to that value.",
+  "type": "object",
+  "properties": {
+    "low": {
+      "type": "double",
+      "description": "The minimum calorie value for an item.",
+      "example": 1
+    },
+    "high": {
+      "type": "double",
+      "description": "The maximum calorie value for an item.",
+      "example": 100
+    }
+  }
+}

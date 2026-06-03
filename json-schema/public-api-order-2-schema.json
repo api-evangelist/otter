@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Order-2",
+  "description": "Order-2 schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-2-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The id of the order in the partner's system.",
+      "example": "someidstring"
+    },
+    "currencyCode": {
+      "type": "string",
+      "description": "Currency code.",
+      "example": "USD"
+    },
+    "items": {
+      "type": "array",
+      "description": "The ordered items in the order.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-2-schema.json"
+      }
+    },
+    "totals": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-totals-schema.json"
+    }
+  }
+}

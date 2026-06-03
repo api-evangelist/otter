@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ParcelCarrierDeliveryInfo",
+  "description": "ParcelCarrierDeliveryInfo schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-parcel-carrier-delivery-info-schema.json",
+  "allOf": [
+    {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-metadata-schema.json"
+    },
+    {
+      "required": [
+        "carrierName"
+      ],
+      "type": "object",
+      "description": "Detailed delivery information for standard postal carriers who deliver parcel shipments.",
+      "properties": {
+        "carrierName": {
+          "type": "string",
+          "description": "The name of the company delivering the shipment.",
+          "enum": [
+            "FED_EX",
+            "UPS",
+            "ON_TRAC",
+            "DHL",
+            "CORREOS",
+            "ESTAFETA",
+            "BR_POST",
+            "TNT",
+            "OTHER"
+          ]
+        },
+        "trackingNumber": {
+          "type": "string",
+          "description": "The tracking number for this shipment",
+          "example": "18492b99ad000"
+        }
+      },
+      "additionalProperties": true
+    }
+  ]
+}

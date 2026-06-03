@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-brand-info-structure.json",
+  "name": "BrandInfo",
+  "description": "Represents the brand information.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Css brand id.",
+      "example": "store_123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Css brand name.",
+      "example": "Main Street Cafe"
+    },
+    "createdAt": {
+      "type": "datetime",
+      "description": "The date and time when the brand was created.",
+      "example": "2023-01-15T10:00:00Z"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "createdAt"
+  ]
+}

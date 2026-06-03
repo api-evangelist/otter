@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-processing-status-response-structure.json",
+  "name": "ProcessingStatusResponse",
+  "description": "Processing status response",
+  "type": "object",
+  "properties": {
+    "processRequestStatuses": {
+      "type": "array",
+      "minItems": 0,
+      "description": "List of provider level requests",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-process-store-service-provider-status-schema.json"
+      }
+    }
+  }
+}

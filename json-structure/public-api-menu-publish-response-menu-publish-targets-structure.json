@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-menu-publish-response-menu-publish-targets-structure.json",
+  "name": "MenuPublishResponseMenuPublishTargets",
+  "description": "Only present if the request fails. Meant to help debugging why the request failed.",
+  "type": "object",
+  "properties": {
+    "menuPublishTargets": {
+      "type": "object",
+      "additionalProperties": {
+        "x-additionalPropertiesName": "menuPublishTargetName",
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-publish-target-schema.json"
+      },
+      "description": "Map of MenuPublishTarget names to their targets. The target can only be published to if the status is READY.",
+      "example": {
+        "rappi": {
+          "status": "PUBLISH_IN_PROGRESS"
+        }
+      }
+    }
+  }
+}

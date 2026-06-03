@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EventCallbackError",
+  "description": "The error container for a processed callback.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-event-callback-error-schema.json",
+  "type": "object",
+  "properties": {
+    "errorCode": {
+      "type": "string",
+      "description": "Errors that occur processing the webhook, modeled after Google's gRPC error codes.\nFor callback errors responding to menu-related webhooks, any error with status code in:  \"INVALID_ARGUMENT\", \"FAILED_PRECONDITION\", \"NOT_FOUND\", \"PERMISSION_DENIED\", \"ALREADY_EXISTS\", \"UNIMPLEMENTED\", \"DATA_LOSS\", \"UNAUTHENTICATED\" will be considered fatal and will fail the operation without retrying.",
+      "enum": [
+        "CANCELLED",
+        "UNKNOWN",
+        "INVALID_ARGUMENT",
+        "FAILED_PRECONDITION",
+        "DEADLINE_EXCEEDED",
+        "NOT_FOUND",
+        "PERMISSION_DENIED",
+        "ALREADY_EXISTS",
+        "RESOURCE_EXHAUSTED",
+        "ABORTED",
+        "OUT_OF_RANGE",
+        "UNIMPLEMENTED",
+        "INTERNAL",
+        "UNAVAILABLE",
+        "DATA_LOSS",
+        "UNAUTHENTICATED"
+      ],
+      "example": "NOT_FOUND"
+    },
+    "errorMessage": {
+      "type": "string",
+      "nullable": true,
+      "description": "Additional information about the error. This message will be displayed to the user, so ideally it should be friendly.",
+      "example": "The store was not found."
+    }
+  }
+}

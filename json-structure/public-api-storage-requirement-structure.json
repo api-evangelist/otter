@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-storage-requirement-structure.json",
+  "name": "StorageRequirement",
+  "description": "Storage requirements for the product.",
+  "type": "object",
+  "properties": {
+    "tag": {
+      "type": "string",
+      "description": "Storage requirements for the product.",
+      "enum": [
+        "FROZEN",
+        "COLD",
+        "DRY",
+        "ROOM_TEMPERATURE",
+        "AVOID_SUNLIGHT"
+      ],
+      "example": "FROZEN"
+    }
+  }
+}

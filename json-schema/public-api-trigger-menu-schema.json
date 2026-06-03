@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TriggerMenu",
+  "description": "TriggerMenu schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-trigger-menu-schema.json",
+  "type": "object",
+  "properties": {
+    "entityId": {
+      "type": "string",
+      "description": "The id of the entity.",
+      "example": "someidstring"
+    },
+    "entityType": {
+      "type": "string",
+      "description": "The type of entity.",
+      "example": "ITEM",
+      "enum": [
+        "ITEM",
+        "CATEGORY"
+      ]
+    },
+    "minimumPurchaseQuantity": {
+      "type": "number",
+      "description": "Minimum quantity need to be purchased to activate the trigger.",
+      "example": 1
+    }
+  }
+}

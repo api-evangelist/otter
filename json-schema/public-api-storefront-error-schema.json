@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StorefrontError",
+  "description": "Unpause response details",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-storefront-error-schema.json",
+  "type": "object",
+  "properties": {
+    "errorType": {
+      "type": "string",
+      "description": "The type of the error.",
+      "example": "string"
+    },
+    "message": {
+      "type": "string",
+      "description": "The error message\u00df.",
+      "example": "string"
+    }
+  }
+}

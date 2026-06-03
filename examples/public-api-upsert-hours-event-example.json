@@ -1,0 +1,36 @@
+{
+  "menuHoursData": {
+    "da0e4e94-5670-4175-897a-3b7dde45bed5": {
+      "timeZone": "America/Los_Angeles",
+      "regularHours": [
+        {
+          "days": [
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY"
+          ],
+          "timeRanges": [
+            {
+              "start": "08:00",
+              "end": "22:00"
+            }
+          ]
+        }
+      ],
+      "specialHours": [
+        {
+          "date": "2021-12-31",
+          "timeRanges": [
+            {
+              "start": "08:00",
+              "end": "22:00"
+            }
+          ],
+          "type": "CLOSED"
+        }
+      ]
+    }
+  }
+}

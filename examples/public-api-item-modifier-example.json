@@ -1,0 +1,15 @@
+{
+  "quantity": 1,
+  "skuPrice": 1,
+  "id": "d7a21692-9195-43aa-a58f-5395bba8a804",
+  "lineItemId": "2f91f9f3-2d7e-4898-ae81-00fe06ed7dbf",
+  "skuId": "867b8fdc-cf7b-4fc3-b7e0-4c7b68d8b1cc",
+  "name": "Avocado",
+  "price": 1,
+  "groupName": "Add ons",
+  "groupId": "fb52b138-7ac4-42c1-bfd8-664d57113a41",
+  "stationId": "a49cbd3e-94e2-462d-a6de-1985e5d98d1c",
+  "modifiers": [
+    {}
+  ]
+}

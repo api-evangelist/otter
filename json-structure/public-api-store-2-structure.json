@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-store-2-structure.json",
+  "name": "Store-2",
+  "description": "Store-2 schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Store identifier.",
+      "example": "9208071e-5f7a-444a-b3a7-4a57ff3f614e"
+    },
+    "name": {
+      "type": "string",
+      "description": "Store name.",
+      "example": "Store name 1"
+    },
+    "logoUrl": {
+      "type": "string",
+      "description": "store's logo image url.",
+      "example": "https://blob-storage.com/photos/storefront-photos/228da7b3-a254-47f4-b82f-5cf29e89b2b9.jpeg"
+    },
+    "bannerUrl": {
+      "type": "string",
+      "description": "store's banner image url.",
+      "example": "https://blob-storage.com/photos/storefront-photos/4abd6b2e-e0f1-467c-a60b-c2e33922573f.jpeg"
+    },
+    "phoneNumber": {
+      "type": "string",
+      "description": "store's phone number.",
+      "example": 2124567890
+    },
+    "address": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-address-schema.json"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "address"
+  ]
+}

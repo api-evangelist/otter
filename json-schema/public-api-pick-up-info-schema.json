@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PickUpInfo",
+  "description": "Pick up information for delivery.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-pick-up-info-schema.json",
+  "type": "object",
+  "properties": {
+    "readyAtTime": {
+      "type": "string",
+      "description": "The timestamp the order(s) became ready for pick up by a courier. If not provided, the order is not yet ready to be picked up.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    }
+  }
+}

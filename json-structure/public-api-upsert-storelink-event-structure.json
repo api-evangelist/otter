@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-upsert-storelink-event-structure.json",
+  "name": "UpsertStorelinkEvent",
+  "description": "UpsertStorelinkEvent schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "credentialsSchemaVersion": {
+      "type": "string",
+      "description": "The version of the credentials schema.",
+      "example": "1.0"
+    },
+    "credentials": {
+      "type": "array",
+      "description": "Array of fulfilled credentials containing its keys and values.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-fulfilled-credential-schema.json"
+      },
+      "example": [
+        {
+          "key": "email",
+          "value": "test@email.com"
+        },
+        {
+          "key": "password",
+          "value": "test-pwd-1234"
+        }
+      ]
+    },
+    "storeInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-info-2-schema.json"
+    }
+  },
+  "required": [
+    "credentialsSchemaVersion",
+    "credentials",
+    "storeInfo"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-courier-service-delivery-info-structure.json",
+  "name": "CourierServiceDeliveryInfo",
+  "description": "CourierServiceDeliveryInfo schema from Public API (Otter Public API).",
+  "allOf": [
+    {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-metadata-schema.json"
+    },
+    {
+      "required": [
+        "courierName"
+      ],
+      "type": "object",
+      "description": "Detailed delivery information for shipments using small point-to-point courier operations that may offer specialized services (scheduling, chill chain, etc).",
+      "properties": {
+        "courierName": {
+          "type": "string",
+          "description": "The name of the company delivering the shipment.",
+          "example": "Express Local Delivery Services"
+        },
+        "trackingId": {
+          "type": "string",
+          "description": "The tracking ID for this shipment",
+          "example": "18492b99ad000"
+        }
+      },
+      "additionalProperties": true
+    }
+  ]
+}

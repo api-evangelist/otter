@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Subtotal",
+  "description": "Subtotal schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-subtotal-schema.json",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "number",
+      "description": "The amount that was discounted.",
+      "example": 19.07
+    }
+  }
+}

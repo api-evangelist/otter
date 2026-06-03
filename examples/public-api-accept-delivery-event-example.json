@@ -1,0 +1,30 @@
+{
+  "deliveryReferenceId": "d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda",
+  "provider": "doordash",
+  "preferredPickupTime": "2007-12-03T10:15:30+01:00",
+  "pickupOrderId": "19dc56c8-4497-4392-a612-9f81beb5fe5f",
+  "pickupNote": "Left side of the restaurant",
+  "pickupAddress": {},
+  "dropoffNote": "Please ring the doorbell",
+  "dropoffAddress": {},
+  "customer": {},
+  "customerPayments": [
+    {}
+  ],
+  "currencyCode": "KRW",
+  "customerTip": {},
+  "orderSubTotal": 15,
+  "pickUpLocationId": "d197bd64-a037-4b6e-aad7-06918e7e2d75",
+  "containsAlcoholicItem": true,
+  "pickUpInstructions": "string",
+  "store": {},
+  "orderItems": [
+    {}
+  ],
+  "ofoDisplayId": 5989,
+  "ofoSlug": "ifood",
+  "pickUpInfo": {},
+  "orderExternalIdentifiers": {},
+  "dropoffInstructions": {},
+  "deliveryFee": {}
+}

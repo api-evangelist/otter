@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-get-user-response-structure.json",
+  "name": "GetUserResponse",
+  "description": "Response body for GetUser API call.",
+  "type": "object",
+  "properties": {
+    "userAccount": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-user-account-schema.json"
+    }
+  }
+}

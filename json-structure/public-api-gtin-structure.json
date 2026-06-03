@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-gtin-structure.json",
+  "name": "Gtin",
+  "description": "A 14 digit Global Trade Item Number (GTIN). For GTIN values that are shorter than 14 digits, value will be padded with leading zeroes.",
+  "type": "string",
+  "example": "00049000608779"
+}

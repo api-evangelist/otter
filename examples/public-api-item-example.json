@@ -1,0 +1,18 @@
+{
+  "quantity": 1,
+  "skuPrice": 5.9,
+  "id": "33e0418f-3d56-4360-ba03-18fc5f8844a3",
+  "lineItemId": "2f91f9f3-2d7e-4898-ae81-00fe06ed7dbf",
+  "skuId": "867b8fdc-cf7b-4fc3-b7e0-4c7b68d8b1cc",
+  "name": "Juicy Cheeseburger",
+  "note": "Please cook to well done!",
+  "categoryId": "303de078-870d-4349-928b-946869d4d69b",
+  "internalCategoryId": "76a66bba-48fb-4bac-80ee-2616a5ca1ab9",
+  "categoryName": "Burgers",
+  "internalCategoryName": "Burgers",
+  "stationId": "5247b8a1-77de-4844-b024-cb59fcec59bd",
+  "price": 5.9,
+  "modifiers": [
+    {}
+  ]
+}

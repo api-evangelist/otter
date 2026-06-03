@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DropoffInfo",
+  "description": "Delivery dropoff details.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-dropoff-info-schema.json",
+  "type": "object",
+  "properties": {
+    "courierNote": {
+      "nullable": true,
+      "type": "string",
+      "description": "Courier supplied dropoff note.",
+      "example": "string"
+    },
+    "proofOfDelivery": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-verification-proof-schema.json",
+      "description": "Proof of delivery."
+    }
+  }
+}

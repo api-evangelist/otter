@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-simple-financial-transaction-structure.json",
+  "name": "SimpleFinancialTransaction",
+  "description": "SimpleFinancialTransaction schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "orderIdentifiers": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-simple-order-identifier-finance-schema.json"
+    },
+    "id": {
+      "type": "string",
+      "description": "External financial transaction identifier.",
+      "example": "store_123"
+    },
+    "createdAt": {
+      "type": "datetime",
+      "description": "The date (in UTC) when the financial transaction was created.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "customerId": {
+      "type": "string",
+      "nullable": true,
+      "description": "Customer identifier.",
+      "example": "store_123"
+    },
+    "notes": {
+      "type": "string",
+      "nullable": true,
+      "description": "General notes about the financial transaction.",
+      "example": "string"
+    },
+    "type": {
+      "type": "string",
+      "description": "Financial transaction operation type.",
+      "enum": [
+        "PAYMENT",
+        "ADJUSTMENT",
+        "CANCELLATION",
+        "MISC"
+      ],
+      "example": "PAYMENT"
+    },
+    "orderItems": {
+      "type": "array",
+      "nullable": true,
+      "description": "Detailed financial per order item.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-item-information-schema.json"
+      }
+    },
+    "issues": {
+      "type": "array",
+      "nullable": true,
+      "description": "List of issues that might have happened with the order.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-issue-schema.json"
+      }
+    },
+    "data": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-financial-data-schema.json"
+    }
+  },
+  "required": [
+    "id",
+    "orderIdentifiers",
+    "createdAt",
+    "type",
+    "data"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SimulateRewardsResponse",
+  "description": "Response body for SimulateRewards API call.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-simulate-rewards-response-schema.json",
+  "type": "object",
+  "properties": {
+    "transactionId": {
+      "type": "string",
+      "description": "The id of the transaction.",
+      "example": "someidstring"
+    },
+    "rewardEffect": {
+      "type": "object",
+      "description": "Effect after applying the reward.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-reward-effect-schema.json"
+    }
+  }
+}

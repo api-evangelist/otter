@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-generate-report-multi-request-structure.json",
+  "name": "GenerateReportMultiRequest",
+  "description": "The request to generate a report for multiple stores.",
+  "type": "object",
+  "properties": {
+    "reportType": {
+      "type": "string",
+      "description": "Type of report to generate",
+      "example": "ORDER_STORES",
+      "enum": [
+        "ORDER_STORES",
+        "ORDER_ITEMS",
+        "PAYOUT_TRANSACTIONS",
+        "RATINGS_AND_REVIEWS"
+      ]
+    },
+    "start": {
+      "type": "date",
+      "description": "Report start date",
+      "example": "2021-10-01"
+    },
+    "end": {
+      "type": "date",
+      "description": "Report end date",
+      "example": "2021-10-01"
+    },
+    "externalStoreIds": {
+      "type": "array",
+      "nullable": false,
+      "description": "List of external store IDs to filter the orders with. At least one value is required. Max is 5000. Fails the requests if one or more invalid external store ID is passed",
+      "example": [
+        "brand1-acbdef",
+        "brand1-fghjkl",
+        "brand2-qwerty"
+      ],
+      "items": {
+        "type": "string",
+        "description": "List of external store IDs to filter the orders with. At least one value is required. Fails the requests if one or more invalid external store ID is passed",
+        "example": "[\"brand1-acbdef\", \"brand1-fghjkl\", \"brand2-qwerty\"]"
+      }
+    },
+    "externalServiceSlugs": {
+      "type": "array",
+      "nullable": true,
+      "description": "List of external service slugs to fetch orders from. Default to all services",
+      "example": [
+        "ubereats",
+        "postmates"
+      ],
+      "items": {
+        "type": "string",
+        "description": "List of external service slugs to fetch orders from. Default to all services",
+        "example": "[\"ubereats\",\"postmates\"]"
+      }
+    },
+    "language": {
+      "type": "string",
+      "nullable": true,
+      "description": "Language of the report. Ignored by ORDER_STORES report Optional. Falls back to English if empty.",
+      "example": "string"
+    }
+  }
+}

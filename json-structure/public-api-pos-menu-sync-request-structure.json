@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-pos-menu-sync-request-structure.json",
+  "name": "PosMenuSyncRequest",
+  "description": "PosMenuSyncRequest schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "shouldPublishChanges": {
+      "type": "boolean",
+      "nullable": true,
+      "description": "Whether or not to publish changes to external services after bulk resolution.",
+      "example": true
+    },
+    "useCustomOptions": {
+      "type": "boolean",
+      "nullable": true,
+      "description": "If true, use `customBulkResolutionOptions` instead of menu configuration.",
+      "example": true
+    },
+    "customBulkResolutionOptions": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-custom-bulk-resolution-options-schema.json"
+    }
+  }
+}

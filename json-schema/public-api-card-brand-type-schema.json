@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CardBrandType",
+  "description": "The brand of the card.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-card-brand-type-schema.json",
+  "type": "string",
+  "enum": [
+    "UNKNOWN",
+    "AMEX",
+    "DINERS_CLUB",
+    "DISCOVER",
+    "JCB",
+    "MASTERCARD",
+    "UNION_PAY",
+    "VISA",
+    "GIROCARD",
+    "EFTPOS_AU",
+    "INTERAC"
+  ],
+  "example": "VISA"
+}

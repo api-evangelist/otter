@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InventorySummary",
+  "description": "The inventory summary for a specific product.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-inventory-summary-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "A unique identifier for the product.",
+      "example": "ZDlhYTc1NjUtMzU3Z"
+    },
+    "gtin": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-gtin-schema.json"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the product.",
+      "example": "Coca-Cola Classic Coke Soft Drink 12 oz. can"
+    },
+    "slug": {
+      "type": "string",
+      "description": "short, unique human-readable id for the product",
+      "example": "coca-cola-classic-soft-drink-12-oz-can"
+    },
+    "externalId": {
+      "type": "string",
+      "description": "id of the product provided by the seller",
+      "example": "some-id-from-a-vendor-123"
+    },
+    "sellableQuantity": {
+      "type": "integer",
+      "description": "The total quantity of the product ready to be sold. Does not include pending or in-progress shipments.",
+      "example": 42
+    },
+    "unsellableQuantity": {
+      "type": "integer",
+      "description": "The total quantity of the product that is in the facility but unable to be sold. This will include inventory that is damaged, expired or otherwise unsellable.",
+      "example": 42
+    },
+    "inboundQuantity": {
+      "type": "integer",
+      "description": "The total quantity of the product inbound to the facility or waiting at the facility to be processed.",
+      "example": 8
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "sellableQuantity"
+  ]
+}

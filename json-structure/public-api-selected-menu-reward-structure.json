@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-selected-menu-reward-structure.json",
+  "name": "SelectedMenuReward",
+  "description": "Indicates the item the user want to redeem, if reward type is MENUS, this should be present.",
+  "type": "object",
+  "properties": {
+    "entityId": {
+      "type": "string",
+      "description": "The id of the selected item.",
+      "example": "someidstring"
+    }
+  }
+}

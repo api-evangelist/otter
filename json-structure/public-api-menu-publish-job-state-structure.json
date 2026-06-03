@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-menu-publish-job-state-structure.json",
+  "name": "MenuPublishJobState",
+  "description": "Information about the menu publish target.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Status of the menu publish.",
+      "enum": [
+        "PENDING",
+        "FAILED",
+        "SUCCESS",
+        "UNKNOWN"
+      ],
+      "example": "PENDING"
+    },
+    "message": {
+      "type": "string",
+      "nullable": true,
+      "description": "Only present if status is FAILED. Contains the error message returned by our menu systems.",
+      "example": "string"
+    }
+  }
+}

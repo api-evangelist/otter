@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SearchUsersResponse",
+  "description": "Response body for SearchUsers API call.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-search-users-response-schema.json",
+  "type": "object",
+  "properties": {
+    "users": {
+      "type": "array",
+      "description": "The users that matches the search condition.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-user-schema.json"
+      }
+    },
+    "offsetToken": {
+      "type": "string",
+      "description": "Opaque token used to fetch the following page. If not set, no more results are available.",
+      "example": "H12MAF2fFaFFFa"
+    }
+  }
+}

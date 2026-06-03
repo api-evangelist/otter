@@ -1,0 +1,4 @@
+{
+  "attribute": "Order Currency Code",
+  "message": "Order Currency Code must be exactly 3 characters"
+}

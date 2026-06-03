@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-manager-order-cancel-details-structure.json",
+  "name": "ManagerOrderCancelDetails",
+  "description": "Details about a canceled manager order",
+  "type": "object",
+  "properties": {
+    "cancelSource": {
+      "type": "string",
+      "description": "Source of the order cancellation",
+      "enum": [
+        "UNKNOWN",
+        "OPERATOR",
+        "SERVICE_PROVIDER"
+      ],
+      "example": "UNKNOWN"
+    }
+  },
+  "required": [
+    "cancelSource"
+  ]
+}

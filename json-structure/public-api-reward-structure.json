@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-reward-structure.json",
+  "name": "Reward",
+  "description": "Reward schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The id of the reward.",
+      "example": "someidstring"
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of reward.",
+      "example": "SUBTOTAL",
+      "enum": [
+        "SUBTOTAL",
+        "MENUS"
+      ]
+    },
+    "cost": {
+      "oneOf": [
+        {
+          "type": "double",
+          "description": "Cost of the reward, nullable, if null this reward can only be redeem once.",
+          "example": 20
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "costType": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "The type of cost, nullable, if null this reward can only be redeem once.",
+          "example": "POINT",
+          "enum": [
+            "POINT",
+            "DOLLAR"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "trigger": {
+      "oneOf": [
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-trigger-schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "subtotal": {
+      "oneOf": [
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-subtotal-reward-schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "menus": {
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "Item rewards, user can select from one of the items.",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menus-reward-schema.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

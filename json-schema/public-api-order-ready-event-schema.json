@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderReadyEvent",
+  "description": "Event notifiying that the order has acquired status READY.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-ready-event-schema.json",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "description": "Unique ID for the order that was placed.",
+      "example": "69f60a06-c335-46d9-b5a1-97f1a211c514"
+    }
+  }
+}

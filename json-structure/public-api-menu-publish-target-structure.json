@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-menu-publish-target-structure.json",
+  "name": "MenuPublishTarget",
+  "description": "Information about the target.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "The status of a menu publish target.",
+      "enum": [
+        "READY",
+        "PUBLISH_IN_PROGRESS",
+        "ERROR"
+      ],
+      "example": "READY"
+    }
+  }
+}

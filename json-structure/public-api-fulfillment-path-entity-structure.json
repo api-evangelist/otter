@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-fulfillment-path-entity-structure.json",
+  "name": "FulfillmentPathEntity",
+  "description": "Delivery distance.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Describes the entity name.",
+      "example": "rappi"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of entities in the fulfillment path.",
+      "enum": [
+        "FULFILLMENT_PROCESSOR",
+        "INTERMEDIARY"
+      ],
+      "example": "FULFILLMENT_PROCESSOR"
+    }
+  }
+}

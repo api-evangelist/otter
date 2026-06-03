@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UnpauseResponse",
+  "description": "Unpause response details",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-unpause-response-schema.json",
+  "type": "object",
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "description": "The requestId of the unpause request.",
+      "example": "store_123"
+    }
+  }
+}

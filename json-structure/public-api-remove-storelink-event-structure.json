@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-remove-storelink-event-structure.json",
+  "name": "RemoveStorelinkEvent",
+  "description": "RemoveStorelinkEvent schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "storeInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-info-2-schema.json"
+    }
+  },
+  "required": [
+    "storeInfo"
+  ]
+}

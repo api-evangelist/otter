@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UnpauseRequest",
+  "description": "Unpause request parameters",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-unpause-request-schema.json",
+  "type": "object",
+  "properties": {
+    "comment": {
+      "type": "string",
+      "nullable": true,
+      "description": "Comment for the unpause",
+      "example": "Some comment"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AcceptDeliveryCallbackRequest",
+  "description": "Delivery information.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-accept-delivery-callback-request-schema.json",
+  "type": "object",
+  "properties": {
+    "deliveryDistance": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-distance-schema.json"
+    },
+    "currencyCode": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 3,
+      "description": "The 3-letter currency code (ISO 4217) to use for all monetary values.",
+      "example": "EUR"
+    },
+    "cost": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-cost-schema.json"
+    },
+    "fulfillmentPath": {
+      "type": "array",
+      "nullable": true,
+      "description": "List of entities involved in the fulfillment processing path.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-fulfillment-path-entity-schema.json"
+      }
+    },
+    "estimatedDeliveryTime": {
+      "type": "string",
+      "nullable": true,
+      "description": "The expected delivery time.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "estimatedPickupTime": {
+      "type": "string",
+      "nullable": true,
+      "description": "The expected pickup time.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "confirmedAt": {
+      "type": "string",
+      "description": "The time that the request was accepted.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "deliveryTrackingUrl": {
+      "type": "string",
+      "nullable": true,
+      "description": "URL to a web page that tracks the delivery.",
+      "example": "www.example.com"
+    },
+    "providerDeliveryId": {
+      "type": "string",
+      "nullable": true,
+      "description": "The provider's internal identifier for the delivery used for tracking purposes.",
+      "example": "store_123"
+    }
+  }
+}

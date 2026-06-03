@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-time-range-structure.json",
+  "name": "TimeRange",
+  "description": "Time range in a given date.",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "string",
+      "description": "Start time of the range in 24 hour format.",
+      "example": "08:00"
+    },
+    "end": {
+      "type": "string",
+      "description": "End time of the range in 24 hour format.",
+      "example": "22:00"
+    }
+  },
+  "required": [
+    "end",
+    "start"
+  ]
+}

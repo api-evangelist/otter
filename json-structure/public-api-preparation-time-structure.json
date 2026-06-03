@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-preparation-time-structure.json",
+  "name": "PreparationTime",
+  "description": "Preparation time information for an order.",
+  "type": "object",
+  "properties": {
+    "estimatedPreparationTime": {
+      "type": "string",
+      "description": "Preparation time estimated by the order provider. Use the Standard ISO 8601 Duration format (E.g. PT1H30M for 1 hour, 30 minutes).",
+      "example": "PT30M"
+    }
+  }
+}

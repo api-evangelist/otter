@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CardInfo",
+  "description": "Additional card information.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-card-info-schema.json",
+  "type": "object",
+  "properties": {
+    "paymentNetwork": {
+      "type": "string",
+      "description": "The payment network (aka card brand or card scheme) for this card.",
+      "enum": [
+        "MASTERCARD",
+        "MASTERCARD_MAESTRO",
+        "VISA",
+        "AMEX",
+        "DINERS",
+        "ELO",
+        "HIPERCARD",
+        "BANRICOMPRAS",
+        "NUGO",
+        "GOODCARD",
+        "ELO_MAIS",
+        "GREENCARD",
+        "VEROCARD",
+        "COOPER",
+        "NUTRICARD",
+        "VR",
+        "SODEXO",
+        "OTHER"
+      ],
+      "example": "MASTERCARD"
+    },
+    "type": {
+      "type": "string",
+      "description": "The payment type of the card.",
+      "enum": [
+        "CREDIT",
+        "DEBIT",
+        "VOUCHER",
+        "OTHER"
+      ],
+      "example": "CREDIT"
+    }
+  },
+  "required": [
+    "paymentNetwork",
+    "type"
+  ],
+  "deprecated": true
+}

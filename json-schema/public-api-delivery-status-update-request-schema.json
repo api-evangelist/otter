@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeliveryStatusUpdateRequest",
+  "description": "Update delivery status request.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-status-update-request-schema.json",
+  "type": "object",
+  "properties": {
+    "deliveryStatus": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-status-schema.json"
+    },
+    "estimatedDeliveryTime": {
+      "type": "string",
+      "nullable": true,
+      "description": "The expected delivery time.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "estimatedPickupTime": {
+      "type": "string",
+      "nullable": true,
+      "description": "The expected pickup time.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "courier": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-person-schema.json"
+    },
+    "location": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-location-schema.json"
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "The time that the update was created.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "vehicleInformation": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-vehicle-information-schema.json"
+    },
+    "currencyCode": {
+      "type": "string",
+      "nullable": true,
+      "minLength": 3,
+      "maxLength": 3,
+      "description": "The 3-letter currency code (ISO 4217) to use for all monetary values.",
+      "example": "EUR"
+    },
+    "cost": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-cost-schema.json"
+    },
+    "providerDeliveryId": {
+      "type": "string",
+      "nullable": true,
+      "description": "The provider's internal identifier for the delivery used for tracking purposes.",
+      "example": "store_123"
+    },
+    "dropoffInfo": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-dropoff-info-schema.json",
+      "description": "Details on delivery dropoff."
+    },
+    "deliveryTrackingUrl": {
+      "type": "string",
+      "nullable": true,
+      "description": "Delivery tracking url.",
+      "example": "https://example.com/resource"
+    }
+  }
+}

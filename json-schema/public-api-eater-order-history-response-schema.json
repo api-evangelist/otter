@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EaterOrderHistoryResponse",
+  "description": "Response body containing the user's order history.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-eater-order-history-response-schema.json",
+  "type": "object",
+  "properties": {
+    "orders": {
+      "type": "array",
+      "description": "List of orders placed by the user. Each item contains details about a specific order.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-eater-order-schema.json"
+      }
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "Opaque token used to fetch the following page. If not set, no more orders are available.",
+      "example": "H12MAF2fFaFFFa"
+    }
+  },
+  "required": [
+    "orders"
+  ]
+}

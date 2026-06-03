@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Hours",
+  "description": "Hours are represented as a list of HourIntervals.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-hours-schema.json",
+  "type": "object",
+  "properties": {
+    "intervals": {
+      "type": "array",
+      "minItems": 1,
+      "description": "List of HourIntervals.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-hour-interval-schema.json"
+      }
+    }
+  },
+  "required": [
+    "intervals"
+  ]
+}

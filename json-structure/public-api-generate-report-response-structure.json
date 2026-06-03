@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-generate-report-response-structure.json",
+  "name": "GenerateReportResponse",
+  "description": "The response to a generate report request",
+  "type": "object",
+  "properties": {
+    "jobId": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-job-id-schema.json"
+    }
+  }
+}

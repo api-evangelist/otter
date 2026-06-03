@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PromotionDetails",
+  "description": "Order promotion details.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-promotion-details-schema.json",
+  "type": "object",
+  "properties": {
+    "externalId": {
+      "type": "string",
+      "description": "External promotion identifier.",
+      "example": "store_123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Promotion name.",
+      "example": "20% off, up to $5"
+    },
+    "value": {
+      "type": "number",
+      "description": "Promotion value.",
+      "example": 2
+    }
+  }
+}

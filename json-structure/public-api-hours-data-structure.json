@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-hours-data-structure.json",
+  "name": "HoursData",
+  "description": "Represents hours configuration with regular hours and special hours.",
+  "type": "object",
+  "properties": {
+    "timeZone": {
+      "type": "string",
+      "description": "TimeZone of all times under it. (https://www.joda.org/joda-time/timezones.html)",
+      "format": "timezone-id",
+      "example": "America/Los_Angeles"
+    },
+    "regularHours": {
+      "type": "array",
+      "description": "List of regular hours configuration.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-regular-hours-schema.json"
+      }
+    },
+    "specialHours": {
+      "type": "array",
+      "description": "List of special hours configuration, for occasions like Christmas, Thanksgiving, or any other holidays.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-special-hours-schema.json"
+      }
+    }
+  },
+  "required": [
+    "regularHours",
+    "specialHours",
+    "timeZone"
+  ]
+}

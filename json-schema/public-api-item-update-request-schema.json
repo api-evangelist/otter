@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ItemUpdateRequest",
+  "description": "Items are sold on the Menu. Modifiers to items are items themselves and their relationship is defined by ModifierGroup.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-update-request-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identifier of this Item.",
+      "example": "faa4c79f-480d-4de1-bc34-5fb74ef082ef"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of this Item",
+      "example": "Bagel"
+    },
+    "price": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-money-schema.json"
+    },
+    "status": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-status-schema.json"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of this Item",
+      "example": "Delicious bagel!"
+    },
+    "modifierGroupIds": {
+      "type": "array",
+      "default": [],
+      "description": "Identifiers of each ModifierGroup within this Item.",
+      "items": {
+        "type": "string",
+        "example": "7152ee6e-e941-45c1-9008-2e306b479114"
+      }
+    },
+    "priceOverrides": {
+      "type": "array",
+      "nullable": true,
+      "description": "Specify price overrides for different service slugs.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-price-override-schema.json"
+      }
+    },
+    "photoUrls": {
+      "type": "array",
+      "nullable": true,
+      "description": "List of photoUrls to associate with the Item. This is used only for POST/PUT requests.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "skuDetails": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-sku-details-schema.json"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "price",
+    "status",
+    "description"
+  ]
+}

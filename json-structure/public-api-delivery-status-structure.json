@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-delivery-status-structure.json",
+  "name": "DeliveryStatus",
+  "description": "The status of the delivery.",
+  "type": "string",
+  "enum": [
+    "REQUESTED",
+    "ALLOCATED",
+    "PICKED_UP",
+    "COMPLETED",
+    "CANCELED",
+    "ARRIVED_AT_PICKUP",
+    "ARRIVED_AT_DROP_OFF"
+  ]
+}

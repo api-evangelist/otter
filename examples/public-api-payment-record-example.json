@@ -1,0 +1,9 @@
+{
+  "otterPaymentRecordId": "otter_123456789",
+  "recordProviderType": {},
+  "recordPaymentType": {},
+  "paymentRecordId": "pm_123456789",
+  "payerId": "payer_123456789",
+  "balanceTransactionId": "ext_bt_123456789",
+  "paymentDetails": {}
+}

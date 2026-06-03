@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateShipmentRequest",
+  "description": "CreateShipmentRequest schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-create-shipment-request-schema.json",
+  "type": "object",
+  "properties": {
+    "deliveryInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-shipment-delivery-info-schema.json"
+    },
+    "lineItems": {
+      "type": "array",
+      "description": "A list of the shipment line items.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-create-shipment-line-item-schema.json"
+      }
+    }
+  },
+  "required": [
+    "deliveryInfo",
+    "lineItems"
+  ]
+}

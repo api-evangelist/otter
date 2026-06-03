@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MenuPublishTargets",
+  "description": "MenuPublishTargets schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-publish-targets-schema.json",
+  "type": "object",
+  "properties": {
+    "menuPublishTargets": {
+      "type": "object",
+      "additionalProperties": {
+        "x-additionalPropertiesName": "menuPublishTargetName",
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-publish-target-schema.json"
+      },
+      "example": {
+        "rappi": {
+          "status": "PUBLISH_IN_PROGRESS"
+        }
+      },
+      "description": "Map of MenuPublishTarget names to their targets. The target can only be published to if the status is READY."
+    }
+  }
+}

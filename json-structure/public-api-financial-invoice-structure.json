@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-financial-invoice-structure.json",
+  "name": "FinancialInvoice",
+  "description": "FinancialInvoice schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "sourceService": {
+      "type": "string",
+      "nullable": true,
+      "description": "Describes the source of the order, typically from a food ordering marketplace.",
+      "example": "ubereats"
+    },
+    "payout": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-invoice-payout-info-schema.json"
+    },
+    "financialTransactions": {
+      "type": "array",
+      "description": "List of financial transactions related to this invoice.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-simple-financial-transaction-schema.json"
+      }
+    },
+    "currencyCode": {
+      "maxLength": 3,
+      "minLength": 3,
+      "type": "string",
+      "description": "The 3-letter currency code (ISO 4217) to use for all monetary values in this order.",
+      "example": "EUR"
+    }
+  },
+  "required": [
+    "payout",
+    "financialTransactions"
+  ]
+}

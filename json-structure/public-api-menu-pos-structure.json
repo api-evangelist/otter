@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-menu-pos-structure.json",
+  "name": "Menu_POS",
+  "description": "A menu for a store.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Internal identifier for Menu.",
+      "example": "ff6dd693-5e55-4a92-a359-ea61b23ed423"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the Menu.",
+      "example": "Tasty BBQ"
+    },
+    "categoryIds": {
+      "type": "array",
+      "default": [],
+      "description": "Identifiers of the categories within this Menu.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "fulfillmentModes": {
+      "type": "array",
+      "default": [],
+      "description": "The ways in which this menu may be fulfilled. If no values are specified, it is assumed that all fulfillment types are allowed.",
+      "items": {
+        "type": "string",
+        "description": "How an item from a menu is allowed to be fulfilled when ordered by a user.",
+        "enum": [
+          "DELIVERY",
+          "PICK_UP",
+          "DINE_IN"
+        ]
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the Menu.",
+      "example": "Cooking up BBQ deliciousness from around the globe!"
+    },
+    "hours": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-hours-schema.json"
+    },
+    "additionalCharges": {
+      "type": "array",
+      "nullable": true,
+      "description": "Additional charges to apply for this menu. All additional charges specified on a menu will only be applied once per order.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-additional-charge-schema.json"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-store-hours-structure.json",
+  "name": "StoreHours",
+  "description": "Represents store hours configuration with regular hours and special hours.",
+  "type": "object",
+  "properties": {
+    "regularHours": {
+      "type": "array",
+      "description": "List of regular hours configuration.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-storefront-regular-hours-schema.json"
+      }
+    },
+    "specialHours": {
+      "type": "array",
+      "nullable": true,
+      "description": "List of special hours configuration.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-storefront-special-hours-schema.json"
+      }
+    }
+  }
+}

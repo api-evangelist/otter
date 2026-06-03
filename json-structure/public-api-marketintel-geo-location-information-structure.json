@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-marketintel-geo-location-information-structure.json",
+  "name": "Marketintel_GeoLocationInformation",
+  "description": "The geographical location information used to discover stores.  This information will need be pass back with the result.",
+  "type": "object",
+  "properties": {
+    "regionId": {
+      "type": "string",
+      "description": "The region id of the geographical location.",
+      "example": [
+        "LATAM-N"
+      ]
+    },
+    "superRegion": {
+      "type": "string",
+      "description": "The super region of the geographical location.",
+      "example": [
+        "LATAM"
+      ]
+    },
+    "h3Index": {
+      "type": "string",
+      "description": "The H3Index value of the geographic location.",
+      "example": [
+        "886d344c81fffff"
+      ]
+    },
+    "searchText": {
+      "type": "string",
+      "nullable": true,
+      "description": "The text used to search for stores.",
+      "example": [
+        "chinese food"
+      ]
+    },
+    "address": {
+      "type": "object",
+      "description": "The address of the geographical location.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-address-schema.json"
+    }
+  }
+}

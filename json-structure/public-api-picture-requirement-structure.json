@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-picture-requirement-structure.json",
+  "name": "PictureRequirement",
+  "description": "Enables and configure the picture requirement.",
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Marks the picture requirement as required.",
+      "example": true
+    }
+  }
+}

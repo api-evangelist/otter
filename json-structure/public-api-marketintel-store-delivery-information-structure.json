@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-marketintel-store-delivery-information-structure.json",
+  "name": "Marketintel_StoreDeliveryInformation",
+  "description": "The Store delivery information.",
+  "type": "object",
+  "properties": {
+    "minDeliveryBasketSize": {
+      "type": "object",
+      "nullable": true,
+      "description": "The minimum basket value of the order needed for delivery",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-money-schema.json"
+    },
+    "deliveryFee": {
+      "type": "object",
+      "nullable": true,
+      "description": "The delivery fee for the order",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-money-schema.json"
+    },
+    "deliveryType": {
+      "type": "string",
+      "nullable": true,
+      "description": "The delivery type for the order",
+      "example": "Third Party"
+    },
+    "deliveryTimeMinutes": {
+      "type": "int32",
+      "nullable": true,
+      "description": "The estimated delivery time in minutes",
+      "example": 30
+    }
+  }
+}

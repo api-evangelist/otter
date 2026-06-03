@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-menu-async-latest-job-for-store-response-structure.json",
+  "name": "MenuAsyncLatestJobForStoreResponse",
+  "description": "MenuAsyncLatestJobForStoreResponse schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "latestJobs": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-asynchronous-job-schema.json"
+      },
+      "description": "The list of latest Job and its children for the store and the specified job type."
+    }
+  }
+}

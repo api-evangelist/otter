@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DietaryClassification",
+  "description": "Dietary classification information.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-dietary-classification-schema.json",
+  "type": "object",
+  "properties": {
+    "tag": {
+      "type": "string",
+      "description": "The type of dietary classification.",
+      "enum": [
+        "VEGAN",
+        "VEGETARIAN",
+        "NON_VEGETARIAN",
+        "EGG",
+        "KOSHER",
+        "HALAL",
+        "PLANT_BASED",
+        "PALEO",
+        "KETO"
+      ],
+      "example": "VEGAN"
+    }
+  }
+}

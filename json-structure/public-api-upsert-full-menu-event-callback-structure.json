@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-upsert-full-menu-event-callback-structure.json",
+  "name": "UpsertFullMenuEventCallback",
+  "description": "UpsertFullMenuEventCallback schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "requestedToCreatedEntityIds": {
+      "type": "object",
+      "additionalProperties": {
+        "x-additionalPropertiesName": "menuId",
+        "type": "string"
+      },
+      "example": {
+        "1ecd8573-c033-4a55-9d69-4e99bb0397b4": "ABCDEFGHIJK1234"
+      },
+      "description": "A map for entities created by the Upsert containing the IDs of the requested entities mapped to the IDs of entities created by the request. Our system will use the IDs returned in this map to send updates to these entities in future requests. **NOTE -** A empty map can be used on requestedToCreatedEntityIds to use the same menu IDs that were previously defined."
+    }
+  },
+  "required": [
+    "requestedToCreatedEntityIds"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderHandedOffEvent",
+  "description": "Event notifiying that the order has acquired status HANDED OFF.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-handed-off-event-schema.json",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "description": "Unique ID for the order that was placed.",
+      "example": "69f60a06-c335-46d9-b5a1-97f1a211c514"
+    },
+    "courierPhone": {
+      "nullable": true,
+      "type": "string",
+      "description": "The phone number of the courier.",
+      "example": "415-234-3212"
+    },
+    "courierBodyTempFahrenheit": {
+      "nullable": true,
+      "type": "number",
+      "description": "The temperature of the courier in fahrenheit.",
+      "example": 36.6
+    },
+    "isCourierWearingMask": {
+      "nullable": true,
+      "type": "boolean",
+      "description": "Whether or not the courier is wearing a mask.",
+      "example": true
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-pos-injection-state-update-event-structure.json",
+  "name": "PosInjectionStateUpdateEvent",
+  "description": "Event that describes current POS injection state",
+  "type": "object",
+  "properties": {
+    "externalIdentifiers": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-external-identifiers-schema.json"
+    },
+    "injectionState": {
+      "type": "string",
+      "description": "Injection state for an order. \n * `UNKNOWN` Injection state unknown. \n * `SUCCEEDED` Injection has succeeded. \n * `INJECTION_FAILING` Injection attempts failing. Will retry. \n * `INJECTION_FAILED` Injection Failed. \n * `MANUAL_INJECTION_SUCCEEDED` Injection was done manually. \n * `MANUAL_INJECTION_REQUIRED` Manual injection is required. \n * `SUCCEEDED_WITH_UNLINKED_ITEMS` Injection has succeeded, but there were open items.",
+      "enum": [
+        "UNKNOWN",
+        "SUCCEEDED",
+        "INJECTION_FAILING",
+        "INJECTION_FAILED",
+        "MANUAL_INJECTION_SUCCEEDED",
+        "MANUAL_INJECTION_REQUIRED",
+        "SUCCEEDED_WITH_UNLINKED_ITEMS"
+      ],
+      "example": "UNKNOWN"
+    },
+    "injectionIssue": {
+      "type": "string",
+      "description": "Injection issue for an order. * `UNKNOWN_INJECTION_ISSUE`: The issue is unknown. \n * `NO_INJECTABLE_EXTERNAL_SERVICE`: No external service is available for injection. \n * `ITEM_MAPPING_FAILED`: Failed to map items from the order. \n * `INCOMPLETE_ITEM_MAPPING`: Some items could not be mapped, but others were successfully injected. \n * `UNKNOWN_ORDER_ISSUE`: The order has an unidentified issue preventing injection. \n * `ORDER_TOO_OLD`: The order is too old to be injected. \n * `ORDER_IMMUTABLE`: The order cannot be modified or injected. \n * `ORDER_ORIGINATED_FROM_POS`: The order originated from the POS system and does not require injection. \n * `ORDER_PENDING_ACCEPT_EXPIRED`: The order was not accepted in time, preventing injection. \n * `INTEGRATION_ERROR`: A general integration error occurred during injection.",
+      "enum": [
+        "UNKNOWN_INJECTION_ISSUE",
+        "NO_INJECTABLE_EXTERNAL_SERVICE",
+        "ITEM_MAPPING_FAILED",
+        "INCOMPLETE_ITEM_MAPPING",
+        "UNKNOWN_ORDER_ISSUE",
+        "ORDER_TOO_OLD",
+        "ORDER_IMMUTABLE",
+        "ORDER_ORIGINATED_FROM_POS",
+        "ORDER_PENDING_ACCEPT_EXPIRED",
+        "INTEGRATION_ERROR"
+      ],
+      "example": "UNKNOWN_INJECTION_ISSUE"
+    },
+    "additionalData": {
+      "type": "object",
+      "description": "Additional data for integration-specific data",
+      "example": {
+        "ticketData": "Some value for the TicketData",
+        "customField": "customValue"
+      }
+    }
+  }
+}

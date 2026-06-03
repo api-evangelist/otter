@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-manager-order-issue-structure.json",
+  "name": "ManagerOrderIssue",
+  "description": "Issue codes for issues encountered when processing a manager order",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "The specific issues with this item",
+      "enum": [
+        "UNKNOWN",
+        "MENU_RESOLUTION_FAILED",
+        "NO_SUPPORTED_POS",
+        "VALIDATION_ONLY",
+        "POS_VENDOR_ERROR",
+        "INTERNAL_ERROR",
+        "MISCONFIGURED_INTEGRATION",
+        "CANCEL_FAILED"
+      ],
+      "example": "MENU_RESOLUTION_FAILED"
+    },
+    "description": {
+      "type": "string",
+      "description": "A friendly description describing what went wrong",
+      "example": "Order contains unreconciled items"
+    }
+  },
+  "required": [
+    "code"
+  ]
+}

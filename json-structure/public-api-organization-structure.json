@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-organization-structure.json",
+  "name": "Organization",
+  "description": "Organization schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Organization identifier.",
+      "example": "9208071e-5f7a-444a-b3a7-4a57ff3f614e"
+    },
+    "name": {
+      "type": "string",
+      "description": "Organization name.",
+      "example": "Organization name 1"
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

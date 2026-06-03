@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MandateStatus",
+  "description": "The status of the mandate.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-mandate-status-schema.json",
+  "type": "string",
+  "enum": [
+    "ACTIVE",
+    "INACTIVE",
+    "PENDING"
+  ],
+  "example": "ACTIVE"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Sample Name",
+  "price": 1.0,
+  "quantity": 1.0,
+  "itemId": "store_123",
+  "modifiers": [
+    {}
+  ]
+}

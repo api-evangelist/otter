@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-card-brand-type-structure.json",
+  "name": "CardBrandType",
+  "description": "The brand of the card.",
+  "type": "string",
+  "enum": [
+    "UNKNOWN",
+    "AMEX",
+    "DINERS_CLUB",
+    "DISCOVER",
+    "JCB",
+    "MASTERCARD",
+    "UNION_PAY",
+    "VISA",
+    "GIROCARD",
+    "EFTPOS_AU",
+    "INTERAC"
+  ],
+  "example": "VISA"
+}

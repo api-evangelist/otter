@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Marketintel_StoreChain",
+  "description": "The Store Chain information.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-chain-schema.json",
+  "type": "object",
+  "properties": {
+    "chainId": {
+      "type": "string",
+      "nullable": true,
+      "description": "The external chain id.",
+      "example": 1
+    },
+    "chainName": {
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the chain.",
+      "example": "Macdonalds"
+    }
+  }
+}

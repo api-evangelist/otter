@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SelectedReward",
+  "description": "SelectedReward schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-selected-reward-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of reward.",
+      "example": "someidstring"
+    },
+    "amount": {
+      "type": "number",
+      "description": "The amount that was deducted.",
+      "example": 19.07
+    },
+    "menus": {
+      "oneOf": [
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-selected-menu-reward-schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

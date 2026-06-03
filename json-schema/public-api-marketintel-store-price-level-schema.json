@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Marketintel_StorePriceLevel",
+  "description": "The Store Price Level information. At least one of the price level or price level name need to be present.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-price-level-schema.json",
+  "type": "object",
+  "properties": {
+    "priceLevel": {
+      "type": "number",
+      "nullable": true,
+      "description": "The price level of the store in numeric rating.",
+      "example": 3
+    },
+    "priceLevelName": {
+      "type": "string",
+      "nullable": true,
+      "description": "The price level of the store in text.",
+      "example": "$$$"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "da0e4e94-5670-4175-897a-3b7dde45bed5",
+  "name": "Tasty BBQ",
+  "categoryIds": [],
+  "fulfillmentModes": [],
+  "description": "Cooking up BBQ deliciousness from around the globe!",
+  "hoursData": {},
+  "additionalCharges": [
+    {}
+  ],
+  "exposedThirdPartyInfos": []
+}

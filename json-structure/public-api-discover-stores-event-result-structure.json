@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-discover-stores-event-result-structure.json",
+  "name": "DiscoverStoresEventResult",
+  "description": "The result of an event that request to find stores at the provided geolocations.",
+  "type": "object",
+  "properties": {
+    "storesDiscovered": {
+      "type": "array",
+      "minItems": 0,
+      "description": "Represents a list of discovered stores.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-discovered-store-schema.json"
+      }
+    },
+    "storeRankings": {
+      "type": "array",
+      "minItems": 0,
+      "description": "Represents the store rankings.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-listing-schema.json"
+      }
+    }
+  }
+}

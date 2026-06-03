@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-customer-tip-structure.json",
+  "name": "CustomerTip",
+  "description": "CustomerTip schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "double",
+      "description": "The amount that the customer tipped.",
+      "example": 2
+    }
+  },
+  "required": [
+    "value"
+  ]
+}

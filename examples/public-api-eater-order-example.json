@@ -1,0 +1,13 @@
+{
+  "id": "69f60a06-c335-46d9-b5a1-97f1a211c514",
+  "status": "NEW_ORDER",
+  "items": [
+    {}
+  ],
+  "orderedAt": "2007-12-03T10:15:30+01:00",
+  "orderTotal": 19.07,
+  "currencyCode": "USD",
+  "pickupTime": "2007-12-03T10:15:30+01:00",
+  "store": {},
+  "orderAgainUrl": "/store/0179860e-8a89-39c2-b9b1-7276683d09f1"
+}

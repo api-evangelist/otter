@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-fulfillment-info-structure.json",
+  "name": "FulfillmentInfo",
+  "description": "Information on order fulfillment.",
+  "type": "object",
+  "properties": {
+    "pickupTime": {
+      "type": "datetime",
+      "nullable": true,
+      "description": "Time (in UTC) specified by the provider when the courier or customer is expected to pick up the order.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "estimatedPickupTime": {
+      "type": "datetime",
+      "nullable": true,
+      "description": "Time (in UTC) estimated by the platform when the courier or customer is likely to pick up the order.  This estimation takes into account preparation time, order readiness, and other logistical factors.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "deliveryTime": {
+      "type": "datetime",
+      "nullable": true,
+      "description": "Estimated time (in UTC) when the order is expected to be delivered. This should be filled in if FulfillmentMode is delivery.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "fulfillmentMode": {
+      "type": "string",
+      "description": "How an order is expected to be fulfilled.",
+      "default": "DELIVERY",
+      "enum": [
+        "DELIVERY",
+        "RESTAURANT_DELIVERY",
+        "PICKUP",
+        "DINE_IN",
+        "DRIVE_THROUGH"
+      ],
+      "example": "DELIVERY"
+    },
+    "schedulingType": {
+      "type": "string",
+      "nullable": true,
+      "description": "Describes whether this order should be cooked as soon as possible, or some time in the future. Please use the pickupTime and/or deliveryTime to indicate when. If no scheduling type is provided, we assume the order should be prepared as soon as possible.",
+      "enum": [
+        "ASAP",
+        "FIXED_TIME"
+      ],
+      "example": "ASAP"
+    },
+    "courierStatus": {
+      "type": "string",
+      "nullable": true,
+      "description": "The status of the courier.",
+      "enum": [
+        "COURIER_ASSIGNED",
+        "COURIER_ON_ROUTE_TO_PICKUP",
+        "COURIER_ARRIVED",
+        "COURIER_PICKED_UP_FOOD",
+        "COURIER_COMPLETED"
+      ],
+      "example": "COURIER_ASSIGNED"
+    },
+    "tableIdentifier": {
+      "type": "string",
+      "nullable": true,
+      "description": "The table identification for dine-in orders.",
+      "example": "R-45"
+    }
+  }
+}

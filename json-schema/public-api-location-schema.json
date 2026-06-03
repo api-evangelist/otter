@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Location",
+  "description": "Latitude and longitude of the address.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-location-schema.json",
+  "type": "object",
+  "properties": {
+    "latitude": {
+      "type": "number",
+      "description": "The latitude of the location.",
+      "format": "double",
+      "example": 38.8977
+    },
+    "longitude": {
+      "type": "number",
+      "description": "The longitude of the location.",
+      "format": "double",
+      "example": 77.0365
+    }
+  },
+  "required": [
+    "latitude",
+    "longitude"
+  ]
+}

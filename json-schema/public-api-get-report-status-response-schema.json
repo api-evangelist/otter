@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GetReportStatusResponse",
+  "description": "GetReportStatusResponse schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-get-report-status-response-schema.json",
+  "type": "object",
+  "properties": {
+    "status": {
+      "description": "Report export status",
+      "type": "string",
+      "enum": [
+        "IN_PROGRESS",
+        "READY",
+        "ERROR",
+        "EXPIRED"
+      ],
+      "example": "IN_PROGRESS"
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "reportUrl": {
+          "type": "string",
+          "nullable": true,
+          "description": "Url to download the report. It will be available only if status is \"READY\"",
+          "example": "https://example.com/path/to/report.csv.gz"
+        },
+        "errorMessage": {
+          "type": "string",
+          "nullable": true,
+          "description": "Error message. It will be available only if status is \"ERROR\"",
+          "example": "Report generation error. Please reach out to support and provide jobId"
+        }
+      }
+    }
+  }
+}

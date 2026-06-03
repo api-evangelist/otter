@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-order-status-event-structure.json",
+  "name": "OrderStatusEvent",
+  "description": "OrderStatusEvent schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Events that represent updates on order status.",
+      "enum": [
+        "ORDER_ACCEPTED",
+        "ORDER_HANDED_OFF",
+        "ORDER_READY_TO_PICKUP",
+        "ORDER_FULFILLED"
+      ],
+      "example": "ORDER_ACCEPTED"
+    },
+    "eventTime": {
+      "type": "datetime",
+      "description": "The time when this OrderStatusUpdateEvent occurred",
+      "example": "2007-12-03T10:15:30+01:00"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InvoicePayoutInfo",
+  "description": "InvoicePayoutInfo schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-invoice-payout-info-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Payout identifier.",
+      "example": "store_123"
+    },
+    "date": {
+      "type": "string",
+      "description": "The payout date.",
+      "format": "date",
+      "example": "2021-10-01"
+    },
+    "summary": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-financial-data-schema.json"
+    },
+    "total": {
+      "type": "number",
+      "nullable": true,
+      "description": "Total payout value. Should only be used if summary is not provided.",
+      "example": 19.07
+    }
+  },
+  "required": [
+    "id",
+    "date"
+  ]
+}

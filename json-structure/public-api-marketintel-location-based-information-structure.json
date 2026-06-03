@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-marketintel-location-based-information-structure.json",
+  "name": "Marketintel_LocationBasedInformation",
+  "description": "The estimated delivery time of the store and delivery distance from the store. At least one of the attributes need to be set.",
+  "type": "object",
+  "properties": {
+    "estimatedDeliveryTimeInSeconds": {
+      "type": "int32",
+      "nullable": true,
+      "description": "The estimated delivery time in seconds",
+      "example": 1200
+    },
+    "distanceInMeters": {
+      "type": "int32",
+      "nullable": true,
+      "description": "The distance in meters",
+      "example": 3000
+    }
+  }
+}

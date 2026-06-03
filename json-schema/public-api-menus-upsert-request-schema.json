@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MenusUpsertRequest",
+  "description": "All menus associated with a store.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menus-upsert-request-schema.json",
+  "type": "object",
+  "properties": {
+    "categories": {
+      "title": "All Categories for the store, indexed by ID",
+      "type": "object",
+      "additionalProperties": {
+        "x-additionalPropertiesName": "categoryId",
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-category-schema.json"
+      },
+      "example": {
+        "b01485b0-034a-47c5-8a0a-0eeca08bf994": {
+          "name": "Drinks",
+          "description": "All drink items served up nice and fresh!",
+          "id": "b01485b0-034a-47c5-8a0a-0eeca08bf994",
+          "itemIds": [
+            "fa4f0192-4c4e-4455-9db8-61d428c34969"
+          ]
+        }
+      }
+    },
+    "modifierGroups": {
+      "title": "All ModifierGroups for the Store, indexed by ID",
+      "type": "object",
+      "additionalProperties": {
+        "x-additionalPropertiesName": "modifierGroupId",
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-modifier-group-update-request-schema.json"
+      },
+      "example": {
+        "f4c69056-3ae3-4517-9294-5ceec8df5f81": {
+          "id": "f4c69056-3ae3-4517-9294-5ceec8df5f81",
+          "name": "Add Straw",
+          "minimumSelections": 0,
+          "maximumSelections": 1,
+          "defaultModifierSelectionData": {
+            "defaultModifierSelections": [
+              {
+                "itemId": "6d53cf04-9d62-40f5-a8b3-706e3377668f",
+                "selectionQuantity": 1
+              }
+            ]
+          },
+          "itemIds": [
+            "6d53cf04-9d62-40f5-a8b3-706e3377668f"
+          ],
+          "type": "DEFAULT",
+          "exposedThirdPartyInfos": [
+            {
+              "externalId": "ff6dd693-5e55-4a92-a359-ea61b23ed423",
+              "externalServiceSlug": "3PD"
+            }
+          ]
+        }
+      }
+    },
+    "menus": {
+      "title": "All Menus for the store, indexed by ID",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "x-additionalPropertiesName": "menuId",
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-pos-schema.json"
+      },
+      "example": {
+        "ff6dd693-5e55-4a92-a359-ea61b23ed423": {
+          "id": "ff6dd693-5e55-4a92-a359-ea61b23ed423",
+          "name": "Tasty BBQ",
+          "categoryIds": [
+            "b01485b0-034a-47c5-8a0a-0eeca08bf994"
+          ],
+          "fulfillmentModes": [
+            "DELIVERY"
+          ],
+          "description": "Cooking up BBQ deliciousness from around the globe!",
+          "hours": {
+            "intervals": [
+              {
+                "day": "MONDAY",
+                "fromHour": 7,
+                "fromMinute": 30,
+                "toHour": 22,
+                "toMinute": 0
+              }
+            ]
+          },
+          "additionalCharges": [
+            {
+              "chargeType": "PACKAGING_CHARGE",
+              "flatCharge": {
+                "currencyCode": "USD",
+                "amount": 1.5
+              }
+            }
+          ]
+        }
+      }
+    },
+    "items": {
+      "title": "All Items for the store, indexed by ID",
+      "type": "object",
+      "additionalProperties": {
+        "x-additionalPropertiesName": "itemId",
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-update-request-schema.json"
+      },
+      "example": {
+        "fa4f0192-4c4e-4455-9db8-61d428c34969": {
+          "id": "fa4f0192-4c4e-4455-9db8-61d428c34969",
+          "name": "Canned Coke",
+          "description": "Best soda pop ever made",
+          "price": {
+            "currencyCode": "USD",
+            "amount": 7.65
+          },
+          "status": {
+            "saleStatus": "FOR_SALE"
+          },
+          "modifierGroupIds": [
+            "f4c69056-3ae3-4517-9294-5ceec8df5f81"
+          ],
+          "photoUrls": [
+            "https://example.com/photos/c75d9460-5d48-423d-8d01-f825fd5b1672.jpeg"
+          ],
+          "priceOverrides": [
+            {
+              "rules": [
+                {
+                  "externalServiceSlug": "ubereats"
+                }
+              ],
+              "currencyCode": "USD",
+              "amount": 7
+            }
+          ],
+          "skuDetails": {
+            "skuSlug": "canned-coke-355ml",
+            "dietaryClassifications": [
+              {
+                "tag": "VEGAN"
+              }
+            ],
+            "allergenClassifications": [
+              {
+                "tag": "GLUTEN",
+                "containsAllergen": false
+              },
+              {
+                "tag": "PEANUT",
+                "containsAllergen": true
+              }
+            ],
+            "storageRequirements": [
+              {
+                "tag": "FROZEN"
+              }
+            ]
+          }
+        },
+        "6d53cf04-9d62-40f5-a8b3-706e3377668f": {
+          "id": "6d53cf04-9d62-40f5-a8b3-706e3377668f",
+          "name": "Paper straw",
+          "description": "A paper straw",
+          "price": {
+            "currencyCode": "USD",
+            "amount": 0.5
+          },
+          "status": {
+            "saleStatus": "FOR_SALE"
+          },
+          "type": "DEFAULT"
+        }
+      }
+    }
+  },
+  "required": [
+    "categories",
+    "menus",
+    "modifierGroups"
+  ]
+}

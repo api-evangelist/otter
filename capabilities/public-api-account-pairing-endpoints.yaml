@@ -1,0 +1,127 @@
+binds:
+- keys:
+    OTTER_API_TOKEN: OTTER_API_TOKEN
+  namespace: env
+capability:
+  consumes:
+  - authentication:
+      token: '{{env.OTTER_API_TOKEN}}'
+      type: bearer
+    baseUri: https://{public-api-url}
+    description: Otter Public API — Account Pairing Endpoints business capability.
+      Self-contained, no shared references.
+    namespace: public-api-account-pairing-endpoints
+    resources:
+    - name: v1-stores
+      operations:
+      - description: Complete Store Onboarding
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: upsertStorelinkEventResultEndpoint
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/stores
+    - name: v1-stores-status
+      operations:
+      - description: Update Store Status
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: PUT
+        name: updateStoreStatusEndpoint
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/stores/status
+    type: http
+  exposes:
+  - description: REST adapter for Otter Public API — Account Pairing Endpoints. One
+      Spectral-compliant resource per consumed operation, prefixed with /v1.
+    namespace: public-api-account-pairing-endpoints-rest
+    port: 8080
+    resources:
+    - description: REST surface for Complete Store Onboarding.
+      name: upsertstorelinkeventresultendpoint
+      operations:
+      - call: public-api-account-pairing-endpoints.upsertStorelinkEventResultEndpoint
+        description: Complete Store Onboarding
+        method: POST
+        name: upsertStorelinkEventResultEndpoint
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/stores
+    - description: REST surface for Update Store Status.
+      name: updatestorestatusendpoint
+      operations:
+      - call: public-api-account-pairing-endpoints.updateStoreStatusEndpoint
+        description: Update Store Status
+        method: PUT
+        name: updateStoreStatusEndpoint
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/stores/status
+    type: rest
+  - description: MCP adapter for Otter Public API — Account Pairing Endpoints. One
+      tool per consumed operation, routed inline through this capability's consumes
+      block.
+    namespace: public-api-account-pairing-endpoints-mcp
+    port: 9090
+    tools:
+    - call: public-api-account-pairing-endpoints.upsertStorelinkEventResultEndpoint
+      description: Complete Store Onboarding
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: complete-store-onboarding
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-account-pairing-endpoints.updateStoreStatusEndpoint
+      description: Update Store Status
+      hints:
+        destructive: false
+        idempotent: true
+        readOnly: false
+      name: update-store-status
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    transport: http
+    type: mcp
+info:
+  created: '2026-06-03'
+  description: 'Account Pairing Endpoints surface of the Otter Public API. 2 operations.
+    Lead operation: Complete Store Onboarding. Self-contained Naftiko capability covering
+    one Otter business surface.'
+  label: Otter Public API — Account Pairing Endpoints
+  modified: '2026-06-03'
+  tags:
+  - Otter
+  - Public API
+  - Account
+  - Pairing
+naftiko: 1.0.0-alpha2

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ShipmentStateChange",
+  "description": "ShipmentStateChange schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-shipment-state-change-schema.json",
+  "type": "object",
+  "properties": {
+    "state": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-shipment-state-schema.json"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "ISO-8601 timestamp representing when the state change occurred.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    }
+  },
+  "required": [
+    "timestamp",
+    "state"
+  ]
+}

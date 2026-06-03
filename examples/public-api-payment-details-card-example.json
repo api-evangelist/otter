@@ -1,0 +1,15 @@
+{
+  "brandType": {},
+  "expiration": {
+    "year": 2025,
+    "month": 12
+  },
+  "fundingType": {},
+  "walletType": {},
+  "lastFour": "1234",
+  "walletLastFour": "5678",
+  "authorizationCode": "auth_code_123",
+  "applicationPreferredName": "MyApp",
+  "fingerprint": "fingerprint_abc123",
+  "readMethod": "chip"
+}

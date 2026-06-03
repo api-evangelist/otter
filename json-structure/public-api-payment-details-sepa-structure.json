@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-payment-details-sepa-structure.json",
+  "name": "PaymentDetailsSepa",
+  "description": "Details of a SEPA payment method in EU countries.",
+  "type": "object",
+  "properties": {
+    "mandateStatus": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-mandate-status-schema.json"
+    },
+    "lastFour": {
+      "type": "string",
+      "description": "The last four digits of the SEPA account.",
+      "example": "4321"
+    },
+    "branchCode": {
+      "type": "string",
+      "description": "The branch code of the SEPA account.",
+      "example": "branch_001"
+    },
+    "bankCode": {
+      "type": "string",
+      "description": "The bank code of the SEPA account.",
+      "example": "bank_001"
+    },
+    "countryCode": {
+      "type": "string",
+      "description": "The country code of the SEPA account.",
+      "example": "DE"
+    },
+    "mandateId": {
+      "type": "string",
+      "description": "The mandate ID for the SEPA account.",
+      "example": "sepa_mandate_012"
+    },
+    "reference": {
+      "type": "string",
+      "description": "The reference for the SEPA payment.",
+      "example": "reference_xyz"
+    },
+    "url": {
+      "type": "string",
+      "description": "The URL for the SEPA payment details.",
+      "example": "http://example.com/sepa"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "key": "full_name",
+  "required": true,
+  "type": "FULL_NAME",
+  "label": "First Name and Last Name"
+}

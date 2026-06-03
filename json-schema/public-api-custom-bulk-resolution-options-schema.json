@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CustomBulkResolutionOptions",
+  "description": "CustomBulkResolutionOptions schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-custom-bulk-resolution-options-schema.json",
+  "type": "object",
+  "properties": {
+    "updateNames": {
+      "type": "boolean",
+      "description": "Update the linked entity's names to match the linked external entity's.",
+      "example": true
+    },
+    "updatePrices": {
+      "type": "boolean",
+      "description": "Update the linked entity's price to match the linked external entity's.",
+      "example": true
+    },
+    "updateDescriptions": {
+      "type": "boolean",
+      "description": "Update the linked entity's description to match the linked external entity's.",
+      "example": true
+    },
+    "createUnmatchedEntities": {
+      "type": "boolean",
+      "description": "Create unmatched external entities in the menu.",
+      "example": true
+    },
+    "deleteMissingEntities": {
+      "type": "boolean",
+      "description": "Delete entities that are missing external links.",
+      "example": true
+    },
+    "bootstrapPhotosToEntities": {
+      "type": "boolean",
+      "description": "Bootstrap linked item photos.",
+      "example": true
+    },
+    "copyEntityPaths": {
+      "type": "boolean",
+      "description": "Copies the entity paths from the external menu.",
+      "example": true
+    },
+    "updateItemSuspensionStatus": {
+      "type": "boolean",
+      "description": "Update Item suspension status.",
+      "example": true
+    },
+    "updateHours": {
+      "type": "boolean",
+      "description": "Update menu hours.",
+      "example": true
+    },
+    "assignItemsToLocations": {
+      "type": "boolean",
+      "description": "If an item exists at a location in the POS, it will automatically be assigned to that location.",
+      "example": true
+    },
+    "unassignItemsFromLocations": {
+      "type": "boolean",
+      "description": "If an item is removed from a location in the POS, it will automatically be unassigned from that location.",
+      "example": true
+    },
+    "updateMenuOrganization": {
+      "type": "boolean",
+      "description": "The organization of modifiers into modifier groups, modifier groups into items and items into categories will be replicated from the POS menu.",
+      "example": true
+    },
+    "updateItemArrangement": {
+      "type": "boolean",
+      "description": "The arrangement of menu products as displayed in your POS will be replicated.",
+      "example": true
+    },
+    "updateModifierGroupRules": {
+      "type": "boolean",
+      "description": "Update modifier group selection rules.",
+      "example": true
+    },
+    "updateTaxes": {
+      "type": "boolean",
+      "description": "Update taxes.",
+      "example": true
+    }
+  }
+}

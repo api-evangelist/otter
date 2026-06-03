@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DefaultModifierSelectionData",
+  "description": "The default modifiers selections for a modifier group.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-default-modifier-selection-data-schema.json",
+  "type": "object",
+  "properties": {
+    "defaultModifierSelections": {
+      "type": "array",
+      "description": "The default modifier selections for this modifier group.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-default-modifier-selection-schema.json"
+      }
+    }
+  },
+  "required": [
+    "defaultModifierSelections"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OperationType",
+  "description": "Type of the operation",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-operation-type-schema.json",
+  "type": "string",
+  "enum": [
+    "UNKNOWN",
+    "PAUSE",
+    "UNPAUSE"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateShipmentLineItem",
+  "description": "CreateShipmentLineItem schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-create-shipment-line-item-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "A CSS SKU UUID for the product. One of id, slug or externalId is required.",
+      "example": "1b8aec80-21aa-43f1-b510-2199ac54156a"
+    },
+    "slug": {
+      "type": "string",
+      "description": "A CSS SKU slug for the product. One of id, slug or externalId is required.",
+      "example": "pizza-pepperoni-12-inch"
+    },
+    "externalId": {
+      "type": "string",
+      "description": "A SKU external ID for the product. One of id, slug or externalId is required.",
+      "example": "id-in-external-system"
+    },
+    "manifestQuantity": {
+      "type": "integer",
+      "description": "The expected quantity of the product in the shipment.",
+      "example": 5
+    },
+    "receivedSellableQuantity": {
+      "type": "integer",
+      "description": "The quantity of the product in the shipment received that was sellable.",
+      "example": 5
+    },
+    "receivedUnsellableQuantity": {
+      "type": "integer",
+      "description": "The quantity of the product in the shipment received that was unsellable (damaged, expired, etc.).",
+      "example": 5
+    }
+  },
+  "required": [
+    "manifestQuantity"
+  ]
+}

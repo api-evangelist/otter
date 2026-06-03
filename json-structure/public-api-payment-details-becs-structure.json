@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-payment-details-becs-structure.json",
+  "name": "PaymentDetailsBecs",
+  "description": "Details of a BECS payment method in Australia.",
+  "type": "object",
+  "properties": {
+    "mandateStatus": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-mandate-status-schema.json"
+    },
+    "lastFour": {
+      "type": "string",
+      "description": "The last four digits of the BECS account.",
+      "example": "3210"
+    },
+    "bsbNumber": {
+      "type": "string",
+      "description": "The BSB number of the BECS account.",
+      "example": "062-001"
+    },
+    "mandateId": {
+      "type": "string",
+      "description": "The mandate ID for the BECS account.",
+      "example": "becs_mandate_789"
+    },
+    "url": {
+      "type": "string",
+      "description": "The URL for the BECS payment details.",
+      "example": "http://example.com/becs"
+    }
+  }
+}

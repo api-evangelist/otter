@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-job-id-structure.json",
+  "name": "JobId",
+  "description": "ID used to track the job created for generating report.",
+  "type": "string",
+  "example": "38ab397f-b142-4b06-b70c-40c68a408bea"
+}

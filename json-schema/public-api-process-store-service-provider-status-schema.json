@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProcessStoreServiceProviderStatus",
+  "description": "Provider level request status details",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-process-store-service-provider-status-schema.json",
+  "type": "object",
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "description": "The request id of the operation specific to service provider.",
+      "example": "store_123"
+    },
+    "provider": {
+      "type": "string",
+      "description": "The service provider.",
+      "example": "doordash"
+    },
+    "startedAt": {
+      "type": "string",
+      "nullable": true,
+      "description": "The time at which the provider level request was started.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "finishedAt": {
+      "type": "string",
+      "nullable": true,
+      "description": "The time at which the provider level request was completed.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "stateInfo": {
+      "type": "array",
+      "minItems": 0,
+      "description": "List of request state details.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-request-state-info-schema.json"
+      }
+    },
+    "requestStatus": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-status-schema.json"
+    },
+    "currentState": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-request-state-schema.json"
+    }
+  }
+}

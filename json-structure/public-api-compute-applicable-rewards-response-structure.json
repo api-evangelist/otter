@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-compute-applicable-rewards-response-structure.json",
+  "name": "ComputeApplicableRewardsResponse",
+  "description": "Response body for ComputeApplicableRewards API call.",
+  "type": "object",
+  "properties": {
+    "rewards": {
+      "type": "array",
+      "description": "List of rewards the user can redeem, depending on the reward type, only one of subtotal/menus will be present.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-reward-schema.json"
+      }
+    }
+  }
+}

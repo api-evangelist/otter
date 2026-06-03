@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PosMenuSyncResponse",
+  "description": "PosMenuSyncResponse schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-pos-menu-sync-response-schema.json",
+  "type": "object",
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "nullable": true,
+      "description": "Only present if the request succeeds. Job ID to check on the status with the MenuAsyncJob endpoint.",
+      "format": "uuid",
+      "example": "c75d9460-5d48-423d-8d01-f825fd5b1672"
+    }
+  }
+}

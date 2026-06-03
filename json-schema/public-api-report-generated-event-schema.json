@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReportGeneratedEvent",
+  "description": "Event data containing metadata of the generated report",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-report-generated-event-schema.json",
+  "type": "object",
+  "properties": {
+    "reportUrl": {
+      "type": "string",
+      "description": "Public URL to download generated report",
+      "example": "https://example.com/"
+    },
+    "jobId": {
+      "type": "string",
+      "description": "Job id as returned by /v1/reports call",
+      "example": "38ab397f-b142-4b06-b70c-40c68a408bea"
+    }
+  }
+}

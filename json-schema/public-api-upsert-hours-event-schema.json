@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UpsertHoursEvent",
+  "description": "Event data containing all Menu Hours.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-upsert-hours-event-schema.json",
+  "type": "object",
+  "properties": {
+    "menuHoursData": {
+      "type": "object",
+      "additionalProperties": {
+        "x-additionalPropertiesName": "menuId",
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-hours-data-schema.json"
+      },
+      "description": "Menu IDs to Hours",
+      "example": {
+        "da0e4e94-5670-4175-897a-3b7dde45bed5": {
+          "timeZone": "America/Los_Angeles",
+          "regularHours": [
+            {
+              "days": [
+                "MONDAY",
+                "TUESDAY",
+                "WEDNESDAY",
+                "THURSDAY",
+                "FRIDAY"
+              ],
+              "timeRanges": [
+                {
+                  "start": "08:00",
+                  "end": "22:00"
+                }
+              ]
+            }
+          ],
+          "specialHours": [
+            {
+              "date": "2021-12-31",
+              "timeRanges": [
+                {
+                  "start": "08:00",
+                  "end": "22:00"
+                }
+              ],
+              "type": "CLOSED"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "menuHoursData"
+  ]
+}

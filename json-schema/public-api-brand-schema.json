@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Brand",
+  "description": "Brand schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-brand-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Brand identifier.",
+      "example": "9208071e-5f7a-444a-b3a7-4a57ff3f614e"
+    },
+    "name": {
+      "type": "string",
+      "description": "Brand name.",
+      "example": "Brand name 1"
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

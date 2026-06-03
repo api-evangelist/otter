@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-null-event-structure.json",
+  "name": "NullEvent",
+  "description": "Empty event payload.",
+  "type": "object"
+}

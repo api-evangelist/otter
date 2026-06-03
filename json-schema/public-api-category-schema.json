@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Category",
+  "description": "Categories contain a list of Item references.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-category-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The identifier that exists in the third party system. During a menu publish event, uuidV4 ids will be generated for new entities that do not yet exist in the internal menu.",
+      "example": "b01485b0-034a-47c5-8a0a-0eeca08bf994"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of Category.",
+      "example": "Drinks"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of Category.",
+      "example": "All drink items served up nice and fresh!"
+    },
+    "itemIds": {
+      "type": "array",
+      "default": [],
+      "description": "All items in the category.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "fa4f0192-4c4e-4455-9db8-61d428c34969"
+      ]
+    },
+    "photoIds": {
+      "type": "array",
+      "description": "A list of Photo references associated with the Category.",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "exposedThirdPartyInfos": {
+      "type": "array",
+      "default": [],
+      "description": "Additional information about the menu that should be exposed to third party",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-exposed-third-party-info-schema.json"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

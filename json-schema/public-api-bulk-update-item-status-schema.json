@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BulkUpdateItemStatus",
+  "description": "Event data containing list of item status updates.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-bulk-update-item-status-schema.json",
+  "type": "object",
+  "properties": {
+    "updates": {
+      "type": "array",
+      "minItems": 1,
+      "description": "List of item status updates.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-update-item-status-entry-schema.json"
+      }
+    }
+  },
+  "required": [
+    "updates"
+  ]
+}

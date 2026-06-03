@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Marketintel_Coordinates",
+  "description": "The geographical coordinates of a location.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-coordinates-schema.json",
+  "type": "object",
+  "properties": {
+    "coordinatesType": {
+      "type": "string",
+      "description": "Coordinates type",
+      "enum": [
+        "WGS84",
+        "GCJ02"
+      ],
+      "example": "WGS84"
+    },
+    "location": {
+      "type": "object",
+      "description": "The longitude and latitude of a location.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-location-schema.json"
+    }
+  }
+}

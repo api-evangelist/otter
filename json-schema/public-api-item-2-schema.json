@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Item-2",
+  "description": "Item-2 schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-2-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The id of the item in the partner's system.",
+      "example": "someidstring"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Name of the item.",
+      "example": "Cheese Burger"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Quantity of item ordered.",
+      "example": 1
+    },
+    "price": {
+      "type": "number",
+      "description": "Price of item.",
+      "example": 19.07
+    },
+    "modifiers": {
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "The modifiers of an item, such as size(small, medium, large), modifier share the same model as item, just in case we have nested modifiers.",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-2-schema.json"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

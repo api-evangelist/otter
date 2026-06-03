@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-shipment-structure.json",
+  "name": "Shipment",
+  "description": "Shipment schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "A UUID for the shipment.",
+      "example": "18695c43-c670-4c57-a714-e0d7b215db20"
+    },
+    "deliveryInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-shipment-delivery-info-schema.json"
+    },
+    "lineItems": {
+      "type": "array",
+      "description": "A list of the shipment line items.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-shipment-line-item-schema.json"
+      }
+    },
+    "stateChanges": {
+      "type": "array",
+      "minItems": 1,
+      "description": "The state changes for the shipment. The final state change represents the current state of the shipment.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-shipment-state-change-schema.json"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "deliveryInfo",
+    "lineItems",
+    "stateChanges"
+  ]
+}

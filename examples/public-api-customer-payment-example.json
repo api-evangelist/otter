@@ -1,0 +1,12 @@
+{
+  "value": 2,
+  "processingStatus": "COLLECTABLE",
+  "paymentMethod": "CASH",
+  "paymentAuthorizer": "UNKNOWN_TYPE",
+  "cardInfo": {},
+  "externalPaymentType": "string",
+  "paymentRecords": [
+    {}
+  ],
+  "loyaltyInfo": {}
+}

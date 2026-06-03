@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateShipmentResponse",
+  "description": "A response containing information about the created shipment.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-create-shipment-response-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "A unique identifier for the shipment.",
+      "example": "18695c43-c670-4c57-a714-e0d7b215db20"
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

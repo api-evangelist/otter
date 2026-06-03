@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-signature-proof-structure.json",
+  "name": "SignatureProof",
+  "description": "Signature info captured.",
+  "type": "object",
+  "properties": {
+    "signatureImageUrl": {
+      "type": "string",
+      "description": "Signature image url.",
+      "example": "https://example.com/resource"
+    },
+    "signerName": {
+      "nullable": true,
+      "type": "string",
+      "description": "The name of the signer.",
+      "example": "Sample Name"
+    },
+    "signerRelationship": {
+      "nullable": true,
+      "type": "string",
+      "description": "The relationship of signer to the intended recipient.",
+      "example": "string"
+    }
+  }
+}

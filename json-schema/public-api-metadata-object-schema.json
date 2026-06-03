@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MetadataObject",
+  "description": "Information about the event.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-metadata-object-schema.json",
+  "type": "object",
+  "properties": {
+    "storeId": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-id-schema.json"
+    },
+    "applicationId": {
+      "type": "string",
+      "description": "The plain-text Application ID, provided at partner onboarding, also available on Developer Portal.",
+      "example": "ad4ff59d-04c0-4c7d-8ca3-e3a673f8443d"
+    },
+    "resourceId": {
+      "type": "string",
+      "description": "Identifier of the resource that this event refers to, if needed.",
+      "example": "resource-id-if-needed"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Object containing details of the given event, if needed."
+    },
+    "resourceHref": {
+      "type": "string",
+      "description": "The full endpoint to fetch the details of the resource, if needed.",
+      "example": "resource-href-id-if-needed"
+    }
+  }
+}

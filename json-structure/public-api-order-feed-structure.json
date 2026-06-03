@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-order-feed-structure.json",
+  "name": "OrderFeed",
+  "description": "An order feed response",
+  "type": "object",
+  "properties": {
+    "orders": {
+      "type": "array",
+      "description": "Array of Orders",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-schema.json"
+      }
+    },
+    "offsetToken": {
+      "type": "string",
+      "description": "Opaque token used to fetch the following page. If not set, no more orders are available.",
+      "example": "H12MAF2fFaFFFa"
+    }
+  },
+  "required": [
+    "orders"
+  ]
+}

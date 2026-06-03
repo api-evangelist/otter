@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ApplicationId",
+  "description": "The plain-text Application ID, provided at partner onboarding, also available on Developer Portal.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-application-id-schema.json",
+  "type": "string",
+  "example": "5045c1c3-694f-4392-b43b-e765cd89c8b8"
+}

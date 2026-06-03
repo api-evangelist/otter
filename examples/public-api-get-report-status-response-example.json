@@ -1,0 +1,7 @@
+{
+  "status": "IN_PROGRESS",
+  "payload": {
+    "reportUrl": "https://example.com/path/to/report.csv.gz",
+    "errorMessage": "Report generation error. Please reach out to support and provide jobId"
+  }
+}

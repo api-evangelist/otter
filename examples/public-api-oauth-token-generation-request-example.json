@@ -1,0 +1,9 @@
+{
+  "client_id": "c75d9460-5d48-423d-8d01-f825fd5b1672",
+  "client_secret": "string",
+  "grant_type": "client_credentials",
+  "scope": "scope1 scope2",
+  "code": "8A9D16B4C3E25F6A",
+  "redirect_uri": "https://example.com/callback",
+  "code_verifier": "Th7UHJdLswIYQxwSg29DbK1a_d9o41uNMTRmuH0PM8zyoMAQ"
+}

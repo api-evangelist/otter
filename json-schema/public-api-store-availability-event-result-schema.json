@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StoreAvailabilityEventResult",
+  "description": "The current state of a store.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-availability-event-result-schema.json",
+  "type": "object",
+  "properties": {
+    "storeState": {
+      "type": "string",
+      "nullable": true,
+      "description": "Represents the current state of a store.",
+      "enum": [
+        "OPEN",
+        "OFF_HOUR",
+        "SERVICE_PROVIDER_PAUSED",
+        "OPERATOR_PAUSED",
+        "SERVICE_PROVIDER_PAUSED_COURIERS_UNAVAILABLE",
+        "STORE_UNAVAILABLE",
+        "HOLIDAY_HOUR",
+        "MENU_UNAVAILABLE",
+        "SERVICE_PROVIDER_PAUSED_MISCONFIGURED",
+        "OPEN_FOR_PICKUP_ONLY",
+        "OPEN_FOR_DELIVERY_ONLY",
+        "CLOSED_FOR_UNDETERMINED_REASON"
+      ],
+      "example": "OPEN"
+    },
+    "statusChangedAt": {
+      "type": "string",
+      "nullable": true,
+      "description": "The time when the store changed to the current state.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "eventResultMetadata": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-event-result-metadata-schema.json"
+    }
+  }
+}

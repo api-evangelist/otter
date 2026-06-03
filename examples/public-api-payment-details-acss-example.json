@@ -1,0 +1,11 @@
+{
+  "mandateStatus": {},
+  "acceptedAt": "2023-01-01T12:00:00Z",
+  "lastFour": "6543",
+  "transitNumber": "11001",
+  "institutionNumber": "001",
+  "bankName": "Bank of Examples",
+  "mandateId": "acss_mandate_456",
+  "transactionType": "recurring",
+  "intervalDescription": "monthly"
+}

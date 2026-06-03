@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Store",
+  "description": "Store schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Store identifier.",
+      "example": "9208071e-5f7a-444a-b3a7-4a57ff3f614e"
+    },
+    "name": {
+      "type": "string",
+      "description": "Store name.",
+      "example": "Store name 1"
+    },
+    "address": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-address-schema.json"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "address"
+  ]
+}

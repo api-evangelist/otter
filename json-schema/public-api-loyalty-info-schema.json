@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LoyaltyInfo",
+  "description": "The customer's loyalty information.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-loyalty-info-schema.json",
+  "type": "object",
+  "properties": {
+    "hasMembershipPass": {
+      "type": "boolean",
+      "description": "Indicates if the customer has a membership pass.",
+      "example": true
+    }
+  }
+}

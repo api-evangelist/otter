@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PauseResponse",
+  "description": "Pause response details",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-pause-response-schema.json",
+  "type": "object",
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "description": "The requestId of the pause request.",
+      "example": "store_123"
+    }
+  }
+}

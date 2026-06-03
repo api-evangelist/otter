@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ItemTax",
+  "description": "The tax configuration.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-tax-schema.json",
+  "type": "object",
+  "properties": {
+    "percentageValue": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-percentage-value-schema.json",
+      "description": "Specify the percentage value of the tax."
+    },
+    "isValueAddedTax": {
+      "type": "boolean",
+      "description": "Whether this tax is a value-added tax.",
+      "example": true
+    }
+  },
+  "required": [
+    "percentageValue",
+    "isValueAddedTax"
+  ]
+}

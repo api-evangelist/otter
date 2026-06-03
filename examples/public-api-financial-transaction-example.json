@@ -1,0 +1,18 @@
+{
+  "orderIdentifiers": {},
+  "id": "store_123",
+  "pending": true,
+  "currencyCode": "EUR",
+  "createdAt": "2007-12-03T10:15:30+01:00",
+  "customerId": "store_123",
+  "notes": "string",
+  "type": "PAYMENT",
+  "payout": {},
+  "orderItems": [
+    {}
+  ],
+  "issues": [
+    {}
+  ],
+  "data": {}
+}

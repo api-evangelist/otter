@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-pause-store-event-result-structure.json",
+  "name": "PauseStoreEventResult",
+  "description": "Result of an event that requested to pause a store.",
+  "type": "object",
+  "properties": {
+    "closureId": {
+      "type": "string",
+      "description": "ID required to unpause a store, if available",
+      "example": "4109d2c9-8bc5-413c-af3e-1c92aa381e41"
+    },
+    "eventResultMetadata": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-required-event-result-metadata-schema.json"
+    }
+  }
+}

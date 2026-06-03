@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-unpause-store-event-structure.json",
+  "name": "UnpauseStoreEvent",
+  "description": "Closure ID. Required to unpause a store, if available.",
+  "type": "string",
+  "example": "4109d2c9-8bc5-413c-af3e-1c92aa381e41"
+}

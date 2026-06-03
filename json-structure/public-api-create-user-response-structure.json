@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-create-user-response-structure.json",
+  "name": "CreateUserResponse",
+  "description": "Response body for CreateUser API call.",
+  "type": "object",
+  "properties": {
+    "user": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-user-schema.json"
+    }
+  }
+}

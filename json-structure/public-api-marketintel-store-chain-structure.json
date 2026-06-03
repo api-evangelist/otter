@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-marketintel-store-chain-structure.json",
+  "name": "Marketintel_StoreChain",
+  "description": "The Store Chain information.",
+  "type": "object",
+  "properties": {
+    "chainId": {
+      "type": "string",
+      "nullable": true,
+      "description": "The external chain id.",
+      "example": 1
+    },
+    "chainName": {
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the chain.",
+      "example": "Macdonalds"
+    }
+  }
+}

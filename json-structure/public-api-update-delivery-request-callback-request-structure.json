@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-update-delivery-request-callback-request-structure.json",
+  "name": "UpdateDeliveryRequestCallbackRequest",
+  "description": "Updated Delivery information.",
+  "type": "object",
+  "properties": {
+    "currencyCode": {
+      "type": "string",
+      "nullable": true,
+      "minLength": 3,
+      "maxLength": 3,
+      "description": "The 3-letter currency code (ISO 4217) to use for all monetary values.",
+      "example": "EUR"
+    },
+    "cost": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-cost-schema.json",
+      "description": "Updated delivery cost."
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-request-action-structure.json",
+  "name": "RequestAction",
+  "description": "Request action details of the current state",
+  "type": "object",
+  "properties": {
+    "operationType": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-operation-type-schema.json"
+    },
+    "status": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-status-schema.json"
+    },
+    "retryAttempt": {
+      "type": "double",
+      "description": "The current retry attempt.",
+      "example": 2
+    },
+    "error": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-storefront-error-schema.json"
+    }
+  }
+}

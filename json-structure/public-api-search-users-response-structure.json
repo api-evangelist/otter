@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-search-users-response-structure.json",
+  "name": "SearchUsersResponse",
+  "description": "Response body for SearchUsers API call.",
+  "type": "object",
+  "properties": {
+    "users": {
+      "type": "array",
+      "description": "The users that matches the search condition.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-user-schema.json"
+      }
+    },
+    "offsetToken": {
+      "type": "string",
+      "description": "Opaque token used to fetch the following page. If not set, no more results are available.",
+      "example": "H12MAF2fFaFFFa"
+    }
+  }
+}

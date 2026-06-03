@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "storeId": "partner-store-unique-identifier",
+  "errorMessage": {
+    "message": "The request body is invalid.",
+    "details": [
+      {}
+    ]
+  }
+}

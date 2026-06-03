@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-compute-applicable-rewards-request-structure.json",
+  "name": "ComputeApplicableRewardsRequest",
+  "description": "Request body for ComputeApplicableRewards API call.",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "string",
+      "description": "The id of the user.",
+      "example": "someidstring"
+    },
+    "order": {
+      "oneOf": [
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-2-schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "userId"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-nutritional-info-structure.json",
+  "name": "NutritionalInfo",
+  "description": "The nutritional information of an item.",
+  "type": "object",
+  "properties": {
+    "energyKcal": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-energy-kcal-schema.json"
+    },
+    "nutritionContent": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-nutrition-content-schema.json"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-verification-proof-structure.json",
+  "name": "VerificationProof",
+  "description": "Verification details.",
+  "type": "object",
+  "properties": {
+    "signatureProof": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-signature-proof-schema.json"
+    },
+    "pictureProof": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-picture-proof-schema.json"
+    }
+  }
+}

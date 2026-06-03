@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ManagerConfirmOrderRequest",
+  "description": "The request to confirm an order.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-manager-confirm-order-request-schema.json",
+  "type": "object",
+  "properties": {
+    "estimatedPrepTimeMinutes": {
+      "type": "integer",
+      "nullable": true,
+      "description": "Estimated order preparation time in minutes.",
+      "example": 15
+    }
+  }
+}

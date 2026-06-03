@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AdditionalCharge",
+  "description": "Additional charge to apply. Exactly one of either flatCharge or percentageCharge should be provided.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-additional-charge-schema.json",
+  "type": "object",
+  "properties": {
+    "chargeType": {
+      "type": "string",
+      "description": "The type of the additional charge.",
+      "enum": [
+        "PACKAGING_CHARGE",
+        "CONTAINER_DEPOSIT"
+      ],
+      "example": "PACKAGING_CHARGE"
+    },
+    "flatCharge": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-money-schema.json"
+    },
+    "percentageCharge": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-percentage-value-schema.json"
+    },
+    "unitPriceAndCount": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-unit-price-and-count-schema.json"
+    }
+  },
+  "required": [
+    "chargeType"
+  ]
+}

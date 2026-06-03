@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-default-modifier-selection-structure.json",
+  "name": "DefaultModifierSelection",
+  "description": "A default modifier selection consists of a reference to the modifier and the default selected quantity of that modifier.",
+  "type": "object",
+  "properties": {
+    "itemId": {
+      "type": "string",
+      "description": "The id of the modifier item that this default selection pertains to. This id must be present in the item ids of the modifier group.",
+      "example": "da0e4e94-5670-4175-897a-3b7dde45bed5"
+    },
+    "selectionQuantity": {
+      "minimum": 0,
+      "type": "int32",
+      "description": "The default quantity of the modifier item to be selected.",
+      "example": 0
+    }
+  },
+  "required": [
+    "itemId",
+    "selectionQuantity"
+  ]
+}

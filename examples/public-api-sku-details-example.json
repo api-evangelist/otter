@@ -1,0 +1,31 @@
+{
+  "skuSlug": "russet-potato-fries-200g",
+  "skuId": "3bac7aed-c8c1-4bfa-a98a-350317e55072",
+  "barcodes": [
+    {}
+  ],
+  "dietaryClassifications": [
+    {}
+  ],
+  "allergenClassifications": [
+    {}
+  ],
+  "storageRequirements": [
+    {}
+  ],
+  "additives": [
+    "flavor enhancers",
+    "emulsifiers",
+    "antioxidants"
+  ],
+  "countryOfOriginIso2": [
+    "US",
+    "CN",
+    "DE"
+  ],
+  "containsAlcohol": true,
+  "nutritionalInfo": {},
+  "servings": {},
+  "producerInformation": "The Coca-Cola Company",
+  "distributorInformation": "The Coca-Cola Company"
+}

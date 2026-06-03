@@ -1,0 +1,102 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Otter
+providerId: otter
+created: '2026-06-03'
+modified: '2026-06-03'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Restaurant
+  - Order Management
+  - Online Ordering
+description: >-
+  The Otter (TryOtter) Public API enforces rate limits at two levels. A global
+  IP-based limit applies across all requests from an IP address, and a
+  finer-grained per-endpoint limit is applied individually at the store level
+  per application — i.e. each (application, store, endpoint) combination has its
+  own budget. Documented per-endpoint budgets are expressed in requests per
+  minute and range from 2/min (store status and account-pairing operations) to
+  32/min (high-volume order, inventory, and menu-availability operations), with
+  8/min and 16/min tiers in between. Exceeding any limit returns HTTP 429.
+  Limits are not self-service; raising them is handled through your Otter
+  Technical Account Manager (TAM).
+sources:
+  - https://developer-guides.tryotter.com/docs/guides-rate-limiting/
+  - https://developer-guides.tryotter.com/api-reference/
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+limits:
+  - name: Authenticated requests (per IP)
+    scope: IP
+    metric: requests_per_second
+    limit: 20
+    timeFrame: second
+    notes: Counts all authenticated requests made by the IP address, across all endpoints.
+  - name: Unauthenticated requests (per IP)
+    scope: IP
+    metric: requests_per_minute
+    limit: 3
+    timeFrame: minute
+    notes: Applies to requests that are not authenticated (e.g. token acquisition before a valid bearer token is presented).
+  - name: Per-endpoint — low-tier operations
+    scope: application/store/endpoint
+    metric: requests_per_minute
+    limit: 2
+    timeFrame: minute
+    notes: >-
+      Applies to sensitive low-volume operations such as Update Store Status and
+      account-pairing store-link callbacks (e.g. updateStoreStatusEndpoint,
+      upsertStorelinkWebhook).
+  - name: Per-endpoint — standard-tier operations
+    scope: application/store/endpoint
+    metric: requests_per_minute
+    limit: 8
+    timeFrame: minute
+    notes: >-
+      Default tier for most endpoints and webhook callbacks (e.g. ping,
+      customer-payment updates, menu publish/upsert-hours callbacks, inventory
+      shipment listing).
+  - name: Per-endpoint — elevated-tier operations
+    scope: application/store/endpoint
+    metric: requests_per_minute
+    limit: 16
+    timeFrame: minute
+    notes: >-
+      Applies to higher-frequency operations such as the generalized callback
+      error endpoint (publishError) and the send-menu callback.
+  - name: Per-endpoint — high-tier operations
+    scope: application/store/endpoint
+    metric: requests_per_minute
+    limit: 32
+    timeFrame: minute
+    notes: >-
+      Applies to high-volume order and inventory operations such as order status
+      updates, inventory summary/shipment listing and creation, and
+      menu-entity-availability callbacks.
+policies:
+  - name: Two-level enforcement
+    description: >-
+      Limits are enforced both globally by IP address and individually per
+      (application, store, endpoint). A request can be throttled by either level
+      independently.
+  - name: Throttle response
+    description: >-
+      When any limit is exceeded the API returns HTTP 429 until the request rate
+      drops below the threshold. The documentation does not specify a
+      Retry-After header.
+  - name: Backoff and retry
+    description: >-
+      Clients should slow down and retry after a 429. No explicit backoff
+      interval is published; exponential backoff is recommended practice.
+  - name: Raising limits
+    description: >-
+      Rate limits are not self-service. Persistent throttling should be escalated
+      to your Otter Technical Account Manager (TAM) to review limit increases.
+  - name: Scope binding
+    description: >-
+      Per-endpoint budgets are scoped to a single store under a single
+      application; the same endpoint for a different store or application has an
+      independent budget.

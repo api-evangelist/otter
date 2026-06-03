@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-job-reference-structure.json",
+  "name": "JobReference",
+  "description": "The job reference.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "uuid",
+      "description": "Unique identifier of the job.",
+      "example": "c75d9460-5d48-423d-8d01-f825fd5b1672"
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the job.",
+      "enum": [
+        "PENDING",
+        "FAILED",
+        "SUCCESS",
+        "UNKNOWN"
+      ],
+      "example": "PENDING"
+    }
+  }
+}

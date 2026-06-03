@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-verification-requirements-structure.json",
+  "name": "VerificationRequirements",
+  "description": "Verification requirements for the delivery.",
+  "type": "object",
+  "properties": {
+    "signatureRequirement": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-signature-requirement-schema.json"
+    },
+    "pictureRequirement": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-picture-requirement-schema.json"
+    }
+  }
+}

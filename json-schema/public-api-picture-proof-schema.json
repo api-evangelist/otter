@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PictureProof",
+  "description": "Picture info captured.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-picture-proof-schema.json",
+  "type": "object",
+  "properties": {
+    "pictureUrl": {
+      "type": "string",
+      "description": "Image url.",
+      "example": "https://example.com/resource"
+    }
+  }
+}

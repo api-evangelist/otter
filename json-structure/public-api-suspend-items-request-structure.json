@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-suspend-items-request-structure.json",
+  "name": "SuspendItemsRequest",
+  "description": "SuspendItemsRequest schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "entityIds": {
+      "type": "array",
+      "description": "Entity IDs to suspend. These should be the IDs as you represent them in your system.",
+      "example": [
+        "9cc4bb5e-bc97-40d9-af28-c02ef1483610"
+      ],
+      "items": {
+        "type": "string",
+        "description": "Entity IDs to suspend.",
+        "example": "[\"9cc4bb5e-bc97-40d9-af28-c02ef1483610\",\"9929290d-31eb-425d-8732-17c4074ac75e\"]"
+      }
+    },
+    "note": {
+      "type": "string",
+      "description": "The reason you are suspending the items.",
+      "example": "Out of item"
+    },
+    "status": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-suspension-status-schema.json"
+    }
+  },
+  "required": [
+    "entityIds",
+    "note",
+    "status"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "deliveryReferenceId": "d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda",
+  "provider": "doordash",
+  "currencyCode": "USD",
+  "customerPayments": [
+    {}
+  ],
+  "customerTip": {},
+  "pickUpInfo": {}
+}

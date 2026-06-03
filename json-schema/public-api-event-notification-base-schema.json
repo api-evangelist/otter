@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EventNotificationBase",
+  "description": "Notification message sent on relevant events.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-event-notification-base-schema.json",
+  "type": "object",
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "description": "Unique identifier of the event.",
+      "format": "uuid",
+      "example": "c75d9460-5d48-423d-8d01-f825fd5b1672"
+    },
+    "eventTime": {
+      "type": "string",
+      "description": "Date of event occurrence.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "eventType": {
+      "type": "string",
+      "description": "The type of event.",
+      "example": "string"
+    }
+  },
+  "required": [
+    "eventId",
+    "eventTime",
+    "eventType",
+    "metadata"
+  ]
+}

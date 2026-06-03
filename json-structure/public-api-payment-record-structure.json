@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-payment-record-structure.json",
+  "name": "PaymentRecord",
+  "description": "Represents the details and metadata of a payment method used in transactions.",
+  "type": "object",
+  "properties": {
+    "otterPaymentRecordId": {
+      "type": "string",
+      "description": "The identifier for the payment record in the Otter system, for reference.",
+      "example": "otter_123456789"
+    },
+    "recordProviderType": {
+      "description": "The type of payment provider.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-record-provider-type-schema.json"
+    },
+    "recordPaymentType": {
+      "description": "The type of payment method.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-record-payment-type-schema.json"
+    },
+    "paymentRecordId": {
+      "type": "string",
+      "description": "The identifier for the payment record from the payment provider.",
+      "example": "pm_123456789"
+    },
+    "payerId": {
+      "type": "string",
+      "description": "The identifier for the payer from the payment provider.",
+      "example": "payer_123456789"
+    },
+    "balanceTransactionId": {
+      "type": "string",
+      "description": "The balance transaction ID from the payment provider.",
+      "example": "ext_bt_123456789"
+    },
+    "paymentDetails": {
+      "description": "One of the possible payment method details, depending on the payment method type.",
+      "oneOf": [
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-payment-details-card-schema.json"
+        },
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-payment-details-bacs-schema.json"
+        },
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-payment-details-acss-schema.json"
+        },
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-payment-details-becs-schema.json"
+        },
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-payment-details-sepa-schema.json"
+        },
+        {
+          "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-payment-details-ach-schema.json"
+        }
+      ]
+    }
+  }
+}

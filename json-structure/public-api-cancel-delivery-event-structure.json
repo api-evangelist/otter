@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-cancel-delivery-event-structure.json",
+  "name": "CancelDeliveryEvent",
+  "description": "CancelDeliveryEvent schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "deliveryReferenceId": {
+      "type": "string",
+      "description": "Generated delivery reference id.",
+      "example": "d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GenerateReportMultiRequest",
+  "description": "The request to generate a report for multiple stores.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-generate-report-multi-request-schema.json",
+  "type": "object",
+  "properties": {
+    "reportType": {
+      "type": "string",
+      "description": "Type of report to generate",
+      "example": "ORDER_STORES",
+      "enum": [
+        "ORDER_STORES",
+        "ORDER_ITEMS",
+        "PAYOUT_TRANSACTIONS",
+        "RATINGS_AND_REVIEWS"
+      ]
+    },
+    "start": {
+      "type": "string",
+      "description": "Report start date",
+      "format": "date",
+      "example": "2021-10-01"
+    },
+    "end": {
+      "type": "string",
+      "description": "Report end date",
+      "format": "date",
+      "example": "2021-10-01"
+    },
+    "externalStoreIds": {
+      "type": "array",
+      "nullable": false,
+      "description": "List of external store IDs to filter the orders with. At least one value is required. Max is 5000. Fails the requests if one or more invalid external store ID is passed",
+      "example": [
+        "brand1-acbdef",
+        "brand1-fghjkl",
+        "brand2-qwerty"
+      ],
+      "items": {
+        "type": "string",
+        "description": "List of external store IDs to filter the orders with. At least one value is required. Fails the requests if one or more invalid external store ID is passed",
+        "example": "[\"brand1-acbdef\", \"brand1-fghjkl\", \"brand2-qwerty\"]"
+      }
+    },
+    "externalServiceSlugs": {
+      "type": "array",
+      "nullable": true,
+      "description": "List of external service slugs to fetch orders from. Default to all services",
+      "example": [
+        "ubereats",
+        "postmates"
+      ],
+      "items": {
+        "type": "string",
+        "description": "List of external service slugs to fetch orders from. Default to all services",
+        "example": "[\"ubereats\",\"postmates\"]"
+      }
+    },
+    "language": {
+      "type": "string",
+      "nullable": true,
+      "description": "Language of the report. Ignored by ORDER_STORES report Optional. Falls back to English if empty.",
+      "example": "string"
+    }
+  }
+}

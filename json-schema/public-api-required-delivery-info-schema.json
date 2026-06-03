@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RequiredDeliveryInfo",
+  "description": "Information on order's delivery process.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-required-delivery-info-schema.json",
+  "type": "object",
+  "properties": {
+    "courier": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-courier-schema.json"
+    },
+    "destination": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-address-schema.json"
+    },
+    "licensePlate": {
+      "type": "string",
+      "nullable": true,
+      "description": "License plate of a vehicle used by the courier.",
+      "example": "ABC 123"
+    },
+    "makeModel": {
+      "type": "string",
+      "nullable": true,
+      "description": "Make and model of a vehicle used by the courier.",
+      "example": "Honda CR-V"
+    },
+    "lastKnownLocation": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-location-schema.json"
+    },
+    "dropoffInstructions": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-dropoff-instructions-schema.json"
+    },
+    "note": {
+      "type": "string",
+      "nullable": true,
+      "description": "Special delivery instructions, if any.",
+      "example": "Gate code 123"
+    }
+  }
+}

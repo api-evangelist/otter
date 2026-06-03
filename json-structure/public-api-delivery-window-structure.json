@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-delivery-window-structure.json",
+  "name": "DeliveryWindow",
+  "description": "The delivery window in which the shipment is expected to arrive at the destination.",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "datetime",
+      "description": "ISO-8601 timestamp representing the start of the time range.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "end": {
+      "type": "datetime",
+      "description": "ISO-8601 timestamp representing the end of the time range.",
+      "example": "2007-12-03T10:15:30+01:00"
+    }
+  },
+  "required": [
+    "start",
+    "end"
+  ]
+}

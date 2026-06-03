@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Menu_3PD",
+  "description": "A Menu for a store.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-3-pd-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The identifier that exists in the third party system. During a menu publish event, uuidV4 ids will be generated for new entities that do not yet exist in the internal menu.",
+      "example": "da0e4e94-5670-4175-897a-3b7dde45bed5"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the Menu.",
+      "example": "Tasty BBQ"
+    },
+    "categoryIds": {
+      "type": "array",
+      "default": [],
+      "description": "Identifiers of the categories within this Menu.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "fulfillmentModes": {
+      "type": "array",
+      "default": [],
+      "description": "The ways in which this menu may be fulfilled. If no values are specified, it is assumed that all fulfillment types are allowed.",
+      "items": {
+        "type": "string",
+        "description": "How an item from a menu is allowed to be fulfilled when ordered by a user.",
+        "enum": [
+          "DELIVERY",
+          "PICK_UP",
+          "DINE_IN"
+        ]
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the Menu.",
+      "example": "Cooking up BBQ deliciousness from around the globe!"
+    },
+    "hoursData": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-hours-data-schema.json"
+    },
+    "additionalCharges": {
+      "type": "array",
+      "nullable": true,
+      "description": "Additional charges to apply for this menu. All additional charges specified on a menu will only be applied once per order.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-additional-charge-schema.json"
+      }
+    },
+    "exposedThirdPartyInfos": {
+      "type": "array",
+      "default": [],
+      "description": "Additional information about the menu that should be exposed to third party",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-exposed-third-party-info-schema.json"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

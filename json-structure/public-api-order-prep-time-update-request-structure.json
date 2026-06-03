@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-order-prep-time-update-request-structure.json",
+  "name": "OrderPrepTimeUpdateRequest",
+  "description": "The request to change an order prep time.",
+  "type": "object",
+  "properties": {
+    "prepTimeMinutes": {
+      "type": "int32",
+      "description": "The requested preparation time to transition the order to.",
+      "example": 1780000000000
+    }
+  },
+  "required": [
+    "prepTimeMinutes"
+  ]
+}

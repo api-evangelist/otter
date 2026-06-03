@@ -1,0 +1,19 @@
+{
+  "id": "faa4c79f-480d-4de1-bc34-5fb74ef082ef",
+  "name": "Bagel",
+  "photoIds": [
+    "string"
+  ],
+  "price": {},
+  "status": {},
+  "description": "Delicious bagel!",
+  "modifierGroupIds": [],
+  "priceOverrides": [
+    {}
+  ],
+  "skuDetails": {},
+  "additionalCharges": [
+    {}
+  ],
+  "tax": {}
+}

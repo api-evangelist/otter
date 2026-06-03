@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-quantity-updated-modification-structure.json",
+  "name": "QuantityUpdatedModification",
+  "description": "QuantityUpdatedModification schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "customerItemIds": {
+      "type": "array",
+      "description": "Unique IDs for the ordered customer items (station item can map to multiple).",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "quantity": {
+      "type": "double",
+      "minimum": 0,
+      "description": "New quantity (0 to remove item).",
+      "example": 1.0
+    },
+    "oldQuantity": {
+      "type": "double",
+      "minimum": 0,
+      "description": "Previous quantity.",
+      "example": 1.0
+    }
+  },
+  "required": [
+    "customerItemIds",
+    "quantity",
+    "oldQuantity"
+  ]
+}

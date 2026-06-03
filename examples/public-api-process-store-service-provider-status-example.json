@@ -1,0 +1,11 @@
+{
+  "requestId": "store_123",
+  "provider": "doordash",
+  "startedAt": "2007-12-03T10:15:30+01:00",
+  "finishedAt": "2007-12-03T10:15:30+01:00",
+  "stateInfo": [
+    {}
+  ],
+  "requestStatus": {},
+  "currentState": {}
+}

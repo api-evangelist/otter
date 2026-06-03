@@ -1,0 +1,16 @@
+{
+  "fullAddress": "123 Sample Street Ste 100, San Francisco, CA 94103",
+  "postalCode": "20500",
+  "city": "Washington",
+  "state": "DC",
+  "countryCode": "US",
+  "addressLines": [
+    "1600 Pennsylvania Avenue NW",
+    "123 Sample Street Ste 100, San Francisco, CA 94103"
+  ],
+  "linesOfAddress": [
+    "1600 Pennsylvania Avenue NW",
+    "123 Sample Street Ste 100, San Francisco, CA 94103"
+  ],
+  "location": {}
+}

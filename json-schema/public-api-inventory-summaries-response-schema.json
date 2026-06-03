@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InventorySummariesResponse",
+  "description": "InventorySummariesResponse schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-inventory-summaries-response-schema.json",
+  "type": "object",
+  "properties": {
+    "inventorySummaries": {
+      "type": "array",
+      "description": "A list of the inventory summaries.",
+      "maxItems": 100,
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-inventory-summary-schema.json"
+      }
+    },
+    "nextToken": {
+      "type": "string",
+      "description": "Opaque token used to fetch the following page. If set, pass the value of nextToken to the next request. If not set, no more results are available.",
+      "example": "H12MAF2fFaFFFa"
+    }
+  }
+}

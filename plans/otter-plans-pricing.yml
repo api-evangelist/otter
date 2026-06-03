@@ -1,0 +1,150 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Otter
+providerId: otter
+created: '2026-06-03'
+modified: '2026-06-03'
+reconciled: true
+tags:
+  - Restaurant
+  - Point Of Sale
+  - Online Ordering
+  - Order Management
+  - Loyalty
+description: >-
+  Otter (TryOtter) prices its Restaurant Operating System as monthly POS
+  subscription packages plus per-order transaction processing fees and optional
+  add-ons, with a custom "Build Your Own" tier for tailored configurations. The
+  Public API itself is not sold as a separately metered product — API and
+  webhook access is provisioned to integration partners through an Otter account
+  representative as part of the platform relationship, with usage governed by
+  per-endpoint rate limits rather than per-call billing. Published package prices
+  below are the publicly listed monthly rates; per-order transaction fees and
+  individual add-on/hardware prices are quoted per merchant and finalized with
+  sales.
+sources:
+  - https://www.tryotter.com/pricing
+  - https://www.tryotter.com/pricing-details-pos
+  - https://helpdesk.tryotter.com/hc/en-us/articles/18739528029715-Otter-Plan-Packages-Pricing
+plans:
+  - id: otter-pos-growth
+    name: POS Growth (POS Only)
+    type: subscription
+    description: Core POS package for restaurants — point of sale, ordering, and loyalty.
+    entries:
+      - label: POS Growth subscription
+        name: pos_growth_subscription
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: '1'
+        price: '$289/month'
+        userMultiplied: false
+      - label: Per-order transaction fee
+        name: transaction_fee
+        type: metered
+        metric: transaction
+        limit: -1
+        timeFrame: usage
+        geo: US
+        unit: '1'
+        price: 'per order transaction fee — see pricing details / contact sales'
+        userMultiplied: false
+    elements:
+      - name: Point of Sale (Dual Screen)
+      - name: Order Manager
+      - name: Online Ordering
+      - name: POS Kiosk Mode
+      - name: Loyalty
+  - id: otter-pos-pro
+    name: POS Pro (POS + Kiosk)
+    type: subscription
+    description: Everything in Growth plus a 21" kiosk with stand and QR code ordering.
+    entries:
+      - label: POS Pro subscription
+        name: pos_pro_subscription
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: '1'
+        price: '$399/month'
+        userMultiplied: false
+      - label: Per-order transaction fee
+        name: transaction_fee
+        type: metered
+        metric: transaction
+        limit: -1
+        timeFrame: usage
+        geo: US
+        unit: '1'
+        price: 'per order transaction fee — see pricing details / contact sales'
+        userMultiplied: false
+    elements:
+      - name: Everything in POS Growth
+      - name: 21" Kiosk with stand
+      - name: QR Code Ordering
+  - id: otter-build-your-own
+    name: Build Your Own
+    type: enterprise
+    description: Custom-configured package with add-ons and hardware tailored to the restaurant.
+    entries:
+      - label: Custom package
+        name: custom_package
+        type: subscription
+        metric: varies
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: '1'
+        price: 'custom'
+        userMultiplied: false
+      - label: Add-ons (handheld POS, gift cards, delivery integration, kiosk license, loyalty)
+        name: add_ons
+        type: flat
+        metric: varies
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: '1'
+        price: 'additional add-ons available for all packages — contact sales'
+        userMultiplied: false
+      - label: Hardware (POS terminal, kiosk, handheld)
+        name: hardware
+        type: flat
+        metric: varies
+        limit: -1
+        timeFrame: usage
+        geo: US
+        unit: '1'
+        price: 'one-time purchase or monthly lease — contact sales'
+        userMultiplied: false
+    elements:
+      - name: Custom add-on selection
+      - name: Cash-discounting available for processing fees
+      - name: Free dedicated onboarding support
+  - id: otter-public-api-access
+    name: Public API & Webhooks Access
+    type: enterprise
+    description: >-
+      Partner/integration access to the Otter Public API and webhooks. Provisioned
+      via an Otter account representative; not separately metered or self-service.
+    entries:
+      - label: API & webhook access
+        name: api_access
+        type: flat
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: 'included with platform relationship — provisioned via account representative'
+        userMultiplied: false
+    elements:
+      - name: OAuth 2.0 application credentials and scopes
+      - name: Per-endpoint rate limits (no per-call billing)
+      - name: Webhook subscriptions with HMAC-SHA256 signing

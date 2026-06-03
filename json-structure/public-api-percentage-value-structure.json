@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-percentage-value-structure.json",
+  "name": "PercentageValue",
+  "description": "Percentage value in decimal format.",
+  "type": "object",
+  "properties": {
+    "decimalValue": {
+      "minimum": 0,
+      "type": "double",
+      "description": "Percentage value in decimal format.",
+      "example": 0.513
+    }
+  },
+  "required": [
+    "decimalValue"
+  ],
+  "example": "A decimalValue of 0.513 will equate to 51.3%"
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RefundRewardsRequest",
+  "description": "Request body for RefundRewards API call.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-refund-rewards-request-schema.json",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "string",
+      "description": "The id of the user.",
+      "example": "someidstring"
+    },
+    "orderId": {
+      "type": "string",
+      "description": "The id of the order.",
+      "example": "someidstring"
+    }
+  },
+  "required": [
+    "userId",
+    "orderId"
+  ]
+}

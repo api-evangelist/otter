@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderPriceAdjustedModification",
+  "description": "OrderPriceAdjustedModification schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-price-adjusted-modification-schema.json",
+  "type": "object",
+  "properties": {
+    "delta": {
+      "type": "number",
+      "description": "Total adjustment on the order (positive = up charge, negative = refund).",
+      "example": -2.5
+    }
+  },
+  "required": [
+    "delta"
+  ]
+}

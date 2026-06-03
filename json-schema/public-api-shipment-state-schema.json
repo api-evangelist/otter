@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ShipmentState",
+  "description": "The state of the shipment.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-shipment-state-schema.json",
+  "type": "string",
+  "enum": [
+    "SCHEDULED",
+    "ARRIVED",
+    "STOCKING",
+    "CLOSED",
+    "CANCELED"
+  ]
+}

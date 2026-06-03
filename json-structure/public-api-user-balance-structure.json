@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-user-balance-structure.json",
+  "name": "UserBalance",
+  "description": "UserBalance schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "double",
+      "description": "Balance amount.",
+      "example": 19.07
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of balance.",
+      "example": "POINT",
+      "enum": [
+        "POINT",
+        "DOLLAR"
+      ]
+    }
+  }
+}

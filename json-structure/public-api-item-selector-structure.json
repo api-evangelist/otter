@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-item-selector-structure.json",
+  "name": "ItemSelector",
+  "description": "Used to select a specific item.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identifier of the item.",
+      "example": "06ef2722-cbf2-11ec-9d64-0242ac120002"
+    },
+    "isModifier": {
+      "type": "boolean",
+      "description": "True, if the item is used as a modifier.",
+      "example": true
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

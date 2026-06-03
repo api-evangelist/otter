@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderStatusHistory",
+  "description": "The Order Status Update History and extra data.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-status-history-schema.json",
+  "type": "object",
+  "properties": {
+    "orderStatusHistory": {
+      "type": "array",
+      "description": "Array of OrderStatusEvent",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-status-event-schema.json"
+      }
+    },
+    "orderAcceptedInfo": {
+      "type": "object",
+      "nullable": true,
+      "description": "[NEW] Extra information added once the order was accepted by the restaurant. This field is nullable.",
+      "properties": {
+        "preparationTimeInMinutes": {
+          "type": "integer",
+          "description": "[NEW] The time in minutes the restaurant says it will take to prepare the order."
+        }
+      },
+      "required": [
+        "preparationTimeInMinutes"
+      ]
+    }
+  }
+}

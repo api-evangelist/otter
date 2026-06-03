@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-upload-past-orders-request-structure.json",
+  "name": "UploadPastOrdersRequest",
+  "description": "The request to create past orders (read only).",
+  "type": "object",
+  "properties": {
+    "orders": {
+      "type": "array",
+      "description": "The past orders you are trying to upload",
+      "maxItems": 100,
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-schema.json"
+      }
+    }
+  },
+  "required": [
+    "orders"
+  ]
+}

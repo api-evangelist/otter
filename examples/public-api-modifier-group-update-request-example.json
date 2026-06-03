@@ -1,0 +1,11 @@
+{
+  "id": "db5740de-429c-4f06-b264-3d41dce6d8c3",
+  "name": "Choose your type of bagel",
+  "minimumSelections": 0,
+  "maximumSelections": 0,
+  "maxPerModifierSelectionQuantity": 0,
+  "defaultModifierSelectionData": {},
+  "itemIds": [],
+  "description": "Choose any of these delicious types of bagels",
+  "type": "DEFAULT"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateUserRequest",
+  "description": "Request body for CreateUser API call.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-create-user-request-schema.json",
+  "type": "object",
+  "properties": {
+    "userFields": {
+      "type": "array",
+      "description": "The user info fields for the new user.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-user-field-schema.json"
+      }
+    }
+  },
+  "required": [
+    "userFields"
+  ]
+}

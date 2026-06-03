@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-pong-object-structure.json",
+  "name": "PongObject",
+  "description": "PongObject schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "response": {
+      "type": "string",
+      "description": "A text response.",
+      "example": "pong"
+    },
+    "currentTime": {
+      "type": "datetime",
+      "description": "The current timestamp.",
+      "example": "2007-12-03T10:15:30+01:00"
+    }
+  }
+}

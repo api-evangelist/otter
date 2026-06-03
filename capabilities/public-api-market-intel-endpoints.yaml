@@ -1,0 +1,84 @@
+binds:
+- keys:
+    OTTER_API_TOKEN: OTTER_API_TOKEN
+  namespace: env
+capability:
+  consumes:
+  - authentication:
+      token: '{{env.OTTER_API_TOKEN}}'
+      type: bearer
+    baseUri: https://{public-api-url}
+    description: Otter Public API — Market Intel Endpoints business capability. Self-contained,
+      no shared references.
+    namespace: public-api-market-intel-endpoints
+    resources:
+    - name: v1-market-intel-discovered-stores
+      operations:
+      - description: Notify Stores Discovered at the Geolocations
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: postDiscoverStoresResult
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/market-intel/discovered-stores
+    type: http
+  exposes:
+  - description: REST adapter for Otter Public API — Market Intel Endpoints. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    namespace: public-api-market-intel-endpoints-rest
+    port: 8080
+    resources:
+    - description: REST surface for Notify Stores Discovered at the Geolocations.
+      name: postdiscoverstoresresult
+      operations:
+      - call: public-api-market-intel-endpoints.postDiscoverStoresResult
+        description: Notify Stores Discovered at the Geolocations
+        method: POST
+        name: postDiscoverStoresResult
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/market-intel/discovered-stores
+    type: rest
+  - description: MCP adapter for Otter Public API — Market Intel Endpoints. One tool
+      per consumed operation, routed inline through this capability's consumes block.
+    namespace: public-api-market-intel-endpoints-mcp
+    port: 9090
+    tools:
+    - call: public-api-market-intel-endpoints.postDiscoverStoresResult
+      description: Notify Stores Discovered at the Geolocations
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: notify-stores-discovered-geolocations
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    transport: http
+    type: mcp
+info:
+  created: '2026-06-03'
+  description: 'Market Intel Endpoints surface of the Otter Public API. 1 operations.
+    Lead operation: Notify Stores Discovered at the Geolocations. Self-contained Naftiko
+    capability covering one Otter business surface.'
+  label: Otter Public API — Market Intel Endpoints
+  modified: '2026-06-03'
+  tags:
+  - Otter
+  - Public API
+  - Market
+  - Intel
+naftiko: 1.0.0-alpha2

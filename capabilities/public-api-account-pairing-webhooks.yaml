@@ -1,0 +1,169 @@
+binds:
+- keys:
+    OTTER_API_TOKEN: OTTER_API_TOKEN
+  namespace: env
+capability:
+  consumes:
+  - authentication:
+      token: '{{env.OTTER_API_TOKEN}}'
+      type: bearer
+    baseUri: https://{public-api-url}
+    description: Otter Public API — Account Pairing Webhooks business capability.
+      Self-contained, no shared references.
+    namespace: public-api-account-pairing-webhooks
+    resources:
+    - name: upsertstore
+      operations:
+      - description: Upsert Store
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: upsertStorelinkWebhook
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: upsertStore
+    - name: removestore
+      operations:
+      - description: Remove Store
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: removeStoreWebhook
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: removeStore
+    - name: fetchcredentials
+      operations:
+      - description: Fetch Credentials (synchronously)
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: fetchCredentialsWebhook
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: fetchCredentials
+    type: http
+  exposes:
+  - description: REST adapter for Otter Public API — Account Pairing Webhooks. One
+      Spectral-compliant resource per consumed operation, prefixed with /v1.
+    namespace: public-api-account-pairing-webhooks-rest
+    port: 8080
+    resources:
+    - description: REST surface for Upsert Store.
+      name: upsertstorelinkwebhook
+      operations:
+      - call: public-api-account-pairing-webhooks.upsertStorelinkWebhook
+        description: Upsert Store
+        method: POST
+        name: upsertStorelinkWebhook
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/upsertstore
+    - description: REST surface for Remove Store.
+      name: removestorewebhook
+      operations:
+      - call: public-api-account-pairing-webhooks.removeStoreWebhook
+        description: Remove Store
+        method: POST
+        name: removeStoreWebhook
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/removestore
+    - description: REST surface for Fetch Credentials (synchronously).
+      name: fetchcredentialswebhook
+      operations:
+      - call: public-api-account-pairing-webhooks.fetchCredentialsWebhook
+        description: Fetch Credentials (synchronously)
+        method: POST
+        name: fetchCredentialsWebhook
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/fetchcredentials
+    type: rest
+  - description: MCP adapter for Otter Public API — Account Pairing Webhooks. One
+      tool per consumed operation, routed inline through this capability's consumes
+      block.
+    namespace: public-api-account-pairing-webhooks-mcp
+    port: 9090
+    tools:
+    - call: public-api-account-pairing-webhooks.upsertStorelinkWebhook
+      description: Upsert Store
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: upsert-store
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-account-pairing-webhooks.removeStoreWebhook
+      description: Remove Store
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: remove-store
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-account-pairing-webhooks.fetchCredentialsWebhook
+      description: Fetch Credentials (synchronously)
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: true
+      name: fetch-credentials-synchronously
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    transport: http
+    type: mcp
+info:
+  created: '2026-06-03'
+  description: 'Account Pairing Webhooks surface of the Otter Public API. 3 operations.
+    Lead operation: Upsert Store. Self-contained Naftiko capability covering one Otter
+    business surface.'
+  label: Otter Public API — Account Pairing Webhooks
+  modified: '2026-06-03'
+  tags:
+  - Otter
+  - Public API
+  - Account
+  - Pairing
+naftiko: 1.0.0-alpha2

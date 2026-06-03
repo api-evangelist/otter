@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-order-issue-structure.json",
+  "name": "OrderIssue",
+  "description": "OrderIssue schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Order issue type.",
+      "enum": [
+        "MISSING_ITEM",
+        "INCOMPLETE",
+        "WRONG_INGREDIENTS",
+        "WRONG_SIZE",
+        "WRONG_INSTRUCTIONS",
+        "TEMPERATURE_COLD",
+        "WRONG_ORDER",
+        "POOR_QUALITY",
+        "HANDLED_POORLY",
+        "WRONG_ITEM",
+        "WRONG_QUANTITY",
+        "LATE_TO_COURIER"
+      ],
+      "example": "MISSING_ITEM"
+    }
+  },
+  "required": [
+    "type"
+  ]
+}

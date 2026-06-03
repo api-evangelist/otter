@@ -1,0 +1,10 @@
+{
+  "mandateStatus": {},
+  "lastFour": "4321",
+  "branchCode": "branch_001",
+  "bankCode": "bank_001",
+  "countryCode": "DE",
+  "mandateId": "sepa_mandate_012",
+  "reference": "reference_xyz",
+  "url": "http://example.com/sepa"
+}

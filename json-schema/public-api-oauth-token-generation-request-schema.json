@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OAuthTokenGenerationRequest",
+  "description": "The entity to request a token, following the OAuth2.0 protocol.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-oauth-token-generation-request-schema.json",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "The ID of the client (also known as the Application ID).",
+      "format": "uuid",
+      "example": "c75d9460-5d48-423d-8d01-f825fd5b1672"
+    },
+    "client_secret": {
+      "type": "string",
+      "description": "The secret of the client.",
+      "example": "string"
+    },
+    "grant_type": {
+      "type": "string",
+      "description": "The OAuth2.0 grant types supported.",
+      "enum": [
+        "client_credentials",
+        "authorization_code"
+      ],
+      "example": "client_credentials"
+    },
+    "scope": {
+      "type": "string",
+      "description": "The scope to request, multiple scopes are passed delimited by a space character.",
+      "example": "scope1 scope2"
+    },
+    "code": {
+      "type": "string",
+      "nullable": true,
+      "description": "The authorization code obtained from the server when performing the authorization code flow. It is required to exchange the code for an access token that will be used to perform actions on behalf of a user.",
+      "example": "8A9D16B4C3E25F6A"
+    },
+    "redirect_uri": {
+      "type": "string",
+      "nullable": true,
+      "description": "The redirect URI that was included in the initial authorization request. The value must be an exact match of the previously used URI, otherwise the request will be rejected.",
+      "example": "https://example.com/callback"
+    },
+    "code_verifier": {
+      "type": "string",
+      "nullable": true,
+      "description": "If the code_challenge parameter was included in the initial authorization requests, the application must now provide the code verifier. The value is the plaintext string that was used to calculate the hash that was previously sent in the code_challenge parameter.",
+      "example": "Th7UHJdLswIYQxwSg29DbK1a_d9o41uNMTRmuH0PM8zyoMAQ"
+    }
+  },
+  "required": [
+    "grant_type",
+    "scope"
+  ]
+}

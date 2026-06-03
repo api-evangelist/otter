@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PauseReason",
+  "description": "Reason for pausing the storefronts",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-pause-reason-schema.json",
+  "type": "string",
+  "enum": [
+    "STORE_MAINTENANCE",
+    "OTHER"
+  ]
+}

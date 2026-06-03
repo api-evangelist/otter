@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-shipment-line-item-structure.json",
+  "name": "ShipmentLineItem",
+  "description": "ShipmentLineItem schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "A CSS SKU UUID for the product.",
+      "example": "1b8aec80-21aa-43f1-b510-2199ac54156a"
+    },
+    "manifestQuantity": {
+      "type": "int32",
+      "description": "The expected quantity of the product in the shipment.",
+      "example": 5
+    },
+    "receivedSellableQuantity": {
+      "type": "int32",
+      "description": "The quantity of the product in the shipment received that was sellable.",
+      "example": 5
+    },
+    "receivedUnsellableQuantity": {
+      "type": "int32",
+      "description": "The quantity of the product in the shipment received that was unsellable (damaged, expired, etc.).",
+      "example": 5
+    }
+  },
+  "required": [
+    "id",
+    "manifestQuantity"
+  ]
+}

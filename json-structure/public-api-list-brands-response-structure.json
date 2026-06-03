@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-list-brands-response-structure.json",
+  "name": "ListBrandsResponse",
+  "description": "ListBrandsResponse schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "description": "Array of brands.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-brand-schema.json"
+      }
+    },
+    "offsetToken": {
+      "type": "string",
+      "description": "Opaque token used to fetch the following page. If not set, no more brands are available.",
+      "example": "H12MAF2fFaFFFa"
+    }
+  },
+  "required": [
+    "items"
+  ]
+}

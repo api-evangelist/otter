@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-location-structure.json",
+  "name": "Location",
+  "description": "Latitude and longitude of the address.",
+  "type": "object",
+  "properties": {
+    "latitude": {
+      "type": "double",
+      "description": "The latitude of the location.",
+      "example": 38.8977
+    },
+    "longitude": {
+      "type": "double",
+      "description": "The longitude of the location.",
+      "example": 77.0365
+    }
+  },
+  "required": [
+    "latitude",
+    "longitude"
+  ]
+}

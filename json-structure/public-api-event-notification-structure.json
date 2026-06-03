@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-event-notification-structure.json",
+  "name": "EventNotification",
+  "description": "Notification message sent on relevant events.",
+  "type": "object",
+  "properties": {
+    "eventId": {
+      "type": "uuid",
+      "description": "Unique identifier of the event.",
+      "example": "c75d9460-5d48-423d-8d01-f825fd5b1672"
+    },
+    "eventTime": {
+      "type": "datetime",
+      "description": "Date of event occurrence.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "eventType": {
+      "type": "string",
+      "description": "The type of the event.",
+      "example": "string"
+    },
+    "metadata": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-metadata-object-schema.json"
+    }
+  }
+}

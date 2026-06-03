@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-ping-event-structure.json",
+  "name": "PingEvent",
+  "description": "PingEvent schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string",
+      "example": "Hello World"
+    }
+  }
+}

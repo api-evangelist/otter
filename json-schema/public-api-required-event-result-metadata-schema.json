@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RequiredEventResultMetadata",
+  "description": "Information about the result of a storefront event.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-required-event-result-metadata-schema.json",
+  "type": "object",
+  "properties": {
+    "operationStatus": {
+      "type": "string",
+      "description": "Status of the operation requested by an event.",
+      "enum": [
+        "SUCCEEDED",
+        "INTERNAL_ERROR",
+        "AUTHENTICATION_FAILURE",
+        "AUTHORIZATION_FAILURE",
+        "UNKNOWN_FAILURE",
+        "INVALID_STORE_STATE",
+        "INVALID_STORE_CONFIGURATION",
+        "OPERATION_NOT_SUPPORTED",
+        "IGNORED_ALREADY_IN_REQUESTED_STATE",
+        "INVALID_REQUEST"
+      ],
+      "example": "SUCCEEDED"
+    },
+    "additionalInformation": {
+      "type": "string",
+      "nullable": true,
+      "description": "Additional details about the event result, if available.",
+      "example": "Completed without problems."
+    },
+    "operationFinishedAt": {
+      "type": "string",
+      "description": "Time when the processing of the event finished.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    }
+  }
+}

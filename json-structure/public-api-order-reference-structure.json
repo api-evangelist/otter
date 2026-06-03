@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-order-reference-structure.json",
+  "name": "OrderReference",
+  "description": "An order reference.",
+  "type": "object",
+  "properties": {
+    "externalIdentifiers": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-external-identifiers-schema.json"
+    },
+    "storeId": {
+      "type": "string",
+      "description": "The identifier of the store.",
+      "example": "ckdss-store-id"
+    }
+  },
+  "required": [
+    "externalIdentifiers",
+    "storeId"
+  ]
+}

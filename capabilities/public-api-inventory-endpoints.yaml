@@ -1,0 +1,150 @@
+binds:
+- keys:
+    OTTER_API_TOKEN: OTTER_API_TOKEN
+  namespace: env
+capability:
+  consumes:
+  - authentication:
+      token: '{{env.OTTER_API_TOKEN}}'
+      type: bearer
+    baseUri: https://{public-api-url}
+    description: Otter Public API — Inventory Endpoints business capability. Self-contained,
+      no shared references.
+    namespace: public-api-inventory-endpoints
+    resources:
+    - name: inventories-v1-summaries
+      operations:
+      - description: List Inventory Summaries
+        inputParameters: []
+        method: GET
+        name: listInventorySummaries
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /inventories/v1/summaries
+    - name: inventories-v1-shipments
+      operations:
+      - description: List Shipments
+        inputParameters: []
+        method: GET
+        name: listInventoryShipments
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      - description: Create Shipment
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: createShipment
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /inventories/v1/shipments
+    type: http
+  exposes:
+  - description: REST adapter for Otter Public API — Inventory Endpoints. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    namespace: public-api-inventory-endpoints-rest
+    port: 8080
+    resources:
+    - description: REST surface for List Inventory Summaries.
+      name: listinventorysummaries
+      operations:
+      - call: public-api-inventory-endpoints.listInventorySummaries
+        description: List Inventory Summaries
+        method: GET
+        name: listInventorySummaries
+        outputParameters:
+        - mapping: $.
+          type: object
+        with: {}
+      path: /v1/inventories/v1/summaries
+    - description: REST surface for List Shipments.
+      name: listinventoryshipments
+      operations:
+      - call: public-api-inventory-endpoints.listInventoryShipments
+        description: List Shipments
+        method: GET
+        name: listInventoryShipments
+        outputParameters:
+        - mapping: $.
+          type: object
+        with: {}
+      path: /v1/inventories/v1/shipments
+    - description: REST surface for Create Shipment.
+      name: createshipment
+      operations:
+      - call: public-api-inventory-endpoints.createShipment
+        description: Create Shipment
+        method: POST
+        name: createShipment
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/inventories/v1/shipments
+    type: rest
+  - description: MCP adapter for Otter Public API — Inventory Endpoints. One tool
+      per consumed operation, routed inline through this capability's consumes block.
+    namespace: public-api-inventory-endpoints-mcp
+    port: 9090
+    tools:
+    - call: public-api-inventory-endpoints.listInventorySummaries
+      description: List Inventory Summaries
+      hints:
+        destructive: false
+        idempotent: true
+        readOnly: true
+      name: list-inventory-summaries
+      outputParameters:
+      - mapping: $.
+        type: object
+      with: {}
+    - call: public-api-inventory-endpoints.listInventoryShipments
+      description: List Shipments
+      hints:
+        destructive: false
+        idempotent: true
+        readOnly: true
+      name: list-shipments
+      outputParameters:
+      - mapping: $.
+        type: object
+      with: {}
+    - call: public-api-inventory-endpoints.createShipment
+      description: Create Shipment
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: create-shipment
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    transport: http
+    type: mcp
+info:
+  created: '2026-06-03'
+  description: 'Inventory Endpoints surface of the Otter Public API. 3 operations.
+    Lead operation: List Inventory Summaries. Self-contained Naftiko capability covering
+    one Otter business surface.'
+  label: Otter Public API — Inventory Endpoints
+  modified: '2026-06-03'
+  tags:
+  - Otter
+  - Public API
+  - Inventory
+naftiko: 1.0.0-alpha2

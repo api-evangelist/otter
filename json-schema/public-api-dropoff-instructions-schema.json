@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DropoffInstructions",
+  "description": "Requirements to verify the completion of the delivery.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-dropoff-instructions-schema.json",
+  "type": "object",
+  "properties": {
+    "dropoffType": {
+      "type": "string",
+      "description": "The drop-off type for the delivery.",
+      "enum": [
+        "MEET_AT_DOOR",
+        "LEAVE_AT_DOOR",
+        "MEET_IN_LOBBY"
+      ],
+      "example": "MEET_AT_DOOR"
+    },
+    "verificationRequirements": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-verification-requirements-schema.json"
+    }
+  }
+}

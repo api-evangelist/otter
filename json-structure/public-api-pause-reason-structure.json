@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-pause-reason-structure.json",
+  "name": "PauseReason",
+  "description": "Reason for pausing the storefronts",
+  "type": "string",
+  "enum": [
+    "STORE_MAINTENANCE",
+    "OTHER"
+  ]
+}

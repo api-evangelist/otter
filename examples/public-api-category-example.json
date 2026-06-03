@@ -1,0 +1,10 @@
+{
+  "id": "b01485b0-034a-47c5-8a0a-0eeca08bf994",
+  "name": "Drinks",
+  "description": "All drink items served up nice and fresh!",
+  "itemIds": [
+    "fa4f0192-4c4e-4455-9db8-61d428c34969"
+  ],
+  "photoIds": [],
+  "exposedThirdPartyInfos": []
+}

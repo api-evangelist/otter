@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-enrollment-field-structure.json",
+  "name": "EnrollmentField",
+  "description": "EnrollmentField schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "The key of field, will be used in the Create User API.",
+      "example": "full_name"
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Whether this field is required when creating a user.",
+      "example": true
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of field, frontend can use type to decide which input to use. i.e. use a date picker for DATE type, use a text input for EMAIL/FULL_NAME type.",
+      "example": "FULL_NAME",
+      "enum": [
+        "TEXT",
+        "NUMBER",
+        "EMAIL",
+        "PASSWORD",
+        "PHONE",
+        "DATE",
+        "DATE_TIME",
+        "URL",
+        "FULL_NAME",
+        "ADDRESS"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "description": "This can be used as the field input's label on the frontend.",
+      "example": "First Name and Last Name"
+    }
+  }
+}

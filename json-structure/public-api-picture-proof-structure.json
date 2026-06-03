@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-picture-proof-structure.json",
+  "name": "PictureProof",
+  "description": "Picture info captured.",
+  "type": "object",
+  "properties": {
+    "pictureUrl": {
+      "type": "string",
+      "description": "Image url.",
+      "example": "https://example.com/resource"
+    }
+  }
+}

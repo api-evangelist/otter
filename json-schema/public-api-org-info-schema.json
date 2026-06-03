@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrgInfo",
+  "description": "Represents the org information.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-org-info-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Css org id.",
+      "example": "store_123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Css org name.",
+      "example": "Main Street Cafe"
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Marketintel_StoreListing",
+  "description": "The Store listing in ranking order based on category.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-listing-schema.json",
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string",
+      "nullable": true,
+      "description": "The grouping category name.",
+      "example": "Fast Food"
+    },
+    "ids": {
+      "type": "array",
+      "description": "The list of external store ids in the list in rank order.",
+      "items": {
+        "type": "string",
+        "description": "The external id the store",
+        "example": 123456
+      }
+    },
+    "location": {
+      "type": "object",
+      "description": "The geographic location of the stores that was searched from."
+    }
+  }
+}

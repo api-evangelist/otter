@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UserAccount",
+  "description": "UserAccount schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-user-account-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The user identifier.",
+      "example": "somestring"
+    },
+    "userFields": {
+      "type": "array",
+      "description": "The user info fields.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-user-field-schema.json"
+      }
+    },
+    "balances": {
+      "type": "array",
+      "description": "The user's current balances.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-user-balance-schema.json"
+      }
+    }
+  }
+}

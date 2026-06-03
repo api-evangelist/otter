@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RefundRewardsResponse",
+  "description": "Response body for RefundRewardsResponse API call.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-refund-rewards-response-schema.json",
+  "type": "object",
+  "properties": {
+    "transactionId": {
+      "type": "string",
+      "description": "The transaction id of the refund.",
+      "example": "someidstring"
+    }
+  }
+}

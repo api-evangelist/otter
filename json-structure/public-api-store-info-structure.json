@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-store-info-structure.json",
+  "name": "StoreInfo",
+  "description": "Represents the store information.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Css store id.",
+      "example": "store_123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Css Store name.",
+      "example": "Main Street Cafe"
+    },
+    "createdAt": {
+      "type": "datetime",
+      "description": "The date and time when the store was created.",
+      "example": "2023-01-15T10:00:00Z"
+    },
+    "currency": {
+      "type": "string",
+      "description": "The currency code used by the store.",
+      "example": "USD"
+    },
+    "orgInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-org-info-schema.json"
+    },
+    "brandInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-brand-info-schema.json"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "createdAt",
+    "currency",
+    "brandInfo",
+    "orgInfo"
+  ]
+}

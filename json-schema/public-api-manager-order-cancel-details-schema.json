@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ManagerOrderCancelDetails",
+  "description": "Details about a canceled manager order",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-manager-order-cancel-details-schema.json",
+  "type": "object",
+  "properties": {
+    "cancelSource": {
+      "type": "string",
+      "description": "Source of the order cancellation",
+      "enum": [
+        "UNKNOWN",
+        "OPERATOR",
+        "SERVICE_PROVIDER"
+      ],
+      "example": "UNKNOWN"
+    }
+  },
+  "required": [
+    "cancelSource"
+  ]
+}

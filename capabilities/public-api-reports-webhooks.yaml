@@ -1,0 +1,83 @@
+binds:
+- keys:
+    OTTER_API_TOKEN: OTTER_API_TOKEN
+  namespace: env
+capability:
+  consumes:
+  - authentication:
+      token: '{{env.OTTER_API_TOKEN}}'
+      type: bearer
+    baseUri: https://{public-api-url}
+    description: Otter Public API — Reports Webhooks business capability. Self-contained,
+      no shared references.
+    namespace: public-api-reports-webhooks
+    resources:
+    - name: reportgenerated
+      operations:
+      - description: Report Generated Webhook
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: reportGeneratedWebhook
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: reportGenerated
+    type: http
+  exposes:
+  - description: REST adapter for Otter Public API — Reports Webhooks. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    namespace: public-api-reports-webhooks-rest
+    port: 8080
+    resources:
+    - description: REST surface for Report Generated Webhook.
+      name: reportgeneratedwebhook
+      operations:
+      - call: public-api-reports-webhooks.reportGeneratedWebhook
+        description: Report Generated Webhook
+        method: POST
+        name: reportGeneratedWebhook
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/reportgenerated
+    type: rest
+  - description: MCP adapter for Otter Public API — Reports Webhooks. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    namespace: public-api-reports-webhooks-mcp
+    port: 9090
+    tools:
+    - call: public-api-reports-webhooks.reportGeneratedWebhook
+      description: Report Generated Webhook
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: report-generated-webhook
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    transport: http
+    type: mcp
+info:
+  created: '2026-06-03'
+  description: 'Reports Webhooks surface of the Otter Public API. 1 operations. Lead
+    operation: Report Generated Webhook. Self-contained Naftiko capability covering
+    one Otter business surface.'
+  label: Otter Public API — Reports Webhooks
+  modified: '2026-06-03'
+  tags:
+  - Otter
+  - Public API
+  - Reports
+naftiko: 1.0.0-alpha2

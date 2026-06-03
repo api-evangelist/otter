@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GetEnrollmentConfigResponse",
+  "description": "Response body for GetEnrollmentConfig API call.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-get-enrollment-config-response-schema.json",
+  "type": "object",
+  "properties": {
+    "enrollmentFields": {
+      "type": "array",
+      "description": "The fields that can be passed into when creating a new loyalty user.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-enrollment-field-schema.json"
+      }
+    }
+  }
+}

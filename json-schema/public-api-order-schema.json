@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Order",
+  "description": "An order placed by a customer.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-schema.json",
+  "type": "object",
+  "properties": {
+    "externalIdentifiers": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-external-identifiers-schema.json"
+    },
+    "currencyCode": {
+      "maxLength": 3,
+      "minLength": 3,
+      "type": "string",
+      "description": "The 3-letter currency code (ISO 4217) to use for all monetary values in this order.",
+      "example": "EUR"
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the order.",
+      "enum": [
+        "NEW_ORDER",
+        "CONFIRMED",
+        "PICKED_UP",
+        "CANCELED",
+        "FULFILLED",
+        "PREPARED",
+        "REJECTED",
+        "UNKNOWN"
+      ],
+      "example": "NEW_ORDER"
+    },
+    "items": {
+      "type": "array",
+      "description": "Items ordered.",
+      "maxItems": 100,
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-schema.json"
+      }
+    },
+    "orderedAt": {
+      "type": "string",
+      "nullable": true,
+      "description": "The date (in UTC) when the order was placed by the customer.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "customer": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-person-schema.json"
+    },
+    "customerNote": {
+      "type": "string",
+      "nullable": true,
+      "description": "An order-level note provided by the customer.",
+      "example": "Please include extra napkins!"
+    },
+    "deliveryInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-info-schema.json"
+    },
+    "orderTotal": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-total-schema.json"
+    },
+    "orderTotalV2": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-total-v2-schema.json"
+    },
+    "customerPayments": {
+      "type": "array",
+      "nullable": true,
+      "description": "Details about the payments made by the customer.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-customer-payment-schema.json"
+      }
+    },
+    "fulfillmentInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-fulfillment-info-schema.json"
+    },
+    "promotionsDetails": {
+      "type": "array",
+      "nullable": true,
+      "description": "[WIP - in development, not supported yet] Details about the promotions applied to this order. The sum of values should be equal to the sum of order total discounts.\"",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-promotion-details-schema.json"
+      }
+    },
+    "preparationTime": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-preparation-time-schema.json"
+    }
+  },
+  "required": [
+    "currencyCode",
+    "externalIdentifiers",
+    "status"
+  ]
+}

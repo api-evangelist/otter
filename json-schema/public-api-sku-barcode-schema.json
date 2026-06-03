@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SkuBarcode",
+  "description": "A barcode for the product which may be common types like UPC, GTIN, ASIN or an internal type.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-sku-barcode-schema.json",
+  "type": "object",
+  "properties": {
+    "barcodeType": {
+      "type": "string",
+      "description": "The type of the barcode.",
+      "enum": [
+        "UPC",
+        "GTIN",
+        "ASIN",
+        "INTERNAL"
+      ],
+      "example": "UPC"
+    },
+    "value": {
+      "type": "string",
+      "description": "The value of the barcode.",
+      "example": "049000028904 (UPC)"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+binds:
+- keys:
+    OTTER_API_TOKEN: OTTER_API_TOKEN
+  namespace: env
+capability:
+  consumes:
+  - authentication:
+      token: '{{env.OTTER_API_TOKEN}}'
+      type: bearer
+    baseUri: https://{public-api-url}
+    description: Otter Public API — Reports Endpoints business capability. Self-contained,
+      no shared references.
+    namespace: public-api-reports-endpoints
+    resources:
+    - name: v1-reports-jobid
+      operations:
+      - description: Request Status of the Report Using JobId
+        inputParameters: []
+        method: GET
+        name: getReportStatus
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/reports/{jobId}
+    - name: v1-reports-generate
+      operations:
+      - description: Request a Business Report for Multiple Stores
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: generateReportMulti
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/reports/generate
+    type: http
+  exposes:
+  - description: REST adapter for Otter Public API — Reports Endpoints. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    namespace: public-api-reports-endpoints-rest
+    port: 8080
+    resources:
+    - description: REST surface for Request Status of the Report Using JobId.
+      name: getreportstatus
+      operations:
+      - call: public-api-reports-endpoints.getReportStatus
+        description: Request Status of the Report Using JobId
+        method: GET
+        name: getReportStatus
+        outputParameters:
+        - mapping: $.
+          type: object
+        with: {}
+      path: /v1/reports/{jobId}
+    - description: REST surface for Request a Business Report for Multiple Stores.
+      name: generatereportmulti
+      operations:
+      - call: public-api-reports-endpoints.generateReportMulti
+        description: Request a Business Report for Multiple Stores
+        method: POST
+        name: generateReportMulti
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/reports/generate
+    type: rest
+  - description: MCP adapter for Otter Public API — Reports Endpoints. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    namespace: public-api-reports-endpoints-mcp
+    port: 9090
+    tools:
+    - call: public-api-reports-endpoints.getReportStatus
+      description: Request Status of the Report Using JobId
+      hints:
+        destructive: false
+        idempotent: true
+        readOnly: true
+      name: request-status-report-using-jobid
+      outputParameters:
+      - mapping: $.
+        type: object
+      with: {}
+    - call: public-api-reports-endpoints.generateReportMulti
+      description: Request a Business Report for Multiple Stores
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: request-business-report-multiple-stores
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    transport: http
+    type: mcp
+info:
+  created: '2026-06-03'
+  description: 'Reports Endpoints surface of the Otter Public API. 2 operations. Lead
+    operation: Request Status of the Report Using JobId. Self-contained Naftiko capability
+    covering one Otter business surface.'
+  label: Otter Public API — Reports Endpoints
+  modified: '2026-06-03'
+  tags:
+  - Otter
+  - Public API
+  - Reports
+naftiko: 1.0.0-alpha2

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-exposed-third-party-info-structure.json",
+  "name": "ExposedThirdPartyInfo",
+  "description": "Information about a third party service that is exposed to the another service. Usually, this is used to expose an POS ID to an OFO.",
+  "type": "object",
+  "properties": {
+    "externalId": {
+      "type": "string",
+      "description": "The identifier that exists in the third party system. ",
+      "example": "da0e4e94-5670-4175-897a-3b7dde45bed5"
+    },
+    "externalServiceSlug": {
+      "type": "string",
+      "description": "The slug of the third party service.",
+      "example": "tasty-bbq"
+    }
+  },
+  "required": [
+    "externalId",
+    "externalServiceSlug"
+  ]
+}

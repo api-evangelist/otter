@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Storefront_RegularHours",
+  "description": "Describes the configuration of regular hours.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-storefront-regular-hours-schema.json",
+  "type": "object",
+  "properties": {
+    "dayOfWeek": {
+      "type": "string",
+      "description": "Day of the week.",
+      "enum": [
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY",
+        "SUNDAY"
+      ],
+      "example": "MONDAY"
+    },
+    "timeRanges": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Hours range applied to the provided day of the week",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-storefront-time-range-schema.json"
+      }
+    }
+  },
+  "required": [
+    "dayOfWeek",
+    "timeRanges"
+  ]
+}

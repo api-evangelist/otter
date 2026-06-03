@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-item-4-structure.json",
+  "name": "Item-4",
+  "description": "Item-4 schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "nullable": true,
+      "description": "Human-readable name for this item.",
+      "example": "Sample Name"
+    },
+    "price": {
+      "type": "double",
+      "nullable": true,
+      "description": "Per-unit price. This value excludes modifier prices.",
+      "example": 1.0
+    },
+    "quantity": {
+      "type": "double",
+      "nullable": true,
+      "description": "Number of units of this item being ordered.",
+      "example": 1.0
+    },
+    "itemId": {
+      "type": "string",
+      "nullable": true,
+      "description": "ID for this item.",
+      "example": "store_123"
+    },
+    "modifiers": {
+      "type": "array",
+      "nullable": true,
+      "description": "Any modifiers attached to this item.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-modifier-item-schema.json"
+      }
+    }
+  }
+}

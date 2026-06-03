@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CancelDeliveryCallbackRequest",
+  "description": "Cancellation result callback request.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-cancel-delivery-callback-request-schema.json",
+  "type": "object",
+  "properties": {
+    "canceledAt": {
+      "type": "string",
+      "description": "The time that the request was cancelled.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    }
+  }
+}

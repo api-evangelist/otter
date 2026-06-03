@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-update-storelink-status-request-structure.json",
+  "name": "UpdateStorelinkStatusRequest",
+  "description": "UpdateStorelinkStatusRequest schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "The new status of the store. ACTIVE: store ready to perform operations again; SUSPENDED: temporarily disables the store; INVALID: current credentials will no longer work, new credentials needed.",
+      "enum": [
+        "ACTIVE",
+        "SUSPENDED",
+        "INVALID"
+      ],
+      "example": "SUSPENDED"
+    },
+    "message": {
+      "nullable": true,
+      "type": "string",
+      "description": "Optional message to explain the reason of the status update.",
+      "example": "Authentication is failing with current credentials.  Suspending store while the retry process is in progress."
+    }
+  },
+  "required": [
+    "status"
+  ]
+}

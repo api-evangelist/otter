@@ -1,0 +1,14 @@
+{
+  "credentialsSchemaVersion": "1.0",
+  "credentials": [
+    {
+      "key": "email",
+      "value": "test@email.com"
+    },
+    {
+      "key": "password",
+      "value": "test-pwd-1234"
+    }
+  ],
+  "storeInfo": {}
+}

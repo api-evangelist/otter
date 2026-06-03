@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AccountHolderType",
+  "description": "The type of account holder.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-account-holder-type-schema.json",
+  "type": "string",
+  "enum": [
+    "INDIVIDUAL",
+    "COMPANY"
+  ],
+  "example": "INDIVIDUAL"
+}

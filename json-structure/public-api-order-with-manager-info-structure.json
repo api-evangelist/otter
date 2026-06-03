@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-order-with-manager-info-structure.json",
+  "name": "OrderWithManagerInfo",
+  "description": "An order placed by a customer with manager injection details",
+  "type": "object",
+  "properties": {
+    "order": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-schema.json"
+    },
+    "injectionState": {
+      "type": "string",
+      "description": "Current Manager injection state",
+      "enum": [
+        "UNKNOWN",
+        "PENDING",
+        "SUCCEEDED",
+        "FAILED_ATTEMPT",
+        "MANUAL_INJECTION_SUCCEEDED",
+        "MANUAL_INJECTION_REQUIRED",
+        "SUCCEEDED_WITH_UNLINKED_ITEM",
+        "ORDER_CANCELED",
+        "ORDER_CANCEL_FAILED",
+        "ORDER_REJECTED",
+        "ORDER_REJECT_FAILED",
+        "RE_INJECTION_REQUESTED",
+        "RE_INJECTION_PENDING"
+      ],
+      "example": "UNKNOWN"
+    },
+    "orderCancelDetails": {
+      "nullable": true,
+      "description": "If canceled - specific details about why this order was canceled",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-manager-order-cancel-details-schema.json"
+    },
+    "injectionEvent": {
+      "type": "string",
+      "description": "The order event that triggered order injection into manager",
+      "enum": [
+        "UNKNOWN",
+        "ORDER_CREATE",
+        "ORDER_ACCEPT",
+        "ORDER_IMPORT",
+        "ORDER_RE_INJECT"
+      ],
+      "example": "UNKNOWN"
+    },
+    "orderIssues": {
+      "description": "Issues encountered with this manager order",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-manager-order-issues-schema.json"
+    }
+  },
+  "required": [
+    "order",
+    "injectionState",
+    "injectionEvent"
+  ]
+}

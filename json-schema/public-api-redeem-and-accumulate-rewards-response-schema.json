@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RedeemAndAccumulateRewardsResponse",
+  "description": "Response body for RedeemAndAccumulateRewards API call.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-redeem-and-accumulate-rewards-response-schema.json",
+  "type": "object",
+  "properties": {
+    "transactionId": {
+      "type": "string",
+      "description": "The id of the transaction.",
+      "example": "someidstring"
+    },
+    "rewardEffect": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-reward-effect-schema.json"
+    },
+    "accumulatedRewards": {
+      "type": "array",
+      "description": "List of rewards accumulated.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-user-balance-schema.json"
+      }
+    }
+  }
+}

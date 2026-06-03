@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-order-customer-items-update-request-structure.json",
+  "name": "OrderCustomerItemsUpdateRequest",
+  "description": "Request to update order customer items. Only supported for dine-in orders when slug is d2c-eater-website and the order tab is open. Modifying party and modification request ID are set by the endpoint.",
+  "type": "object",
+  "properties": {
+    "currencyCode": {
+      "type": "string",
+      "description": "3-letter currency code (ISO 4217) for monetary values in this request (e.g. delta in price_adjusted, item/modifier prices in item_added). If omitted, USD is used.",
+      "minLength": 3,
+      "maxLength": 3,
+      "example": "USD",
+      "nullable": true
+    },
+    "customerItemModifications": {
+      "type": "array",
+      "description": "List of modifications to apply (quantity change, price adjustment, or item added).",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-customer-item-modification-schema.json"
+      }
+    }
+  },
+  "required": [
+    "customerItemModifications"
+  ]
+}

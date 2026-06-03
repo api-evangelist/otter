@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SkuDetails",
+  "description": "Details of the product being prepared or a pre-packaged good being sold. Includes information such as UPC barcode, unique identifiers, or classification information.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-sku-details-schema.json",
+  "type": "object",
+  "properties": {
+    "skuSlug": {
+      "type": "string",
+      "description": "A system-unique, human-readable identifier for the product.",
+      "example": "russet-potato-fries-200g"
+    },
+    "skuId": {
+      "type": "string",
+      "description": "A unique identifier for the product.",
+      "example": "3bac7aed-c8c1-4bfa-a98a-350317e55072"
+    },
+    "barcodes": {
+      "type": "array",
+      "description": "Barcodes for this product.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-sku-barcode-schema.json"
+      }
+    },
+    "dietaryClassifications": {
+      "type": "array",
+      "description": "All dietary classifications that apply to the product.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-dietary-classification-schema.json"
+      }
+    },
+    "allergenClassifications": {
+      "type": "array",
+      "description": "All allergens that are present in the product.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-allergen-classification-schema.json"
+      }
+    },
+    "storageRequirements": {
+      "type": "array",
+      "description": "All storage requirements that apply to the product.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-storage-requirement-schema.json"
+      }
+    },
+    "additives": {
+      "type": "array",
+      "default": [],
+      "description": "All additives present in the item. Additives are free strings.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "flavor enhancers",
+        "emulsifiers",
+        "antioxidants"
+      ]
+    },
+    "countryOfOriginIso2": {
+      "maxLength": 2,
+      "minLength": 2,
+      "type": "string",
+      "description": "The 2-letter country ISO2 code for where the product originated from.",
+      "example": [
+        "US",
+        "CN",
+        "DE"
+      ]
+    },
+    "containsAlcohol": {
+      "type": "boolean",
+      "description": "Indicates whether or not this product contains alcohol.",
+      "example": true
+    },
+    "nutritionalInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-nutritional-info-schema.json",
+      "description": "The nutritional information for the product."
+    },
+    "servings": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-servings-schema.json",
+      "description": "The number of servings for the product."
+    },
+    "producerInformation": {
+      "type": "string",
+      "description": "Information about the producer of this product. May or may not be the same as the distributor.",
+      "example": "The Coca-Cola Company"
+    },
+    "distributorInformation": {
+      "type": "string",
+      "description": "Information about the distributor of this product. May or may not be the same as the producer.",
+      "example": "The Coca-Cola Company"
+    }
+  }
+}

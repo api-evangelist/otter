@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-nutrition-content-structure.json",
+  "name": "NutritionContent",
+  "description": "The nutrition content of the item.",
+  "type": "object",
+  "properties": {
+    "servingSizeInGrams": {
+      "type": "double",
+      "description": "The serving size in grams. This field and the servingSizeInMilliliters field are mutually exclusive.",
+      "example": 100
+    },
+    "servingSizeInMilliliters": {
+      "type": "double",
+      "description": "The serving size in milliliters. This field and the servingSizeInGrams are mutually exclusive.",
+      "example": 100
+    },
+    "fats": {
+      "type": "double",
+      "description": "The fats in grams per serving size.",
+      "example": 2.3
+    },
+    "saturatedFats": {
+      "type": "double",
+      "description": "The saturated fats in grams per serving size.",
+      "example": 1.4
+    },
+    "monoUnsaturatedFats": {
+      "type": "double",
+      "description": "The mono unsaturated fats in grams per serving size.",
+      "example": 1.5
+    },
+    "polyUnsaturatedFats": {
+      "type": "double",
+      "description": "The poly unsaturated fats in grams per serving size.",
+      "example": 5.3
+    },
+    "carbohydrates": {
+      "type": "double",
+      "description": "The carbohydrates in grams per serving size.",
+      "example": 1.8
+    },
+    "sugar": {
+      "type": "double",
+      "description": "The sugar in grams per serving size.",
+      "example": 1.7
+    },
+    "polyols": {
+      "type": "double",
+      "description": "The polyols in grams per serving size.",
+      "example": 9.3
+    },
+    "starch": {
+      "type": "double",
+      "description": "The starch in grams per serving size.",
+      "example": 1.1
+    },
+    "protein": {
+      "type": "double",
+      "description": "The protein in grams per serving size.",
+      "example": 7.3
+    },
+    "salt": {
+      "type": "double",
+      "description": "The salt in grams per serving size.",
+      "example": 1.5
+    },
+    "sodium": {
+      "type": "double",
+      "description": "The sodium in grams per serving size.",
+      "example": 0.3
+    },
+    "fibres": {
+      "type": "double",
+      "description": "The fibres in grams per serving size.",
+      "example": 1.9
+    },
+    "vitaminC": {
+      "type": "double",
+      "description": "The vitamin C in milligrams per serving size.",
+      "example": 9.3
+    },
+    "calcium": {
+      "type": "double",
+      "description": "The calcium in milligrams per serving size.",
+      "example": 1.2
+    },
+    "magnesium": {
+      "type": "double",
+      "description": "The magnesium in milligrams per serving size.",
+      "example": 1.3
+    },
+    "chloride": {
+      "type": "double",
+      "description": "The chloride in milligrams per serving size.",
+      "example": 1.3
+    },
+    "fluoride": {
+      "type": "double",
+      "description": "The fluoride in milligrams per serving size.",
+      "example": 3.3
+    },
+    "potassium": {
+      "type": "double",
+      "description": "The potassium in milligrams per serving size.",
+      "example": 22.3
+    },
+    "caffeine": {
+      "type": "double",
+      "description": "The caffeine in milligrams per serving size.",
+      "example": 81.3
+    },
+    "energy": {
+      "type": "double",
+      "description": "The energy in kcal per serving size.",
+      "example": 991.3
+    }
+  }
+}

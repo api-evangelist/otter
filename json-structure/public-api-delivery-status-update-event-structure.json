@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-delivery-status-update-event-structure.json",
+  "name": "DeliveryStatusUpdateEvent",
+  "description": "Event that represent a status update for a delivery.",
+  "type": "object",
+  "properties": {
+    "provider": {
+      "type": "string",
+      "description": "Describes the provider of the delivery.",
+      "example": "doordash"
+    },
+    "courier": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-courier-schema.json"
+    },
+    "estimatedDeliveryTime": {
+      "type": "datetime",
+      "nullable": true,
+      "description": "The expected delivery time.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "estimatedPickupTime": {
+      "type": "datetime",
+      "nullable": true,
+      "description": "The expected pickup time.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "status": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-status-schema.json"
+    },
+    "deliveryStatus": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-status-schema.json"
+    },
+    "currencyCode": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 3,
+      "description": "The 3-letter currency code (ISO 4217) to use for all monetary values.",
+      "example": "EUR",
+      "nullable": true
+    },
+    "baseFee": {
+      "type": "double",
+      "nullable": true,
+      "example": 1.0
+    },
+    "extraFee": {
+      "type": "double",
+      "nullable": true,
+      "example": 1.0
+    },
+    "totalFee": {
+      "type": "double",
+      "nullable": true,
+      "example": 1.0
+    },
+    "distance": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-distance-schema.json"
+    },
+    "updatedTime": {
+      "type": "datetime",
+      "nullable": true,
+      "description": "The time that the delivery status was updated.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "deliveryTrackingUrl": {
+      "type": "uri",
+      "nullable": true,
+      "description": "The URL to track the delivery.",
+      "example": "https://www.doordash.com/delivery/track/1234567890"
+    },
+    "dropoffInfo": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-dropoff-info-schema.json"
+    }
+  }
+}

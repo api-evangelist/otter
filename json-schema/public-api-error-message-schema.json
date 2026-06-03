@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ErrorMessage",
+  "description": "The error response object.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-error-message-schema.json",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string",
+      "description": "The error description.",
+      "example": "The request body is invalid."
+    },
+    "details": {
+      "type": "array",
+      "description": "The error details.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-error-detail-schema.json"
+      }
+    }
+  }
+}

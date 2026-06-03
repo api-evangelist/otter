@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-entity-path-override-rule-structure.json",
+  "name": "EntityPathOverrideRule",
+  "description": "EntityPathOverrideRule schema from Public API (Otter Public API).",
+  "type": "object",
+  "required": [
+    "entityIds"
+  ],
+  "allOf": [
+    {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-override-rule-3-pd-schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "entityIds": {
+          "type": "array",
+          "description": "EntityPath for this rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

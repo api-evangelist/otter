@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-item-added-modification-structure.json",
+  "name": "ItemAddedModification",
+  "description": "ItemAddedModification schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "addedItem": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-schema.json",
+      "description": "The customer item added to the order. Include any modifiers on this item via its modifiers array."
+    }
+  },
+  "required": [
+    "addedItem"
+  ]
+}

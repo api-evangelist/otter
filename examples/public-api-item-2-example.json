@@ -1,0 +1,9 @@
+{
+  "id": "someidstring",
+  "displayName": "Cheese Burger",
+  "quantity": 1,
+  "price": 19.07,
+  "modifiers": [
+    {}
+  ]
+}

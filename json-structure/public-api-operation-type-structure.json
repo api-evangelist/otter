@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-operation-type-structure.json",
+  "name": "OperationType",
+  "description": "Type of the operation",
+  "type": "string",
+  "enum": [
+    "UNKNOWN",
+    "PAUSE",
+    "UNPAUSE"
+  ]
+}

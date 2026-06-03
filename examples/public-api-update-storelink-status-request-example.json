@@ -1,0 +1,4 @@
+{
+  "status": "SUSPENDED",
+  "message": "Authentication is failing with current credentials.  Suspending store while the retry process is in progress."
+}

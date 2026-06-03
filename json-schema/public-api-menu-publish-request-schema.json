@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MenuPublishRequest",
+  "description": "MenuPublishRequest schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-publish-request-schema.json",
+  "type": "object",
+  "properties": {
+    "menuPublishTargets": {
+      "type": "array",
+      "description": "MenuPublishTargets to publish to.",
+      "example": [
+        "doordash",
+        "ubereats"
+      ],
+      "items": {
+        "type": "string",
+        "description": "MenuPublishTargets to publish to.",
+        "example": "[\"doordash\",\"ubereats\"]"
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-simple-finance-line-structure.json",
+  "name": "SimpleFinanceLine",
+  "description": "simple finance line.",
+  "type": "object",
+  "properties": {
+    "subType": {
+      "type": "string",
+      "nullable": false,
+      "enum": [
+        "VALUE",
+        "TAX",
+        "VALUE_WITH_TAX",
+        "VAT"
+      ],
+      "description": "type of the finance line.",
+      "example": "VALUE"
+    },
+    "name": {
+      "type": "string",
+      "nullable": false,
+      "description": "name of the finance line.",
+      "example": "sales tax."
+    },
+    "value": {
+      "type": "double",
+      "nullable": false,
+      "description": "money amount.",
+      "example": 3.4
+    }
+  },
+  "required": [
+    "subType",
+    "name",
+    "value"
+  ]
+}

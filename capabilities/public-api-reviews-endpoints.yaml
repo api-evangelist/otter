@@ -1,0 +1,83 @@
+binds:
+- keys:
+    OTTER_API_TOKEN: OTTER_API_TOKEN
+  namespace: env
+capability:
+  consumes:
+  - authentication:
+      token: '{{env.OTTER_API_TOKEN}}'
+      type: bearer
+    baseUri: https://{public-api-url}
+    description: Otter Public API — Reviews Endpoints business capability. Self-contained,
+      no shared references.
+    namespace: public-api-reviews-endpoints
+    resources:
+    - name: v1-reviews-reply
+      operations:
+      - description: Reply or Schedule a Reply to a Review
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: reviewReply
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/reviews/reply
+    type: http
+  exposes:
+  - description: REST adapter for Otter Public API — Reviews Endpoints. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    namespace: public-api-reviews-endpoints-rest
+    port: 8080
+    resources:
+    - description: REST surface for Reply or Schedule a Reply to a Review.
+      name: reviewreply
+      operations:
+      - call: public-api-reviews-endpoints.reviewReply
+        description: Reply or Schedule a Reply to a Review
+        method: POST
+        name: reviewReply
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/reviews/reply
+    type: rest
+  - description: MCP adapter for Otter Public API — Reviews Endpoints. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    namespace: public-api-reviews-endpoints-mcp
+    port: 9090
+    tools:
+    - call: public-api-reviews-endpoints.reviewReply
+      description: Reply or Schedule a Reply to a Review
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: reply-schedule-reply-review
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    transport: http
+    type: mcp
+info:
+  created: '2026-06-03'
+  description: 'Reviews Endpoints surface of the Otter Public API. 1 operations. Lead
+    operation: Reply or Schedule a Reply to a Review. Self-contained Naftiko capability
+    covering one Otter business surface.'
+  label: Otter Public API — Reviews Endpoints
+  modified: '2026-06-03'
+  tags:
+  - Otter
+  - Public API
+  - Reviews
+naftiko: 1.0.0-alpha2

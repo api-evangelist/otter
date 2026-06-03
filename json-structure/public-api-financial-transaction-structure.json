@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-financial-transaction-structure.json",
+  "name": "FinancialTransaction",
+  "description": "FinancialTransaction schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "orderIdentifiers": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-identifier-finance-schema.json"
+    },
+    "id": {
+      "type": "string",
+      "description": "External financial transaction identifier.",
+      "example": "store_123"
+    },
+    "pending": {
+      "type": "boolean",
+      "description": "Whether the transaction can be updated in the future.",
+      "example": true
+    },
+    "currencyCode": {
+      "maxLength": 3,
+      "minLength": 3,
+      "type": "string",
+      "description": "The 3-letter currency code (ISO 4217) to use for all monetary values in this order.",
+      "example": "EUR"
+    },
+    "createdAt": {
+      "type": "datetime",
+      "description": "The date (in UTC) when the financial transaction was created.",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "customerId": {
+      "type": "string",
+      "nullable": true,
+      "description": "Customer identifier.",
+      "example": "store_123"
+    },
+    "notes": {
+      "type": "string",
+      "nullable": true,
+      "description": "General notes about the financial transaction.",
+      "example": "string"
+    },
+    "type": {
+      "type": "string",
+      "description": "Financial transaction operation type.",
+      "enum": [
+        "PAYMENT",
+        "ADJUSTMENT",
+        "CANCELLATION",
+        "MISC"
+      ],
+      "example": "PAYMENT"
+    },
+    "payout": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-payout-info-schema.json"
+    },
+    "orderItems": {
+      "type": "array",
+      "nullable": true,
+      "description": "Detailed financial per order item.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-item-information-schema.json"
+      }
+    },
+    "issues": {
+      "type": "array",
+      "nullable": true,
+      "description": "List of issues that might have happened with the order.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-issue-schema.json"
+      }
+    },
+    "data": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-financial-data-schema.json"
+    }
+  },
+  "required": [
+    "id",
+    "orderIdentifiers",
+    "pending",
+    "currencyCode",
+    "createdAt",
+    "type",
+    "data"
+  ]
+}

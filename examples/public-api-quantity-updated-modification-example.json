@@ -1,0 +1,7 @@
+{
+  "customerItemIds": [
+    "string"
+  ],
+  "quantity": 1.0,
+  "oldQuantity": 1.0
+}

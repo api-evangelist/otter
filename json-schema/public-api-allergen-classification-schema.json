@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AllergenClassification",
+  "description": "Allergen classification information.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-allergen-classification-schema.json",
+  "type": "object",
+  "properties": {
+    "tag": {
+      "type": "string",
+      "description": "The type of allergen classification.",
+      "enum": [
+        "GLUTEN",
+        "DAIRY",
+        "WHEAT",
+        "RYE",
+        "BARLEY",
+        "OAT",
+        "SPELT",
+        "KAMUT",
+        "CRUSTACEAN",
+        "MOLLUSK",
+        "EGG",
+        "FISH",
+        "PEANUT",
+        "SOYBEAN",
+        "NUT",
+        "ALMOND",
+        "HAZELNUT",
+        "WALNUT",
+        "CASHEW",
+        "PECAN",
+        "BRAZIL_NUT",
+        "PISTACHIO",
+        "MACADAMIA_NUT",
+        "QUEENSLAND_NUT",
+        "LUPIN",
+        "CELERY",
+        "MUSTARD",
+        "SESAME_SEED",
+        "SULFITE",
+        "CAFFEINE",
+        "PHENYLALANINE"
+      ],
+      "example": "GLUTEN"
+    },
+    "containsAllergen": {
+      "type": "boolean",
+      "description": "Indication of whether or not the product contains this allergen. If the status of the allergen is unknown, a classification should not be provided for this product.",
+      "example": true
+    }
+  }
+}

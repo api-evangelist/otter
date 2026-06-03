@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SelfDropDeliveryInfo",
+  "description": "SelfDropDeliveryInfo schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-self-drop-delivery-info-schema.json",
+  "allOf": [
+    {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-metadata-schema.json"
+    },
+    {
+      "required": [
+        "delivererName"
+      ],
+      "type": "object",
+      "description": "Detailed delivery information for self-delivered shipments.",
+      "properties": {
+        "delivererName": {
+          "type": "string",
+          "description": "The name of the deliverer.",
+          "example": "Local Delivery Service"
+        },
+        "delivererEmailAddress": {
+          "type": "string",
+          "description": "The email address of the deliverer.",
+          "example": "foo.bar@deliver.com"
+        }
+      },
+      "additionalProperties": true
+    }
+  ]
+}

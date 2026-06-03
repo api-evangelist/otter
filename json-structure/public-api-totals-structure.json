@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-totals-structure.json",
+  "name": "Totals",
+  "description": "Totals schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "subTotal": {
+      "type": "double",
+      "description": "Order subtotal.",
+      "example": 29.07
+    },
+    "tax": {
+      "type": "double",
+      "description": "Order tax.",
+      "example": 10
+    },
+    "discount": {
+      "type": "double",
+      "description": "Order discount.",
+      "example": 9.07
+    },
+    "total": {
+      "type": "double",
+      "description": "Order total.",
+      "example": 30
+    }
+  }
+}

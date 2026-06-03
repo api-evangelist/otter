@@ -1,0 +1,9 @@
+{
+  "externalIdentifiers": {},
+  "injectionState": "UNKNOWN",
+  "injectionIssue": "UNKNOWN_INJECTION_ISSUE",
+  "additionalData": {
+    "ticketData": "Some value for the TicketData",
+    "customField": "customValue"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-override-rule-3-pd-structure.json",
+  "name": "OverrideRule_3PD",
+  "description": "Specification for rules to apply overrides (e.g. PriceOverride).",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "example": "string"
+    }
+  },
+  "required": [
+    "type"
+  ]
+}

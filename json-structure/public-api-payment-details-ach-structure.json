@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-payment-details-ach-structure.json",
+  "name": "PaymentDetailsAch",
+  "description": "Details of a debit ACH payment method in the US.",
+  "type": "object",
+  "properties": {
+    "accountHolderType": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-account-holder-type-schema.json"
+    },
+    "accountType": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-account-type-schema.json"
+    },
+    "mandateStatus": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-mandate-status-schema.json"
+    },
+    "lastFour": {
+      "type": "string",
+      "description": "The last four digits of the ACH account.",
+      "example": "7890"
+    },
+    "routingNumber": {
+      "type": "string",
+      "description": "The routing number of the ACH account.",
+      "example": "123456789"
+    },
+    "bankName": {
+      "type": "string",
+      "description": "The name of the bank.",
+      "example": "Example Bank"
+    },
+    "mandateId": {
+      "type": "string",
+      "description": "The mandate ID for the ACH account.",
+      "example": "ach_mandate_345"
+    }
+  }
+}

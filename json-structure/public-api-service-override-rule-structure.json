@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-service-override-rule-structure.json",
+  "name": "ServiceOverrideRule",
+  "description": "ServiceOverrideRule schema from Public API (Otter Public API).",
+  "type": "object",
+  "required": [
+    "serviceSlug"
+  ],
+  "allOf": [
+    {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-override-rule-3-pd-schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "serviceSlug": {
+          "type": "string",
+          "description": "The service for which the override rule should apply. The list of relevant service slugs can be provided by your integration partner. This feature is only available to  point-of-sale system providers."
+        }
+      }
+    }
+  ]
+}

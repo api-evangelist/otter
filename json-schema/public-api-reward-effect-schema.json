@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RewardEffect",
+  "description": "Shows how much is deducted from total.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-reward-effect-schema.json",
+  "type": "object",
+  "properties": {
+    "subtotal": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-subtotal-schema.json"
+    }
+  }
+}

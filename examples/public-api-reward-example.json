@@ -1,0 +1,11 @@
+{
+  "id": "someidstring",
+  "type": "SUBTOTAL",
+  "cost": 20,
+  "costType": "POINT",
+  "trigger": {},
+  "subtotal": {},
+  "menus": [
+    {}
+  ]
+}

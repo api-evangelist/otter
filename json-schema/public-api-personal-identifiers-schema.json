@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PersonalIdentifiers",
+  "description": "The person's personal identifiers (e.g. tax identification number).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-personal-identifiers-schema.json",
+  "type": "object",
+  "properties": {
+    "taxIdentificationNumber": {
+      "type": "string",
+      "nullable": true,
+      "description": "Person tax identification number.",
+      "example": 1234567890
+    },
+    "serviceProviderId": {
+      "type": "string",
+      "nullable": true,
+      "description": "External service provider ID i.e. Courier Id.",
+      "example": "12345ba6-789e-123f-4e56-d78db90d123b"
+    }
+  }
+}

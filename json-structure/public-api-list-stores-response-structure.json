@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-list-stores-response-structure.json",
+  "name": "ListStoresResponse",
+  "description": "ListStoresResponse schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "description": "Array of Stores",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-schema.json"
+      }
+    },
+    "offsetToken": {
+      "type": "string",
+      "description": "Opaque token used to fetch the following page. If not set, no more stores are available.",
+      "example": "H12MAF2fFaFFFa"
+    }
+  },
+  "required": [
+    "items"
+  ]
+}

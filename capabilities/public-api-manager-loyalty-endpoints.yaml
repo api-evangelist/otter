@@ -1,0 +1,355 @@
+binds:
+- keys:
+    OTTER_API_TOKEN: OTTER_API_TOKEN
+  namespace: env
+capability:
+  consumes:
+  - authentication:
+      token: '{{env.OTTER_API_TOKEN}}'
+      type: bearer
+    baseUri: https://{public-api-url}
+    description: Otter Public API — Manager Loyalty Endpoints business capability.
+      Self-contained, no shared references.
+    namespace: public-api-manager-loyalty-endpoints
+    resources:
+    - name: manager-loyalty-v1-source-user-enrollment-config
+      operations:
+      - description: Get Enrollment Config for a Loyalty Provider
+        inputParameters: []
+        method: GET
+        name: getEnrollmentConfig
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /manager/loyalty/v1/{source}/user/enrollment-config
+    - name: manager-loyalty-v1-source-user
+      operations:
+      - description: Get User by Id
+        inputParameters: []
+        method: GET
+        name: getUser
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      - description: Create a Loyalty User
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: createUser
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /manager/loyalty/v1/{source}/user
+    - name: manager-loyalty-v1-source-user-search
+      operations:
+      - description: Search Loyalty Users
+        inputParameters: []
+        method: GET
+        name: searchUsers
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /manager/loyalty/v1/{source}/user/search
+    - name: manager-loyalty-v1-source-rewards-evaluate
+      operations:
+      - description: Compute Applicable Rewards
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: computeApplicableRewards
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /manager/loyalty/v1/{source}/rewards/evaluate
+    - name: manager-loyalty-v1-source-rewards-simulate
+      operations:
+      - description: Simulate Rewards
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: simulateRewards
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /manager/loyalty/v1/{source}/rewards/simulate
+    - name: manager-loyalty-v1-source-rewards-redeem-and-accumulate
+      operations:
+      - description: Redeem and Accumulate Rewards
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: redeemAndAccumulateRewards
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /manager/loyalty/v1/{source}/rewards/redeem-and-accumulate
+    - name: manager-loyalty-v1-source-rewards-refund
+      operations:
+      - description: Refund Rewards
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: refundRewards
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /manager/loyalty/v1/{source}/rewards/refund
+    type: http
+  exposes:
+  - description: REST adapter for Otter Public API — Manager Loyalty Endpoints. One
+      Spectral-compliant resource per consumed operation, prefixed with /v1.
+    namespace: public-api-manager-loyalty-endpoints-rest
+    port: 8080
+    resources:
+    - description: REST surface for Get Enrollment Config for a Loyalty Provider.
+      name: getenrollmentconfig
+      operations:
+      - call: public-api-manager-loyalty-endpoints.getEnrollmentConfig
+        description: Get Enrollment Config for a Loyalty Provider
+        method: GET
+        name: getEnrollmentConfig
+        outputParameters:
+        - mapping: $.
+          type: object
+        with: {}
+      path: /v1/{source}/user/enrollment-config
+    - description: REST surface for Get User by Id.
+      name: getuser
+      operations:
+      - call: public-api-manager-loyalty-endpoints.getUser
+        description: Get User by Id
+        method: GET
+        name: getUser
+        outputParameters:
+        - mapping: $.
+          type: object
+        with: {}
+      path: /v1/{source}/user
+    - description: REST surface for Create a Loyalty User.
+      name: createuser
+      operations:
+      - call: public-api-manager-loyalty-endpoints.createUser
+        description: Create a Loyalty User
+        method: POST
+        name: createUser
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/{source}/user
+    - description: REST surface for Search Loyalty Users.
+      name: searchusers
+      operations:
+      - call: public-api-manager-loyalty-endpoints.searchUsers
+        description: Search Loyalty Users
+        method: GET
+        name: searchUsers
+        outputParameters:
+        - mapping: $.
+          type: object
+        with: {}
+      path: /v1/{source}/user/search
+    - description: REST surface for Compute Applicable Rewards.
+      name: computeapplicablerewards
+      operations:
+      - call: public-api-manager-loyalty-endpoints.computeApplicableRewards
+        description: Compute Applicable Rewards
+        method: POST
+        name: computeApplicableRewards
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/{source}/rewards/evaluate
+    - description: REST surface for Simulate Rewards.
+      name: simulaterewards
+      operations:
+      - call: public-api-manager-loyalty-endpoints.simulateRewards
+        description: Simulate Rewards
+        method: POST
+        name: simulateRewards
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/{source}/rewards/simulate
+    - description: REST surface for Redeem and Accumulate Rewards.
+      name: redeemandaccumulaterewards
+      operations:
+      - call: public-api-manager-loyalty-endpoints.redeemAndAccumulateRewards
+        description: Redeem and Accumulate Rewards
+        method: POST
+        name: redeemAndAccumulateRewards
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/{source}/rewards/redeem-and-accumulate
+    - description: REST surface for Refund Rewards.
+      name: refundrewards
+      operations:
+      - call: public-api-manager-loyalty-endpoints.refundRewards
+        description: Refund Rewards
+        method: POST
+        name: refundRewards
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/{source}/rewards/refund
+    type: rest
+  - description: MCP adapter for Otter Public API — Manager Loyalty Endpoints. One
+      tool per consumed operation, routed inline through this capability's consumes
+      block.
+    namespace: public-api-manager-loyalty-endpoints-mcp
+    port: 9090
+    tools:
+    - call: public-api-manager-loyalty-endpoints.getEnrollmentConfig
+      description: Get Enrollment Config for a Loyalty Provider
+      hints:
+        destructive: false
+        idempotent: true
+        readOnly: true
+      name: get-enrollment-config-loyalty-provider
+      outputParameters:
+      - mapping: $.
+        type: object
+      with: {}
+    - call: public-api-manager-loyalty-endpoints.getUser
+      description: Get User by Id
+      hints:
+        destructive: false
+        idempotent: true
+        readOnly: true
+      name: get-user-id
+      outputParameters:
+      - mapping: $.
+        type: object
+      with: {}
+    - call: public-api-manager-loyalty-endpoints.createUser
+      description: Create a Loyalty User
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: create-loyalty-user
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-manager-loyalty-endpoints.searchUsers
+      description: Search Loyalty Users
+      hints:
+        destructive: false
+        idempotent: true
+        readOnly: true
+      name: search-loyalty-users
+      outputParameters:
+      - mapping: $.
+        type: object
+      with: {}
+    - call: public-api-manager-loyalty-endpoints.computeApplicableRewards
+      description: Compute Applicable Rewards
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: compute-applicable-rewards
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-manager-loyalty-endpoints.simulateRewards
+      description: Simulate Rewards
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: simulate-rewards
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-manager-loyalty-endpoints.redeemAndAccumulateRewards
+      description: Redeem and Accumulate Rewards
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: redeem-accumulate-rewards
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-manager-loyalty-endpoints.refundRewards
+      description: Refund Rewards
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: refund-rewards
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    transport: http
+    type: mcp
+info:
+  created: '2026-06-03'
+  description: 'Manager Loyalty Endpoints surface of the Otter Public API. 8 operations.
+    Lead operation: Get Enrollment Config for a Loyalty Provider. Self-contained Naftiko
+    capability covering one Otter business surface.'
+  label: Otter Public API — Manager Loyalty Endpoints
+  modified: '2026-06-03'
+  tags:
+  - Otter
+  - Public API
+  - Manager
+  - Loyalty
+naftiko: 1.0.0-alpha2

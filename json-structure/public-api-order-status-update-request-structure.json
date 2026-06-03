@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-order-status-update-request-structure.json",
+  "name": "OrderStatusUpdateRequest",
+  "description": "The request to change an order status.",
+  "type": "object",
+  "properties": {
+    "orderStatus": {
+      "type": "string",
+      "description": "The requested status to transition the order to.",
+      "enum": [
+        "PREPARED",
+        "CANCELED",
+        "FULFILLED"
+      ],
+      "example": "PREPARED"
+    }
+  },
+  "required": [
+    "orderStatus"
+  ]
+}

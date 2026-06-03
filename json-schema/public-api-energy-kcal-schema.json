@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EnergyKcal",
+  "description": "The calorie range of the item. If only one calorie value is known, set both low and high to that value.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-energy-kcal-schema.json",
+  "type": "object",
+  "properties": {
+    "low": {
+      "type": "number",
+      "description": "The minimum calorie value for an item.",
+      "example": 1
+    },
+    "high": {
+      "type": "number",
+      "description": "The maximum calorie value for an item.",
+      "example": 100
+    }
+  }
+}

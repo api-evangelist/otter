@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Item",
+  "description": "Item schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-schema.json",
+  "type": "object",
+  "properties": {
+    "quantity": {
+      "minimum": 1,
+      "maximum": 1000,
+      "type": "integer",
+      "description": "The quantity of the item ordered by the customer.",
+      "format": "int32",
+      "example": 1
+    },
+    "skuPrice": {
+      "type": "number",
+      "nullable": true,
+      "description": "The stored sku price of this item",
+      "readOnly": true,
+      "example": 5.9
+    },
+    "id": {
+      "type": "string",
+      "nullable": true,
+      "description": "The unique ID of the item.",
+      "example": "33e0418f-3d56-4360-ba03-18fc5f8844a3"
+    },
+    "lineItemId": {
+      "type": "string",
+      "nullable": true,
+      "description": "The unique ID of the instance of an item in an order. Instances of the same item across different orders will have different line item IDs. Multiple instances of the same item in one order will have different line item IDs if their modifiers are different.",
+      "readOnly": true,
+      "example": "2f91f9f3-2d7e-4898-ae81-00fe06ed7dbf"
+    },
+    "skuId": {
+      "type": "string",
+      "nullable": true,
+      "description": "sku ID of the item.",
+      "example": "867b8fdc-cf7b-4fc3-b7e0-4c7b68d8b1cc"
+    },
+    "name": {
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the item as displayed to the customer.",
+      "example": "Juicy Cheeseburger"
+    },
+    "note": {
+      "type": "string",
+      "nullable": true,
+      "description": "An optional item-level note provided by the customer.",
+      "example": "Please cook to well done!"
+    },
+    "categoryId": {
+      "deprecated": true,
+      "type": "string",
+      "nullable": true,
+      "description": "The unique ID of the category of this item.",
+      "example": "303de078-870d-4349-928b-946869d4d69b"
+    },
+    "internalCategoryId": {
+      "type": "string",
+      "nullable": true,
+      "description": "Otter's internal identifier for the item's category",
+      "example": "76a66bba-48fb-4bac-80ee-2616a5ca1ab9"
+    },
+    "categoryName": {
+      "deprecated": true,
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the category of this item.",
+      "example": "Burgers"
+    },
+    "internalCategoryName": {
+      "type": "string",
+      "nullable": true,
+      "description": "Otter's internal name for the item's category",
+      "example": "Burgers"
+    },
+    "stationId": {
+      "type": "string",
+      "nullable": true,
+      "description": "The ID of the station the item is assigned to.",
+      "readOnly": true,
+      "example": "5247b8a1-77de-4844-b024-cb59fcec59bd"
+    },
+    "price": {
+      "type": "number",
+      "nullable": true,
+      "description": "The price of the sold item.",
+      "example": 5.9
+    },
+    "modifiers": {
+      "type": "array",
+      "nullable": true,
+      "description": "Modifiers to the base item.",
+      "maxItems": 100,
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-modifier-schema.json"
+      }
+    }
+  },
+  "required": [
+    "quantity"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-cancel-delivery-callback-request-structure.json",
+  "name": "CancelDeliveryCallbackRequest",
+  "description": "Cancellation result callback request.",
+  "type": "object",
+  "properties": {
+    "canceledAt": {
+      "type": "datetime",
+      "description": "The time that the request was cancelled.",
+      "example": "2007-12-03T10:15:30+01:00"
+    }
+  }
+}

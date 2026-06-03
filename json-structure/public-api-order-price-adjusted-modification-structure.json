@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-order-price-adjusted-modification-structure.json",
+  "name": "OrderPriceAdjustedModification",
+  "description": "OrderPriceAdjustedModification schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "delta": {
+      "type": "double",
+      "description": "Total adjustment on the order (positive = up charge, negative = refund).",
+      "example": -2.5
+    }
+  },
+  "required": [
+    "delta"
+  ]
+}

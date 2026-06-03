@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-delivery-fee-structure.json",
+  "name": "DeliveryFee",
+  "description": "DeliveryFee schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "double",
+      "description": "The delivery fee paid by the customer.",
+      "example": 2
+    }
+  },
+  "required": [
+    "value"
+  ]
+}

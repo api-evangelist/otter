@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-org-info-structure.json",
+  "name": "OrgInfo",
+  "description": "Represents the org information.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Css org id.",
+      "example": "store_123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Css org name.",
+      "example": "Main Street Cafe"
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

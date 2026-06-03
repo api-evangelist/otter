@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-regular-hours-structure.json",
+  "name": "RegularHours",
+  "description": "Describes the configuration of regular hours.",
+  "type": "object",
+  "properties": {
+    "days": {
+      "type": "array",
+      "description": "The day of the week this configuration applies.",
+      "items": {
+        "type": "string",
+        "description": "Day of the week.",
+        "enum": [
+          "MONDAY",
+          "TUESDAY",
+          "WEDNESDAY",
+          "THURSDAY",
+          "FRIDAY",
+          "SATURDAY",
+          "SUNDAY"
+        ]
+      }
+    },
+    "timeRanges": {
+      "type": "array",
+      "description": "Hours range applied to the provided day of the week",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-time-range-schema.json"
+      }
+    }
+  },
+  "required": [
+    "days",
+    "timeRanges"
+  ]
+}

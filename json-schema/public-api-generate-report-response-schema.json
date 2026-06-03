@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GenerateReportResponse",
+  "description": "The response to a generate report request",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-generate-report-response-schema.json",
+  "type": "object",
+  "properties": {
+    "jobId": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-job-id-schema.json"
+    }
+  }
+}

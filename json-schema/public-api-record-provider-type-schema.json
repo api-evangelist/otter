@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RecordProviderType",
+  "description": "The type of payment provider.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-record-provider-type-schema.json",
+  "type": "string",
+  "enum": [
+    "ALLINPAY",
+    "CHECKOUT",
+    "CSS",
+    "MERCADO_PAGO",
+    "OLIVENETWORKS",
+    "SHOUQIANBA",
+    "STRIPE",
+    "UNIONPAY",
+    "VAN_DAOU",
+    "VAN_JTNET",
+    "VAN_KICC",
+    "VAN_KIS",
+    "VAN_KOVAN",
+    "VAN_KSNET",
+    "VAN_NICE",
+    "VAN_SMARTRO",
+    "UNKNOWN"
+  ],
+  "example": "STRIPE"
+}

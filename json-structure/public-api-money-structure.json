@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-money-structure.json",
+  "name": "Money",
+  "description": "Money amount.",
+  "type": "object",
+  "properties": {
+    "currencyCode": {
+      "maxLength": 3,
+      "minLength": 3,
+      "type": "string",
+      "description": "The 3-letter currency code (ISO 4217) to use for all monetary values.",
+      "example": "EUR"
+    },
+    "amount": {
+      "minimum": 0,
+      "exclusiveMinimum": false,
+      "type": "double",
+      "description": "Amount value.",
+      "example": 25.21
+    }
+  },
+  "required": [
+    "amount",
+    "currencyCode"
+  ],
+  "example": 25.21
+}

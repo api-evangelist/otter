@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-create-connection-request-structure.json",
+  "name": "CreateConnectionRequest",
+  "description": "CreateConnectionRequest schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "storeId": {
+      "type": "string",
+      "description": "The unique identifier of the store in the partner application. This is the ID, along with the Application ID, used to match the correct store when performing operations.",
+      "example": "9208071e-5f7a-444a-b3a7-4a57ff3f614e"
+    }
+  },
+  "required": [
+    "storeId"
+  ]
+}

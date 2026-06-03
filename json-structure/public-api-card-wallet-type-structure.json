@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-card-wallet-type-structure.json",
+  "name": "CardWalletType",
+  "description": "The type of wallet associated with the card.",
+  "type": "string",
+  "enum": [
+    "UNKNOWN",
+    "APPLE_PAY",
+    "GOOGLE_PAY"
+  ],
+  "example": "APPLE_PAY"
+}

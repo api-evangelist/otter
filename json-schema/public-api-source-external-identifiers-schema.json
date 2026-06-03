@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SourceExternalIdentifiers",
+  "description": "The external identifiers.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-source-external-identifiers-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique ID for the order that was placed.",
+      "example": "69f60a06-c335-46d9-b5a1-97f1a211c514"
+    },
+    "friendlyId": {
+      "type": "string",
+      "description": "ID used for driver pickup and restaurant management.",
+      "example": "ABCDE"
+    },
+    "source": {
+      "type": "string",
+      "description": "Describes the source of the order, typically from a food ordering marketplace.",
+      "example": "ubereats"
+    },
+    "sourceType": {
+      "type": "string",
+      "description": "source type of the order",
+      "enum": [
+        "POINT_OF_SALE",
+        "ORDERING_MARKETPLACE",
+        "AGGREGATOR",
+        "CUSTOMER_INTERACTION"
+      ],
+      "example": "POINT_OF_SALE"
+    },
+    "sourceExternalIdentifiers": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-source-external-identifiers-schema.json"
+    }
+  }
+}

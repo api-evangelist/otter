@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-marketintel-store-details-structure.json",
+  "name": "Marketintel_StoreDetails",
+  "description": "The Store delivery information.",
+  "type": "object",
+  "properties": {
+    "regionId": {
+      "type": "string",
+      "nullable": true,
+      "description": "The region that store belongs to.",
+      "example": "LATAM-N"
+    },
+    "provider": {
+      "type": "string",
+      "description": "The store information provider",
+      "example": "ubereats-provider"
+    },
+    "id": {
+      "type": "string",
+      "description": "The external store id",
+      "example": 12345
+    },
+    "storeUrl": {
+      "type": "string",
+      "nullable": true,
+      "description": "The store url",
+      "example": 30
+    },
+    "location": {
+      "type": "object",
+      "description": "The Geographic location used to discover the store",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-geo-location-information-schema.json"
+    },
+    "address": {
+      "type": "object",
+      "nullable": true,
+      "description": "The store address",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-address-schema.json"
+    },
+    "phoneNumbers": {
+      "type": "array",
+      "minItems": 0,
+      "description": "The store phone numbers.",
+      "items": {
+        "type": "string",
+        "example": "613-123-4567"
+      }
+    },
+    "storeName": {
+      "type": "string",
+      "nullable": true,
+      "description": "The name of the store.",
+      "example": "McDonald's"
+    },
+    "menu": {
+      "type": "object",
+      "nullable": true,
+      "description": "The store menu.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-menu-schema.json"
+    },
+    "storeHours": {
+      "type": "object",
+      "nullable": true,
+      "description": "The store hours.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-hours-data-schema.json"
+    },
+    "tags": {
+      "type": "array",
+      "minItems": 0,
+      "description": "The store tags",
+      "items": {
+        "description": "The store tag",
+        "example": "chinese"
+      }
+    },
+    "storeBannerPhotoUrl": {
+      "type": "string",
+      "nullable": true,
+      "description": "The store bannel photo url.",
+      "example": "https://www.ubereats.com/ca/store/mcdonalds-1000-rideau-street/1QY5X6QcQX2Q4Z3Z3QZQYQ.jpg"
+    },
+    "storeRating": {
+      "type": "object",
+      "nullable": true,
+      "description": "The store ratings.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-rating-schema.json"
+    },
+    "coordinates": {
+      "type": "object",
+      "nullable": true,
+      "description": "The coordinates of the store.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-coordinates-schema.json"
+    },
+    "storeSales": {
+      "type": "object",
+      "nullable": true,
+      "description": "The store sales information.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-sales-schema.json"
+    },
+    "avgBasketAmount": {
+      "type": "object",
+      "nullable": true,
+      "description": "The average order amount.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-money-schema.json"
+    },
+    "storePromotions": {
+      "type": "array",
+      "minItems": 0,
+      "description": "The store promotions.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-promotion-schema.json"
+      }
+    },
+    "storeChain": {
+      "type": "object",
+      "description": "The store chain information.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-chain-schema.json"
+    },
+    "storeDeliveryInformation": {
+      "type": "object",
+      "nullable": true,
+      "description": "The Store delivery information.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-delivery-information-schema.json"
+    },
+    "logoPhotoUrl": {
+      "type": "string",
+      "nullable": true,
+      "description": "The store photo url.",
+      "example": "https://www.ubereats.com/ca/store/mcdonalds-1000-rideau-street/1QY5X6QcQX2Q4Z3Z3QZQYQ.jpg"
+    },
+    "priceLevel": {
+      "type": "string",
+      "nullable": true,
+      "description": "The estimated delivery time in minutes.",
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-price-level-schema.json"
+    }
+  }
+}

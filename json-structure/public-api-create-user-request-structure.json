@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-create-user-request-structure.json",
+  "name": "CreateUserRequest",
+  "description": "Request body for CreateUser API call.",
+  "type": "object",
+  "properties": {
+    "userFields": {
+      "type": "array",
+      "description": "The user info fields for the new user.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-user-field-schema.json"
+      }
+    }
+  },
+  "required": [
+    "userFields"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-payment-details-acss-structure.json",
+  "name": "PaymentDetailsAcss",
+  "description": "Details of an ACSS payment method in Canada.",
+  "type": "object",
+  "properties": {
+    "mandateStatus": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-mandate-status-schema.json"
+    },
+    "acceptedAt": {
+      "type": "datetime",
+      "description": "The timestamp when the mandate was accepted.",
+      "example": "2023-01-01T12:00:00Z"
+    },
+    "lastFour": {
+      "type": "string",
+      "description": "The last four digits of the ACSS account.",
+      "example": "6543"
+    },
+    "transitNumber": {
+      "type": "string",
+      "description": "The transit number of the ACSS account.",
+      "example": "11001"
+    },
+    "institutionNumber": {
+      "type": "string",
+      "description": "The institution number of the ACSS account.",
+      "example": "001"
+    },
+    "bankName": {
+      "type": "string",
+      "description": "The name of the bank.",
+      "example": "Bank of Examples"
+    },
+    "mandateId": {
+      "type": "string",
+      "description": "The mandate ID for the ACSS account.",
+      "example": "acss_mandate_456"
+    },
+    "transactionType": {
+      "type": "string",
+      "description": "The type of transaction.",
+      "example": "recurring"
+    },
+    "intervalDescription": {
+      "type": "string",
+      "description": "The description of the transaction interval.",
+      "example": "monthly"
+    }
+  }
+}

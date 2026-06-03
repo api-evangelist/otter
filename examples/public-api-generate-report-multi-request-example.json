@@ -1,0 +1,15 @@
+{
+  "reportType": "ORDER_STORES",
+  "start": "2021-10-01",
+  "end": "2021-10-01",
+  "externalStoreIds": [
+    "brand1-acbdef",
+    "brand1-fghjkl",
+    "brand2-qwerty"
+  ],
+  "externalServiceSlugs": [
+    "ubereats",
+    "postmates"
+  ],
+  "language": "string"
+}

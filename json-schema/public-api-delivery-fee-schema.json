@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeliveryFee",
+  "description": "DeliveryFee schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-fee-schema.json",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "number",
+      "description": "The delivery fee paid by the customer.",
+      "example": 2
+    }
+  },
+  "required": [
+    "value"
+  ]
+}

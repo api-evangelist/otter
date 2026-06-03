@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-person-structure.json",
+  "name": "Person",
+  "description": "The recipient information.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "nullable": true,
+      "description": "The person's name as it should be displayed.",
+      "example": "Jane Doe",
+      "maxLength": 255
+    },
+    "phone": {
+      "type": "string",
+      "nullable": true,
+      "description": "The person's phone number.",
+      "example": "+1-555-555-5555",
+      "maxLength": 25
+    },
+    "phoneCode": {
+      "type": "string",
+      "nullable": true,
+      "description": "A code or extension of the phone number.",
+      "example": "111 11 111",
+      "maxLength": 25
+    },
+    "email": {
+      "type": "string",
+      "nullable": true,
+      "description": "The person's email address.",
+      "example": "email@email.com"
+    },
+    "personalIdentifiers": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-personal-identifiers-schema.json"
+    }
+  }
+}

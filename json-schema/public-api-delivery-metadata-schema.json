@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeliveryMetadata",
+  "description": "DeliveryMetadata schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-metadata-schema.json",
+  "type": "object",
+  "properties": {
+    "deliveryWindow": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-window-schema.json",
+      "description": "The delivery window for the shipment."
+    },
+    "deliveryType": {
+      "type": "string",
+      "description": "The type of delivery service for this shipment.",
+      "example": "string"
+    }
+  },
+  "required": [
+    "deliveryWindow",
+    "deliveryType"
+  ],
+  "additionalProperties": true
+}

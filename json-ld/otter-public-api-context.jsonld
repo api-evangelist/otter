@@ -1,0 +1,2596 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "otter": "https://tryotter.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "AcceptDeliveryCallbackRequest": "otter:AcceptDeliveryCallbackRequest",
+    "AcceptDeliveryEvent": "otter:AcceptDeliveryEvent",
+    "AdditionalCharge": "otter:AdditionalCharge",
+    "Address": "otter:Address",
+    "AllergenClassification": "otter:AllergenClassification",
+    "BootstrapMenuRequest": "otter:BootstrapMenuRequest",
+    "Brand": "otter:Brand",
+    "BrandInfo": "otter:BrandInfo",
+    "BulkUpdateItemStatus": "otter:BulkUpdateItemStatus",
+    "CancelDeliveryCallbackRequest": "otter:CancelDeliveryCallbackRequest",
+    "CancelDeliveryEvent": "otter:CancelDeliveryEvent",
+    "CardInfo": "otter:CardInfo",
+    "Category": "otter:Category",
+    "CompositeFinanceLine": "otter:CompositeFinanceLine",
+    "ComputeApplicableRewardsRequest": "otter:ComputeApplicableRewardsRequest",
+    "ComputeApplicableRewardsResponse": "otter:ComputeApplicableRewardsResponse",
+    "Connection": "otter:Connection",
+    "Courier": "otter:Courier",
+    "CreateConnectionRequest": "otter:CreateConnectionRequest",
+    "CreateShipmentLineItem": "otter:CreateShipmentLineItem",
+    "CreateShipmentRequest": "otter:CreateShipmentRequest",
+    "CreateShipmentResponse": "otter:CreateShipmentResponse",
+    "CreateUserRequest": "otter:CreateUserRequest",
+    "CreateUserResponse": "otter:CreateUserResponse",
+    "CustomBulkResolutionOptions": "otter:CustomBulkResolutionOptions",
+    "CustomerItemModification": "otter:CustomerItemModification",
+    "CustomerPayment": "otter:CustomerPayment",
+    "CustomerPaymentV2": "otter:CustomerPaymentV2",
+    "CustomerTip": "otter:CustomerTip",
+    "DefaultModifierSelection": "otter:DefaultModifierSelection",
+    "DefaultModifierSelectionData": "otter:DefaultModifierSelectionData",
+    "DeliveryCost": "otter:DeliveryCost",
+    "DeliveryFee": "otter:DeliveryFee",
+    "DeliveryInfo": "otter:DeliveryInfo",
+    "DeliveryMetadata": "otter:DeliveryMetadata",
+    "DeliveryStatusUpdateEvent": "otter:DeliveryStatusUpdateEvent",
+    "DeliveryStatusUpdateRequest": "otter:DeliveryStatusUpdateRequest",
+    "DeliveryWindow": "otter:DeliveryWindow",
+    "DietaryClassification": "otter:DietaryClassification",
+    "DiscoverStoresEventResult": "otter:DiscoverStoresEventResult",
+    "DiscoveredStore": "otter:DiscoveredStore",
+    "Distance": "otter:Distance",
+    "DropoffInfo": "otter:DropoffInfo",
+    "DropoffInstructions": "otter:DropoffInstructions",
+    "EaterOrder": "otter:EaterOrder",
+    "EaterOrderHistoryRequest": "otter:EaterOrderHistoryRequest",
+    "EaterOrderHistoryResponse": "otter:EaterOrderHistoryResponse",
+    "EnergyKcal": "otter:EnergyKcal",
+    "EnrollmentField": "otter:EnrollmentField",
+    "EntityPathOverrideRule": "otter:EntityPathOverrideRule",
+    "ErrorDetail": "otter:ErrorDetail",
+    "ErrorMessage": "otter:ErrorMessage",
+    "EventCallbackError": "otter:EventCallbackError",
+    "EventNotification": "otter:EventNotification",
+    "EventNotificationBase": "otter:EventNotificationBase",
+    "EventResultMetadata": "otter:EventResultMetadata",
+    "ExistingCredential": "otter:ExistingCredential",
+    "ExposedThirdPartyInfo": "otter:ExposedThirdPartyInfo",
+    "FetchCredentialsEvent": "otter:FetchCredentialsEvent",
+    "FinancialData": "otter:FinancialData",
+    "FinancialInvoice": "otter:FinancialInvoice",
+    "FinancialTransaction": "otter:FinancialTransaction",
+    "FulfilledCredential": "otter:FulfilledCredential",
+    "FulfillmentInfo": "otter:FulfillmentInfo",
+    "FulfillmentModeOverrideRule": "otter:FulfillmentModeOverrideRule",
+    "FulfillmentPathEntity": "otter:FulfillmentPathEntity",
+    "GenerateReportMultiRequest": "otter:GenerateReportMultiRequest",
+    "GenerateReportResponse": "otter:GenerateReportResponse",
+    "GetEnrollmentConfigResponse": "otter:GetEnrollmentConfigResponse",
+    "GetReportStatusResponse": "otter:GetReportStatusResponse",
+    "GetStoreDetailsEventResult": "otter:GetStoreDetailsEventResult",
+    "GetUserResponse": "otter:GetUserResponse",
+    "HourInterval": "otter:HourInterval",
+    "Hours": "otter:Hours",
+    "HoursData": "otter:HoursData",
+    "HydraToken": "otter:HydraToken",
+    "IntentToCancelEvent": "otter:IntentToCancelEvent",
+    "InventorySummariesResponse": "otter:InventorySummariesResponse",
+    "InventorySummary": "otter:InventorySummary",
+    "InvoicePayoutInfo": "otter:InvoicePayoutInfo",
+    "Item": "otter:Item",
+    "Item-2": "otter:Item-2",
+    "Item-3": "otter:Item-3",
+    "Item-4": "otter:Item-4",
+    "ItemAddedModification": "otter:ItemAddedModification",
+    "ItemModifier": "otter:ItemModifier",
+    "ItemPriceOverride": "otter:ItemPriceOverride",
+    "ItemSelector": "otter:ItemSelector",
+    "ItemStatus": "otter:ItemStatus",
+    "ItemTax": "otter:ItemTax",
+    "ItemUpdateRequest": "otter:ItemUpdateRequest",
+    "JobReference": "otter:JobReference",
+    "ListBrandsResponse": "otter:ListBrandsResponse",
+    "ListShipmentsResponse": "otter:ListShipmentsResponse",
+    "ListStoresResponse": "otter:ListStoresResponse",
+    "Location": "otter:Location",
+    "LoyaltyInfo": "otter:LoyaltyInfo",
+    "ManagerCancelOrderRequest": "otter:ManagerCancelOrderRequest",
+    "ManagerConfirmOrderRequest": "otter:ManagerConfirmOrderRequest",
+    "ManagerItemIssue": "otter:ManagerItemIssue",
+    "ManagerItemIssues": "otter:ManagerItemIssues",
+    "ManagerOrderCancelDetails": "otter:ManagerOrderCancelDetails",
+    "ManagerOrderIssue": "otter:ManagerOrderIssue",
+    "ManagerOrderIssues": "otter:ManagerOrderIssues",
+    "Marketintel_Coordinates": "otter:Marketintel_Coordinates",
+    "Marketintel_GeoLocationInformation": "otter:Marketintel_GeoLocationInformation",
+    "Marketintel_HoursData": "otter:Marketintel_HoursData",
+    "Marketintel_LocationBasedInformation": "otter:Marketintel_LocationBasedInformation",
+    "Marketintel_RegularHours": "otter:Marketintel_RegularHours",
+    "Marketintel_SpecialHours": "otter:Marketintel_SpecialHours",
+    "Marketintel_StoreChain": "otter:Marketintel_StoreChain",
+    "Marketintel_StoreDeliveryInformation": "otter:Marketintel_StoreDeliveryInformation",
+    "Marketintel_StoreDetails": "otter:Marketintel_StoreDetails",
+    "Marketintel_StoreListing": "otter:Marketintel_StoreListing",
+    "Marketintel_StoreMenu": "otter:Marketintel_StoreMenu",
+    "Marketintel_StorePriceLevel": "otter:Marketintel_StorePriceLevel",
+    "Marketintel_StorePromotion": "otter:Marketintel_StorePromotion",
+    "Marketintel_StoreRating": "otter:Marketintel_StoreRating",
+    "Marketintel_StoreSales": "otter:Marketintel_StoreSales",
+    "Marketintel_TimeRange": "otter:Marketintel_TimeRange",
+    "MenuAsyncLatestJobForStoreResponse": "otter:MenuAsyncLatestJobForStoreResponse",
+    "MenuAsynchronousJob": "otter:MenuAsynchronousJob",
+    "MenuData": "otter:MenuData",
+    "MenuItem_3PD": "otter:MenuItem_3PD",
+    "MenuItem_POS": "otter:MenuItem_POS",
+    "MenuJobPublishState": "otter:MenuJobPublishState",
+    "MenuPublishEvent": "otter:MenuPublishEvent",
+    "MenuPublishJobState": "otter:MenuPublishJobState",
+    "MenuPublishRequest": "otter:MenuPublishRequest",
+    "MenuPublishResponse": "otter:MenuPublishResponse",
+    "MenuPublishResponseMenuPublishTargets": "otter:MenuPublishResponseMenuPublishTargets",
+    "MenuPublishTarget": "otter:MenuPublishTarget",
+    "MenuPublishTargets": "otter:MenuPublishTargets",
+    "Menu_3PD": "otter:Menu_3PD",
+    "Menu_POS": "otter:Menu_POS",
+    "Menus": "otter:Menus",
+    "MenusReward": "otter:MenusReward",
+    "MenusUpsertRequest": "otter:MenusUpsertRequest",
+    "MetadataObject": "otter:MetadataObject",
+    "ModifierGroup": "otter:ModifierGroup",
+    "ModifierGroupUpdateRequest": "otter:ModifierGroupUpdateRequest",
+    "ModifierItem": "otter:ModifierItem",
+    "Money": "otter:Money",
+    "NullEvent": "otter:NullEvent",
+    "NutritionContent": "otter:NutritionContent",
+    "NutritionalInfo": "otter:NutritionalInfo",
+    "OAuthTokenGenerationRequest": "otter:OAuthTokenGenerationRequest",
+    "OptionalStoreIdInMetadata": "otter:OptionalStoreIdInMetadata",
+    "Order": "otter:Order",
+    "Order-2": "otter:Order-2",
+    "OrderComponentId": "otter:OrderComponentId",
+    "OrderConfirmEvent": "otter:OrderConfirmEvent",
+    "OrderCustomerItemsUpdateRequest": "otter:OrderCustomerItemsUpdateRequest",
+    "OrderCustomerPaymentUpdateRequest": "otter:OrderCustomerPaymentUpdateRequest",
+    "OrderDeliveryInfoUpdateRequest": "otter:OrderDeliveryInfoUpdateRequest",
+    "OrderExternalIdentifiers": "otter:OrderExternalIdentifiers",
+    "OrderFeed": "otter:OrderFeed",
+    "OrderFulfilledEvent": "otter:OrderFulfilledEvent",
+    "OrderHandedOffEvent": "otter:OrderHandedOffEvent",
+    "OrderIdentifier": "otter:OrderIdentifier",
+    "OrderIdentifierFinance": "otter:OrderIdentifierFinance",
+    "OrderIssue": "otter:OrderIssue",
+    "OrderItemInformation": "otter:OrderItemInformation",
+    "OrderPrepTimeUpdateRequest": "otter:OrderPrepTimeUpdateRequest",
+    "OrderPriceAdjustedModification": "otter:OrderPriceAdjustedModification",
+    "OrderReadyEvent": "otter:OrderReadyEvent",
+    "OrderReference": "otter:OrderReference",
+    "OrderStatusEvent": "otter:OrderStatusEvent",
+    "OrderStatusHistory": "otter:OrderStatusHistory",
+    "OrderStatusUpdateRequest": "otter:OrderStatusUpdateRequest",
+    "OrderTotal": "otter:OrderTotal",
+    "OrderTotalV2": "otter:OrderTotalV2",
+    "OrderWithManagerInfo": "otter:OrderWithManagerInfo",
+    "OrgInfo": "otter:OrgInfo",
+    "Organization": "otter:Organization",
+    "OverrideRule": "otter:OverrideRule",
+    "OverrideRule_3PD": "otter:OverrideRule_3PD",
+    "POSOrderStatusUpdateRequest": "otter:POSOrderStatusUpdateRequest",
+    "PauseRequest": "otter:PauseRequest",
+    "PauseResponse": "otter:PauseResponse",
+    "PauseStoreEventResult": "otter:PauseStoreEventResult",
+    "PaymentDetailsAch": "otter:PaymentDetailsAch",
+    "PaymentDetailsAcss": "otter:PaymentDetailsAcss",
+    "PaymentDetailsBacs": "otter:PaymentDetailsBacs",
+    "PaymentDetailsBecs": "otter:PaymentDetailsBecs",
+    "PaymentDetailsCard": "otter:PaymentDetailsCard",
+    "PaymentDetailsSepa": "otter:PaymentDetailsSepa",
+    "PaymentRecord": "otter:PaymentRecord",
+    "Payout": "otter:Payout",
+    "PayoutInfo": "otter:PayoutInfo",
+    "PercentageValue": "otter:PercentageValue",
+    "Person": "otter:Person",
+    "PersonalIdentifiers": "otter:PersonalIdentifiers",
+    "Photo": "otter:Photo",
+    "PickUpInfo": "otter:PickUpInfo",
+    "PictureProof": "otter:PictureProof",
+    "PictureRequirement": "otter:PictureRequirement",
+    "PingEvent": "otter:PingEvent",
+    "PongObject": "otter:PongObject",
+    "PosInjectionStateUpdateEvent": "otter:PosInjectionStateUpdateEvent",
+    "PosMenuSyncRequest": "otter:PosMenuSyncRequest",
+    "PosMenuSyncResponse": "otter:PosMenuSyncResponse",
+    "PreparationTime": "otter:PreparationTime",
+    "PriceOverride": "otter:PriceOverride",
+    "ProcessStoreServiceProviderStatus": "otter:ProcessStoreServiceProviderStatus",
+    "ProcessingStatusResponse": "otter:ProcessingStatusResponse",
+    "PromotionDetails": "otter:PromotionDetails",
+    "QuantityUpdatedModification": "otter:QuantityUpdatedModification",
+    "RedeemAndAccumulateRewardsRequest": "otter:RedeemAndAccumulateRewardsRequest",
+    "RedeemAndAccumulateRewardsResponse": "otter:RedeemAndAccumulateRewardsResponse",
+    "RefundRewardsRequest": "otter:RefundRewardsRequest",
+    "RefundRewardsResponse": "otter:RefundRewardsResponse",
+    "RegularHours": "otter:RegularHours",
+    "RemoveStorelinkEvent": "otter:RemoveStorelinkEvent",
+    "ReportGeneratedEvent": "otter:ReportGeneratedEvent",
+    "RequestAction": "otter:RequestAction",
+    "RequestDeliveryQuoteCallbackRequest": "otter:RequestDeliveryQuoteCallbackRequest",
+    "RequestDeliveryQuoteEvent": "otter:RequestDeliveryQuoteEvent",
+    "RequestStateInfo": "otter:RequestStateInfo",
+    "RequiredAddress": "otter:RequiredAddress",
+    "RequiredDeliveryInfo": "otter:RequiredDeliveryInfo",
+    "RequiredEventResultMetadata": "otter:RequiredEventResultMetadata",
+    "RequiredPerson": "otter:RequiredPerson",
+    "ReviewReplyRequest": "otter:ReviewReplyRequest",
+    "ReviewReplyResponse": "otter:ReviewReplyResponse",
+    "Reward": "otter:Reward",
+    "RewardEffect": "otter:RewardEffect",
+    "SearchUsersResponse": "otter:SearchUsersResponse",
+    "SelectedMenuReward": "otter:SelectedMenuReward",
+    "SelectedReward": "otter:SelectedReward",
+    "SendMenuEventCallback": "otter:SendMenuEventCallback",
+    "ServiceOverrideRule": "otter:ServiceOverrideRule",
+    "Servings": "otter:Servings",
+    "Shipment": "otter:Shipment",
+    "ShipmentDeliveryInfo": "otter:ShipmentDeliveryInfo",
+    "ShipmentLineItem": "otter:ShipmentLineItem",
+    "ShipmentStateChange": "otter:ShipmentStateChange",
+    "SignatureProof": "otter:SignatureProof",
+    "SignatureRequirement": "otter:SignatureRequirement",
+    "SimpleFinanceLine": "otter:SimpleFinanceLine",
+    "SimpleFinancialTransaction": "otter:SimpleFinancialTransaction",
+    "SimpleOrderIdentifierFinance": "otter:SimpleOrderIdentifierFinance",
+    "SimulateRewardsRequest": "otter:SimulateRewardsRequest",
+    "SimulateRewardsResponse": "otter:SimulateRewardsResponse",
+    "SkuBarcode": "otter:SkuBarcode",
+    "SkuDetails": "otter:SkuDetails",
+    "SourceExternalIdentifiers": "otter:SourceExternalIdentifiers",
+    "SpecialHours": "otter:SpecialHours",
+    "StorageRequirement": "otter:StorageRequirement",
+    "Store": "otter:Store",
+    "Store-2": "otter:Store-2",
+    "Store-3": "otter:Store-3",
+    "StoreAvailabilityEventResult": "otter:StoreAvailabilityEventResult",
+    "StoreHours": "otter:StoreHours",
+    "StoreHoursConfiguration": "otter:StoreHoursConfiguration",
+    "StoreHoursConfigurationEventResult": "otter:StoreHoursConfigurationEventResult",
+    "StoreInfo": "otter:StoreInfo",
+    "StoreInfo-2": "otter:StoreInfo-2",
+    "StorefrontError": "otter:StorefrontError",
+    "Storefront_RegularHours": "otter:Storefront_RegularHours",
+    "Storefront_SpecialHours": "otter:Storefront_SpecialHours",
+    "Storefront_TimeRange": "otter:Storefront_TimeRange",
+    "Subtotal": "otter:Subtotal",
+    "SubtotalReward": "otter:SubtotalReward",
+    "SuspendItemsRequest": "otter:SuspendItemsRequest",
+    "SuspensionStatus": "otter:SuspensionStatus",
+    "TimeRange": "otter:TimeRange",
+    "Totals": "otter:Totals",
+    "Trigger": "otter:Trigger",
+    "TriggerMenu": "otter:TriggerMenu",
+    "UnitPriceAndCount": "otter:UnitPriceAndCount",
+    "UnpauseRequest": "otter:UnpauseRequest",
+    "UnpauseResponse": "otter:UnpauseResponse",
+    "UnpauseStoreEventResult": "otter:UnpauseStoreEventResult",
+    "UnsuspendItemsRequest": "otter:UnsuspendItemsRequest",
+    "UpdateDeliveryRequestCallbackRequest": "otter:UpdateDeliveryRequestCallbackRequest",
+    "UpdateDeliveryRequestEvent": "otter:UpdateDeliveryRequestEvent",
+    "UpdateItemStatusEntry": "otter:UpdateItemStatusEntry",
+    "UpdateStorelinkStatusRequest": "otter:UpdateStorelinkStatusRequest",
+    "UploadPastOrdersRequest": "otter:UploadPastOrdersRequest",
+    "UploadPastOrdersResponse": "otter:UploadPastOrdersResponse",
+    "UpsertFullMenuEventCallback": "otter:UpsertFullMenuEventCallback",
+    "UpsertHoursEvent": "otter:UpsertHoursEvent",
+    "UpsertStorelinkEvent": "otter:UpsertStorelinkEvent",
+    "UpsertStorelinkEventResultRequest": "otter:UpsertStorelinkEventResultRequest",
+    "User": "otter:User",
+    "UserAccount": "otter:UserAccount",
+    "UserBalance": "otter:UserBalance",
+    "UserField": "otter:UserField",
+    "VehicleInformation": "otter:VehicleInformation",
+    "VerificationProof": "otter:VerificationProof",
+    "VerificationRequirements": "otter:VerificationRequirements",
+    "ViewCredential": "otter:ViewCredential",
+    "ViewCredentialsArray": "otter:ViewCredentialsArray",
+    "acceptedAt": {
+      "@id": "otter:acceptedAt",
+      "@type": "xsd:dateTime"
+    },
+    "accessToken": {
+      "@id": "otter:access_token",
+      "@type": "xsd:string"
+    },
+    "accountBalance": {
+      "@id": "otter:accountBalance",
+      "@type": "xsd:decimal"
+    },
+    "accountHolderType": {
+      "@id": "otter:accountHolderType",
+      "@type": "xsd:string"
+    },
+    "accountType": {
+      "@id": "otter:accountType",
+      "@type": "xsd:string"
+    },
+    "accumulatedRewards": {
+      "@id": "otter:accumulatedRewards",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "action": {
+      "@id": "otter:action",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "addedItem": {
+      "@id": "otter:addedItem",
+      "@type": "xsd:string"
+    },
+    "additionalCharges": {
+      "@id": "otter:additionalCharges",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "additionalData": {
+      "@id": "otter:additionalData",
+      "@type": "@id"
+    },
+    "additionalInformation": {
+      "@id": "otter:additionalInformation",
+      "@type": "xsd:string"
+    },
+    "additives": {
+      "@id": "otter:additives",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "address": {
+      "@id": "otter:address",
+      "@type": "xsd:string"
+    },
+    "addressLines": {
+      "@id": "otter:addressLines",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "adjustments": {
+      "@id": "otter:adjustments",
+      "@type": "xsd:string"
+    },
+    "allergenClassifications": {
+      "@id": "otter:allergenClassifications",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "amount": {
+      "@id": "otter:amount",
+      "@type": "xsd:decimal"
+    },
+    "applicationId": {
+      "@id": "otter:applicationId",
+      "@type": "xsd:string"
+    },
+    "applicationPreferredName": {
+      "@id": "otter:applicationPreferredName",
+      "@type": "xsd:string"
+    },
+    "assignItemsToLocations": {
+      "@id": "otter:assignItemsToLocations",
+      "@type": "xsd:boolean"
+    },
+    "attribute": {
+      "@id": "otter:attribute",
+      "@type": "xsd:string"
+    },
+    "authorizationCode": {
+      "@id": "otter:authorizationCode",
+      "@type": "xsd:string"
+    },
+    "avgBasketAmount": {
+      "@id": "otter:avgBasketAmount",
+      "@type": "@id"
+    },
+    "bagFee": {
+      "@id": "otter:bagFee",
+      "@type": "xsd:string"
+    },
+    "balanceTransactionId": {
+      "@id": "otter:balanceTransactionId",
+      "@type": "xsd:string"
+    },
+    "balances": {
+      "@id": "otter:balances",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "bankCode": {
+      "@id": "otter:bankCode",
+      "@type": "xsd:string"
+    },
+    "bankName": {
+      "@id": "otter:bankName",
+      "@type": "xsd:string"
+    },
+    "bannerUrl": {
+      "@id": "otter:bannerUrl",
+      "@type": "xsd:string"
+    },
+    "barcodeType": {
+      "@id": "otter:barcodeType",
+      "@type": "xsd:string"
+    },
+    "barcodes": {
+      "@id": "otter:barcodes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "baseCost": {
+      "@id": "otter:baseCost",
+      "@type": "xsd:double"
+    },
+    "baseFee": {
+      "@id": "otter:baseFee",
+      "@type": "xsd:double"
+    },
+    "bootstrapPhotosToEntities": {
+      "@id": "otter:bootstrapPhotosToEntities",
+      "@type": "xsd:boolean"
+    },
+    "branchCode": {
+      "@id": "otter:branchCode",
+      "@type": "xsd:string"
+    },
+    "brandInfo": {
+      "@id": "otter:brandInfo",
+      "@type": "xsd:string"
+    },
+    "brandType": {
+      "@id": "otter:brandType",
+      "@type": "xsd:string"
+    },
+    "breakdown": {
+      "@id": "otter:breakdown",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "bsbNumber": {
+      "@id": "otter:bsbNumber",
+      "@type": "xsd:string"
+    },
+    "caffeine": {
+      "@id": "otter:caffeine",
+      "@type": "xsd:decimal"
+    },
+    "calcium": {
+      "@id": "otter:calcium",
+      "@type": "xsd:decimal"
+    },
+    "campaignType": {
+      "@id": "otter:campaignType",
+      "@type": "xsd:string"
+    },
+    "cancelSource": {
+      "@id": "otter:cancelSource",
+      "@type": "xsd:string"
+    },
+    "canceledAt": {
+      "@id": "otter:canceledAt",
+      "@type": "xsd:dateTime"
+    },
+    "cancelingParty": {
+      "@id": "otter:cancelingParty",
+      "@type": "xsd:string"
+    },
+    "cancellationReason": {
+      "@id": "otter:cancellationReason",
+      "@type": "xsd:string"
+    },
+    "carbohydrates": {
+      "@id": "otter:carbohydrates",
+      "@type": "xsd:decimal"
+    },
+    "cardInfo": {
+      "@id": "otter:cardInfo",
+      "@type": "xsd:string"
+    },
+    "cashPayout": {
+      "@id": "otter:cashPayout",
+      "@type": "xsd:decimal"
+    },
+    "categories": {
+      "@id": "otter:categories",
+      "@type": "@id"
+    },
+    "category": {
+      "@id": "otter:category",
+      "@type": "xsd:string"
+    },
+    "categoryId": {
+      "@id": "otter:categoryId",
+      "@type": "xsd:string"
+    },
+    "categoryIds": {
+      "@id": "otter:categoryIds",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "categoryName": {
+      "@id": "otter:categoryName",
+      "@type": "xsd:string"
+    },
+    "chainId": {
+      "@id": "otter:chainId",
+      "@type": "xsd:string"
+    },
+    "chainName": {
+      "@id": "otter:chainName",
+      "@type": "xsd:string"
+    },
+    "chargeType": {
+      "@id": "otter:chargeType",
+      "@type": "xsd:string"
+    },
+    "chloride": {
+      "@id": "otter:chloride",
+      "@type": "xsd:decimal"
+    },
+    "city": {
+      "@id": "otter:city",
+      "@type": "xsd:string"
+    },
+    "claimedSubtotal": {
+      "@id": "otter:claimedSubtotal",
+      "@type": "xsd:decimal"
+    },
+    "clientId": {
+      "@id": "otter:client_id",
+      "@type": "xsd:string"
+    },
+    "clientSecret": {
+      "@id": "otter:client_secret",
+      "@type": "xsd:string"
+    },
+    "closureId": {
+      "@id": "otter:closureId",
+      "@type": "xsd:string"
+    },
+    "code": {
+      "@id": "otter:code",
+      "@type": "xsd:string"
+    },
+    "codeVerifier": {
+      "@id": "otter:code_verifier",
+      "@type": "xsd:string"
+    },
+    "collectSignerName": {
+      "@id": "otter:collectSignerName",
+      "@type": "xsd:boolean"
+    },
+    "collectSignerRelationship": {
+      "@id": "otter:collectSignerRelationship",
+      "@type": "xsd:boolean"
+    },
+    "comment": {
+      "@id": "otter:comment",
+      "@type": "xsd:string"
+    },
+    "confirmedAt": {
+      "@id": "otter:confirmedAt",
+      "@type": "xsd:dateTime"
+    },
+    "containsAlcohol": {
+      "@id": "otter:containsAlcohol",
+      "@type": "xsd:boolean"
+    },
+    "containsAlcoholicItem": {
+      "@id": "otter:containsAlcoholicItem",
+      "@type": "xsd:boolean"
+    },
+    "containsAllergen": {
+      "@id": "otter:containsAllergen",
+      "@type": "xsd:boolean"
+    },
+    "contentType": {
+      "@id": "otter:contentType",
+      "@type": "xsd:string"
+    },
+    "coordinates": {
+      "@id": "otter:coordinates",
+      "@type": "@id"
+    },
+    "coordinatesType": {
+      "@id": "otter:coordinatesType",
+      "@type": "xsd:string"
+    },
+    "copyEntityPaths": {
+      "@id": "otter:copyEntityPaths",
+      "@type": "xsd:boolean"
+    },
+    "cost": {
+      "@id": "otter:cost",
+      "@type": "xsd:string"
+    },
+    "costType": {
+      "@id": "otter:costType",
+      "@type": "xsd:string"
+    },
+    "count": {
+      "@id": "otter:count",
+      "@type": "xsd:integer"
+    },
+    "countryCode": {
+      "@id": "otter:countryCode",
+      "@type": "xsd:string"
+    },
+    "countryOfOriginIso2": {
+      "@id": "otter:countryOfOriginIso2",
+      "@type": "xsd:string"
+    },
+    "couponCode": {
+      "@id": "otter:couponCode",
+      "@type": "xsd:string"
+    },
+    "couponCodes": {
+      "@id": "otter:couponCodes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "courier": {
+      "@id": "otter:courier",
+      "@type": "xsd:string"
+    },
+    "courierBodyTempFahrenheit": {
+      "@id": "otter:courierBodyTempFahrenheit",
+      "@type": "xsd:decimal"
+    },
+    "courierNote": {
+      "@id": "otter:courierNote",
+      "@type": "xsd:string"
+    },
+    "courierPhone": {
+      "@id": "otter:courierPhone",
+      "@type": "xsd:string"
+    },
+    "courierStatus": {
+      "@id": "otter:courierStatus",
+      "@type": "xsd:string"
+    },
+    "createUnmatchedEntities": {
+      "@id": "otter:createUnmatchedEntities",
+      "@type": "xsd:boolean"
+    },
+    "createdAt": {
+      "@id": "otter:createdAt",
+      "@type": "xsd:dateTime"
+    },
+    "credentials": {
+      "@id": "otter:credentials",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "credentialsSchemaVersion": {
+      "@id": "otter:credentialsSchemaVersion",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "otter:currency",
+      "@type": "xsd:string"
+    },
+    "currencyCode": {
+      "@id": "otter:currencyCode",
+      "@type": "xsd:string"
+    },
+    "currentState": {
+      "@id": "otter:currentState",
+      "@type": "xsd:string"
+    },
+    "currentTime": {
+      "@id": "otter:currentTime",
+      "@type": "xsd:dateTime"
+    },
+    "customBulkResolutionOptions": {
+      "@id": "otter:customBulkResolutionOptions",
+      "@type": "xsd:string"
+    },
+    "customer": {
+      "@id": "otter:customer",
+      "@type": "xsd:string"
+    },
+    "customerAmountToReturn": {
+      "@id": "otter:customerAmountToReturn",
+      "@type": "xsd:decimal"
+    },
+    "customerId": {
+      "@id": "otter:customerId",
+      "@type": "xsd:string"
+    },
+    "customerItemIds": {
+      "@id": "otter:customerItemIds",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "customerItemModifications": {
+      "@id": "otter:customerItemModifications",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "customerNote": {
+      "@id": "otter:customerNote",
+      "@type": "xsd:string"
+    },
+    "customerPayment": {
+      "@id": "otter:customerPayment",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "customerPaymentDue": {
+      "@id": "otter:customerPaymentDue",
+      "@type": "xsd:decimal"
+    },
+    "customerPayments": {
+      "@id": "otter:customerPayments",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "customerPrepayment": {
+      "@id": "otter:customerPrepayment",
+      "@type": "xsd:decimal"
+    },
+    "customerTip": {
+      "@id": "otter:customerTip",
+      "@type": "xsd:string"
+    },
+    "customerTotal": {
+      "@id": "otter:customerTotal",
+      "@type": "xsd:string"
+    },
+    "data": {
+      "@id": "otter:data",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "otter:date",
+      "@type": "xsd:date"
+    },
+    "day": {
+      "@id": "otter:day",
+      "@type": "xsd:string"
+    },
+    "dayOfWeek": {
+      "@id": "otter:dayOfWeek",
+      "@type": "xsd:string"
+    },
+    "days": {
+      "@id": "otter:days",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "decimalValue": {
+      "@id": "otter:decimalValue",
+      "@type": "xsd:decimal"
+    },
+    "defaultModifierSelectionData": {
+      "@id": "otter:defaultModifierSelectionData",
+      "@type": "xsd:string"
+    },
+    "defaultModifierSelections": {
+      "@id": "otter:defaultModifierSelections",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "deleteMissingEntities": {
+      "@id": "otter:deleteMissingEntities",
+      "@type": "xsd:boolean"
+    },
+    "deliveryDistance": {
+      "@id": "otter:deliveryDistance",
+      "@type": "xsd:string"
+    },
+    "deliveryFee": {
+      "@id": "otter:deliveryFee",
+      "@type": "@id"
+    },
+    "deliveryHours": {
+      "@id": "otter:deliveryHours",
+      "@type": "xsd:string"
+    },
+    "deliveryInfo": {
+      "@id": "otter:deliveryInfo",
+      "@type": "xsd:string"
+    },
+    "deliveryReferenceId": {
+      "@id": "otter:deliveryReferenceId",
+      "@type": "xsd:string"
+    },
+    "deliveryStatus": {
+      "@id": "otter:deliveryStatus",
+      "@type": "xsd:string"
+    },
+    "deliveryTime": {
+      "@id": "otter:deliveryTime",
+      "@type": "xsd:dateTime"
+    },
+    "deliveryTimeMinutes": {
+      "@id": "otter:deliveryTimeMinutes",
+      "@type": "xsd:integer"
+    },
+    "deliveryTrackingUrl": {
+      "@id": "otter:deliveryTrackingUrl",
+      "@type": "@id"
+    },
+    "deliveryType": {
+      "@id": "otter:deliveryType",
+      "@type": "xsd:string"
+    },
+    "deliveryWindow": {
+      "@id": "otter:deliveryWindow",
+      "@type": "xsd:string"
+    },
+    "delta": {
+      "@id": "otter:delta",
+      "@type": "xsd:decimal"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "destination": {
+      "@id": "otter:destination",
+      "@type": "xsd:string"
+    },
+    "destinationAddress": {
+      "@id": "otter:destinationAddress",
+      "@type": "xsd:string"
+    },
+    "details": {
+      "@id": "otter:details",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "dietaryClassifications": {
+      "@id": "otter:dietaryClassifications",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "discount": {
+      "@id": "otter:discount",
+      "@type": "xsd:decimal"
+    },
+    "displayName": {
+      "@id": "otter:displayName",
+      "@type": "xsd:string"
+    },
+    "displayNumberOfSales": {
+      "@id": "otter:displayNumberOfSales",
+      "@type": "xsd:string"
+    },
+    "displayRatingCount": {
+      "@id": "otter:displayRatingCount",
+      "@type": "xsd:string"
+    },
+    "distance": {
+      "@id": "otter:distance",
+      "@type": "xsd:string"
+    },
+    "distanceInMeters": {
+      "@id": "otter:distanceInMeters",
+      "@type": "xsd:integer"
+    },
+    "distributorInformation": {
+      "@id": "otter:distributorInformation",
+      "@type": "xsd:string"
+    },
+    "dropoffAddress": {
+      "@id": "otter:dropoffAddress",
+      "@type": "xsd:string"
+    },
+    "dropoffInfo": {
+      "@id": "otter:dropoffInfo",
+      "@type": "xsd:string"
+    },
+    "dropoffInstructions": {
+      "@id": "otter:dropoffInstructions",
+      "@type": "xsd:string"
+    },
+    "dropoffNote": {
+      "@id": "otter:dropoffNote",
+      "@type": "xsd:string"
+    },
+    "dropoffType": {
+      "@id": "otter:dropoffType",
+      "@type": "xsd:string"
+    },
+    "eaterId": {
+      "@id": "otter:eaterId",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "schema:email"
+    },
+    "enableTemplate": {
+      "@id": "otter:enableTemplate",
+      "@type": "xsd:boolean"
+    },
+    "enabled": {
+      "@id": "otter:enabled",
+      "@type": "xsd:boolean"
+    },
+    "end": {
+      "@id": "otter:end",
+      "@type": "xsd:dateTime"
+    },
+    "endTime": {
+      "@id": "otter:endTime",
+      "@type": "xsd:string"
+    },
+    "energy": {
+      "@id": "otter:energy",
+      "@type": "xsd:decimal"
+    },
+    "energyKcal": {
+      "@id": "otter:energyKcal",
+      "@type": "xsd:string"
+    },
+    "enrollmentFields": {
+      "@id": "otter:enrollmentFields",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "entityId": {
+      "@id": "otter:entityId",
+      "@type": "xsd:string"
+    },
+    "entityIds": {
+      "@id": "otter:entityIds",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "entityType": {
+      "@id": "otter:entityType",
+      "@type": "xsd:string"
+    },
+    "error": {
+      "@id": "otter:error",
+      "@type": "xsd:string"
+    },
+    "errorCode": {
+      "@id": "otter:errorCode",
+      "@type": "xsd:string"
+    },
+    "errorMessage": {
+      "@id": "otter:errorMessage",
+      "@type": "xsd:string"
+    },
+    "errorType": {
+      "@id": "otter:errorType",
+      "@type": "xsd:string"
+    },
+    "estimatedDeliveryTime": {
+      "@id": "otter:estimatedDeliveryTime",
+      "@type": "xsd:dateTime"
+    },
+    "estimatedDeliveryTimeInSeconds": {
+      "@id": "otter:estimatedDeliveryTimeInSeconds",
+      "@type": "xsd:integer"
+    },
+    "estimatedPickupTime": {
+      "@id": "otter:estimatedPickupTime",
+      "@type": "xsd:dateTime"
+    },
+    "estimatedPrepTimeMinutes": {
+      "@id": "otter:estimatedPrepTimeMinutes",
+      "@type": "xsd:integer"
+    },
+    "estimatedPreparationTime": {
+      "@id": "otter:estimatedPreparationTime",
+      "@type": "xsd:string"
+    },
+    "estimatedRatingCount": {
+      "@id": "otter:estimatedRatingCount",
+      "@type": "xsd:integer"
+    },
+    "eventId": {
+      "@id": "otter:eventId",
+      "@type": "xsd:string"
+    },
+    "eventResultMetadata": {
+      "@id": "otter:eventResultMetadata",
+      "@type": "xsd:string"
+    },
+    "eventTime": {
+      "@id": "otter:eventTime",
+      "@type": "xsd:dateTime"
+    },
+    "eventType": {
+      "@id": "otter:eventType",
+      "@type": "xsd:string"
+    },
+    "expiration": {
+      "@id": "otter:expiration",
+      "@type": "@id"
+    },
+    "expiresIn": {
+      "@id": "otter:expires_in",
+      "@type": "xsd:integer"
+    },
+    "exposedThirdPartyInfos": {
+      "@id": "otter:exposedThirdPartyInfos",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "externalId": {
+      "@id": "otter:externalId",
+      "@type": "xsd:string"
+    },
+    "externalIdentifiers": {
+      "@id": "otter:externalIdentifiers",
+      "@type": "xsd:string"
+    },
+    "externalPaymentType": {
+      "@id": "otter:externalPaymentType",
+      "@type": "xsd:string"
+    },
+    "externalServiceSlug": {
+      "@id": "otter:externalServiceSlug",
+      "@type": "xsd:string"
+    },
+    "externalServiceSlugs": {
+      "@id": "otter:externalServiceSlugs",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "externalStoreId": {
+      "@id": "otter:externalStoreId",
+      "@type": "xsd:string"
+    },
+    "externalStoreIds": {
+      "@id": "otter:externalStoreIds",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "extraCost": {
+      "@id": "otter:extraCost",
+      "@type": "xsd:double"
+    },
+    "extraFee": {
+      "@id": "otter:extraFee",
+      "@type": "xsd:double"
+    },
+    "fats": {
+      "@id": "otter:fats",
+      "@type": "xsd:decimal"
+    },
+    "feeForRestaurantProvidedDelivery": {
+      "@id": "otter:feeForRestaurantProvidedDelivery",
+      "@type": "xsd:string"
+    },
+    "feeForServiceProviderDelivery": {
+      "@id": "otter:feeForServiceProviderDelivery",
+      "@type": "xsd:string"
+    },
+    "fibres": {
+      "@id": "otter:fibres",
+      "@type": "xsd:decimal"
+    },
+    "fileName": {
+      "@id": "otter:fileName",
+      "@type": "xsd:string"
+    },
+    "financialTransactions": {
+      "@id": "otter:financialTransactions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "fingerprint": {
+      "@id": "otter:fingerprint",
+      "@type": "xsd:string"
+    },
+    "finishedAt": {
+      "@id": "otter:finishedAt",
+      "@type": "xsd:dateTime"
+    },
+    "flatCharge": {
+      "@id": "otter:flatCharge",
+      "@type": "xsd:string"
+    },
+    "fluoride": {
+      "@id": "otter:fluoride",
+      "@type": "xsd:decimal"
+    },
+    "foodSales": {
+      "@id": "otter:foodSales",
+      "@type": "xsd:string"
+    },
+    "friendlyId": {
+      "@id": "otter:friendlyId",
+      "@type": "xsd:string"
+    },
+    "fromHour": {
+      "@id": "otter:fromHour",
+      "@type": "xsd:integer"
+    },
+    "fromMinute": {
+      "@id": "otter:fromMinute",
+      "@type": "xsd:integer"
+    },
+    "fulfillmentInfo": {
+      "@id": "otter:fulfillmentInfo",
+      "@type": "xsd:string"
+    },
+    "fulfillmentMode": {
+      "@id": "otter:fulfillmentMode",
+      "@type": "xsd:string"
+    },
+    "fulfillmentModes": {
+      "@id": "otter:fulfillmentModes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "fulfillmentPath": {
+      "@id": "otter:fulfillmentPath",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "fullAddress": {
+      "@id": "otter:fullAddress",
+      "@type": "xsd:string"
+    },
+    "fundingType": {
+      "@id": "otter:fundingType",
+      "@type": "xsd:string"
+    },
+    "grantType": {
+      "@id": "otter:grant_type",
+      "@type": "xsd:string"
+    },
+    "groupId": {
+      "@id": "otter:groupId",
+      "@type": "xsd:string"
+    },
+    "groupName": {
+      "@id": "otter:groupName",
+      "@type": "xsd:string"
+    },
+    "gtin": {
+      "@id": "otter:gtin",
+      "@type": "xsd:string"
+    },
+    "h3Index": {
+      "@id": "otter:h3Index",
+      "@type": "xsd:string"
+    },
+    "hasMembershipPass": {
+      "@id": "otter:hasMembershipPass",
+      "@type": "xsd:boolean"
+    },
+    "high": {
+      "@id": "otter:high",
+      "@type": "xsd:decimal"
+    },
+    "hours": {
+      "@id": "otter:hours",
+      "@type": "xsd:string"
+    },
+    "hoursData": {
+      "@id": "otter:hoursData",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "otter:id",
+      "@type": "xsd:string"
+    },
+    "ids": {
+      "@id": "otter:ids",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "inboundQuantity": {
+      "@id": "otter:inboundQuantity",
+      "@type": "xsd:integer"
+    },
+    "injectionEvent": {
+      "@id": "otter:injectionEvent",
+      "@type": "xsd:string"
+    },
+    "injectionIssue": {
+      "@id": "otter:injectionIssue",
+      "@type": "xsd:string"
+    },
+    "injectionState": {
+      "@id": "otter:injectionState",
+      "@type": "xsd:string"
+    },
+    "inputType": {
+      "@id": "otter:inputType",
+      "@type": "xsd:string"
+    },
+    "institutionNumber": {
+      "@id": "otter:institutionNumber",
+      "@type": "xsd:string"
+    },
+    "internalCategoryId": {
+      "@id": "otter:internalCategoryId",
+      "@type": "xsd:string"
+    },
+    "internalCategoryName": {
+      "@id": "otter:internalCategoryName",
+      "@type": "xsd:string"
+    },
+    "internalStoreId": {
+      "@id": "otter:internalStoreId",
+      "@type": "xsd:string"
+    },
+    "intervalDescription": {
+      "@id": "otter:intervalDescription",
+      "@type": "xsd:string"
+    },
+    "intervals": {
+      "@id": "otter:intervals",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "inventorySummaries": {
+      "@id": "otter:inventorySummaries",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "isCourierWearingMask": {
+      "@id": "otter:isCourierWearingMask",
+      "@type": "xsd:boolean"
+    },
+    "isIndefinite": {
+      "@id": "otter:isIndefinite",
+      "@type": "xsd:boolean"
+    },
+    "isModifier": {
+      "@id": "otter:isModifier",
+      "@type": "xsd:boolean"
+    },
+    "isValueAddedTax": {
+      "@id": "otter:isValueAddedTax",
+      "@type": "xsd:boolean"
+    },
+    "issues": {
+      "@id": "otter:issues",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "itemAdded": {
+      "@id": "otter:itemAdded",
+      "@type": "xsd:string"
+    },
+    "itemId": {
+      "@id": "otter:itemId",
+      "@type": "xsd:string"
+    },
+    "itemIds": {
+      "@id": "otter:itemIds",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "itemIssues": {
+      "@id": "otter:itemIssues",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "items": {
+      "@id": "otter:items",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "jobId": {
+      "@id": "otter:jobId",
+      "@type": "xsd:string"
+    },
+    "jobReference": {
+      "@id": "otter:jobReference",
+      "@type": "xsd:string"
+    },
+    "jobType": {
+      "@id": "otter:jobType",
+      "@type": "xsd:string"
+    },
+    "key": {
+      "@id": "otter:key",
+      "@type": "xsd:string"
+    },
+    "label": {
+      "@id": "otter:label",
+      "@type": "xsd:string"
+    },
+    "language": {
+      "@id": "otter:language",
+      "@type": "xsd:string"
+    },
+    "lastFour": {
+      "@id": "otter:lastFour",
+      "@type": "xsd:string"
+    },
+    "lastKnownLocation": {
+      "@id": "otter:lastKnownLocation",
+      "@type": "xsd:string"
+    },
+    "latestJobs": {
+      "@id": "otter:latestJobs",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "latitude": {
+      "@id": "otter:latitude",
+      "@type": "xsd:double"
+    },
+    "licensePlate": {
+      "@id": "otter:licensePlate",
+      "@type": "xsd:string"
+    },
+    "limit": {
+      "@id": "otter:limit",
+      "@type": "xsd:decimal"
+    },
+    "lineItemId": {
+      "@id": "otter:lineItemId",
+      "@type": "xsd:string"
+    },
+    "lineItems": {
+      "@id": "otter:lineItems",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "linesOfAddress": {
+      "@id": "otter:linesOfAddress",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "location": {
+      "@id": "otter:location",
+      "@type": "@id"
+    },
+    "locationBasedInformation": {
+      "@id": "otter:locationBasedInformation",
+      "@type": "@id"
+    },
+    "logoPhotoUrl": {
+      "@id": "otter:logoPhotoUrl",
+      "@type": "xsd:string"
+    },
+    "logoUrl": {
+      "@id": "otter:logoUrl",
+      "@type": "xsd:string"
+    },
+    "longitude": {
+      "@id": "otter:longitude",
+      "@type": "xsd:double"
+    },
+    "low": {
+      "@id": "otter:low",
+      "@type": "xsd:decimal"
+    },
+    "loyaltyDiscount": {
+      "@id": "otter:loyaltyDiscount",
+      "@type": "xsd:string"
+    },
+    "loyaltyInfo": {
+      "@id": "otter:loyaltyInfo",
+      "@type": "xsd:string"
+    },
+    "magnesium": {
+      "@id": "otter:magnesium",
+      "@type": "xsd:decimal"
+    },
+    "makeModel": {
+      "@id": "otter:makeModel",
+      "@type": "xsd:string"
+    },
+    "mandateId": {
+      "@id": "otter:mandateId",
+      "@type": "xsd:string"
+    },
+    "mandateStatus": {
+      "@id": "otter:mandateStatus",
+      "@type": "xsd:string"
+    },
+    "manifestQuantity": {
+      "@id": "otter:manifestQuantity",
+      "@type": "xsd:integer"
+    },
+    "max": {
+      "@id": "otter:max",
+      "@type": "xsd:integer"
+    },
+    "maxPerModifierSelectionQuantity": {
+      "@id": "otter:maxPerModifierSelectionQuantity",
+      "@type": "xsd:integer"
+    },
+    "maxPickupDuration": {
+      "@id": "otter:maxPickupDuration",
+      "@type": "xsd:integer"
+    },
+    "maximumSelections": {
+      "@id": "otter:maximumSelections",
+      "@type": "xsd:integer"
+    },
+    "menu": {
+      "@id": "otter:menu",
+      "@type": "@id"
+    },
+    "menuData": {
+      "@id": "otter:menuData",
+      "@type": "xsd:string"
+    },
+    "menuHoursData": {
+      "@id": "otter:menuHoursData",
+      "@type": "@id"
+    },
+    "menuPublishTargets": {
+      "@id": "otter:menuPublishTargets",
+      "@type": "@id"
+    },
+    "menus": {
+      "@id": "otter:menus",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "otter:message",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "otter:metadata",
+      "@type": "@id"
+    },
+    "min": {
+      "@id": "otter:min",
+      "@type": "xsd:integer"
+    },
+    "minDeliveryBasketSize": {
+      "@id": "otter:minDeliveryBasketSize",
+      "@type": "@id"
+    },
+    "minPickupDuration": {
+      "@id": "otter:minPickupDuration",
+      "@type": "xsd:integer"
+    },
+    "minimumPurchaseQuantity": {
+      "@id": "otter:minimumPurchaseQuantity",
+      "@type": "xsd:decimal"
+    },
+    "minimumSelections": {
+      "@id": "otter:minimumSelections",
+      "@type": "xsd:integer"
+    },
+    "modifierGroupIds": {
+      "@id": "otter:modifierGroupIds",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "modifierGroups": {
+      "@id": "otter:modifierGroups",
+      "@type": "@id"
+    },
+    "modifierId": {
+      "@id": "otter:modifierId",
+      "@type": "xsd:string"
+    },
+    "modifiers": {
+      "@id": "otter:modifiers",
+      "@type": "xsd:string"
+    },
+    "monoUnsaturatedFats": {
+      "@id": "otter:monoUnsaturatedFats",
+      "@type": "xsd:decimal"
+    },
+    "month": {
+      "@id": "otter:month",
+      "@type": "xsd:integer"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "netPayout": {
+      "@id": "otter:netPayout",
+      "@type": "xsd:string"
+    },
+    "nextPageToken": {
+      "@id": "otter:nextPageToken",
+      "@type": "xsd:string"
+    },
+    "nextToken": {
+      "@id": "otter:nextToken",
+      "@type": "xsd:string"
+    },
+    "note": {
+      "@id": "otter:note",
+      "@type": "xsd:string"
+    },
+    "notes": {
+      "@id": "otter:notes",
+      "@type": "xsd:string"
+    },
+    "numberOfSales": {
+      "@id": "otter:numberOfSales",
+      "@type": "xsd:integer"
+    },
+    "nutritionContent": {
+      "@id": "otter:nutritionContent",
+      "@type": "xsd:string"
+    },
+    "nutritionalInfo": {
+      "@id": "otter:nutritionalInfo",
+      "@type": "xsd:string"
+    },
+    "offsetToken": {
+      "@id": "otter:offsetToken",
+      "@type": "xsd:string"
+    },
+    "ofoDisplayId": {
+      "@id": "otter:ofoDisplayId",
+      "@type": "xsd:string"
+    },
+    "ofoSlug": {
+      "@id": "otter:ofoSlug",
+      "@type": "xsd:string"
+    },
+    "oldQuantity": {
+      "@id": "otter:oldQuantity",
+      "@type": "xsd:decimal"
+    },
+    "operationFinishedAt": {
+      "@id": "otter:operationFinishedAt",
+      "@type": "xsd:dateTime"
+    },
+    "operationStatus": {
+      "@id": "otter:operationStatus",
+      "@type": "xsd:string"
+    },
+    "operationType": {
+      "@id": "otter:operationType",
+      "@type": "xsd:string"
+    },
+    "operatorDiscount": {
+      "@id": "otter:operatorDiscount",
+      "@type": "xsd:string"
+    },
+    "order": {
+      "@id": "otter:order",
+      "@type": "xsd:string"
+    },
+    "orderAcceptedInfo": {
+      "@id": "otter:orderAcceptedInfo",
+      "@type": "@id"
+    },
+    "orderAgainUrl": {
+      "@id": "otter:orderAgainUrl",
+      "@type": "xsd:string"
+    },
+    "orderCancelDetails": {
+      "@id": "otter:orderCancelDetails",
+      "@type": "xsd:string"
+    },
+    "orderComponentId": {
+      "@id": "otter:orderComponentId",
+      "@type": "xsd:string"
+    },
+    "orderComponentOrderId": {
+      "@id": "otter:orderComponentOrderId",
+      "@type": "xsd:string"
+    },
+    "orderExternalIdentifiers": {
+      "@id": "otter:orderExternalIdentifiers",
+      "@type": "xsd:string"
+    },
+    "orderId": {
+      "@id": "otter:orderId",
+      "@type": "xsd:string"
+    },
+    "orderIdentifiers": {
+      "@id": "otter:orderIdentifiers",
+      "@type": "xsd:string"
+    },
+    "orderIssues": {
+      "@id": "otter:orderIssues",
+      "@type": "xsd:string"
+    },
+    "orderItems": {
+      "@id": "otter:orderItems",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "orderReferences": {
+      "@id": "otter:orderReferences",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "orderStatus": {
+      "@id": "otter:orderStatus",
+      "@type": "xsd:string"
+    },
+    "orderStatusHistory": {
+      "@id": "otter:orderStatusHistory",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "orderSubTotal": {
+      "@id": "otter:orderSubTotal",
+      "@type": "xsd:decimal"
+    },
+    "orderTotal": {
+      "@id": "otter:orderTotal",
+      "@type": "xsd:decimal"
+    },
+    "orderTotalV2": {
+      "@id": "otter:orderTotalV2",
+      "@type": "xsd:string"
+    },
+    "orderTotalsV2": {
+      "@id": "otter:orderTotalsV2",
+      "@type": "xsd:string"
+    },
+    "orderedAt": {
+      "@id": "otter:orderedAt",
+      "@type": "xsd:dateTime"
+    },
+    "orders": {
+      "@id": "otter:orders",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "orgInfo": {
+      "@id": "otter:orgInfo",
+      "@type": "xsd:string"
+    },
+    "otherFee": {
+      "@id": "otter:otherFee",
+      "@type": "xsd:string"
+    },
+    "otterPaymentRecordId": {
+      "@id": "otter:otterPaymentRecordId",
+      "@type": "xsd:string"
+    },
+    "packingFee": {
+      "@id": "otter:packingFee",
+      "@type": "xsd:string"
+    },
+    "pageToken": {
+      "@id": "otter:pageToken",
+      "@type": "xsd:string"
+    },
+    "payerId": {
+      "@id": "otter:payerId",
+      "@type": "xsd:string"
+    },
+    "payload": {
+      "@id": "otter:payload",
+      "@type": "@id"
+    },
+    "paymentAuthorizer": {
+      "@id": "otter:paymentAuthorizer",
+      "@type": "xsd:string"
+    },
+    "paymentDetails": {
+      "@id": "otter:paymentDetails",
+      "@type": "xsd:string"
+    },
+    "paymentDueToRestaurant": {
+      "@id": "otter:paymentDueToRestaurant",
+      "@type": "xsd:decimal"
+    },
+    "paymentMethod": {
+      "@id": "otter:paymentMethod",
+      "@type": "xsd:string"
+    },
+    "paymentNetwork": {
+      "@id": "otter:paymentNetwork",
+      "@type": "xsd:string"
+    },
+    "paymentRecordId": {
+      "@id": "otter:paymentRecordId",
+      "@type": "xsd:string"
+    },
+    "paymentRecords": {
+      "@id": "otter:paymentRecords",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "payout": {
+      "@id": "otter:payout",
+      "@type": "xsd:string"
+    },
+    "payoutFrom3rdParty": {
+      "@id": "otter:payoutFrom3rdParty",
+      "@type": "xsd:decimal"
+    },
+    "payoutFromServiceProvider": {
+      "@id": "otter:payoutFromServiceProvider",
+      "@type": "xsd:decimal"
+    },
+    "pending": {
+      "@id": "otter:pending",
+      "@type": "xsd:boolean"
+    },
+    "percentageCharge": {
+      "@id": "otter:percentageCharge",
+      "@type": "xsd:string"
+    },
+    "percentageValue": {
+      "@id": "otter:percentageValue",
+      "@type": "xsd:string"
+    },
+    "periodType": {
+      "@id": "otter:periodType",
+      "@type": "xsd:string"
+    },
+    "personalIdentifiers": {
+      "@id": "otter:personalIdentifiers",
+      "@type": "xsd:string"
+    },
+    "phone": {
+      "@id": "otter:phone",
+      "@type": "xsd:string"
+    },
+    "phoneCode": {
+      "@id": "otter:phoneCode",
+      "@type": "xsd:string"
+    },
+    "phoneNumber": {
+      "@id": "otter:phoneNumber",
+      "@type": "xsd:string"
+    },
+    "phoneNumbers": {
+      "@id": "otter:phoneNumbers",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "photoIds": {
+      "@id": "otter:photoIds",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "photoUrls": {
+      "@id": "otter:photoUrls",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "photos": {
+      "@id": "otter:photos",
+      "@type": "@id"
+    },
+    "pickUpInfo": {
+      "@id": "otter:pickUpInfo",
+      "@type": "xsd:string"
+    },
+    "pickUpInstructions": {
+      "@id": "otter:pickUpInstructions",
+      "@type": "xsd:string"
+    },
+    "pickUpLocationId": {
+      "@id": "otter:pickUpLocationId",
+      "@type": "xsd:string"
+    },
+    "pickupAddress": {
+      "@id": "otter:pickupAddress",
+      "@type": "xsd:string"
+    },
+    "pickupHours": {
+      "@id": "otter:pickupHours",
+      "@type": "xsd:string"
+    },
+    "pickupNote": {
+      "@id": "otter:pickupNote",
+      "@type": "xsd:string"
+    },
+    "pickupOrderId": {
+      "@id": "otter:pickupOrderId",
+      "@type": "xsd:string"
+    },
+    "pickupTime": {
+      "@id": "otter:pickupTime",
+      "@type": "xsd:dateTime"
+    },
+    "pictureProof": {
+      "@id": "otter:pictureProof",
+      "@type": "xsd:string"
+    },
+    "pictureRequirement": {
+      "@id": "otter:pictureRequirement",
+      "@type": "xsd:string"
+    },
+    "pictureUrl": {
+      "@id": "otter:pictureUrl",
+      "@type": "xsd:string"
+    },
+    "polyUnsaturatedFats": {
+      "@id": "otter:polyUnsaturatedFats",
+      "@type": "xsd:decimal"
+    },
+    "polyols": {
+      "@id": "otter:polyols",
+      "@type": "xsd:decimal"
+    },
+    "posSlug": {
+      "@id": "otter:posSlug",
+      "@type": "xsd:string"
+    },
+    "postalCode": {
+      "@id": "otter:postalCode",
+      "@type": "xsd:string"
+    },
+    "potassium": {
+      "@id": "otter:potassium",
+      "@type": "xsd:decimal"
+    },
+    "preferredPickupDuration": {
+      "@id": "otter:preferredPickupDuration",
+      "@type": "xsd:integer"
+    },
+    "preferredPickupTime": {
+      "@id": "otter:preferredPickupTime",
+      "@type": "xsd:dateTime"
+    },
+    "prepTimeMinutes": {
+      "@id": "otter:prepTimeMinutes",
+      "@type": "xsd:integer"
+    },
+    "preparationTime": {
+      "@id": "otter:preparationTime",
+      "@type": "xsd:string"
+    },
+    "preparationTimeInMinutes": {
+      "@id": "otter:preparationTimeInMinutes",
+      "@type": "xsd:integer"
+    },
+    "price": {
+      "@id": "otter:price",
+      "@type": "xsd:string"
+    },
+    "priceAdjusted": {
+      "@id": "otter:priceAdjusted",
+      "@type": "xsd:string"
+    },
+    "priceLevel": {
+      "@id": "otter:priceLevel",
+      "@type": "xsd:decimal"
+    },
+    "priceLevelName": {
+      "@id": "otter:priceLevelName",
+      "@type": "xsd:string"
+    },
+    "priceOverrides": {
+      "@id": "otter:priceOverrides",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "processRequestStatuses": {
+      "@id": "otter:processRequestStatuses",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "processingStatus": {
+      "@id": "otter:processingStatus",
+      "@type": "xsd:string"
+    },
+    "producerInformation": {
+      "@id": "otter:producerInformation",
+      "@type": "xsd:string"
+    },
+    "promotionDiscount": {
+      "@id": "otter:promotionDiscount",
+      "@type": "xsd:string"
+    },
+    "promotionId": {
+      "@id": "otter:promotionId",
+      "@type": "xsd:string"
+    },
+    "promotionType": {
+      "@id": "otter:promotionType",
+      "@type": "xsd:string"
+    },
+    "promotionsDetails": {
+      "@id": "otter:promotionsDetails",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "proofOfDelivery": {
+      "@id": "otter:proofOfDelivery",
+      "@type": "xsd:string"
+    },
+    "protein": {
+      "@id": "otter:protein",
+      "@type": "xsd:decimal"
+    },
+    "provider": {
+      "@id": "otter:provider",
+      "@type": "xsd:string"
+    },
+    "providerDeliveryId": {
+      "@id": "otter:providerDeliveryId",
+      "@type": "xsd:string"
+    },
+    "publishJobState": {
+      "@id": "otter:publishJobState",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "otter:quantity",
+      "@type": "xsd:integer"
+    },
+    "quantityUpdated": {
+      "@id": "otter:quantityUpdated",
+      "@type": "xsd:string"
+    },
+    "ratingScore": {
+      "@id": "otter:ratingScore",
+      "@type": "xsd:decimal"
+    },
+    "readMethod": {
+      "@id": "otter:readMethod",
+      "@type": "xsd:string"
+    },
+    "readyAtTime": {
+      "@id": "otter:readyAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "reason": {
+      "@id": "otter:reason",
+      "@type": "xsd:string"
+    },
+    "receivedSellableQuantity": {
+      "@id": "otter:receivedSellableQuantity",
+      "@type": "xsd:integer"
+    },
+    "receivedUnsellableQuantity": {
+      "@id": "otter:receivedUnsellableQuantity",
+      "@type": "xsd:integer"
+    },
+    "recordPaymentType": {
+      "@id": "otter:recordPaymentType",
+      "@type": "xsd:string"
+    },
+    "recordProviderType": {
+      "@id": "otter:recordProviderType",
+      "@type": "xsd:string"
+    },
+    "redirectUri": {
+      "@id": "otter:redirect_uri",
+      "@type": "xsd:string"
+    },
+    "reference": {
+      "@id": "otter:reference",
+      "@type": "xsd:string"
+    },
+    "regionId": {
+      "@id": "otter:regionId",
+      "@type": "xsd:string"
+    },
+    "regularHours": {
+      "@id": "otter:regularHours",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "replyId": {
+      "@id": "otter:replyId",
+      "@type": "xsd:string"
+    },
+    "replyText": {
+      "@id": "otter:replyText",
+      "@type": "xsd:string"
+    },
+    "reportType": {
+      "@id": "otter:reportType",
+      "@type": "xsd:string"
+    },
+    "reportUrl": {
+      "@id": "otter:reportUrl",
+      "@type": "xsd:string"
+    },
+    "requestId": {
+      "@id": "otter:requestId",
+      "@type": "xsd:string"
+    },
+    "requestStatus": {
+      "@id": "otter:requestStatus",
+      "@type": "xsd:string"
+    },
+    "requestSubmitted": {
+      "@id": "otter:requestSubmitted",
+      "@type": "xsd:boolean"
+    },
+    "requestedToCreatedEntityIds": {
+      "@id": "otter:requestedToCreatedEntityIds",
+      "@type": "@id"
+    },
+    "required": {
+      "@id": "otter:required",
+      "@type": "xsd:boolean"
+    },
+    "resourceHref": {
+      "@id": "otter:resourceHref",
+      "@type": "xsd:string"
+    },
+    "resourceId": {
+      "@id": "otter:resourceId",
+      "@type": "xsd:string"
+    },
+    "response": {
+      "@id": "otter:response",
+      "@type": "xsd:string"
+    },
+    "restaurantFundedDiscount": {
+      "@id": "otter:restaurantFundedDiscount",
+      "@type": "xsd:string"
+    },
+    "retryAttempt": {
+      "@id": "otter:retryAttempt",
+      "@type": "xsd:decimal"
+    },
+    "reviewId": {
+      "@id": "otter:reviewId",
+      "@type": "xsd:string"
+    },
+    "rewardEffect": {
+      "@id": "otter:rewardEffect",
+      "@type": "xsd:string"
+    },
+    "rewards": {
+      "@id": "otter:rewards",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "routingNumber": {
+      "@id": "otter:routingNumber",
+      "@type": "xsd:string"
+    },
+    "rules": {
+      "@id": "otter:rules",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "saleStatus": {
+      "@id": "otter:saleStatus",
+      "@type": "xsd:string"
+    },
+    "salt": {
+      "@id": "otter:salt",
+      "@type": "xsd:decimal"
+    },
+    "saturatedFats": {
+      "@id": "otter:saturatedFats",
+      "@type": "xsd:decimal"
+    },
+    "scheduledAt": {
+      "@id": "otter:scheduledAt",
+      "@type": "xsd:double"
+    },
+    "schedulingType": {
+      "@id": "otter:schedulingType",
+      "@type": "xsd:string"
+    },
+    "scope": {
+      "@id": "otter:scope",
+      "@type": "xsd:string"
+    },
+    "searchText": {
+      "@id": "otter:searchText",
+      "@type": "xsd:string"
+    },
+    "selectOptions": {
+      "@id": "otter:selectOptions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "selectedRewards": {
+      "@id": "otter:selectedRewards",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "selectionQuantity": {
+      "@id": "otter:selectionQuantity",
+      "@type": "xsd:integer"
+    },
+    "selector": {
+      "@id": "otter:selector",
+      "@type": "xsd:string"
+    },
+    "sellableQuantity": {
+      "@id": "otter:sellableQuantity",
+      "@type": "xsd:integer"
+    },
+    "serviceFee": {
+      "@id": "otter:serviceFee",
+      "@type": "xsd:string"
+    },
+    "serviceProviderDiscount": {
+      "@id": "otter:serviceProviderDiscount",
+      "@type": "xsd:string"
+    },
+    "serviceProviderId": {
+      "@id": "otter:serviceProviderId",
+      "@type": "xsd:string"
+    },
+    "serviceSlug": {
+      "@id": "otter:serviceSlug",
+      "@type": "xsd:string"
+    },
+    "servingSizeInGrams": {
+      "@id": "otter:servingSizeInGrams",
+      "@type": "xsd:decimal"
+    },
+    "servingSizeInMilliliters": {
+      "@id": "otter:servingSizeInMilliliters",
+      "@type": "xsd:decimal"
+    },
+    "servings": {
+      "@id": "otter:servings",
+      "@type": "xsd:string"
+    },
+    "shipments": {
+      "@id": "otter:shipments",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "shouldPublishChanges": {
+      "@id": "otter:shouldPublishChanges",
+      "@type": "xsd:boolean"
+    },
+    "signatureImageUrl": {
+      "@id": "otter:signatureImageUrl",
+      "@type": "xsd:string"
+    },
+    "signatureProof": {
+      "@id": "otter:signatureProof",
+      "@type": "xsd:string"
+    },
+    "signatureRequirement": {
+      "@id": "otter:signatureRequirement",
+      "@type": "xsd:string"
+    },
+    "signerName": {
+      "@id": "otter:signerName",
+      "@type": "xsd:string"
+    },
+    "signerRelationship": {
+      "@id": "otter:signerRelationship",
+      "@type": "xsd:string"
+    },
+    "skuDetails": {
+      "@id": "otter:skuDetails",
+      "@type": "xsd:string"
+    },
+    "skuId": {
+      "@id": "otter:skuId",
+      "@type": "xsd:string"
+    },
+    "skuPrice": {
+      "@id": "otter:skuPrice",
+      "@type": "xsd:decimal"
+    },
+    "skuSlug": {
+      "@id": "otter:skuSlug",
+      "@type": "xsd:string"
+    },
+    "slug": {
+      "@id": "otter:slug",
+      "@type": "xsd:string"
+    },
+    "smallOrderFee": {
+      "@id": "otter:smallOrderFee",
+      "@type": "xsd:string"
+    },
+    "sodium": {
+      "@id": "otter:sodium",
+      "@type": "xsd:decimal"
+    },
+    "sortCode": {
+      "@id": "otter:sortCode",
+      "@type": "xsd:string"
+    },
+    "source": {
+      "@id": "otter:source",
+      "@type": "xsd:string"
+    },
+    "sourceExternalIdentifiers": {
+      "@id": "otter:sourceExternalIdentifiers",
+      "@type": "xsd:string"
+    },
+    "sourceService": {
+      "@id": "otter:sourceService",
+      "@type": "xsd:string"
+    },
+    "sourceType": {
+      "@id": "otter:sourceType",
+      "@type": "xsd:string"
+    },
+    "specialHourType": {
+      "@id": "otter:specialHourType",
+      "@type": "xsd:string"
+    },
+    "specialHours": {
+      "@id": "otter:specialHours",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "starch": {
+      "@id": "otter:starch",
+      "@type": "xsd:decimal"
+    },
+    "start": {
+      "@id": "otter:start",
+      "@type": "xsd:dateTime"
+    },
+    "startTime": {
+      "@id": "otter:startTime",
+      "@type": "xsd:string"
+    },
+    "startedAt": {
+      "@id": "otter:startedAt",
+      "@type": "xsd:dateTime"
+    },
+    "state": {
+      "@id": "otter:state",
+      "@type": "xsd:string"
+    },
+    "stateChanges": {
+      "@id": "otter:stateChanges",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "stateInfo": {
+      "@id": "otter:stateInfo",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "stationId": {
+      "@id": "otter:stationId",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "otter:status",
+      "@type": "xsd:string"
+    },
+    "statusChangedAt": {
+      "@id": "otter:statusChangedAt",
+      "@type": "xsd:dateTime"
+    },
+    "storageRequirements": {
+      "@id": "otter:storageRequirements",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "store": {
+      "@id": "otter:store",
+      "@type": "xsd:string"
+    },
+    "storeBannerPhotoUrl": {
+      "@id": "otter:storeBannerPhotoUrl",
+      "@type": "xsd:string"
+    },
+    "storeChain": {
+      "@id": "otter:storeChain",
+      "@type": "@id"
+    },
+    "storeDeliveryInformation": {
+      "@id": "otter:storeDeliveryInformation",
+      "@type": "@id"
+    },
+    "storeDetails": {
+      "@id": "otter:storeDetails",
+      "@type": "@id"
+    },
+    "storeHours": {
+      "@id": "otter:storeHours",
+      "@type": "@id"
+    },
+    "storeHoursConfiguration": {
+      "@id": "otter:storeHoursConfiguration",
+      "@type": "xsd:string"
+    },
+    "storeId": {
+      "@id": "otter:storeId",
+      "@type": "xsd:string"
+    },
+    "storeInfo": {
+      "@id": "otter:storeInfo",
+      "@type": "xsd:string"
+    },
+    "storeName": {
+      "@id": "otter:storeName",
+      "@type": "xsd:string"
+    },
+    "storePromotions": {
+      "@id": "otter:storePromotions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "storeRankings": {
+      "@id": "otter:storeRankings",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "storeRating": {
+      "@id": "otter:storeRating",
+      "@type": "@id"
+    },
+    "storeSales": {
+      "@id": "otter:storeSales",
+      "@type": "@id"
+    },
+    "storeState": {
+      "@id": "otter:storeState",
+      "@type": "xsd:string"
+    },
+    "storeUrl": {
+      "@id": "otter:storeUrl",
+      "@type": "xsd:string"
+    },
+    "storesDiscovered": {
+      "@id": "otter:storesDiscovered",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "subTotal": {
+      "@id": "otter:subTotal",
+      "@type": "xsd:decimal"
+    },
+    "subType": {
+      "@id": "otter:subType",
+      "@type": "xsd:string"
+    },
+    "subtotal": {
+      "@id": "otter:subtotal",
+      "@type": "xsd:string"
+    },
+    "success": {
+      "@id": "otter:success",
+      "@type": "xsd:boolean"
+    },
+    "sugar": {
+      "@id": "otter:sugar",
+      "@type": "xsd:decimal"
+    },
+    "summary": {
+      "@id": "otter:summary",
+      "@type": "xsd:string"
+    },
+    "superRegion": {
+      "@id": "otter:superRegion",
+      "@type": "xsd:string"
+    },
+    "suspendedUntil": {
+      "@id": "otter:suspendedUntil",
+      "@type": "xsd:dateTime"
+    },
+    "tableIdentifier": {
+      "@id": "otter:tableIdentifier",
+      "@type": "xsd:string"
+    },
+    "tag": {
+      "@id": "otter:tag",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "otter:tags",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "tax": {
+      "@id": "otter:tax",
+      "@type": "xsd:string"
+    },
+    "taxIdentificationNumber": {
+      "@id": "otter:taxIdentificationNumber",
+      "@type": "xsd:string"
+    },
+    "templateName": {
+      "@id": "otter:templateName",
+      "@type": "xsd:string"
+    },
+    "timeRanges": {
+      "@id": "otter:timeRanges",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "timeZone": {
+      "@id": "otter:timeZone",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "otter:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "timezone": {
+      "@id": "otter:timezone",
+      "@type": "xsd:string"
+    },
+    "tip": {
+      "@id": "otter:tip",
+      "@type": "xsd:decimal"
+    },
+    "tipForRestaurant": {
+      "@id": "otter:tipForRestaurant",
+      "@type": "xsd:string"
+    },
+    "tipForServiceProviderCourier": {
+      "@id": "otter:tipForServiceProviderCourier",
+      "@type": "xsd:string"
+    },
+    "toHour": {
+      "@id": "otter:toHour",
+      "@type": "xsd:integer"
+    },
+    "toMinute": {
+      "@id": "otter:toMinute",
+      "@type": "xsd:integer"
+    },
+    "tokenType": {
+      "@id": "otter:token_type",
+      "@type": "xsd:string"
+    },
+    "total": {
+      "@id": "otter:total",
+      "@type": "xsd:decimal"
+    },
+    "totalFee": {
+      "@id": "otter:totalFee",
+      "@type": "xsd:double"
+    },
+    "totals": {
+      "@id": "otter:totals",
+      "@type": "xsd:string"
+    },
+    "transactionId": {
+      "@id": "otter:transactionId",
+      "@type": "xsd:string"
+    },
+    "transactionType": {
+      "@id": "otter:transactionType",
+      "@type": "xsd:string"
+    },
+    "transitNumber": {
+      "@id": "otter:transitNumber",
+      "@type": "xsd:string"
+    },
+    "trigger": {
+      "@id": "otter:trigger",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "otter:type",
+      "@type": "xsd:string"
+    },
+    "unassignItemsFromLocations": {
+      "@id": "otter:unassignItemsFromLocations",
+      "@type": "xsd:boolean"
+    },
+    "unit": {
+      "@id": "otter:unit",
+      "@type": "xsd:string"
+    },
+    "unitPrice": {
+      "@id": "otter:unitPrice",
+      "@type": "xsd:string"
+    },
+    "unitPriceAndCount": {
+      "@id": "otter:unitPriceAndCount",
+      "@type": "xsd:string"
+    },
+    "unsellableQuantity": {
+      "@id": "otter:unsellableQuantity",
+      "@type": "xsd:integer"
+    },
+    "updateDescriptions": {
+      "@id": "otter:updateDescriptions",
+      "@type": "xsd:boolean"
+    },
+    "updateHours": {
+      "@id": "otter:updateHours",
+      "@type": "xsd:boolean"
+    },
+    "updateItemArrangement": {
+      "@id": "otter:updateItemArrangement",
+      "@type": "xsd:boolean"
+    },
+    "updateItemSuspensionStatus": {
+      "@id": "otter:updateItemSuspensionStatus",
+      "@type": "xsd:boolean"
+    },
+    "updateMenuOrganization": {
+      "@id": "otter:updateMenuOrganization",
+      "@type": "xsd:boolean"
+    },
+    "updateModifierGroupRules": {
+      "@id": "otter:updateModifierGroupRules",
+      "@type": "xsd:boolean"
+    },
+    "updateNames": {
+      "@id": "otter:updateNames",
+      "@type": "xsd:boolean"
+    },
+    "updatePrices": {
+      "@id": "otter:updatePrices",
+      "@type": "xsd:boolean"
+    },
+    "updateTaxes": {
+      "@id": "otter:updateTaxes",
+      "@type": "xsd:boolean"
+    },
+    "updatedTime": {
+      "@id": "otter:updatedTime",
+      "@type": "xsd:dateTime"
+    },
+    "updates": {
+      "@id": "otter:updates",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "url": {
+      "@id": "schema:url"
+    },
+    "useCustomOptions": {
+      "@id": "otter:useCustomOptions",
+      "@type": "xsd:boolean"
+    },
+    "user": {
+      "@id": "otter:user",
+      "@type": "xsd:string"
+    },
+    "userAccount": {
+      "@id": "otter:userAccount",
+      "@type": "xsd:string"
+    },
+    "userFields": {
+      "@id": "otter:userFields",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "userId": {
+      "@id": "otter:userId",
+      "@type": "xsd:string"
+    },
+    "users": {
+      "@id": "otter:users",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "otter:value",
+      "@type": "xsd:decimal"
+    },
+    "vehicleInformation": {
+      "@id": "otter:vehicleInformation",
+      "@type": "xsd:string"
+    },
+    "vehicleType": {
+      "@id": "otter:vehicleType",
+      "@type": "xsd:string"
+    },
+    "verificationRequirements": {
+      "@id": "otter:verificationRequirements",
+      "@type": "xsd:string"
+    },
+    "vitaminC": {
+      "@id": "otter:vitaminC",
+      "@type": "xsd:decimal"
+    },
+    "voucherDiscount": {
+      "@id": "otter:voucherDiscount",
+      "@type": "xsd:string"
+    },
+    "walletLastFour": {
+      "@id": "otter:walletLastFour",
+      "@type": "xsd:string"
+    },
+    "walletType": {
+      "@id": "otter:walletType",
+      "@type": "xsd:string"
+    },
+    "year": {
+      "@id": "otter:year",
+      "@type": "xsd:integer"
+    }
+  }
+}

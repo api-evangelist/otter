@@ -1,0 +1,29 @@
+{
+  "regionId": "LATAM-N",
+  "provider": "ubereats-provider",
+  "id": 12345,
+  "storeUrl": 30,
+  "location": {},
+  "address": {},
+  "phoneNumbers": [
+    "613-123-4567"
+  ],
+  "storeName": "McDonald's",
+  "menu": {},
+  "storeHours": {},
+  "tags": [
+    "chinese"
+  ],
+  "storeBannerPhotoUrl": "https://www.ubereats.com/ca/store/mcdonalds-1000-rideau-street/1QY5X6QcQX2Q4Z3Z3QZQYQ.jpg",
+  "storeRating": {},
+  "coordinates": {},
+  "storeSales": {},
+  "avgBasketAmount": {},
+  "storePromotions": [
+    {}
+  ],
+  "storeChain": {},
+  "storeDeliveryInformation": {},
+  "logoPhotoUrl": "https://www.ubereats.com/ca/store/mcdonalds-1000-rideau-street/1QY5X6QcQX2Q4Z3Z3QZQYQ.jpg",
+  "priceLevel": {}
+}

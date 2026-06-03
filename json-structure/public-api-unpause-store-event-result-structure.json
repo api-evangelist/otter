@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-unpause-store-event-result-structure.json",
+  "name": "UnpauseStoreEventResult",
+  "description": "Result of an event that requested to unpause a store.",
+  "type": "object",
+  "properties": {
+    "eventResultMetadata": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-required-event-result-metadata-schema.json"
+    }
+  }
+}

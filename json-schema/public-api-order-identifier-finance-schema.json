@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderIdentifierFinance",
+  "description": "The external identifiers of the order.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-identifier-finance-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique ID for the order that was placed.",
+      "example": "69f60a06-c335-46d9-b5a1-97f1a211c514"
+    },
+    "source": {
+      "type": "string",
+      "nullable": true,
+      "description": "Describes the source of the order, typically from a food ordering marketplace.",
+      "example": "ubereats"
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

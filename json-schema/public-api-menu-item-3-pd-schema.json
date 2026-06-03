@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MenuItem_3PD",
+  "description": "Items are sold on the Menu. Modifiers to items are items themselves and their relationship is defined by ModifierGroup.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-menu-item-3-pd-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The identifier that exists in the third party system. During a menu publish event, uuidV4 ids will be generated for new entities that do not yet exist in the internal menu.",
+      "example": "da0e4e94-5670-4175-897a-3b7dde45bed5"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of this Item",
+      "example": "Bagel"
+    },
+    "photoIds": {
+      "type": "array",
+      "description": "A list of Photo references associated with the Item.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "price": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-money-schema.json"
+    },
+    "priceOverrides": {
+      "type": "array",
+      "description": "Specify price overrides.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-price-override-schema.json"
+      }
+    },
+    "status": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-status-schema.json"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of this Item",
+      "example": "Delicious bagel!"
+    },
+    "modifierGroupIds": {
+      "type": "array",
+      "default": [],
+      "description": "Identifiers of each ModifierGroup within this Item.",
+      "items": {
+        "type": "string",
+        "example": "7152ee6e-e941-45c1-9008-2e306b479114"
+      }
+    },
+    "skuDetails": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-sku-details-schema.json"
+    },
+    "additionalCharges": {
+      "type": "array",
+      "nullable": true,
+      "description": "Additional charges to apply for this item. Additional charges will be applied for every instance of this item within an order.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-additional-charge-schema.json"
+      }
+    },
+    "tax": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-tax-schema.json",
+      "description": "The tax configuration for the menu item."
+    },
+    "exposedThirdPartyInfos": {
+      "type": "array",
+      "default": [],
+      "description": "Additional information about the menu that should be exposed to third party",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-exposed-third-party-info-schema.json"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "photoIds",
+    "price",
+    "priceOverrides",
+    "status"
+  ]
+}

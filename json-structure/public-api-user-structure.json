@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-user-structure.json",
+  "name": "User",
+  "description": "User schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The user identifier.",
+      "example": "somestring"
+    },
+    "userFields": {
+      "type": "array",
+      "description": "The user info fields.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-user-field-schema.json"
+      }
+    }
+  }
+}

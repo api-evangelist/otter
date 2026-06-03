@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReviewReplyRequest",
+  "description": "The request to reply to a review.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-review-reply-request-schema.json",
+  "type": "object",
+  "properties": {
+    "reviewId": {
+      "type": "string",
+      "description": "The review ID.",
+      "example": "review-56e9-46be"
+    },
+    "externalStoreId": {
+      "type": "string",
+      "description": "External store ID of the review you are responding to. Fails the requests if invalid external store ID is passed.",
+      "example": "order-1fa4-479c"
+    },
+    "serviceSlug": {
+      "type": "string",
+      "description": "The slug of the service for the review.",
+      "example": "ubereats"
+    },
+    "replyText": {
+      "type": "string",
+      "description": "The reply text.",
+      "example": "Thank you very much."
+    },
+    "scheduledAt": {
+      "type": "number",
+      "description": "The scheduled timestamp (seconds) to reply to the review.",
+      "format": "double",
+      "example": 1697727006,
+      "nullable": true
+    }
+  }
+}

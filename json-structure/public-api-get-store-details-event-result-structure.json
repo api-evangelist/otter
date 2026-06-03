@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-get-store-details-event-result-structure.json",
+  "name": "GetStoreDetailsEventResult",
+  "description": "The result of an event that request to store details.",
+  "type": "object",
+  "properties": {
+    "superRegion": {
+      "type": "string",
+      "description": "Represents a super region geographical mapping.",
+      "example": "LATAM"
+    },
+    "storeDetails": {
+      "type": "array",
+      "minItems": 0,
+      "description": "Represents a list of stores",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-marketintel-store-details-schema.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderItemInformation",
+  "description": "OrderItemInformation schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-item-information-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Regular item identifier.",
+      "example": "store_123"
+    },
+    "name": {
+      "type": "string",
+      "nullable": true,
+      "description": "Item name",
+      "example": "Sample Name"
+    },
+    "issues": {
+      "type": "array",
+      "nullable": true,
+      "description": "Order issues that relate to this item.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-issue-schema.json"
+      }
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

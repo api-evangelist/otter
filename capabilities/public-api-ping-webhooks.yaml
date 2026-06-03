@@ -1,0 +1,83 @@
+binds:
+- keys:
+    OTTER_API_TOKEN: OTTER_API_TOKEN
+  namespace: env
+capability:
+  consumes:
+  - authentication:
+      token: '{{env.OTTER_API_TOKEN}}'
+      type: bearer
+    baseUri: https://{public-api-url}
+    description: Otter Public API — Ping Webhooks business capability. Self-contained,
+      no shared references.
+    namespace: public-api-ping-webhooks
+    resources:
+    - name: ping
+      operations:
+      - description: Ping Webhook
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: pingWebhook
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: ping
+    type: http
+  exposes:
+  - description: REST adapter for Otter Public API — Ping Webhooks. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    namespace: public-api-ping-webhooks-rest
+    port: 8080
+    resources:
+    - description: REST surface for Ping Webhook.
+      name: pingwebhook
+      operations:
+      - call: public-api-ping-webhooks.pingWebhook
+        description: Ping Webhook
+        method: POST
+        name: pingWebhook
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/ping
+    type: rest
+  - description: MCP adapter for Otter Public API — Ping Webhooks. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    namespace: public-api-ping-webhooks-mcp
+    port: 9090
+    tools:
+    - call: public-api-ping-webhooks.pingWebhook
+      description: Ping Webhook
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: ping-webhook
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    transport: http
+    type: mcp
+info:
+  created: '2026-06-03'
+  description: 'Ping Webhooks surface of the Otter Public API. 1 operations. Lead
+    operation: Ping Webhook. Self-contained Naftiko capability covering one Otter
+    business surface.'
+  label: Otter Public API — Ping Webhooks
+  modified: '2026-06-03'
+  tags:
+  - Otter
+  - Public API
+  - Ping
+naftiko: 1.0.0-alpha2

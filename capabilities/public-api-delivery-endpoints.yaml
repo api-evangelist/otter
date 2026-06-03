@@ -1,0 +1,295 @@
+binds:
+- keys:
+    OTTER_API_TOKEN: OTTER_API_TOKEN
+  namespace: env
+capability:
+  consumes:
+  - authentication:
+      token: '{{env.OTTER_API_TOKEN}}'
+      type: bearer
+    baseUri: https://{public-api-url}
+    description: Otter Public API — Delivery Endpoints business capability. Self-contained,
+      no shared references.
+    namespace: public-api-delivery-endpoints
+    resources:
+    - name: v1-delivery-deliveryreferenceid-status
+      operations:
+      - description: Update Delivery Status
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: PUT
+        name: updateDeliveryStatus
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/delivery/{deliveryReferenceId}/status
+    - name: v1-delivery-deliveryreferenceid-quotes
+      operations:
+      - description: Notify the Result of a Request Delivery Quote Event
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: requestDeliveryQuoteCallback
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/delivery/{deliveryReferenceId}/quotes
+    - name: v1-delivery-deliveryreferenceid-accept
+      operations:
+      - description: Notify the Result of an Accept Delivery Event
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: acceptDeliveryCallback
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/delivery/{deliveryReferenceId}/accept
+    - name: v1-delivery-deliveryreferenceid-cancel
+      operations:
+      - description: Notify the Result of a Cancel Delivery Event
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: cancelDeliveryCallback
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/delivery/{deliveryReferenceId}/cancel
+    - name: v1-delivery-callback-error
+      operations:
+      - description: Publish Delivery Callback Error
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: deliveryCallbackError
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/delivery/callback/error
+    - name: v1-delivery-deliveryreferenceid-update
+      operations:
+      - description: Notify the Result of an Update Delivery Request Event
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: updateDeliveryRequestCallback
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/delivery/{deliveryReferenceId}/update
+    type: http
+  exposes:
+  - description: REST adapter for Otter Public API — Delivery Endpoints. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    namespace: public-api-delivery-endpoints-rest
+    port: 8080
+    resources:
+    - description: REST surface for Update Delivery Status.
+      name: updatedeliverystatus
+      operations:
+      - call: public-api-delivery-endpoints.updateDeliveryStatus
+        description: Update Delivery Status
+        method: PUT
+        name: updateDeliveryStatus
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/delivery/{deliveryReferenceId}/status
+    - description: REST surface for Notify the Result of a Request Delivery Quote
+        Event.
+      name: requestdeliveryquotecallback
+      operations:
+      - call: public-api-delivery-endpoints.requestDeliveryQuoteCallback
+        description: Notify the Result of a Request Delivery Quote Event
+        method: POST
+        name: requestDeliveryQuoteCallback
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/delivery/{deliveryReferenceId}/quotes
+    - description: REST surface for Notify the Result of an Accept Delivery Event.
+      name: acceptdeliverycallback
+      operations:
+      - call: public-api-delivery-endpoints.acceptDeliveryCallback
+        description: Notify the Result of an Accept Delivery Event
+        method: POST
+        name: acceptDeliveryCallback
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/delivery/{deliveryReferenceId}/accept
+    - description: REST surface for Notify the Result of a Cancel Delivery Event.
+      name: canceldeliverycallback
+      operations:
+      - call: public-api-delivery-endpoints.cancelDeliveryCallback
+        description: Notify the Result of a Cancel Delivery Event
+        method: POST
+        name: cancelDeliveryCallback
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/delivery/{deliveryReferenceId}/cancel
+    - description: REST surface for Publish Delivery Callback Error.
+      name: deliverycallbackerror
+      operations:
+      - call: public-api-delivery-endpoints.deliveryCallbackError
+        description: Publish Delivery Callback Error
+        method: POST
+        name: deliveryCallbackError
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/delivery/callback/error
+    - description: REST surface for Notify the Result of an Update Delivery Request
+        Event.
+      name: updatedeliveryrequestcallback
+      operations:
+      - call: public-api-delivery-endpoints.updateDeliveryRequestCallback
+        description: Notify the Result of an Update Delivery Request Event
+        method: POST
+        name: updateDeliveryRequestCallback
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/delivery/{deliveryReferenceId}/update
+    type: rest
+  - description: MCP adapter for Otter Public API — Delivery Endpoints. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    namespace: public-api-delivery-endpoints-mcp
+    port: 9090
+    tools:
+    - call: public-api-delivery-endpoints.updateDeliveryStatus
+      description: Update Delivery Status
+      hints:
+        destructive: false
+        idempotent: true
+        readOnly: false
+      name: update-delivery-status
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-delivery-endpoints.requestDeliveryQuoteCallback
+      description: Notify the Result of a Request Delivery Quote Event
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: notify-request-delivery-quote
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-delivery-endpoints.acceptDeliveryCallback
+      description: Notify the Result of an Accept Delivery Event
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: notify-accept-delivery
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-delivery-endpoints.cancelDeliveryCallback
+      description: Notify the Result of a Cancel Delivery Event
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: notify-cancel-delivery
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-delivery-endpoints.deliveryCallbackError
+      description: Publish Delivery Callback Error
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: publish-delivery-callback-error
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    - call: public-api-delivery-endpoints.updateDeliveryRequestCallback
+      description: Notify the Result of an Update Delivery Request Event
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: false
+      name: notify-update-delivery-request
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    transport: http
+    type: mcp
+info:
+  created: '2026-06-03'
+  description: 'Delivery Endpoints surface of the Otter Public API. 6 operations.
+    Lead operation: Update Delivery Status. Self-contained Naftiko capability covering
+    one Otter business surface.'
+  label: Otter Public API — Delivery Endpoints
+  modified: '2026-06-03'
+  tags:
+  - Otter
+  - Public API
+  - Delivery
+naftiko: 1.0.0-alpha2

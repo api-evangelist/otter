@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-order-customer-payment-update-request-structure.json",
+  "name": "OrderCustomerPaymentUpdateRequest",
+  "description": "The request to update customer payment for an order.",
+  "type": "object",
+  "properties": {
+    "currencyCode": {
+      "maxLength": 3,
+      "minLength": 3,
+      "type": "string",
+      "description": "The 3-letter currency code (ISO 4217) to use for all monetary values in this order.",
+      "example": "EUR"
+    },
+    "customerPayment": {
+      "type": "array",
+      "description": "The requested customer payment to transition the order to.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-customer-payment-schema.json"
+      }
+    },
+    "orderTotal": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-total-schema.json"
+    },
+    "orderTotalsV2": {
+      "nullable": true,
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-order-total-v2-schema.json"
+    }
+  },
+  "required": [
+    "currencyCode",
+    "customerPayment"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StoreHoursConfigurationEventResult",
+  "description": "The current store hours configuration.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-hours-configuration-event-result-schema.json",
+  "type": "object",
+  "properties": {
+    "storeHoursConfiguration": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-store-hours-configuration-schema.json"
+    },
+    "statusChangedAt": {
+      "type": "string",
+      "description": "The time when the store hours configuration changed.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "eventResultMetadata": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-event-result-metadata-schema.json"
+    }
+  }
+}

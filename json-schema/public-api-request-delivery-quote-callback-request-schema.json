@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RequestDeliveryQuoteCallbackRequest",
+  "description": "Delivery quote information.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-request-delivery-quote-callback-request-schema.json",
+  "type": "object",
+  "properties": {
+    "minPickupDuration": {
+      "type": "integer",
+      "minimum": 0,
+      "format": "int32",
+      "description": "Minimum time required for courier to arrive at pickup location in minutes It is an estimation.",
+      "example": 5
+    },
+    "maxPickupDuration": {
+      "type": "integer",
+      "nullable": true,
+      "description": "Maximum time that the courier's arrival at pick up location can be delayed. If not provided, it will default to 60 minutes or minPickUpDuration, whichever is greater. This value is an estimation and expressed in minutes.",
+      "format": "int32",
+      "example": 10
+    },
+    "deliveryDistance": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-distance-schema.json"
+    },
+    "currencyCode": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 3,
+      "description": "The 3-letter currency code (ISO 4217) to use for all monetary values.",
+      "example": "EUR"
+    },
+    "cost": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-delivery-cost-schema.json"
+    },
+    "provider": {
+      "type": "string",
+      "nullable": true,
+      "description": "Delivery Service Provider Slug.",
+      "example": "doordash"
+    },
+    "fulfillmentPath": {
+      "type": "array",
+      "nullable": true,
+      "description": "List of entities involved in the fulfillment processing path.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-fulfillment-path-entity-schema.json"
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "The time that the quote was created.",
+      "format": "date-time",
+      "example": "2007-12-03T10:15:30+01:00"
+    },
+    "accountBalance": {
+      "type": "number",
+      "nullable": true,
+      "description": "The remaining account balance of the requester for the delivery provider.",
+      "example": 1068.32
+    }
+  }
+}

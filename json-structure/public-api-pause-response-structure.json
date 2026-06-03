@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-pause-response-structure.json",
+  "name": "PauseResponse",
+  "description": "Pause response details",
+  "type": "object",
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "description": "The requestId of the pause request.",
+      "example": "store_123"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReviewReplyResponse",
+  "description": "The response to reply to a review.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-review-reply-response-schema.json",
+  "type": "object",
+  "properties": {
+    "replyId": {
+      "type": "string",
+      "description": "The reply ID. Returned if no scheduled timestamp was provided.",
+      "example": "reply-f34f-4d35",
+      "nullable": true
+    }
+  }
+}

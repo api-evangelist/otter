@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-unsuspend-items-request-structure.json",
+  "name": "UnsuspendItemsRequest",
+  "description": "UnsuspendItemsRequest schema from Public API (Otter Public API).",
+  "type": "object",
+  "properties": {
+    "entityIds": {
+      "type": "array",
+      "description": "Entity IDs to unsuspend. These should be the IDs as you represent them in your system.",
+      "example": [
+        "9cc4bb5e-bc97-40d9-af28-c02ef1483610"
+      ],
+      "items": {
+        "type": "string",
+        "description": "Entity IDs to unsuspend.",
+        "example": "[\"9cc4bb5e-bc97-40d9-af28-c02ef1483610\",\"9929290d-31eb-425d-8732-17c4074ac75e\"]"
+      }
+    },
+    "note": {
+      "type": "string",
+      "description": "The reason you are unsuspending the items.",
+      "example": "Item back in stock"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-update-item-status-entry-structure.json",
+  "name": "UpdateItemStatusEntry",
+  "description": "Update the status of an Item to the provided value.",
+  "type": "object",
+  "properties": {
+    "selector": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-selector-schema.json"
+    },
+    "status": {
+      "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-item-status-schema.json"
+    }
+  },
+  "required": [
+    "selector",
+    "status"
+  ]
+}

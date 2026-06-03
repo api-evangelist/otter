@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ManagerOrderIssues",
+  "description": "Manager order issues",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-manager-order-issues-schema.json",
+  "type": "object",
+  "properties": {
+    "orderIssues": {
+      "type": "array",
+      "description": "The specific issues with this order",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-manager-order-issue-schema.json"
+      }
+    },
+    "itemIssues": {
+      "type": "array",
+      "description": "The specific issues with individual items or modifiers on this order",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-manager-item-issues-schema.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "deliveryReferenceId": "d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda",
+  "provider": "doordash",
+  "preferredPickupDuration": 0,
+  "pickupAddress": {},
+  "dropoffAddress": {},
+  "destinationAddress": {},
+  "pickUpLocationId": "d197bd64-a037-4b6e-aad7-06918e7e2d75",
+  "orderSubTotal": 15,
+  "currencyCode": "KRW",
+  "containsAlcoholicItem": true,
+  "customerPayments": [
+    {}
+  ],
+  "orderExternalIdentifiers": {}
+}

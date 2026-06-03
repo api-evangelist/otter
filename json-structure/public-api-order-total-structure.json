@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-order-total-structure.json",
+  "name": "OrderTotal",
+  "description": "Details about values of the order.",
+  "type": "object",
+  "properties": {
+    "subtotal": {
+      "type": "double",
+      "description": "The order's subtotal, as the sum of all item and modifier prices.",
+      "example": 11.97
+    },
+    "claimedSubtotal": {
+      "type": "double",
+      "nullable": true,
+      "description": "The order's claimed subtotal, without guaranteeing this will match calculated subtotal.",
+      "example": 1.0
+    },
+    "discount": {
+      "type": "double",
+      "nullable": true,
+      "description": "Any discount amount for the order.",
+      "example": 1
+    },
+    "tax": {
+      "type": "double",
+      "nullable": true,
+      "description": "Tax paid by the customer.",
+      "example": 1.1
+    },
+    "tip": {
+      "type": "double",
+      "nullable": true,
+      "description": "Tip paid by the customer.",
+      "example": 2
+    },
+    "deliveryFee": {
+      "type": "double",
+      "nullable": true,
+      "description": "Delivery fee.",
+      "example": 5
+    },
+    "total": {
+      "type": "double",
+      "nullable": true,
+      "description": "Order total including everything paid by the customer.",
+      "example": 19.07
+    },
+    "couponCode": {
+      "type": "string",
+      "nullable": true,
+      "description": "Coupon code applied to the order.",
+      "example": "VWXYZ98765"
+    }
+  },
+  "required": [
+    "subtotal"
+  ]
+}

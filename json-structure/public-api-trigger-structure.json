@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-structure/public-api-trigger-structure.json",
+  "name": "Trigger",
+  "description": "The preconditions to redeem this reward, for example, buy Fries to get a free Burger. Nullable, if null, this reward can be unconditionally redeemed.",
+  "type": "object",
+  "properties": {
+    "menus": {
+      "type": "array",
+      "description": "The item/category preconditions to redeem this reward, for example, buy any drinks to get a free Burger.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-trigger-menu-schema.json"
+      }
+    }
+  }
+}

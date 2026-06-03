@@ -1,0 +1,84 @@
+binds:
+- keys:
+    OTTER_API_TOKEN: OTTER_API_TOKEN
+  namespace: env
+capability:
+  consumes:
+  - authentication:
+      token: '{{env.OTTER_API_TOKEN}}'
+      type: bearer
+    baseUri: https://{public-api-url}
+    description: Otter Public API — Direct Orders Endpoints business capability. Self-contained,
+      no shared references.
+    namespace: public-api-direct-orders-endpoints
+    resources:
+    - name: v1-eater-order-history
+      operations:
+      - description: Query Eater's Related History Orders
+        inputParameters:
+        - description: Request body payload.
+          in: body
+          name: body
+          required: true
+          type: object
+        method: POST
+        name: eaterOrderHistory
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        outputRawFormat: json
+      path: /v1/eater/order-history
+    type: http
+  exposes:
+  - description: REST adapter for Otter Public API — Direct Orders Endpoints. One
+      Spectral-compliant resource per consumed operation, prefixed with /v1.
+    namespace: public-api-direct-orders-endpoints-rest
+    port: 8080
+    resources:
+    - description: REST surface for Query Eater's Related History Orders.
+      name: eaterorderhistory
+      operations:
+      - call: public-api-direct-orders-endpoints.eaterOrderHistory
+        description: Query Eater's Related History Orders
+        method: POST
+        name: eaterOrderHistory
+        outputParameters:
+        - mapping: $.
+          type: object
+        with:
+          body: rest.body
+      path: /v1/eater/order-history
+    type: rest
+  - description: MCP adapter for Otter Public API — Direct Orders Endpoints. One tool
+      per consumed operation, routed inline through this capability's consumes block.
+    namespace: public-api-direct-orders-endpoints-mcp
+    port: 9090
+    tools:
+    - call: public-api-direct-orders-endpoints.eaterOrderHistory
+      description: Query Eater's Related History Orders
+      hints:
+        destructive: false
+        idempotent: false
+        readOnly: true
+      name: query-eater-s-related-history
+      outputParameters:
+      - mapping: $.
+        type: object
+      with:
+        body: tools.body
+    transport: http
+    type: mcp
+info:
+  created: '2026-06-03'
+  description: 'Direct Orders Endpoints surface of the Otter Public API. 1 operations.
+    Lead operation: Query Eater''s Related History Orders. Self-contained Naftiko
+    capability covering one Otter business surface.'
+  label: Otter Public API — Direct Orders Endpoints
+  modified: '2026-06-03'
+  tags:
+  - Otter
+  - Public API
+  - Direct
+  - Orders
+naftiko: 1.0.0-alpha2

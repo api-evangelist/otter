@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ModifierItem",
+  "description": "ModifierItem schema from Public API (Otter Public API).",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-modifier-item-schema.json",
+  "type": "object",
+  "properties": {
+    "modifierId": {
+      "type": "string",
+      "nullable": true,
+      "description": "ID for this modifier.",
+      "example": "store_123"
+    },
+    "name": {
+      "type": "string",
+      "nullable": true,
+      "description": "Human-readable name for this modifier.",
+      "example": "Sample Name"
+    },
+    "price": {
+      "type": "number",
+      "nullable": true,
+      "description": "Per-unit price of this modifier.",
+      "example": 1.0
+    },
+    "quantity": {
+      "type": "number",
+      "nullable": true,
+      "description": "Number of units of this modifier being added to the item.",
+      "example": 1.0
+    },
+    "modifiers": {
+      "type": "array",
+      "nullable": true,
+      "description": "Nested modifier items.",
+      "items": {
+        "$ref": "https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/json-schema/public-api-modifier-item-schema.json"
+      }
+    }
+  }
+}
