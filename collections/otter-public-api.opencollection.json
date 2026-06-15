@@ -1,0 +1,2867 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Create Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/orders",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Update Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{public-api-url}/v1/orders/:orderId",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Update Order Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/orders/:orderId/status",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Update Order Customer Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{public-api-url}/v1/orders/:orderId/payments",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n\nNotice that this operation do not completely replace the existent customer payment, instead, it overwrites the field if the latest update is a non-null value. If the update value is null, the existent value will continue to be used.\n"
+        },
+        {
+          "info": {
+            "name": "Otter Update Order Delivery Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{public-api-url}/v1/orders/:orderId/delivery",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Upload Past Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/orders/past-orders",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`; orders must have a status of FULFILLED, REJECTED, or CANCELED\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Manager Order Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Notify the Result of a Create Order Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/order/v1/orders/order-created",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Fetch Order Feed for a Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/manager/order/v1/orders",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "minDateTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "maxDateTime",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Fetch Order Feed for a Store"
+        },
+        {
+          "info": {
+            "name": "Otter Fetch Order with Manager Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/manager/order/v1/sources/:source/orders/:orderId",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Fetch Order with Manager Info"
+        },
+        {
+          "info": {
+            "name": "Otter Request Order Confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/order/v1/sources/:source/orders/:orderId/confirm",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Request Order Cancelation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/order/v1/sources/:source/orders/:orderId/cancel",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Mark an Order as Ready to Pickup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/order/v1/sources/:source/orders/:orderId/ready-to-pickup",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Create a Packaging Component",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/order/v1/sources/:source/orders/:orderId/create-packaging-component",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Mark an Order as Fulfilled",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/order/v1/sources/:source/orders/:orderId/fulfill",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Mark a Dine-in (open-tab) Order as Closed",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/order/v1/sources/:source/orders/:orderId/close",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Marks an open-tab dine-in order as closed. The closing party is always the merchant/POS (system). `RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Update Order Customer Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{public-api-url}/manager/order/v1/sources/:source/orders/:orderId/items",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates customer items for a dine-in order (quantity change, price adjustment, or add item). Only supported when integration slug is d2c-eater-website, order fulfillment type is dine-in, and the order tab is open (order is modifiable). Modifying party and modification request ID are set by the endpoint. `RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Update Order Prep Time",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/order/v1/sources/:source/orders/:orderId/prep-time",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Manager Storefront Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Request Pausing Storefronts of a Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/storefront/v1/storefront/pause",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Request Unpausing Storefronts of a Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/storefront/v1/storefront/unpause",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Get the Process Status Details of a Pause Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/manager/storefront/v1/storefront/pause/request/:requestId/status",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Get the Process Status Details of an Unpause Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/manager/storefront/v1/storefront/unpause/request/:requestId/status",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Manager Menu Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Get the Menus for a Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/v1/menus",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Get the Async Menu Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/v1/menus/jobs/:jobId",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Get the Publish-targets for a Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/manager/menu/v1/menus/publish-targets",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 2 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Publish Menus to Targets for a Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/menu/v1/menus/publish",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 2 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Synchronize Store Menu with POS Menu",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/menu/v1/menus/menu-sync",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 2 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Suspend Menu Entities Targets for a Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/menu/v1/menus/entities/availability/suspend",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Unsuspend Menu Entities Targets for a Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/menu/v1/menus/entities/availability/unsuspend",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Bootstrap Menus for a Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/menu/v1/bootstrap",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 2 per minute`\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Menus Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Upsert Menus for a Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/menus",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 2 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of a Publish Menu Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/menus/publish",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n\nSuccessful callback response for the [**publish menu**](/api-reference/#operation/menuPublishWebhook) webhook. If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead. See [**failed event flow**](/docs/menus-integrations-failed-event-flow/) for details.\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of a Send Menu Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/menus/current",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 4 per minute`\n\nSuccessful callback response for the [**send menu**](/api-reference/#operation/menuSendCallback) webhook. If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead. See [**failed event flow**](/docs/menus-integrations-failed-event-flow/) for details.\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Receival of a Upsert Hours Menu Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/menus/hours",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n\nSuccessful callback response for the [**upsert hours**](/api-reference/#operation/upsertMenuHoursWebhook) webhook. If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead. See [**failed event flow**](/docs/menus-integrations-failed-event-flow/) for details.\n"
+        },
+        {
+          "info": {
+            "name": "Otter Synchronize Store Menu with POS Menu",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/menus/menu-sync",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "This endpoint is used to synchronize the store menu with the connected POS."
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of an Update Menu Entities Availabilities Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/menus/entity/availability/bulk",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n\nSuccessful callback response for the [**update menu entities availabilities**](/api-reference/#operation/updateMenuEntitiesAvailabilitiesWebhook) webhook. If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead. See [**failed event flow**](/docs/menus-integrations-failed-event-flow/) for details.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Storefront Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Notify About Store Availability Change",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/storefront/availability",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify About Store Hours Configuration Change",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/storefront/hours",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of a Pause Request Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/storefront/pause",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of an Unpause Request Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/storefront/unpause",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify About Store Availability Change from the Eater Side",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/storefront/eater-side/status",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify About Store Hours Configuration Change on Eater Side",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/storefront/eater-side/hours",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify About Store Details Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/market-intel/store-details",
+            "headers": [
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Notify About Store Details Update"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Delivery Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Update Delivery Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{public-api-url}/v1/delivery/:deliveryReferenceId/status",
+            "params": [
+              {
+                "name": "deliveryReferenceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of a Request Delivery Quote Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/delivery/:deliveryReferenceId/quotes",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deliveryReferenceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of an Accept Delivery Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/delivery/:deliveryReferenceId/accept",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deliveryReferenceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of a Cancel Delivery Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/delivery/:deliveryReferenceId/cancel",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deliveryReferenceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Publish Delivery Callback Error",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/delivery/callback/error",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of an Update Delivery Request Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/delivery/:deliveryReferenceId/update",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deliveryReferenceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Callback Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Publish Callback Error",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/callback/error",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute` \n\nThis is the generalized callback error that should be used to return failures for all webhooks, unless otherwise specified. See [**failed event flow**](/docs/menus-integrations-failed-event-flow/) for details.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ping Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Ping the System",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/v1/ping",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Echo-Error",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reports Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Request Status of the Report Using JobId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/v1/reports/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 2 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Request a Business Report for Multiple Stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/reports/generate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Request a Business Report for Multiple Stores"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reviews Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Reply or Schedule a Reply to a Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/reviews/reply",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Reply or Schedule a Reply to a Review"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Auth Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Generate Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/auth/token",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Client credentials in the request-body and HTTP Basic Auth are supported."
+        },
+        {
+          "info": {
+            "name": "Otter OAuth 2.0 Authorize Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/v1/auth/oauth2/authorize",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "store_123",
+                "type": "query",
+                "description": "The ID of the client (also known as the Application ID)."
+              },
+              {
+                "name": "redirect_uri",
+                "value": "https://example.com/resource",
+                "type": "query",
+                "description": "The URI to where the user should be redirected when the flow is successfully completed. It must be previously registered at Developer Portal in the application settings."
+              },
+              {
+                "name": "response_type",
+                "value": "string",
+                "type": "query",
+                "description": "Specifies the expected response type. Only \"code\" is accepted."
+              },
+              {
+                "name": "scope",
+                "value": "string",
+                "type": "query",
+                "description": "The scope to request, multiple scopes are passed delimited by a space character."
+              },
+              {
+                "name": "state",
+                "value": "string",
+                "type": "query",
+                "description": "Can be used to store request-specific data. The server will return the unmodified state value back to the application."
+              },
+              {
+                "name": "code_challenge",
+                "value": "string",
+                "type": "query",
+                "description": "A code verifier generated by the client application transformed by applying a cryptographic hash function, such as SHA-256, and encoding the result using URL-safe Base64 encoding."
+              },
+              {
+                "name": "code_challenge_method",
+                "value": "string",
+                "type": "query",
+                "description": "Method used to transform the code verifier. The most common method is \"S256\", which stands for SHA-256."
+              }
+            ]
+          },
+          "docs": "Request a user's authorization to perform action on their behalf"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account Pairing Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Complete Store Onboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/stores",
+            "headers": [
+              {
+                "name": "X-Application-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 2 per minute`\n\nThe asynchronous callback of the Upsert Store Webhook. The partner application will use this endpoint  to inform if the store data and credentials provided through the `Upsert Store Webhook` were enough to  create/update and validate the store. If informing success, the `Store ID` must be provided to  complete the store onboarding process. If informing failure, use the `Error Message` field to provide  details about the problem.\n"
+        },
+        {
+          "info": {
+            "name": "Otter Update Store Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{public-api-url}/v1/stores/status",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 2 per minute`\n\nThe partner application should call this endpoint when needing to change the status of a store that already completed the onboarding process.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Finance Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Post Financial Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/finance/v1/financial-transactions",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Post financial data related to a given order."
+        },
+        {
+          "info": {
+            "name": "Otter Post a Financial Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/finance/v1/financial-invoices",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Post a financial invoice containing payout and financial data for orders in a given period of time."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Inventory Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter List Inventory Summaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/inventories/v1/summaries",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n\nList inventory summaries by the requested parameters.\n"
+        },
+        {
+          "info": {
+            "name": "Otter List Shipments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/inventories/v1/shipments",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n\nList shipments by the requested parameters.\n"
+        },
+        {
+          "info": {
+            "name": "Otter Create Shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/inventories/v1/shipments",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n\nCreate a new shipment.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Organization Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Get the Organization Managed by the User.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/organization/v1/organization",
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Get the Organization Managed by the User."
+        },
+        {
+          "info": {
+            "name": "Otter Get a Brand of the Organization Managed by the User.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/organization/v1/organization/brands/:brandId",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Get a Brand of the Organization Managed by the User."
+        },
+        {
+          "info": {
+            "name": "Otter Get the List of Brands of the Organization Managed by the User.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/organization/v1/organization/brands",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Get the List of Brands of the Organization Managed by the User."
+        },
+        {
+          "info": {
+            "name": "Otter Get a Store of the Organization Managed by the User.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/organization/v1/organization/brands/:brandId/stores/:storeId",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Get a Store of the Organization Managed by the User."
+        },
+        {
+          "info": {
+            "name": "Otter Get the List of Stores of a Given Brand.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/organization/v1/organization/brands/:brandId/stores",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Get the List of Stores of a Given Brand."
+        },
+        {
+          "info": {
+            "name": "Otter Get the Partner Application Connection with the Selected Store.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/organization/v1/organization/brands/:brandId/stores/:storeId/connection",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Get the Partner Application Connection with the Selected Store."
+        },
+        {
+          "info": {
+            "name": "Otter Create a Connection for the Partner Application with the Selected Store.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/organization/v1/organization/brands/:brandId/stores/:storeId/connection",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Create a Connection for the Partner Application with the Selected Store."
+        },
+        {
+          "info": {
+            "name": "Otter Delete the Connection Between the Partner Application and the Selected Store.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{public-api-url}/organization/v1/organization/brands/:brandId/stores/:storeId/connection",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Delete the Connection Between the Partner Application and the Selected Store."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Market Intel Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Notify Stores Discovered at the Geolocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/market-intel/discovered-stores",
+            "headers": [
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Notify Stores Discovered at the Geolocations"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Manager Loyalty Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Get Enrollment Config for a Loyalty Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/manager/loyalty/v1/:source/user/enrollment-config",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Get User by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/manager/loyalty/v1/:source/user",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Create a Loyalty User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/loyalty/v1/:source/user",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Search Loyalty Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/manager/loyalty/v1/:source/user/search",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "term",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Compute Applicable Rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/loyalty/v1/:source/rewards/evaluate",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`Supply both userId and order to get a list of applicable rewards for an order. Supply only userId to get a list of rewards the user can redeem` `RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Simulate Rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/loyalty/v1/:source/rewards/simulate",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`Show what the effects will be after applying the selected rewards, and start the rewards transaction, only call this when user selected some reward, otherwise skip this call and use redeemAndAccumulateRewards API call.` `RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Redeem and Accumulate Rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/loyalty/v1/:source/rewards/redeem-and-accumulate",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`Redeem existing rewards and accumulate new rewards` `RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Refund Rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/manager/loyalty/v1/:source/rewards/refund",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Direct Orders Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Query Eater's Related History Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/eater/order-history",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`Provide an external eater ID to get a list of order related to that eater.`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

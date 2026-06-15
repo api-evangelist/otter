@@ -1,0 +1,18 @@
+{
+  "repo": "otter",
+  "feeds": [
+    {
+      "source": "https://www.tryotter.com/blog",
+      "feed_url": "https://www.tryotter.com/blog",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://helpdesk.tryotter.com/hc/en-us/articles/22694653065107-API-Documentation",
+      "error": "HTTPError"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-14T20:42:17Z"
+}
