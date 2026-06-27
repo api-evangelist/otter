@@ -56,7 +56,7 @@ apis:
         url: json-schema/
       - type: JSONStructure
         url: json-structure/
-      - type: Example
+      - type: Examples
         url: examples/
     baseURL: https://{public-api-url}
 common:
