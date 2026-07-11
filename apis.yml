@@ -60,6 +60,10 @@ apis:
         url: examples/
     baseURL: https://{public-api-url}
 common:
+  - type: DomainSecurity
+    url: security/otter-domain-security.yml
+  - type: Authentication
+    url: authentication/otter-authentication.yml
   - type: OAuthScopes
     url: scopes/otter-scopes.yml
   - type: Website

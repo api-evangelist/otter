@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/otter-public-api-openapi.yml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+schemes:
+- name: OAuth2.0
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /v1/auth/token
+    scopes: 27
+  - flow: authorizationCode
+    authorizationUrl: /v1/auth/oauth2/authorize
+    tokenUrl: /v1/auth/token
+    scopes: 2
+  description: "The **Authorization API** is based on the [OAuth2.0 protocol](https://tools.ietf.org/html/rfc6749),\
+    \ supporting the (Client Credentials)[https://datatracker.ietf.org/doc/html/rfc6749#section-4.4]\
+    \ and the (Authorization Code)[https://datatracker.ietf.org/doc/html/rfc6749#section-4.1]\
+    \ flows. Resources expect a valid token sent as a `Bearer` token in the HTTP `Authorization`\
+    \ header.\n### Scopes\nScopes "
+  sources:
+  - openapi/otter-public-api-openapi.yml
