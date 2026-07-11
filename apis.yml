@@ -60,6 +60,8 @@ apis:
         url: examples/
     baseURL: https://{public-api-url}
 common:
+  - type: OAuthScopes
+    url: scopes/otter-scopes.yml
   - type: Website
     url: https://www.tryotter.com
   - type: Documentation
