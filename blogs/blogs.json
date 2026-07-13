@@ -2,13 +2,14 @@
   "repo": "otter",
   "feeds": [
     {
-      "source": "https://www.tryotter.com/blog",
-      "feed_url": "",
+      "source": "https://helpdesk.tryotter.com/hc/en-us/articles/22694653065107-API-Documentation",
+      "feed_url": "https://helpdesk.tryotter.com/hc/en-us/articles/22694653065107-API-Documentation",
+      "title": "",
       "saved": 0,
-      "method": "agent-scrape"
+      "method": "none"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-27T12:59:22Z",
-  "agent_pulled": "2026-06-27"
+  "fetched": "2026-07-11T11:50:51Z",
+  "agent_pulled": "2026-07-04"
 }
