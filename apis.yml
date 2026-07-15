@@ -60,6 +60,8 @@ apis:
         url: examples/
     baseURL: https://{public-api-url}
 common:
+  - type: AgenticAccess
+    url: agentic-access/otter-agentic-access.yml
   - type: DomainSecurity
     url: security/otter-domain-security.yml
   - type: Authentication
