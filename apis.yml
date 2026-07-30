@@ -9,7 +9,20 @@ description: >-
   an application, configuring webhooks, and onboarding stores; authentication and the account-specific base URL are
   provisioned through an Otter account representative.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/otter.png
 tags:
   - Restaurant
   - Order Management
@@ -22,43 +35,539 @@ created: '2026-06-02'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: otter:public-api
-    name: Otter Public API
-    description: >-
-      The Otter Public API enables integrations across the digital food ecosystem, covering account pairing, orders,
-      menus, delivery, finance, reports, reviews, storefront, loyalty, and store management. Integrations combine API
-      endpoints with webhooks and configuration; onboarding starts by registering an application, configuring webhooks,
-      and onboarding stores. Auth and base URL details are provided via an account representative and the OpenAPI
-      reference.
-    humanURL: https://developer-guides.tryotter.com/docs/
-    tags:
-      - Orders
-      - Menu
-      - Delivery
-      - Webhooks
-      - Reports
-    properties:
-      - type: Documentation
-        url: https://developer-guides.tryotter.com/docs/
-      - type: GettingStarted
-        url: https://developer-guides.tryotter.com/docs/
-      - type: OpenAPI
-        url: openapi/otter-public-api-openapi.yml
-      - type: APIReference
-        url: https://developer-guides.tryotter.com/api-reference/
-      - type: Authentication
-        url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
-      - type: Webhooks
-        url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
-      - type: RateLimits
-        url: rate-limits/otter-rate-limits.yml
-      - type: JSONSchema
-        url: json-schema/
-      - type: JSONStructure
-        url: json-structure/
-      - type: Examples
-        url: examples/
-    baseURL: https://{public-api-url}
+- aid: otter:otter-account-pairing-endpoints-api
+  name: Otter Account Pairing Endpoints API
+  description: Endpoints to manage store onboarding and status
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Account Pairing Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-account-pairing-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-auth-endpoints-api
+  name: Otter Auth Endpoints API
+  description: Endpoints to handle token management.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Auth Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-auth-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-callback-endpoints-api
+  name: Otter Callback Endpoints API
+  description: Endpoints for callback management.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Callback Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-callback-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-delivery-endpoints-api
+  name: Otter Delivery Endpoints API
+  description: Endpoints to manage delivery.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Delivery Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-delivery-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-direct-orders-endpoints-api
+  name: Otter Direct Orders Endpoints API
+  description: Endpoints to get orders directly.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Direct Orders Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-direct-orders-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-finance-endpoints-api
+  name: Otter Finance Endpoints API
+  description: Endpoints to handle financial data.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Finance Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-finance-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-inventory-endpoints-api
+  name: Otter Inventory Endpoints API
+  description: Endpoints to interact with product inventory.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Inventory Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-inventory-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-manager-loyalty-endpoints-api
+  name: Otter Manager Loyalty Endpoints API
+  description: Endpoints to manage loyalty.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Manager Loyalty Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-manager-loyalty-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-manager-menu-endpoints-api
+  name: Otter Manager Menu Endpoints API
+  description: Endpoints for applications managing menus related data and operations.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Manager Menu Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-manager-menu-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-manager-order-endpoints-api
+  name: Otter Manager Order Endpoints API
+  description: Endpoints for applications managing order related data and operations.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Manager Order Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-manager-order-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-manager-storefront-endpoints-api
+  name: Otter Manager Storefront Endpoints API
+  description: Endpoints for applications managing storefront related data and operations.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Manager Storefront Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-manager-storefront-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-market-intel-endpoints-api
+  name: Otter Market Intel Endpoints API
+  description: The Market Intel Endpoints API from Otter — 1 operation(s) for market intel endpoints.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Market Intel Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-market-intel-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-menus-endpoints-api
+  name: Otter Menus Endpoints API
+  description: Endpoints to manage menus.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Menus Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-menus-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-orders-endpoints-api
+  name: Otter Orders Endpoints API
+  description: Endpoints to manage orders for a store.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Orders Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-orders-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-organization-endpoints-api
+  name: Otter Organization Endpoints API
+  description: >-
+    Endpoints to interact with with organizations/brands/stores and with integration connections.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Organization Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-organization-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-ping-endpoints-api
+  name: Otter Ping Endpoints API
+  description: Endpoints to ping and test system authentication.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Ping Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-ping-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-reports-endpoints-api
+  name: Otter Reports Endpoints API
+  description: Endpoints to reports generation operations
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Reports Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-reports-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-reviews-endpoints-api
+  name: Otter Reviews Endpoints API
+  description: Endpoints for review operations
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Reviews Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-reviews-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
+- aid: otter:otter-storefront-endpoints-api
+  name: Otter Storefront Endpoints API
+  description: Endpoints to manage storefront state
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Storefront Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-storefront-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://developer-guides.tryotter.com/docs/
+  - type: GettingStarted
+    url: https://developer-guides.tryotter.com/docs/
+  - type: APIReference
+    url: https://developer-guides.tryotter.com/api-reference/
+  - type: Authentication
+    url: https://developer-guides.tryotter.com/api-reference/#operation/requestToken
+  - type: Webhooks
+    url: https://developer-guides.tryotter.com/docs/guides-webhook-authentication/
+  - type: RateLimits
+    url: rate-limits/otter-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: Examples
+    url: examples/
 common:
   - type: AgenticAccess
     url: agentic-access/otter-agentic-access.yml
