@@ -1,0 +1,3737 @@
+{
+  "item": [
+    {
+      "id": "3ef7b736-8ec2-4cc9-a354-4b3507d3a671",
+      "name": "Manager Loyalty Endpoints",
+      "description": {
+        "content": "Endpoints to manage loyalty.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ae80df91-edc8-4625-b5c1-026fcc9b5f41",
+          "name": "Otter Get Enrollment Config for a Loyalty Provider",
+          "request": {
+            "name": "Otter Get Enrollment Config for a Loyalty Provider",
+            "description": {
+              "content": "`RATE LIMIT: 8 per minute`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manager",
+                "loyalty",
+                "v1",
+                ":source",
+                "user",
+                "enrollment-config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Store-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "catalog delivery.provider finance manager.menus manager.orders manager.storefront menus.async_job.read menus.entity_suspension menus.get_current menus.publish menus.read menus.upsert menus.upsert_hours orders.create orders.read orders.update ping reports.generate_report reviews.reply storefront.store_pause_unpause storefront.store_availability storefront.store_hours_configuration stores.manage callback.error.write manager.loyalty direct.orders store.read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/v1/auth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "611c1143-869c-4e83-bfc1-7b87bfb906e3",
+              "name": "Enrollment config for the loyalty provider.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user",
+                    "enrollment-config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"enrollmentFields\": [\n    {\n      \"key\": \"full_name\",\n      \"required\": true,\n      \"type\": \"FULL_NAME\",\n      \"label\": \"First Name and Last Name\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e1828b4-02e5-4625-9728-ac9745d6b622",
+              "name": "The request is malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user",
+                    "enrollment-config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ce1206c-cee1-4534-a226-7a05109fd001",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user",
+                    "enrollment-config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdd11839-b6a6-41d7-ad0c-2af28830404e",
+              "name": "Authorization not valid for the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user",
+                    "enrollment-config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92769465-f790-4bd4-ac70-4ae3375ba063",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user",
+                    "enrollment-config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac59683b-586e-44b7-95c8-a502ad014796",
+          "name": "Otter Get User by Id",
+          "request": {
+            "name": "Otter Get User by Id",
+            "description": {
+              "content": "`RATE LIMIT: 8 per minute`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manager",
+                "loyalty",
+                "v1",
+                ":source",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Store-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "catalog delivery.provider finance manager.menus manager.orders manager.storefront menus.async_job.read menus.entity_suspension menus.get_current menus.publish menus.read menus.upsert menus.upsert_hours orders.create orders.read orders.update ping reports.generate_report reviews.reply storefront.store_pause_unpause storefront.store_availability storefront.store_hours_configuration stores.manage callback.error.write manager.loyalty direct.orders store.read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/v1/auth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "18caad8a-7a32-48c5-8b3f-c4bc6e0dfb96",
+              "name": "Get user response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "somestring"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"userAccount\": {\n    \"id\": \"somestring\",\n    \"userFields\": [\n      {}\n    ],\n    \"balances\": [\n      {}\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5eaf26c7-35ed-4661-b4de-38e9094528e8",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "somestring"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91cd2c81-cbf9-4370-b9ab-c3e0966c9500",
+              "name": "Authorization not valid for the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "somestring"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bc2d0f8-4171-412e-8032-db7ffe6d44db",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "somestring"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12585dec-f79b-491e-8d8c-14d7160f9f39",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "somestring"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f39a5e80-ca44-499a-a1f5-b6bd49785d40",
+          "name": "Otter Create a Loyalty User",
+          "request": {
+            "name": "Otter Create a Loyalty User",
+            "description": {
+              "content": "`RATE LIMIT: 8 per minute`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manager",
+                "loyalty",
+                "v1",
+                ":source",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Store-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "catalog delivery.provider finance manager.menus manager.orders manager.storefront menus.async_job.read menus.entity_suspension menus.get_current menus.publish menus.read menus.upsert menus.upsert_hours orders.create orders.read orders.update ping reports.generate_report reviews.reply storefront.store_pause_unpause storefront.store_availability storefront.store_hours_configuration stores.manage callback.error.write manager.loyalty direct.orders store.read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/v1/auth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userFields\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a6538da1-c3d0-4369-8d1c-4c7c90950ae5",
+              "name": "Create user response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userFields\": [\n    {\n      \"key\": \"full_name\",\n      \"value\": \"john doe\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"id\": \"somestring\",\n    \"userFields\": [\n      {}\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45e9e138-8f2a-4a1f-b87c-9752e63d8cd4",
+              "name": "The request is malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userFields\": [\n    {\n      \"key\": \"full_name\",\n      \"value\": \"john doe\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b33fedf-9738-475f-9e0d-ceb80d466252",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userFields\": [\n    {\n      \"key\": \"full_name\",\n      \"value\": \"john doe\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38c4af6f-3b2e-4a30-86b5-810430536ab2",
+              "name": "Authorization not valid for the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userFields\": [\n    {\n      \"key\": \"full_name\",\n      \"value\": \"john doe\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da76cf86-673a-4b94-87b5-2e37b931d5fb",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userFields\": [\n    {\n      \"key\": \"full_name\",\n      \"value\": \"john doe\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad3c7b86-95d3-4755-bdec-9af4634d4a80",
+          "name": "Otter Search Loyalty Users",
+          "request": {
+            "name": "Otter Search Loyalty Users",
+            "description": {
+              "content": "`RATE LIMIT: 8 per minute`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manager",
+                "loyalty",
+                "v1",
+                ":source",
+                "user",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "term",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Store-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "catalog delivery.provider finance manager.menus manager.orders manager.storefront menus.async_job.read menus.entity_suspension menus.get_current menus.publish menus.read menus.upsert menus.upsert_hours orders.create orders.read orders.update ping reports.generate_report reviews.reply storefront.store_pause_unpause storefront.store_availability storefront.store_hours_configuration stores.manage callback.error.write manager.loyalty direct.orders store.read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/v1/auth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ab278754-27f2-485e-aefc-f1f75b38834c",
+              "name": "Search users response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "john"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"users\": [\n    {\n      \"id\": \"somestring\",\n      \"userFields\": [\n        {}\n      ]\n    }\n  ],\n  \"offsetToken\": \"H12MAF2fFaFFFa\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37d6f651-dc1f-4462-be18-b06eff9696ba",
+              "name": "The request is malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "john"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ec9ddc8-2cc4-4f29-96ca-084f62b41e61",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "john"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc8b9b4f-cc9b-49b5-9f3a-91ac131eb1b8",
+              "name": "Authorization not valid for the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "john"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2580d01e-4e9f-4311-aad8-55ff1aa16920",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "user",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "term",
+                      "value": "john"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "66a03543-e07d-4d17-b45f-10cdc501898e",
+          "name": "Otter Compute Applicable Rewards",
+          "request": {
+            "name": "Otter Compute Applicable Rewards",
+            "description": {
+              "content": "`Supply both userId and order to get a list of applicable rewards for an order. Supply only userId to get a list of rewards the user can redeem` `RATE LIMIT: 8 per minute`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manager",
+                "loyalty",
+                "v1",
+                ":source",
+                "rewards",
+                "evaluate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Store-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "catalog delivery.provider finance manager.menus manager.orders manager.storefront menus.async_job.read menus.entity_suspension menus.get_current menus.publish menus.read menus.upsert menus.upsert_hours orders.create orders.read orders.update ping reports.generate_report reviews.reply storefront.store_pause_unpause storefront.store_availability storefront.store_hours_configuration stores.manage callback.error.write manager.loyalty direct.orders store.read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/v1/auth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"order\": {\n    \"id\": \"<string>\",\n    \"currencyCode\": \"<string>\",\n    \"items\": [\n      {\n        \"id\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\",\n        \"modifiers\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Item-2 detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Item-2 detected>\"\n          }\n        ]\n      },\n      {\n        \"id\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\",\n        \"modifiers\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Item-2 detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Item-2 detected>\"\n          }\n        ]\n      }\n    ],\n    \"totals\": {\n      \"subTotal\": \"<number>\",\n      \"tax\": \"<number>\",\n      \"discount\": \"<number>\",\n      \"total\": \"<number>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "80f1e853-91c2-4bca-aec9-f59df5f0df22",
+              "name": "Compute applicable rewards response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rewards\": [\n    {\n      \"id\": \"someidstring\",\n      \"type\": \"SUBTOTAL\",\n      \"cost\": 20,\n      \"costType\": \"POINT\",\n      \"trigger\": {},\n      \"subtotal\": {},\n      \"menus\": [\n        {}\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc8d7b32-5adb-463a-8dd9-ae97926a6ce4",
+              "name": "The request is malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50393a4f-328f-4bf3-8d49-137d9d71784a",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "326b5e41-15be-41a8-9d4d-d709fe3978d8",
+              "name": "Authorization not valid for the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3414ba5-449b-4c26-89f0-50a7832c75b4",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "evaluate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8fa13a33-5768-47f8-9a3e-acee04b63442",
+          "name": "Otter Simulate Rewards",
+          "request": {
+            "name": "Otter Simulate Rewards",
+            "description": {
+              "content": "`Show what the effects will be after applying the selected rewards, and start the rewards transaction, only call this when user selected some reward, otherwise skip this call and use redeemAndAccumulateRewards API call.` `RATE LIMIT: 8 per minute`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manager",
+                "loyalty",
+                "v1",
+                ":source",
+                "rewards",
+                "simulate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Store-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "catalog delivery.provider finance manager.menus manager.orders manager.storefront menus.async_job.read menus.entity_suspension menus.get_current menus.publish menus.read menus.upsert menus.upsert_hours orders.create orders.read orders.update ping reports.generate_report reviews.reply storefront.store_pause_unpause storefront.store_availability storefront.store_hours_configuration stores.manage callback.error.write manager.loyalty direct.orders store.read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/v1/auth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"order\": {\n    \"id\": \"<string>\",\n    \"currencyCode\": \"<string>\",\n    \"items\": [\n      {\n        \"id\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\",\n        \"modifiers\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Item-2 detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Item-2 detected>\"\n          }\n        ]\n      },\n      {\n        \"id\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\",\n        \"modifiers\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Item-2 detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Item-2 detected>\"\n          }\n        ]\n      }\n    ],\n    \"totals\": {\n      \"subTotal\": \"<number>\",\n      \"tax\": \"<number>\",\n      \"discount\": \"<number>\",\n      \"total\": \"<number>\"\n    }\n  },\n  \"selectedRewards\": [\n    {\n      \"id\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"menus\": {\n        \"entityId\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"menus\": {\n        \"entityId\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b946e2fb-16aa-4a41-9031-c162f3bb5233",
+              "name": "Simulate rewards response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  },\n  \"selectedRewards\": [\n    {\n      \"id\": \"someidstring\",\n      \"amount\": 19.07,\n      \"menus\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"someidstring\",\n  \"rewardEffect\": {\n    \"subtotal\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b231bc49-6f8a-426c-aa49-2e51f92291be",
+              "name": "The request is malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  },\n  \"selectedRewards\": [\n    {\n      \"id\": \"someidstring\",\n      \"amount\": 19.07,\n      \"menus\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22a1bb00-766c-4521-8a65-be89dc72c3fb",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  },\n  \"selectedRewards\": [\n    {\n      \"id\": \"someidstring\",\n      \"amount\": 19.07,\n      \"menus\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "413ed957-453e-443f-8995-1be87536ff6e",
+              "name": "Authorization not valid for the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  },\n  \"selectedRewards\": [\n    {\n      \"id\": \"someidstring\",\n      \"amount\": 19.07,\n      \"menus\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce132a52-011c-43ab-936e-fb5405ac53b2",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  },\n  \"selectedRewards\": [\n    {\n      \"id\": \"someidstring\",\n      \"amount\": 19.07,\n      \"menus\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a2477c3-8d82-405f-aa69-96c419a1b8a5",
+          "name": "Otter Redeem and Accumulate Rewards",
+          "request": {
+            "name": "Otter Redeem and Accumulate Rewards",
+            "description": {
+              "content": "`Redeem existing rewards and accumulate new rewards` `RATE LIMIT: 8 per minute`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manager",
+                "loyalty",
+                "v1",
+                ":source",
+                "rewards",
+                "redeem-and-accumulate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Store-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "catalog delivery.provider finance manager.menus manager.orders manager.storefront menus.async_job.read menus.entity_suspension menus.get_current menus.publish menus.read menus.upsert menus.upsert_hours orders.create orders.read orders.update ping reports.generate_report reviews.reply storefront.store_pause_unpause storefront.store_availability storefront.store_hours_configuration stores.manage callback.error.write manager.loyalty direct.orders store.read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/v1/auth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"order\": {\n    \"id\": \"<string>\",\n    \"currencyCode\": \"<string>\",\n    \"items\": [\n      {\n        \"id\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\",\n        \"modifiers\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Item-2 detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Item-2 detected>\"\n          }\n        ]\n      },\n      {\n        \"id\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"price\": \"<number>\",\n        \"modifiers\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Item-2 detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Item-2 detected>\"\n          }\n        ]\n      }\n    ],\n    \"totals\": {\n      \"subTotal\": \"<number>\",\n      \"tax\": \"<number>\",\n      \"discount\": \"<number>\",\n      \"total\": \"<number>\"\n    }\n  },\n  \"selectedRewards\": [\n    {\n      \"id\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"menus\": {\n        \"entityId\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"menus\": {\n        \"entityId\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ce49275-a471-4932-9171-7b8c94839f1e",
+              "name": "Redeem and accumulate response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "redeem-and-accumulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  },\n  \"selectedRewards\": [\n    {\n      \"id\": \"someidstring\",\n      \"amount\": 19.07,\n      \"menus\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"someidstring\",\n  \"rewardEffect\": {\n    \"subtotal\": {}\n  },\n  \"accumulatedRewards\": [\n    {\n      \"amount\": 19.07,\n      \"type\": \"POINT\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24bdbd4f-239e-4d52-be9a-6a3135beddd9",
+              "name": "The request is malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "redeem-and-accumulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  },\n  \"selectedRewards\": [\n    {\n      \"id\": \"someidstring\",\n      \"amount\": 19.07,\n      \"menus\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90fb67f1-6899-4960-a567-41bf22406961",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "redeem-and-accumulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  },\n  \"selectedRewards\": [\n    {\n      \"id\": \"someidstring\",\n      \"amount\": 19.07,\n      \"menus\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9792f24-5abf-43f4-bcec-5c5f43dbc7dc",
+              "name": "Authorization not valid for the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "redeem-and-accumulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  },\n  \"selectedRewards\": [\n    {\n      \"id\": \"someidstring\",\n      \"amount\": 19.07,\n      \"menus\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0969abfc-bb9d-40d3-a3ee-19f104b3adc1",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "redeem-and-accumulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"order\": {\n    \"id\": \"someidstring\",\n    \"currencyCode\": \"USD\",\n    \"items\": [\n      {}\n    ],\n    \"totals\": {}\n  },\n  \"selectedRewards\": [\n    {\n      \"id\": \"someidstring\",\n      \"amount\": 19.07,\n      \"menus\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9cb18ff3-6a31-4224-a56b-f97086719e93",
+          "name": "Otter Refund Rewards",
+          "request": {
+            "name": "Otter Refund Rewards",
+            "description": {
+              "content": "`RATE LIMIT: 8 per minute`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "manager",
+                "loyalty",
+                "v1",
+                ":source",
+                "rewards",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Store-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "catalog delivery.provider finance manager.menus manager.orders manager.storefront menus.async_job.read menus.entity_suspension menus.get_current menus.publish menus.read menus.upsert menus.upsert_hours orders.create orders.read orders.update ping reports.generate_report reviews.reply storefront.store_pause_unpause storefront.store_availability storefront.store_hours_configuration stores.manage callback.error.write manager.loyalty direct.orders store.read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/v1/auth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"orderId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a687e027-55ab-4d2e-a871-3b5e9b155ebe",
+              "name": "Refund rewards response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"orderId\": \"someidstring\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"someidstring\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d56c0b2a-12c5-410c-8a29-a4282fa33a1d",
+              "name": "The request is malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"orderId\": \"someidstring\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c960159c-f3dd-4ae7-86ac-8ed66e821278",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"orderId\": \"someidstring\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2c89ee7-9b95-47f4-a630-6b111989b86d",
+              "name": "Authorization not valid for the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"orderId\": \"someidstring\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78829709-0e0b-4003-b490-5c3bef65de4c",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "manager",
+                    "loyalty",
+                    "v1",
+                    ":source",
+                    "rewards",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"someidstring\",\n  \"orderId\": \"someidstring\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Account-specific Public API host provided by Otter during onboarding.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "public-api-url",
+      "key": "public-api-url"
+    },
+    {
+      "type": "string",
+      "value": "https://{{public-api-url}}/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f0c487e8-d442-4338-b23e-873b1d8249e6",
+    "name": "Public Account Pairing Endpoints Manager Loyalty Endpoints API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\n\nThe API endpoints are developed around [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) principles secure via the OAuth2.0 protocol.\n\nBeyond the entry points, the API also provides a line of communication into your system via [webhooks](https://en.wikipedia.org/wiki/Webhook).\n\nFor testing purposes, we offer a staging environment. Also, more detailed information about the business rules and workflows can be found on the [**Documentation Section**](/docs/)\n\n## Versioning\nEach API is versioned individually, but we follow these rules:\n- Non breaking changes (eg: adding new fields) are added in the current version without previous communication\n- Breaking changes (fields removal, semantic changed or schema update) have the version incremented\n- Users will be notified about new versions and will be given time to migrate (the time will be set on a case by case basis)\n- Once users migrate to the new version, we will deprecate the old ones\n- Once there is a new version for an API, we won't accept new integrations targeting old versions\n\n## API General Definitions\nThe APIs use resource-oriented URLs communicating, primarily, via JSON and leveraging the HTTP headers, [response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), and verbs.\n\nTo exemplify how the API is to be consumed, consider a fake GET resource endpoint invocation below:\n\n```\ncurl --request GET 'https://{{public-api-url}}/v1/resource/123' \\\n--header 'Authorization: Bearer 34fdabeeafds=' --header 'X-Store-Id: 321'\n```\n\n|      Header      | Description |\n| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n|`Authorization`   | Standard HTTP header is used to associate the request with the originating invoker. The content of this header is a `Bearer` token generated from you client_secret, defined in the [API Auth](#/section/Guides/API-Auth) guide.|\n|`X-Store-Id`      | The ID of the store in your system this call acts on behalf of. |\n\n_All resource endpoints expect the `Authorization` header, the remaining headers are explicitly stated in the individual endpoint documentation section._\n\nWith these headers, the system will:\n - Validate the client token, making sure the call is originating from a trusted source.\n - Validate that the Application has the permission to access the `v1/resource/{id}` resource via the Application's pre-configured scopes.\n - Translate your X-Store-Id to our internal store ID (e.g. `AAA`).\n - Validate and retrieve resource `AAA`, that is associated to your Application via store id `321`.\n\nPOST/PUT methods will look similar to the GET calls, but they'll take in a body in the HTTP request (default to the application/json content-type).\n\n```\ncurl --location --request POST 'https://{{public-api-url}}/v1/resource' \\\n--header 'Authorization: Bearer 34fdabeeafds=' --header 'X-Store-Id: 321'\n--data '{\"foo\": \"bar\"}'\n```\n\n## API Authentication/Authorization\n\n<SecurityDefinitions />\n\n## Webhook\n\nThe Public API is able to send notifications to your system via HTTP POST requests.\n\nEvery webhook is signed using HMAC-SHA256 that is present in the header `X-HMAC-SHA256`, and you can also authenticate the requests using Basic Auth, Bearer Token or HMAC-SHA1 (legacy). Please, refer to [**Webhook Authentication Guide**](/docs/guides-webhook-authentication/) for more details.\n\n_Please work with your Account Representative to setup your Application's Webhook configurations._\n\n```\nExample Base-URL = https://{{your-server-url}}/webhook\n```\n\n### Notification Schema\n\n| **Name**                | **Type** | **Description**                                                      |\n| ------------------------| ---------| -------------------------------------------------------------------- |\n| eventId                 | string   | Unique id of the event.                                              |\n| eventTime               | string   | The time the event occurred.                                         |\n| eventType               | string   | The type of event (e.g. create_order).                               |\n| metadata.storeId        | string   | Id of the store for which the event is being published.              |\n| metadata.applicationId  | string   | Id of the application for which the event is being published.        |\n| metadata.resourceId     | string   | The external identifier of the resource that this event refers to.   |\n| metadata.resourceHref   | string   | The endpoint to fetch the details of the resource.                   |\n| metadata.payload        | object   | The event object which will be detailed in each Webhook description. |\n\n### Notification Request Example\n\n```\ncurl --location --request POST 'https://{{your-server-url}}/webhook' \\\n--header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36' \\\n--header 'Authorization: MAC <hash signature>' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n   \"eventId\": \"123456\",\n   \"eventTime\": \"2020-10-10T20:06:02:123Z\",\n   \"eventType\": \"orders.new_order\",\n   \"metadata\": {\n      \"storeId\": \"755fd19a-7562-487a-b615-171a9f89d669\",\n      \"applicationId\": \"e22f94b3-967c-4e26-bf39-9e364066b68b\",\n      \"resourceHref\": \"https://{{public-api-url}}/v1/orders/bf9f1d81-f213-496e-a026-91b6af44996c\",\n      \"resourceId\": \"bf9f1d81-f213-496e-a026-91b6af44996c\",\n      \"payload\": {}\n   }\n}\n```\n\n### Expected Response\n\nThe partner application should return an HTTP 200 response code with an empty response body to acknowledge receipt of the webhook event.\n## Rate Limiting\nPlease, refer to [**Rate Limiting Guide**](/docs/guides-rate-limiting/) for more details.\n\n## Error codes\nThe APIs use standard HTTP status codes to indicate the success or failure of a request. Error codes are divided into two categories: 4XX codes for client-side errors and 5xx codes for server-side errors.\n### 4XX Client-Side Errors\nClient-side errors are indicated by status codes in the 4xx range. These errors are typically the result of a problem with the request made by your application.\nIf a client-side error occurs, our API will return a response that includes an appropriate error message. This message will provide information about the cause of the error. The aim of these messages is to assist you in identifying and resolving the issue.\nFor example, if you submit a request with missing or invalid parameters, you might receive a 400 Bad Request error with a message indicating which parameters were missing or incorrect.\n### 5XX Server-Side Errors\nServer-side errors are represented by status codes in the 5xx range. These errors suggest a problem with our server, not with your application's request.\nServer-side errors are typically transient, meaning they are temporary. If a server-side error occurs, we recommend that the client retries the same request with the exact same parameters.\nFor example, if you get a 500 Internal Server Error, it's possible that our server is suffering a temporary problem. In such cases, retrying the request after a short delay is often successful.\nIf you continually receive server-side errors, reach out to our support team for further assistance.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

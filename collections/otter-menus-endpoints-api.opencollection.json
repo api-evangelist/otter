@@ -1,0 +1,206 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Account Pairing Endpoints Menus Endpoints API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Menus Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Upsert Menus for a Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/menus",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 2 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of a Publish Menu Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/menus/publish",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n\nSuccessful callback response for the [**publish menu**](/api-reference/#operation/menuPublishWebhook) webhook. If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead. See [**failed event flow**](/docs/menus-integrations-failed-event-flow/) for details.\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of a Send Menu Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/menus/current",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 4 per minute`\n\nSuccessful callback response for the [**send menu**](/api-reference/#operation/menuSendCallback) webhook. If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead. See [**failed event flow**](/docs/menus-integrations-failed-event-flow/) for details.\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Receival of a Upsert Hours Menu Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/menus/hours",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n\nSuccessful callback response for the [**upsert hours**](/api-reference/#operation/upsertMenuHoursWebhook) webhook. If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead. See [**failed event flow**](/docs/menus-integrations-failed-event-flow/) for details.\n"
+        },
+        {
+          "info": {
+            "name": "Otter Synchronize Store Menu with POS Menu",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/menus/menu-sync",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "This endpoint is used to synchronize the store menu with the connected POS."
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of an Update Menu Entities Availabilities Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/menus/entity/availability/bulk",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n\nSuccessful callback response for the [**update menu entities availabilities**](/api-reference/#operation/updateMenuEntitiesAvailabilitiesWebhook) webhook. If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead. See [**failed event flow**](/docs/menus-integrations-failed-event-flow/) for details.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

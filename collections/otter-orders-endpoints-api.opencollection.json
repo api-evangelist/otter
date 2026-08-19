@@ -1,0 +1,230 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Account Pairing Endpoints Orders Endpoints API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Create Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/orders",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Update Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{public-api-url}/v1/orders/:orderId",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Update Order Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/orders/:orderId/status",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Update Order Customer Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{public-api-url}/v1/orders/:orderId/payments",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n\nNotice that this operation do not completely replace the existent customer payment, instead, it overwrites the field if the latest update is a non-null value. If the update value is null, the existent value will continue to be used.\n"
+        },
+        {
+          "info": {
+            "name": "Otter Update Order Delivery Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{public-api-url}/v1/orders/:orderId/delivery",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Upload Past Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/orders/past-orders",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`; orders must have a status of FULFILLED, REJECTED, or CANCELED\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

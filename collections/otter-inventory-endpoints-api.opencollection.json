@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Account Pairing Endpoints Inventory Endpoints API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inventory Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter List Inventory Summaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/inventories/v1/summaries",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n\nList inventory summaries by the requested parameters.\n"
+        },
+        {
+          "info": {
+            "name": "Otter List Shipments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/inventories/v1/shipments",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n\nList shipments by the requested parameters.\n"
+        },
+        {
+          "info": {
+            "name": "Otter Create Shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/inventories/v1/shipments",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 32 per minute`\n\nCreate a new shipment.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,252 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Account Pairing Endpoints Storefront Endpoints API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Storefront Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Notify About Store Availability Change",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/storefront/availability",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify About Store Hours Configuration Change",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/storefront/hours",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of a Pause Request Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/storefront/pause",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of an Unpause Request Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/storefront/unpause",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify About Store Availability Change from the Eater Side",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/storefront/eater-side/status",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify About Store Hours Configuration Change on Eater Side",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/storefront/eater-side/hours",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify About Store Details Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/market-intel/store-details",
+            "headers": [
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Notify About Store Details Update"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

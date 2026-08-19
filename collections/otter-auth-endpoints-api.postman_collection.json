@@ -1,0 +1,964 @@
+{
+  "item": [
+    {
+      "id": "48daceff-43fe-4a40-a236-cc0414841ecc",
+      "name": "Auth Endpoints",
+      "description": {
+        "content": "Endpoints to handle token management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6393c6d4-09c9-4393-a20c-062e11b3b876",
+          "name": "Otter Generate Token",
+          "request": {
+            "name": "Otter Generate Token",
+            "description": {
+              "content": "Client credentials in the request-body and HTTP Basic Auth are supported.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "grant_type",
+                  "value": "<string>",
+                  "description": "(Required) The OAuth2.0 grant types supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "(Required) The scope to request, multiple scopes are passed delimited by a space character."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<uuid>",
+                  "description": "The ID of the client (also known as the Application ID)."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_secret",
+                  "value": "<string>",
+                  "description": "The secret of the client."
+                },
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>",
+                  "description": "The authorization code obtained from the server when performing the authorization code flow. It is required to exchange the code for an access token that will be used to perform actions on behalf of a user."
+                },
+                {
+                  "disabled": false,
+                  "key": "redirect_uri",
+                  "value": "<string>",
+                  "description": "The redirect URI that was included in the initial authorization request. The value must be an exact match of the previously used URI, otherwise the request will be rejected."
+                },
+                {
+                  "disabled": false,
+                  "key": "code_verifier",
+                  "value": "<string>",
+                  "description": "If the code_challenge parameter was included in the initial authorization requests, the application must now provide the code verifier. The value is the plaintext string that was used to calculate the hash that was previously sent in the code_challenge parameter."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bc09c17e-ea3f-42c9-9447-f54ad4d6ff82",
+              "name": "The token was successfully generated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The OAuth2.0 grant types supported.",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The scope to request, multiple scopes are passed delimited by a space character.",
+                        "type": "text/plain"
+                      },
+                      "key": "scope",
+                      "value": "scope1 scope2"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the client (also known as the Application ID).",
+                        "type": "text/plain"
+                      },
+                      "key": "client_id",
+                      "value": "c75d9460-5d48-423d-8d01-f825fd5b1672"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The secret of the client.",
+                        "type": "text/plain"
+                      },
+                      "key": "client_secret",
+                      "value": "string"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The authorization code obtained from the server when performing the authorization code flow. It is required to exchange the code for an access token that will be used to perform actions on behalf of a user.",
+                        "type": "text/plain"
+                      },
+                      "key": "code",
+                      "value": "8A9D16B4C3E25F6A"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The redirect URI that was included in the initial authorization request. The value must be an exact match of the previously used URI, otherwise the request will be rejected.",
+                        "type": "text/plain"
+                      },
+                      "key": "redirect_uri",
+                      "value": "https://example.com/callback"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If the code_challenge parameter was included in the initial authorization requests, the application must now provide the code verifier. The value is the plaintext string that was used to calculate the hash that was previously sent in the code_challenge parameter.",
+                        "type": "text/plain"
+                      },
+                      "key": "code_verifier",
+                      "value": "Th7UHJdLswIYQxwSg29DbK1a_d9o41uNMTRmuH0PM8zyoMAQ"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"oMahtBwBbnZeh4Q66mSuLFmk2V0_CLCKVt0aYcNJlcg.yditzjwCP7yp0PgR6AzQR3wQ1rTdCjkcPeAMuyfK-NU\",\n  \"expires_in\": 2627999,\n  \"scope\": \"ping orders.create\",\n  \"token_type\": \"bearer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c4532a1-1d26-442b-b2ad-085230735501",
+              "name": "The request is malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The OAuth2.0 grant types supported.",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The scope to request, multiple scopes are passed delimited by a space character.",
+                        "type": "text/plain"
+                      },
+                      "key": "scope",
+                      "value": "scope1 scope2"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the client (also known as the Application ID).",
+                        "type": "text/plain"
+                      },
+                      "key": "client_id",
+                      "value": "c75d9460-5d48-423d-8d01-f825fd5b1672"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The secret of the client.",
+                        "type": "text/plain"
+                      },
+                      "key": "client_secret",
+                      "value": "string"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The authorization code obtained from the server when performing the authorization code flow. It is required to exchange the code for an access token that will be used to perform actions on behalf of a user.",
+                        "type": "text/plain"
+                      },
+                      "key": "code",
+                      "value": "8A9D16B4C3E25F6A"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The redirect URI that was included in the initial authorization request. The value must be an exact match of the previously used URI, otherwise the request will be rejected.",
+                        "type": "text/plain"
+                      },
+                      "key": "redirect_uri",
+                      "value": "https://example.com/callback"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If the code_challenge parameter was included in the initial authorization requests, the application must now provide the code verifier. The value is the plaintext string that was used to calculate the hash that was previously sent in the code_challenge parameter.",
+                        "type": "text/plain"
+                      },
+                      "key": "code_verifier",
+                      "value": "Th7UHJdLswIYQxwSg29DbK1a_d9o41uNMTRmuH0PM8zyoMAQ"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c053f109-a8a9-46d3-bee4-5b5fcede80a6",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The OAuth2.0 grant types supported.",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The scope to request, multiple scopes are passed delimited by a space character.",
+                        "type": "text/plain"
+                      },
+                      "key": "scope",
+                      "value": "scope1 scope2"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the client (also known as the Application ID).",
+                        "type": "text/plain"
+                      },
+                      "key": "client_id",
+                      "value": "c75d9460-5d48-423d-8d01-f825fd5b1672"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The secret of the client.",
+                        "type": "text/plain"
+                      },
+                      "key": "client_secret",
+                      "value": "string"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The authorization code obtained from the server when performing the authorization code flow. It is required to exchange the code for an access token that will be used to perform actions on behalf of a user.",
+                        "type": "text/plain"
+                      },
+                      "key": "code",
+                      "value": "8A9D16B4C3E25F6A"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The redirect URI that was included in the initial authorization request. The value must be an exact match of the previously used URI, otherwise the request will be rejected.",
+                        "type": "text/plain"
+                      },
+                      "key": "redirect_uri",
+                      "value": "https://example.com/callback"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If the code_challenge parameter was included in the initial authorization requests, the application must now provide the code verifier. The value is the plaintext string that was used to calculate the hash that was previously sent in the code_challenge parameter.",
+                        "type": "text/plain"
+                      },
+                      "key": "code_verifier",
+                      "value": "Th7UHJdLswIYQxwSg29DbK1a_d9o41uNMTRmuH0PM8zyoMAQ"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c14f8346-5558-440a-8b8c-147f4a60cac3",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The OAuth2.0 grant types supported.",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The scope to request, multiple scopes are passed delimited by a space character.",
+                        "type": "text/plain"
+                      },
+                      "key": "scope",
+                      "value": "scope1 scope2"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the client (also known as the Application ID).",
+                        "type": "text/plain"
+                      },
+                      "key": "client_id",
+                      "value": "c75d9460-5d48-423d-8d01-f825fd5b1672"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The secret of the client.",
+                        "type": "text/plain"
+                      },
+                      "key": "client_secret",
+                      "value": "string"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The authorization code obtained from the server when performing the authorization code flow. It is required to exchange the code for an access token that will be used to perform actions on behalf of a user.",
+                        "type": "text/plain"
+                      },
+                      "key": "code",
+                      "value": "8A9D16B4C3E25F6A"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The redirect URI that was included in the initial authorization request. The value must be an exact match of the previously used URI, otherwise the request will be rejected.",
+                        "type": "text/plain"
+                      },
+                      "key": "redirect_uri",
+                      "value": "https://example.com/callback"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If the code_challenge parameter was included in the initial authorization requests, the application must now provide the code verifier. The value is the plaintext string that was used to calculate the hash that was previously sent in the code_challenge parameter.",
+                        "type": "text/plain"
+                      },
+                      "key": "code_verifier",
+                      "value": "Th7UHJdLswIYQxwSg29DbK1a_d9o41uNMTRmuH0PM8zyoMAQ"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "348bd254-86af-4e9b-9401-6c06908e2067",
+          "name": "Otter OAuth 2.0 Authorize Endpoint",
+          "request": {
+            "name": "Otter OAuth 2.0 Authorize Endpoint",
+            "description": {
+              "content": "Request a user's authorization to perform action on their behalf",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "oauth2",
+                "authorize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the client (also known as the Application ID)."
+                },
+                {
+                  "disabled": false,
+                  "key": "redirect_uri",
+                  "value": "<string>",
+                  "description": "(Required) The URI to where the user should be redirected when the flow is successfully completed. It must be previously registered at Developer Portal in the application settings."
+                },
+                {
+                  "disabled": false,
+                  "key": "response_type",
+                  "value": "<string>",
+                  "description": "(Required) Specifies the expected response type. Only \"code\" is accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "(Required) The scope to request, multiple scopes are passed delimited by a space character."
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "(Required) Can be used to store request-specific data. The server will return the unmodified state value back to the application."
+                },
+                {
+                  "disabled": false,
+                  "key": "code_challenge",
+                  "value": "<string>",
+                  "description": "A code verifier generated by the client application transformed by applying a cryptographic hash function, such as SHA-256, and encoding the result using URL-safe Base64 encoding."
+                },
+                {
+                  "disabled": false,
+                  "key": "code_challenge_method",
+                  "value": "<string>",
+                  "description": "Method used to transform the code verifier. The most common method is \"S256\", which stands for SHA-256."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24c18319-8e2a-4984-b5ce-840b97f06592",
+              "name": "The token was successfully generated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "oauth2",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "store_123"
+                    },
+                    {
+                      "key": "redirect_uri",
+                      "value": "https://example.com/resource"
+                    },
+                    {
+                      "key": "response_type",
+                      "value": "string"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "string"
+                    },
+                    {
+                      "key": "state",
+                      "value": "string"
+                    },
+                    {
+                      "key": "code_challenge",
+                      "value": "string"
+                    },
+                    {
+                      "key": "code_challenge_method",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Redirect URI",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "acbfed0e-acbb-49d4-b4d6-dc9f2bac5576",
+              "name": "The request is malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "oauth2",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "store_123"
+                    },
+                    {
+                      "key": "redirect_uri",
+                      "value": "https://example.com/resource"
+                    },
+                    {
+                      "key": "response_type",
+                      "value": "string"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "string"
+                    },
+                    {
+                      "key": "state",
+                      "value": "string"
+                    },
+                    {
+                      "key": "code_challenge",
+                      "value": "string"
+                    },
+                    {
+                      "key": "code_challenge_method",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e37b2ae2-5e96-41af-93e6-60bd43f8f539",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "oauth2",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "store_123"
+                    },
+                    {
+                      "key": "redirect_uri",
+                      "value": "https://example.com/resource"
+                    },
+                    {
+                      "key": "response_type",
+                      "value": "string"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "string"
+                    },
+                    {
+                      "key": "state",
+                      "value": "string"
+                    },
+                    {
+                      "key": "code_challenge",
+                      "value": "string"
+                    },
+                    {
+                      "key": "code_challenge_method",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10598a1f-5ba4-47af-98aa-50c741b4564f",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "oauth2",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_id",
+                      "value": "store_123"
+                    },
+                    {
+                      "key": "redirect_uri",
+                      "value": "https://example.com/resource"
+                    },
+                    {
+                      "key": "response_type",
+                      "value": "string"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "string"
+                    },
+                    {
+                      "key": "state",
+                      "value": "string"
+                    },
+                    {
+                      "key": "code_challenge",
+                      "value": "string"
+                    },
+                    {
+                      "key": "code_challenge_method",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Account-specific Public API host provided by Otter during onboarding.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "public-api-url",
+      "key": "public-api-url"
+    },
+    {
+      "type": "string",
+      "value": "https://{{public-api-url}}/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f63a3460-6af4-4d94-ba13-2d175d50b10f",
+    "name": "Public Account Pairing Endpoints Auth Endpoints API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\n\nThe API endpoints are developed around [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) principles secure via the OAuth2.0 protocol.\n\nBeyond the entry points, the API also provides a line of communication into your system via [webhooks](https://en.wikipedia.org/wiki/Webhook).\n\nFor testing purposes, we offer a staging environment. Also, more detailed information about the business rules and workflows can be found on the [**Documentation Section**](/docs/)\n\n## Versioning\nEach API is versioned individually, but we follow these rules:\n- Non breaking changes (eg: adding new fields) are added in the current version without previous communication\n- Breaking changes (fields removal, semantic changed or schema update) have the version incremented\n- Users will be notified about new versions and will be given time to migrate (the time will be set on a case by case basis)\n- Once users migrate to the new version, we will deprecate the old ones\n- Once there is a new version for an API, we won't accept new integrations targeting old versions\n\n## API General Definitions\nThe APIs use resource-oriented URLs communicating, primarily, via JSON and leveraging the HTTP headers, [response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), and verbs.\n\nTo exemplify how the API is to be consumed, consider a fake GET resource endpoint invocation below:\n\n```\ncurl --request GET 'https://{{public-api-url}}/v1/resource/123' \\\n--header 'Authorization: Bearer 34fdabeeafds=' --header 'X-Store-Id: 321'\n```\n\n|      Header      | Description |\n| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n|`Authorization`   | Standard HTTP header is used to associate the request with the originating invoker. The content of this header is a `Bearer` token generated from you client_secret, defined in the [API Auth](#/section/Guides/API-Auth) guide.|\n|`X-Store-Id`      | The ID of the store in your system this call acts on behalf of. |\n\n_All resource endpoints expect the `Authorization` header, the remaining headers are explicitly stated in the individual endpoint documentation section._\n\nWith these headers, the system will:\n - Validate the client token, making sure the call is originating from a trusted source.\n - Validate that the Application has the permission to access the `v1/resource/{id}` resource via the Application's pre-configured scopes.\n - Translate your X-Store-Id to our internal store ID (e.g. `AAA`).\n - Validate and retrieve resource `AAA`, that is associated to your Application via store id `321`.\n\nPOST/PUT methods will look similar to the GET calls, but they'll take in a body in the HTTP request (default to the application/json content-type).\n\n```\ncurl --location --request POST 'https://{{public-api-url}}/v1/resource' \\\n--header 'Authorization: Bearer 34fdabeeafds=' --header 'X-Store-Id: 321'\n--data '{\"foo\": \"bar\"}'\n```\n\n## API Authentication/Authorization\n\n<SecurityDefinitions />\n\n## Webhook\n\nThe Public API is able to send notifications to your system via HTTP POST requests.\n\nEvery webhook is signed using HMAC-SHA256 that is present in the header `X-HMAC-SHA256`, and you can also authenticate the requests using Basic Auth, Bearer Token or HMAC-SHA1 (legacy). Please, refer to [**Webhook Authentication Guide**](/docs/guides-webhook-authentication/) for more details.\n\n_Please work with your Account Representative to setup your Application's Webhook configurations._\n\n```\nExample Base-URL = https://{{your-server-url}}/webhook\n```\n\n### Notification Schema\n\n| **Name**                | **Type** | **Description**                                                      |\n| ------------------------| ---------| -------------------------------------------------------------------- |\n| eventId                 | string   | Unique id of the event.                                              |\n| eventTime               | string   | The time the event occurred.                                         |\n| eventType               | string   | The type of event (e.g. create_order).                               |\n| metadata.storeId        | string   | Id of the store for which the event is being published.              |\n| metadata.applicationId  | string   | Id of the application for which the event is being published.        |\n| metadata.resourceId     | string   | The external identifier of the resource that this event refers to.   |\n| metadata.resourceHref   | string   | The endpoint to fetch the details of the resource.                   |\n| metadata.payload        | object   | The event object which will be detailed in each Webhook description. |\n\n### Notification Request Example\n\n```\ncurl --location --request POST 'https://{{your-server-url}}/webhook' \\\n--header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36' \\\n--header 'Authorization: MAC <hash signature>' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n   \"eventId\": \"123456\",\n   \"eventTime\": \"2020-10-10T20:06:02:123Z\",\n   \"eventType\": \"orders.new_order\",\n   \"metadata\": {\n      \"storeId\": \"755fd19a-7562-487a-b615-171a9f89d669\",\n      \"applicationId\": \"e22f94b3-967c-4e26-bf39-9e364066b68b\",\n      \"resourceHref\": \"https://{{public-api-url}}/v1/orders/bf9f1d81-f213-496e-a026-91b6af44996c\",\n      \"resourceId\": \"bf9f1d81-f213-496e-a026-91b6af44996c\",\n      \"payload\": {}\n   }\n}\n```\n\n### Expected Response\n\nThe partner application should return an HTTP 200 response code with an empty response body to acknowledge receipt of the webhook event.\n## Rate Limiting\nPlease, refer to [**Rate Limiting Guide**](/docs/guides-rate-limiting/) for more details.\n\n## Error codes\nThe APIs use standard HTTP status codes to indicate the success or failure of a request. Error codes are divided into two categories: 4XX codes for client-side errors and 5xx codes for server-side errors.\n### 4XX Client-Side Errors\nClient-side errors are indicated by status codes in the 4xx range. These errors are typically the result of a problem with the request made by your application.\nIf a client-side error occurs, our API will return a response that includes an appropriate error message. This message will provide information about the cause of the error. The aim of these messages is to assist you in identifying and resolving the issue.\nFor example, if you submit a request with missing or invalid parameters, you might receive a 400 Bad Request error with a message indicating which parameters were missing or incorrect.\n### 5XX Server-Side Errors\nServer-side errors are represented by status codes in the 5xx range. These errors suggest a problem with our server, not with your application's request.\nServer-side errors are typically transient, meaning they are temporary. If a server-side error occurs, we recommend that the client retries the same request with the exact same parameters.\nFor example, if you get a 500 Internal Server Error, it's possible that our server is suffering a temporary problem. In such cases, retrying the request after a short delay is often successful.\nIf you continually receive server-side errors, reach out to our support team for further assistance.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

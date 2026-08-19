@@ -1,0 +1,247 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Account Pairing Endpoints Delivery Endpoints API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Delivery Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Update Delivery Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{public-api-url}/v1/delivery/:deliveryReferenceId/status",
+            "params": [
+              {
+                "name": "deliveryReferenceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of a Request Delivery Quote Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/delivery/:deliveryReferenceId/quotes",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deliveryReferenceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of an Accept Delivery Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/delivery/:deliveryReferenceId/accept",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deliveryReferenceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of a Cancel Delivery Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/delivery/:deliveryReferenceId/cancel",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deliveryReferenceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Publish Delivery Callback Error",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/delivery/callback/error",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 16 per minute`\n"
+        },
+        {
+          "info": {
+            "name": "Otter Notify the Result of an Update Delivery Request Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/v1/delivery/:deliveryReferenceId/update",
+            "headers": [
+              {
+                "name": "X-Store-Id",
+                "value": ""
+              },
+              {
+                "name": "X-Event-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deliveryReferenceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "`RATE LIMIT: 8 per minute`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1474 @@
+{
+  "item": [
+    {
+      "id": "5bf4b3ca-5743-44b1-b651-4aba23110cf7",
+      "name": "Inventory Endpoints",
+      "description": {
+        "content": "Endpoints to interact with product inventory.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0accae0d-0283-4494-bc64-8422a56d12ae",
+          "name": "Otter List Inventory Summaries",
+          "request": {
+            "name": "Otter List Inventory Summaries",
+            "description": {
+              "content": "`RATE LIMIT: 32 per minute`\n\nList inventory summaries by the requested parameters.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "inventories",
+                "v1",
+                "summaries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Store-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "catalog delivery.provider finance manager.menus manager.orders manager.storefront menus.async_job.read menus.entity_suspension menus.get_current menus.publish menus.read menus.upsert menus.upsert_hours orders.create orders.read orders.update ping reports.generate_report reviews.reply storefront.store_pause_unpause storefront.store_availability storefront.store_hours_configuration stores.manage callback.error.write manager.loyalty direct.orders store.read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/v1/auth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d42f7353-a6b4-49ec-9569-28300da09df9",
+              "name": "The inventory summaries were successfully retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"inventorySummaries\": [\n    {\n      \"id\": \"ZDlhYTc1NjUtMzU3Z\",\n      \"gtin\": 49000608779,\n      \"name\": \"Coca-Cola Classic Coke Soft Drink 12 oz. can\",\n      \"slug\": \"coca-cola-classic-soft-drink-12-oz-can\",\n      \"externalId\": \"some-id-from-a-vendor-123\",\n      \"sellableQuantity\": 42,\n      \"unsellableQuantity\": 42,\n      \"inboundQuantity\": 8\n    }\n  ],\n  \"nextToken\": \"H12MAF2fFaFFFa\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb159d27-621f-42eb-ad84-ba569ecc2772",
+              "name": "The request is malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c445885-ea4d-46b3-94d8-6e99087b72aa",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef0644b8-8998-480e-9e6f-002b50d1ebe6",
+              "name": "Authorization not valid for the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47b767f9-7bf4-4696-a238-f7292629218d",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "093562a5-a008-4ff6-bc1b-157037d4c1fd",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6808f4a-ce56-4800-bb98-c759db11e018",
+          "name": "Otter List Shipments",
+          "request": {
+            "name": "Otter List Shipments",
+            "description": {
+              "content": "`RATE LIMIT: 8 per minute`\n\nList shipments by the requested parameters.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "inventories",
+                "v1",
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Store-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "catalog delivery.provider finance manager.menus manager.orders manager.storefront menus.async_job.read menus.entity_suspension menus.get_current menus.publish menus.read menus.upsert menus.upsert_hours orders.create orders.read orders.update ping reports.generate_report reviews.reply storefront.store_pause_unpause storefront.store_availability storefront.store_hours_configuration stores.manage callback.error.write manager.loyalty direct.orders store.read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/v1/auth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "190bd136-896b-4d0c-8eab-57810bd744bb",
+              "name": "The shipments were successfully retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipments\": [\n    {\n      \"id\": \"18695c43-c670-4c57-a714-e0d7b215db20\",\n      \"deliveryInfo\": {},\n      \"lineItems\": [\n        {}\n      ],\n      \"stateChanges\": [\n        {}\n      ]\n    }\n  ],\n  \"nextToken\": \"H12MAF2fFaFFFa\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a79cbea-7a0a-433b-aeb2-ae47ca1446d6",
+              "name": "The request is malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67223534-a68f-4693-b112-4e8274e226a7",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6974a98f-e89f-4e45-bc78-763c555bd42f",
+              "name": "Authorization not valid for the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9c918d2-9020-4c89-84af-0271c72fd6de",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2dd658d-a345-4b37-b736-31c8dcd92efc",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "753e6f28-0dae-409e-b5d2-4a1a2003a9d1",
+          "name": "Otter Create Shipment",
+          "request": {
+            "name": "Otter Create Shipment",
+            "description": {
+              "content": "`RATE LIMIT: 32 per minute`\n\nCreate a new shipment.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "inventories",
+                "v1",
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Account-specific Public API host provided by Otter during onboarding.",
+                  "type": "any",
+                  "value": "{{public-api-url}}",
+                  "key": "public-api-url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Store-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "catalog delivery.provider finance manager.menus manager.orders manager.storefront menus.async_job.read menus.entity_suspension menus.get_current menus.publish menus.read menus.upsert menus.upsert_hours orders.create orders.read orders.update ping reports.generate_report reviews.reply storefront.store_pause_unpause storefront.store_availability storefront.store_hours_configuration stores.manage callback.error.write manager.loyalty direct.orders store.read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/v1/auth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deliveryInfo\": {\n    \"courierName\": \"<string>\",\n    \"deliveryType\": \"<string>\",\n    \"deliveryWindow\": {\n      \"start\": \"<dateTime>\",\n      \"end\": \"<dateTime>\"\n    },\n    \"trackingId\": \"<string>\"\n  },\n  \"lineItems\": [\n    {\n      \"manifestQuantity\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"externalId\": \"<string>\",\n      \"receivedSellableQuantity\": \"<integer>\",\n      \"receivedUnsellableQuantity\": \"<integer>\"\n    },\n    {\n      \"manifestQuantity\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"externalId\": \"<string>\",\n      \"receivedSellableQuantity\": \"<integer>\",\n      \"receivedUnsellableQuantity\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "721a65dc-6d36-4a7c-b9b8-5bd2c903ca6e",
+              "name": "The shipment was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryInfo\": {},\n  \"lineItems\": [\n    {\n      \"id\": \"1b8aec80-21aa-43f1-b510-2199ac54156a\",\n      \"slug\": \"pizza-pepperoni-12-inch\",\n      \"externalId\": \"id-in-external-system\",\n      \"manifestQuantity\": 5,\n      \"receivedSellableQuantity\": 5,\n      \"receivedUnsellableQuantity\": 5\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"18695c43-c670-4c57-a714-e0d7b215db20\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cff30696-d3e7-40dc-beb7-afaa614ce11a",
+              "name": "The request is malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryInfo\": {},\n  \"lineItems\": [\n    {\n      \"id\": \"1b8aec80-21aa-43f1-b510-2199ac54156a\",\n      \"slug\": \"pizza-pepperoni-12-inch\",\n      \"externalId\": \"id-in-external-system\",\n      \"manifestQuantity\": 5,\n      \"receivedSellableQuantity\": 5,\n      \"receivedUnsellableQuantity\": 5\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37e38609-4e0d-476b-9fa3-4ee0a756c2c9",
+              "name": "Invalid authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryInfo\": {},\n  \"lineItems\": [\n    {\n      \"id\": \"1b8aec80-21aa-43f1-b510-2199ac54156a\",\n      \"slug\": \"pizza-pepperoni-12-inch\",\n      \"externalId\": \"id-in-external-system\",\n      \"manifestQuantity\": 5,\n      \"receivedSellableQuantity\": 5,\n      \"receivedUnsellableQuantity\": 5\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d49e911-5923-450a-8ea5-d1acf5148335",
+              "name": "Authorization not valid for the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryInfo\": {},\n  \"lineItems\": [\n    {\n      \"id\": \"1b8aec80-21aa-43f1-b510-2199ac54156a\",\n      \"slug\": \"pizza-pepperoni-12-inch\",\n      \"externalId\": \"id-in-external-system\",\n      \"manifestQuantity\": 5,\n      \"receivedSellableQuantity\": 5,\n      \"receivedUnsellableQuantity\": 5\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5be8ff31-022b-43c6-8926-004bd5a0ca5f",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryInfo\": {},\n  \"lineItems\": [\n    {\n      \"id\": \"1b8aec80-21aa-43f1-b510-2199ac54156a\",\n      \"slug\": \"pizza-pepperoni-12-inch\",\n      \"externalId\": \"id-in-external-system\",\n      \"manifestQuantity\": 5,\n      \"receivedSellableQuantity\": 5,\n      \"receivedUnsellableQuantity\": 5\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04577d45-0fb7-4f22-baff-de616edbe491",
+              "name": "The request body is not valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventories",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Account-specific Public API host provided by Otter during onboarding.",
+                      "type": "any",
+                      "value": "{{public-api-url}}",
+                      "key": "public-api-url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Store-Id",
+                    "value": "partner-store-unique-identifier"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deliveryInfo\": {},\n  \"lineItems\": [\n    {\n      \"id\": \"1b8aec80-21aa-43f1-b510-2199ac54156a\",\n      \"slug\": \"pizza-pepperoni-12-inch\",\n      \"externalId\": \"id-in-external-system\",\n      \"manifestQuantity\": 5,\n      \"receivedSellableQuantity\": 5,\n      \"receivedUnsellableQuantity\": 5\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The request body is invalid.\",\n  \"details\": [\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    },\n    {\n      \"attribute\": \"Order Currency Code\",\n      \"message\": \"Order Currency Code must be exactly 3 characters\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Account-specific Public API host provided by Otter during onboarding.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "public-api-url",
+      "key": "public-api-url"
+    },
+    {
+      "type": "string",
+      "value": "https://{{public-api-url}}/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0cfd6d4a-fbf1-4a9c-8d98-df851ab1868d",
+    "name": "Public Account Pairing Endpoints Inventory Endpoints API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\n\nThe API endpoints are developed around [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) principles secure via the OAuth2.0 protocol.\n\nBeyond the entry points, the API also provides a line of communication into your system via [webhooks](https://en.wikipedia.org/wiki/Webhook).\n\nFor testing purposes, we offer a staging environment. Also, more detailed information about the business rules and workflows can be found on the [**Documentation Section**](/docs/)\n\n## Versioning\nEach API is versioned individually, but we follow these rules:\n- Non breaking changes (eg: adding new fields) are added in the current version without previous communication\n- Breaking changes (fields removal, semantic changed or schema update) have the version incremented\n- Users will be notified about new versions and will be given time to migrate (the time will be set on a case by case basis)\n- Once users migrate to the new version, we will deprecate the old ones\n- Once there is a new version for an API, we won't accept new integrations targeting old versions\n\n## API General Definitions\nThe APIs use resource-oriented URLs communicating, primarily, via JSON and leveraging the HTTP headers, [response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), and verbs.\n\nTo exemplify how the API is to be consumed, consider a fake GET resource endpoint invocation below:\n\n```\ncurl --request GET 'https://{{public-api-url}}/v1/resource/123' \\\n--header 'Authorization: Bearer 34fdabeeafds=' --header 'X-Store-Id: 321'\n```\n\n|      Header      | Description |\n| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n|`Authorization`   | Standard HTTP header is used to associate the request with the originating invoker. The content of this header is a `Bearer` token generated from you client_secret, defined in the [API Auth](#/section/Guides/API-Auth) guide.|\n|`X-Store-Id`      | The ID of the store in your system this call acts on behalf of. |\n\n_All resource endpoints expect the `Authorization` header, the remaining headers are explicitly stated in the individual endpoint documentation section._\n\nWith these headers, the system will:\n - Validate the client token, making sure the call is originating from a trusted source.\n - Validate that the Application has the permission to access the `v1/resource/{id}` resource via the Application's pre-configured scopes.\n - Translate your X-Store-Id to our internal store ID (e.g. `AAA`).\n - Validate and retrieve resource `AAA`, that is associated to your Application via store id `321`.\n\nPOST/PUT methods will look similar to the GET calls, but they'll take in a body in the HTTP request (default to the application/json content-type).\n\n```\ncurl --location --request POST 'https://{{public-api-url}}/v1/resource' \\\n--header 'Authorization: Bearer 34fdabeeafds=' --header 'X-Store-Id: 321'\n--data '{\"foo\": \"bar\"}'\n```\n\n## API Authentication/Authorization\n\n<SecurityDefinitions />\n\n## Webhook\n\nThe Public API is able to send notifications to your system via HTTP POST requests.\n\nEvery webhook is signed using HMAC-SHA256 that is present in the header `X-HMAC-SHA256`, and you can also authenticate the requests using Basic Auth, Bearer Token or HMAC-SHA1 (legacy). Please, refer to [**Webhook Authentication Guide**](/docs/guides-webhook-authentication/) for more details.\n\n_Please work with your Account Representative to setup your Application's Webhook configurations._\n\n```\nExample Base-URL = https://{{your-server-url}}/webhook\n```\n\n### Notification Schema\n\n| **Name**                | **Type** | **Description**                                                      |\n| ------------------------| ---------| -------------------------------------------------------------------- |\n| eventId                 | string   | Unique id of the event.                                              |\n| eventTime               | string   | The time the event occurred.                                         |\n| eventType               | string   | The type of event (e.g. create_order).                               |\n| metadata.storeId        | string   | Id of the store for which the event is being published.              |\n| metadata.applicationId  | string   | Id of the application for which the event is being published.        |\n| metadata.resourceId     | string   | The external identifier of the resource that this event refers to.   |\n| metadata.resourceHref   | string   | The endpoint to fetch the details of the resource.                   |\n| metadata.payload        | object   | The event object which will be detailed in each Webhook description. |\n\n### Notification Request Example\n\n```\ncurl --location --request POST 'https://{{your-server-url}}/webhook' \\\n--header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36' \\\n--header 'Authorization: MAC <hash signature>' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n   \"eventId\": \"123456\",\n   \"eventTime\": \"2020-10-10T20:06:02:123Z\",\n   \"eventType\": \"orders.new_order\",\n   \"metadata\": {\n      \"storeId\": \"755fd19a-7562-487a-b615-171a9f89d669\",\n      \"applicationId\": \"e22f94b3-967c-4e26-bf39-9e364066b68b\",\n      \"resourceHref\": \"https://{{public-api-url}}/v1/orders/bf9f1d81-f213-496e-a026-91b6af44996c\",\n      \"resourceId\": \"bf9f1d81-f213-496e-a026-91b6af44996c\",\n      \"payload\": {}\n   }\n}\n```\n\n### Expected Response\n\nThe partner application should return an HTTP 200 response code with an empty response body to acknowledge receipt of the webhook event.\n## Rate Limiting\nPlease, refer to [**Rate Limiting Guide**](/docs/guides-rate-limiting/) for more details.\n\n## Error codes\nThe APIs use standard HTTP status codes to indicate the success or failure of a request. Error codes are divided into two categories: 4XX codes for client-side errors and 5xx codes for server-side errors.\n### 4XX Client-Side Errors\nClient-side errors are indicated by status codes in the 4xx range. These errors are typically the result of a problem with the request made by your application.\nIf a client-side error occurs, our API will return a response that includes an appropriate error message. This message will provide information about the cause of the error. The aim of these messages is to assist you in identifying and resolving the issue.\nFor example, if you submit a request with missing or invalid parameters, you might receive a 400 Bad Request error with a message indicating which parameters were missing or incorrect.\n### 5XX Server-Side Errors\nServer-side errors are represented by status codes in the 5xx range. These errors suggest a problem with our server, not with your application's request.\nServer-side errors are typically transient, meaning they are temporary. If a server-side error occurs, we recommend that the client retries the same request with the exact same parameters.\nFor example, if you get a 500 Internal Server Error, it's possible that our server is suffering a temporary problem. In such cases, retrying the request after a short delay is often successful.\nIf you continually receive server-side errors, reach out to our support team for further assistance.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Account Pairing Endpoints Organization Endpoints API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organization Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Otter Get the Organization Managed by the User.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/organization/v1/organization",
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Get the Organization Managed by the User."
+        },
+        {
+          "info": {
+            "name": "Otter Get a Brand of the Organization Managed by the User.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/organization/v1/organization/brands/:brandId",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Get a Brand of the Organization Managed by the User."
+        },
+        {
+          "info": {
+            "name": "Otter Get the List of Brands of the Organization Managed by the User.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/organization/v1/organization/brands",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Get the List of Brands of the Organization Managed by the User."
+        },
+        {
+          "info": {
+            "name": "Otter Get a Store of the Organization Managed by the User.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/organization/v1/organization/brands/:brandId/stores/:storeId",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Get a Store of the Organization Managed by the User."
+        },
+        {
+          "info": {
+            "name": "Otter Get the List of Stores of a Given Brand.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/organization/v1/organization/brands/:brandId/stores",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Get the List of Stores of a Given Brand."
+        },
+        {
+          "info": {
+            "name": "Otter Get the Partner Application Connection with the Selected Store.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{public-api-url}/organization/v1/organization/brands/:brandId/stores/:storeId/connection",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Get the Partner Application Connection with the Selected Store."
+        },
+        {
+          "info": {
+            "name": "Otter Create a Connection for the Partner Application with the Selected Store.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{public-api-url}/organization/v1/organization/brands/:brandId/stores/:storeId/connection",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Create a Connection for the Partner Application with the Selected Store."
+        },
+        {
+          "info": {
+            "name": "Otter Delete the Connection Between the Partner Application and the Selected Store.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{public-api-url}/organization/v1/organization/brands/:brandId/stores/:storeId/connection",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/v1/auth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Otter Delete the Connection Between the Partner Application and the Selected Store."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
