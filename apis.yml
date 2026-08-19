@@ -33,7 +33,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/otter/refs/heads/main/apis.yml
 created: '2026-06-02'
 modified: '2026-06-03'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: otter:otter-account-pairing-endpoints-api
   name: Otter Account Pairing Endpoints API
