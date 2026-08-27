@@ -568,6 +568,87 @@ apis:
     url: json-structure/
   - type: Examples
     url: examples/
+- aid: otter:otter-account-pairing-webhooks-api
+  name: Otter Account Pairing Webhooks API
+  description: >-
+    The Account Pairing Webhooks API from Otter — 0 operation(s) for account pairing webhooks.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Account Pairing Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-account-pairing-webhooks-api-openapi.yml
+- aid: otter:otter-delivery-webhooks-api
+  name: Otter Delivery Webhooks API
+  description: The Delivery Webhooks API from Otter — 0 operation(s) for delivery webhooks.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Delivery Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-delivery-webhooks-api-openapi.yml
+- aid: otter:otter-manager-orders-webhooks-api
+  name: Otter Manager Orders Webhooks API
+  description: The Manager Orders Webhooks API from Otter — 0 operation(s) for manager orders webhooks.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Manager Orders Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-manager-orders-webhooks-api-openapi.yml
+- aid: otter:otter-menus-webhooks-api
+  name: Otter Menus Webhooks API
+  description: The Menus Webhooks API from Otter — 0 operation(s) for menus webhooks.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Menus Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-menus-webhooks-api-openapi.yml
+- aid: otter:otter-orders-webhooks-api
+  name: Otter Orders Webhooks API
+  description: The Orders Webhooks API from Otter — 0 operation(s) for orders webhooks.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Orders Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-orders-webhooks-api-openapi.yml
+- aid: otter:otter-ping-webhooks-api
+  name: Otter Ping Webhooks API
+  description: The Ping Webhooks API from Otter — 0 operation(s) for ping webhooks.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Ping Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-ping-webhooks-api-openapi.yml
+- aid: otter:otter-reports-webhooks-api
+  name: Otter Reports Webhooks API
+  description: The Reports Webhooks API from Otter — 0 operation(s) for reports webhooks.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Reports Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-reports-webhooks-api-openapi.yml
+- aid: otter:otter-storefront-webhooks-api
+  name: Otter Storefront Webhooks API
+  description: The Storefront Webhooks API from Otter — 0 operation(s) for storefront webhooks.
+  humanURL: https://developer-guides.tryotter.com/docs/
+  baseURL: https://{public-api-url}
+  tags:
+  - Storefront Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/otter-storefront-webhooks-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/otter-agentic-access.yml
