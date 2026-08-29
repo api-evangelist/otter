@@ -9,6 +9,19 @@ description: >-
   an application, configuring webhooks, and onboarding stores; authentication and the account-specific base URL are
   provisioned through an Otter account representative.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
@@ -650,6 +663,10 @@ apis:
   - type: OpenAPI
     url: openapi/otter-storefront-webhooks-api-openapi.yml
 common:
+  - type: IssueTracker
+    url: https://github.com/api-evangelist/otter/issues
+  - type: SecurityPolicy
+    url: https://github.com/api-evangelist/otter/tree/main/security
   - type: AgenticAccess
     url: agentic-access/otter-agentic-access.yml
   - type: DomainSecurity
