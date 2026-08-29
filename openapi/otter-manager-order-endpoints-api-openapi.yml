@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Public Account Pairing Endpoints Manager Order Endpoints API
   description: "# Overview\n\nThe API endpoints are developed around [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) principles secure via the OAuth2.0 protocol.\n\nBeyond the entry points, the API also provides a line of communication into your system via [webhooks](https://en.wikipedia.org/wiki/Webhook).\n\nFor testing purposes, we offer a staging environment. Also, more detailed information about the business rules and workflows can be found on the [**Documentation Section**](/docs/)\n\n## Versioning\nEach API is versioned individually, but we follow these rules:\n- Non breaking changes (eg: adding new fields) are added in the current version without previous communication\n- Breaking changes (fields removal, semantic changed or schema update) have the version incremented\n- Users will be notified about new versions and will be given time to migrate (the time will be set on a case by case basis)\n- Once users migrate to the new version, we will deprecate the old ones\n- Once there is a new version for an API, we won't accept new integrations targeting old versions\n\n## API General Definitions\nThe APIs use resource-oriented URLs communicating, primarily, via JSON and leveraging the HTTP headers, [response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), and verbs.\n\nTo exemplify how the API is to be consumed, consider a fake GET resource endpoint invocation below:\n\n```\ncurl --request GET 'https://{{public-api-url}}/v1/resource/123' \\\n--header 'Authorization: Bearer 34fdabeeafds=' --header 'X-Store-Id: 321'\n```\n\n|      Header      | Description |\n| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n|`Authorization`   | Standard HTTP header is used to associate the request with the originating invoker. The content of this header is a `Bearer` token generated from you client_secret, defined in the [API Auth](#/section/Guides/API-Auth) guide.|\n|`X-Store-Id`      | The ID of the store in your system this call acts on behalf of. |\n\n_All resource endpoints expect the `Authorization` header, the remaining headers are explicitly stated in the individual endpoint documentation section._\n\nWith these headers, the system will:\n - Validate the client token, making sure the call is originating from a trusted source.\n - Validate that the Application has the permission to access the `v1/resource/{id}` resource via the Application's pre-configured scopes.\n - Translate your X-Store-Id to our internal store ID (e.g. `AAA`).\n - Validate and retrieve resource `AAA`, that is associated to your Application via store id `321`.\n\nPOST/PUT methods will look similar to the GET calls, but they'll take in a body in the HTTP request (default to the application/json content-type).\n\n```\ncurl --location --request POST 'https://{{public-api-url}}/v1/resource' \\\n--header 'Authorization: Bearer 34fdabeeafds=' --header 'X-Store-Id: 321'\n--data '{\"foo\": \"bar\"}'\n```\n\n## API Authentication/Authorization\n\n<SecurityDefinitions />\n\n## Webhook\n\nThe Public API is able to send notifications to your system via HTTP POST requests.\n\nEvery webhook is signed using HMAC-SHA256 that is present in the header `X-HMAC-SHA256`, and you can also authenticate the requests using Basic Auth, Bearer Token or HMAC-SHA1 (legacy). Please, refer to [**Webhook Authentication Guide**](/docs/guides-webhook-authentication/) for more details.\n\n_Please work with your Account Representative to setup your Application's Webhook configurations._\n\n```\nExample Base-URL = https://{{your-server-url}}/webhook\n```\n\n### Notification Schema\n\n| **Name**                | **Type** | **Description**                                                      |\n| ------------------------| ---------| -------------------------------------------------------------------- |\n| eventId                 | string   | Unique id of the event.                                              |\n| eventTime               | string   | The time the event occurred.                                         |\n| eventType               | string   | The type of event (e.g. create_order).                               |\n| metadata.storeId        | string   | Id of the store for which the event is being published.              |\n| metadata.applicationId  | string   | Id of the application for which the event is being published.        |\n| metadata.resourceId     | string   | The external identifier of the resource that this event refers to.   |\n| metadata.resourceHref   | string   | The endpoint to fetch the details of the resource.                   |\n| metadata.payload        | object   | The event object which will be detailed in each Webhook description. |\n\n### Notification Request Example\n\n```\ncurl --location --request POST 'https://{{your-server-url}}/webhook' \\\n--header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36' \\\n--header 'Authorization: MAC <hash signature>' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n   \"eventId\": \"123456\",\n   \"eventTime\": \"2020-10-10T20:06:02:123Z\",\n   \"eventType\": \"orders.new_order\",\n   \"metadata\": {\n      \"storeId\": \"755fd19a-7562-487a-b615-171a9f89d669\",\n      \"applicationId\": \"e22f94b3-967c-4e26-bf39-9e364066b68b\",\n      \"resourceHref\": \"https://{{public-api-url}}/v1/orders/bf9f1d81-f213-496e-a026-91b6af44996c\",\n      \"resourceId\": \"bf9f1d81-f213-496e-a026-91b6af44996c\",\n      \"payload\": {}\n   }\n}\n```\n\n### Expected Response\n\nThe partner application should return an HTTP 200 response code with an empty response body to acknowledge receipt of the webhook event.\n## Rate Limiting\nPlease, refer to [**Rate Limiting Guide**](/docs/guides-rate-limiting/) for more details.\n\n## Error codes\nThe APIs use standard HTTP status codes to indicate the success or failure of a request. Error codes are divided into two categories: 4XX codes for client-side errors and 5xx codes for server-side errors.\n### 4XX Client-Side Errors\nClient-side errors are indicated by status codes in the 4xx range. These errors are typically the result of a problem with the request made by your application.\nIf a client-side error occurs, our API will return a response that includes an appropriate error message. This message will provide information about the cause of the error. The aim of these messages is to assist you in identifying and resolving the issue.\nFor example, if you submit a request with missing or invalid parameters, you might receive a 400 Bad Request error with a message indicating which parameters were missing or incorrect.\n### 5XX Server-Side Errors\nServer-side errors are represented by status codes in the 5xx range. These errors suggest a problem with our server, not with your application's request.\nServer-side errors are typically transient, meaning they are temporary. If a server-side error occurs, we recommend that the client retries the same request with the exact same parameters.\nFor example, if you get a 500 Internal Server Error, it's possible that our server is suffering a temporary problem. In such cases, retrying the request after a short delay is often successful.\nIf you continually receive server-side errors, reach out to our support team for further assistance."
@@ -508,13 +508,170 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Address:
+    PreparationTime:
+      type:
+      - object
+      - 'null'
+      description: Preparation time information for an order.
+      properties:
+        estimatedPreparationTime:
+          type: string
+          description: Preparation time estimated by the order provider. Use the Standard ISO 8601 Duration format (E.g. PT1H30M for 1 hour, 30 minutes).
+          example: PT30M
+    ManagerItemIssue:
+      required:
+      - code
       type: object
-      nullable: true
+      properties:
+        code:
+          type: string
+          description: The error code indicating the type of error
+          enum:
+          - UNKNOWN
+          - ITEM_MISMATCH
+          - INCOMPLETE_MENU
+          - NO_PARENT_ENTITY
+          - MULTIPLE_PARENT_ENTITIES
+          - MISCONFIGURED_INTEGRATION
+          - INVALID_PARENT_ENTITY_SETUP
+          - CATEGORY_MISSING
+          - EXTERNAL_MODIFIER_GROUP_MISSING
+          - INTERNAL_MODIFIER_GROUP_MISSING
+          example: ITEM_MISMATCH
+        description:
+          type: string
+          description: A friendly description describing what went wrong
+          example: Item not found
+      description: A detailed issue encountered with this item or modifier
+    SignatureRequirement:
+      type:
+      - object
+      - 'null'
+      properties:
+        enabled:
+          type: boolean
+          description: Marks the signature requirement as required.
+          example: true
+        collectSignerName:
+          type: boolean
+          description: Whether the signer's name should be collected.
+          example: true
+        collectSignerRelationship:
+          type: boolean
+          description: Whether the signer's relationship with the intended recipient should be collected.
+          example: true
+      description: Enables and configure the signature requirement.
+    PaymentDetailsBecs:
+      type: object
+      description: Details of a BECS payment method in Australia.
+      properties:
+        mandateStatus:
+          $ref: '#/components/schemas/MandateStatus'
+        lastFour:
+          type: string
+          description: The last four digits of the BECS account.
+          example: '3210'
+        bsbNumber:
+          type: string
+          description: The BSB number of the BECS account.
+          example: 062-001
+        mandateId:
+          type: string
+          description: The mandate ID for the BECS account.
+          example: becs_mandate_789
+        url:
+          type: string
+          description: The URL for the BECS payment details.
+          example: http://example.com/becs
+    StoreId:
+      type: string
+      description: The unique identifier of the store in the partner application. This ID, along with the `Application ID`, will be used to match the correct store when performing operations. It cannot be longer than 255 characters and must only contain printable ASCII characters. During on-boarding, this ID will be similar to `onboarding:905bb725-b141-4a9b-832a-1f254f772c94` (where the UUID is the Internal Store ID). During off-boarding, this field will be filled with the last known Store ID, or with an empty string, in case none is found. In that case, please fall back to the provided `internalStoreId` (a.k.a. Sku-Sku ID).
+      example: partner-store-unique-identifier
+    RecordProviderType:
+      type: string
+      enum:
+      - ALLINPAY
+      - CHECKOUT
+      - CSS
+      - MERCADO_PAGO
+      - OLIVENETWORKS
+      - SHOUQIANBA
+      - STRIPE
+      - UNIONPAY
+      - VAN_DAOU
+      - VAN_JTNET
+      - VAN_KICC
+      - VAN_KIS
+      - VAN_KOVAN
+      - VAN_KSNET
+      - VAN_NICE
+      - VAN_SMARTRO
+      - UNKNOWN
+      example: STRIPE
+      description: The type of payment provider.
+    SourceExternalIdentifiers:
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          type: string
+          description: Unique ID for the order that was placed.
+          example: 69f60a06-c335-46d9-b5a1-97f1a211c514
+        friendlyId:
+          type: string
+          description: ID used for driver pickup and restaurant management.
+          example: ABCDE
+        source:
+          type: string
+          description: Describes the source of the order, typically from a food ordering marketplace.
+          example: ubereats
+        sourceType:
+          type: string
+          description: source type of the order
+          enum:
+          - POINT_OF_SALE
+          - ORDERING_MARKETPLACE
+          - AGGREGATOR
+          - CUSTOMER_INTERACTION
+          example: POINT_OF_SALE
+        sourceExternalIdentifiers:
+          $ref: '#/components/schemas/SourceExternalIdentifiers'
+      description: The external identifiers.
+    QuantityUpdatedModification:
+      required:
+      - customerItemIds
+      - quantity
+      - oldQuantity
+      type: object
+      properties:
+        customerItemIds:
+          type: array
+          description: Unique IDs for the ordered customer items (station item can map to multiple).
+          minItems: 1
+          items:
+            type: string
+        quantity:
+          type: number
+          minimum: 0
+          format: int32
+          description: New quantity (0 to remove item).
+          example: 1.0
+        oldQuantity:
+          type: number
+          minimum: 0
+          format: int32
+          description: Previous quantity.
+          example: 1.0
+    Address:
+      type:
+      - object
+      - 'null'
       properties:
         fullAddress:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Full, human comprehensible address. It is usually formatted in the order appropriate for your locale.
           example: 123 Sample Street Ste 100, San Francisco, CA 94103
         postalCode:
@@ -534,8 +691,9 @@ components:
           description: CLDR country code. See http://cldr.unicode.org/
           example: US
         addressLines:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           description: Address lines (e.g. street, PO Box, or company name) or the full single line address (e.g. street, city, state, country, zip).
           example:
           - 1600 Pennsylvania Avenue NW
@@ -543,8 +701,9 @@ components:
           items:
             type: string
         linesOfAddress:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           deprecated: true
           description: 'Deprecated: use addressLines. Address lines (e.g. street, PO Box, or company name) or the full single line address (e.g. street, city, state, country, zip).'
           example:
@@ -555,244 +714,41 @@ components:
         location:
           $ref: '#/components/schemas/Location'
       description: Order delivery address.
-    PromotionDetails:
-      type: object
-      nullable: true
-      description: Order promotion details.
-      properties:
-        externalId:
-          type: string
-          description: External promotion identifier.
-          example: store_123
-        name:
-          type: string
-          description: Promotion name.
-          example: 20% off, up to $5
-        value:
-          type: number
-          description: Promotion value.
-          example: 2
-    CardFundingType:
-      type: string
-      enum:
-      - UNKNOWN
-      - CREDIT
-      - DEBIT
-      - PREPAID
-      description: The funding type of the card.
-      example: CREDIT
-    ManagerConfirmOrderRequest:
-      type: object
-      properties:
-        estimatedPrepTimeMinutes:
-          type: integer
-          nullable: true
-          description: Estimated order preparation time in minutes.
-          example: 15
-      description: The request to confirm an order.
     Person:
-      type: object
-      nullable: true
+      type:
+      - object
+      - 'null'
       properties:
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The person's name as it should be displayed.
           example: Jane Doe
           maxLength: 255
         phone:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The person's phone number.
           example: +1-555-555-5555
           maxLength: 25
         phoneCode:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: A code or extension of the phone number.
           example: 111 11 111
           maxLength: 25
         email:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The person's email address.
           example: email@email.com
         personalIdentifiers:
           $ref: '#/components/schemas/PersonalIdentifiers'
       description: The recipient information.
-    AccountHolderType:
-      type: string
-      enum:
-      - INDIVIDUAL
-      - COMPANY
-      description: The type of account holder.
-      example: INDIVIDUAL
-    OrderExternalIdentifiers:
-      required:
-      - friendlyId
-      - id
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique ID for the order that was placed.
-          example: 69f60a06-c335-46d9-b5a1-97f1a211c514
-        friendlyId:
-          type: string
-          description: ID used for driver pickup and restaurant management.
-          example: ABCDE
-        source:
-          type: string
-          nullable: true
-          description: Describes the source of the order, typically from a food ordering marketplace.
-          example: ubereats
-        sourceType:
-          type: string
-          nullable: true
-          description: source type of the order
-          enum:
-          - POINT_OF_SALE
-          - ORDERING_MARKETPLACE
-          - AGGREGATOR
-          - CUSTOMER_INTERACTION
-          example: POINT_OF_SALE
-        sourceExternalIdentifiers:
-          nullable: true
-          $ref: '#/components/schemas/SourceExternalIdentifiers'
-      description: The external identifiers.
-    OrderTotalV2:
-      required:
-      - customerTotal
-      type: object
-      nullable: true
-      properties:
-        customerTotal:
-          nullable: false
-          allOf:
-          - $ref: '#/components/schemas/FinancialData'
-        customerPayment:
-          nullable: true
-          description: The customer perspective, each price field in this model is meant to represent the values the customer paid/received and how. Values must match amounts and payment methods described in customerPayments.
-          allOf:
-          - $ref: '#/components/schemas/CustomerPaymentV2'
-        payout:
-          nullable: true
-          description: Breakdown of net payout received by the store. Optional object, should be provided when payout information is available during the order lifecycle.
-          allOf:
-          - $ref: '#/components/schemas/Payout'
-      description: V2 for details about values of the order, provides richer objects allowing to capture taxes, misc charges, payments more precisely.
-    ItemAddedModification:
-      required:
-      - addedItem
-      type: object
-      properties:
-        addedItem:
-          $ref: '#/components/schemas/Item'
-          description: The customer item added to the order. Include any modifiers on this item via its modifiers array.
-    ManagerOrderIssue:
-      required:
-      - code
-      type: object
-      properties:
-        code:
-          type: string
-          description: The specific issues with this item
-          enum:
-          - UNKNOWN
-          - MENU_RESOLUTION_FAILED
-          - NO_SUPPORTED_POS
-          - VALIDATION_ONLY
-          - POS_VENDOR_ERROR
-          - INTERNAL_ERROR
-          - MISCONFIGURED_INTEGRATION
-          - CANCEL_FAILED
-          example: MENU_RESOLUTION_FAILED
-        description:
-          type: string
-          description: A friendly description describing what went wrong
-          example: Order contains unreconciled items
-      description: Issue codes for issues encountered when processing a manager order
-    ErrorMessage:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error description.
-          example: The request body is invalid.
-        details:
-          type: array
-          description: The error details.
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-      description: The error response object.
-    OrderTotal:
-      required:
-      - subtotal
-      type: object
-      properties:
-        subtotal:
-          type: number
-          description: The order's subtotal, as the sum of all item and modifier prices.
-          example: 11.97
-        claimedSubtotal:
-          type: number
-          nullable: true
-          description: The order's claimed subtotal, without guaranteeing this will match calculated subtotal.
-          example: 1.0
-        discount:
-          type: number
-          nullable: true
-          description: Any discount amount for the order.
-          example: 1
-        tax:
-          type: number
-          nullable: true
-          description: Tax paid by the customer.
-          example: 1.1
-        tip:
-          type: number
-          nullable: true
-          description: Tip paid by the customer.
-          example: 2
-        deliveryFee:
-          type: number
-          nullable: true
-          description: Delivery fee.
-          example: 5
-        total:
-          type: number
-          nullable: true
-          description: Order total including everything paid by the customer.
-          example: 19.07
-        couponCode:
-          type: string
-          nullable: true
-          description: Coupon code applied to the order.
-          example: VWXYZ98765
-      description: Details about values of the order.
-    ErrorDetail:
-      type: object
-      properties:
-        attribute:
-          type: string
-          description: The error attribute.
-          example: Order Currency Code
-        message:
-          type: string
-          description: The error detail description.
-          example: Order Currency Code must be exactly 3 characters
-      description: The error detail response object.
-    OrderComponentId:
-      type: object
-      properties:
-        orderComponentId:
-          type: string
-          description: The id of the order component for the order component ticket.
-          example: 69f60a06-c335-46d9-b5a1-97f1a211c514
-        orderComponentOrderId:
-          type: string
-          description: The id of the order for the order component ticket.
-          example: 69f60a06-c335-46d9-b5a1-97f1a211c514
     PaymentDetailsSepa:
       type: object
       description: Details of a SEPA payment method in EU countries.
@@ -827,260 +783,71 @@ components:
           type: string
           description: The URL for the SEPA payment details.
           example: http://example.com/sepa
-    AccountType:
-      type: string
-      enum:
-      - CHECKING
-      - SAVINGS
-      description: The type of ACH account.
-      example: CHECKING
-    Location:
-      required:
-      - latitude
-      - longitude
-      type: object
-      nullable: true
+    FulfillmentInfo:
+      type:
+      - object
+      - 'null'
       properties:
-        latitude:
-          type: number
-          description: The latitude of the location.
-          format: double
-          example: 38.8977
-        longitude:
-          type: number
-          description: The longitude of the location.
-          format: double
-          example: 77.0365
-      description: Latitude and longitude of the address.
-    ManagerCancelOrderRequest:
-      required:
-      - cancellationReason
-      type: object
-      properties:
-        cancellationReason:
+        pickupTime:
+          type:
+          - string
+          - 'null'
+          description: Time (in UTC) specified by the provider when the courier or customer is expected to pick up the order.
+          format: date-time
+          example: '2007-12-03T10:15:30+01:00'
+        estimatedPickupTime:
+          type:
+          - string
+          - 'null'
+          description: Time (in UTC) estimated by the platform when the courier or customer is likely to pick up the order.  This estimation takes into account preparation time, order readiness, and other logistical factors.
+          format: date-time
+          example: '2007-12-03T10:15:30+01:00'
+        deliveryTime:
+          type:
+          - string
+          - 'null'
+          description: Estimated time (in UTC) when the order is expected to be delivered. This should be filled in if FulfillmentMode is delivery.
+          format: date-time
+          example: '2007-12-03T10:15:30+01:00'
+        fulfillmentMode:
           type: string
-          description: The reason for cancellation.
+          description: How an order is expected to be fulfilled.
+          default: DELIVERY
           enum:
-          - REASON_UNKNOWN
-          - DUPLICATE_ORDER
-          - UNAVAILABLE_ITEM
-          - FRAUDULENT_EATER
-          - RESTAURANT_INTERNAL_ISSUE
-          - KITCHEN_CLOSED
-          - CUSTOMER_CALLED_TO_CANCEL
-          - RESTAURANT_TOO_BUSY
-          - CANNOT_COMPLETE_CUSTOMER_REQUEST
-          - UNACCEPTED_ORDER
-          - RESTAURANT_CANCELED
-          - AUTOMATICALLY_CANCELED
-          - LATE_DELIVERY
-          - COURIER_NOT_FOUND
-          - CUSTOMER_NOT_FOUND
-          - UNABLE_TO_DELIVER
-          - ALL_ITEMS_OUT_OF_STOCK
-          - ALL_ITEMS_EXPIRED
-          - ALL_ITEMS_DAMAGED
-          - LABOR_UNAVAILABLE
-          - REASON_OTHER
-          example: REASON_UNKNOWN
-        cancelingParty:
-          $ref: '#/components/schemas/Person'
-      description: The request to cancel an order.
-    CardBrandType:
-      type: string
-      enum:
-      - UNKNOWN
-      - AMEX
-      - DINERS_CLUB
-      - DISCOVER
-      - JCB
-      - MASTERCARD
-      - UNION_PAY
-      - VISA
-      - GIROCARD
-      - EFTPOS_AU
-      - INTERAC
-      description: The brand of the card.
-      example: VISA
-    CardInfo:
-      required:
-      - paymentNetwork
-      - type
-      type: object
-      nullable: true
-      deprecated: true
-      description: Additional card information.
-      properties:
-        paymentNetwork:
-          type: string
-          description: The payment network (aka card brand or card scheme) for this card.
+          - DELIVERY
+          - RESTAURANT_DELIVERY
+          - PICKUP
+          - DINE_IN
+          - DRIVE_THROUGH
+          example: DELIVERY
+        schedulingType:
+          type:
+          - string
+          - 'null'
+          description: Describes whether this order should be cooked as soon as possible, or some time in the future. Please use the pickupTime and/or deliveryTime to indicate when. If no scheduling type is provided, we assume the order should be prepared as soon as possible.
           enum:
-          - MASTERCARD
-          - MASTERCARD_MAESTRO
-          - VISA
-          - AMEX
-          - DINERS
-          - ELO
-          - HIPERCARD
-          - BANRICOMPRAS
-          - NUGO
-          - GOODCARD
-          - ELO_MAIS
-          - GREENCARD
-          - VEROCARD
-          - COOPER
-          - NUTRICARD
-          - VR
-          - SODEXO
-          - OTHER
-          example: MASTERCARD
-        type:
-          type: string
-          description: The payment type of the card.
+          - ASAP
+          - FIXED_TIME
+          example: ASAP
+        courierStatus:
+          type:
+          - string
+          - 'null'
+          description: The status of the courier.
           enum:
-          - CREDIT
-          - DEBIT
-          - VOUCHER
-          - OTHER
-          example: CREDIT
-    SourceExternalIdentifiers:
-      type: object
-      nullable: true
-      properties:
-        id:
-          type: string
-          description: Unique ID for the order that was placed.
-          example: 69f60a06-c335-46d9-b5a1-97f1a211c514
-        friendlyId:
-          type: string
-          description: ID used for driver pickup and restaurant management.
-          example: ABCDE
-        source:
-          type: string
-          description: Describes the source of the order, typically from a food ordering marketplace.
-          example: ubereats
-        sourceType:
-          type: string
-          description: source type of the order
-          enum:
-          - POINT_OF_SALE
-          - ORDERING_MARKETPLACE
-          - AGGREGATOR
-          - CUSTOMER_INTERACTION
-          example: POINT_OF_SALE
-        sourceExternalIdentifiers:
-          nullable: true
-          $ref: '#/components/schemas/SourceExternalIdentifiers'
-      description: The external identifiers.
-    CustomerPaymentV2:
-      type: object
-      nullable: true
-      properties:
-        customerPaymentDue:
-          type: number
-          nullable: true
-          description: The portion of the overall order cost that will be collected when the order is delivered, or when picked up by the customer at the store. This field should not be set if the order was pre-paid.
-          example: 1
-        customerPrepayment:
-          type: number
-          nullable: true
-          description: The portion of the overall order cost that was paid upfront by the customer (online payment), with the remaining portion in the customerPaymentDue. In most cases the order value will be covered entirely by prepayment or entirely by payment_due. But in some cases mixing is allowed.
-          example: 1
-        customerAmountToReturn:
-          type: number
-          nullable: true
-          description: "Change (cash back) to be returned to the customer by the courier or store when the order has payment due value.\n\n Scenario:\n 1. Customer places an order for $7.50.\n 2. In the service app, after selecting Cash as payment type, the customer is presented with an additional field to indicate that order will be paid with a single $20 bill.\n 3. When the order is delivered, the courier should have $12.50 in cash on hand to complete the transaction.\n"
-          example: 1
-        paymentDueToRestaurant:
-          type: number
-          nullable: true
-          description: The portion of the overall order cost that was received directly by restaurant/store when the order is delivered or picked up. Should be used when customerPaymentDue is set. If payment due is entirely received by the store, customerPaymentDue and paymentDueToRestaurant will have the same value.
-          example: 1
-      description: Details about customer payment.
-    Item:
-      required:
-      - quantity
-      type: object
-      properties:
-        quantity:
-          minimum: 1
-          maximum: 1000
-          type: integer
-          description: The quantity of the item ordered by the customer.
-          format: int32
-          example: 1
-        skuPrice:
-          type: number
-          nullable: true
-          description: The stored sku price of this item
-          readOnly: true
-          example: 5.9
-        id:
-          type: string
-          nullable: true
-          description: The unique ID of the item.
-          example: 33e0418f-3d56-4360-ba03-18fc5f8844a3
-        lineItemId:
-          type: string
-          nullable: true
-          description: The unique ID of the instance of an item in an order. Instances of the same item across different orders will have different line item IDs. Multiple instances of the same item in one order will have different line item IDs if their modifiers are different.
-          readOnly: true
-          example: 2f91f9f3-2d7e-4898-ae81-00fe06ed7dbf
-        skuId:
-          type: string
-          nullable: true
-          description: sku ID of the item.
-          example: 867b8fdc-cf7b-4fc3-b7e0-4c7b68d8b1cc
-        name:
-          type: string
-          nullable: true
-          description: The name of the item as displayed to the customer.
-          example: Juicy Cheeseburger
-        note:
-          type: string
-          nullable: true
-          description: An optional item-level note provided by the customer.
-          example: Please cook to well done!
-        categoryId:
-          deprecated: true
-          type: string
-          nullable: true
-          description: The unique ID of the category of this item.
-          example: 303de078-870d-4349-928b-946869d4d69b
-        internalCategoryId:
-          type: string
-          nullable: true
-          description: Otter's internal identifier for the item's category
-          example: 76a66bba-48fb-4bac-80ee-2616a5ca1ab9
-        categoryName:
-          deprecated: true
-          type: string
-          nullable: true
-          description: The name of the category of this item.
-          example: Burgers
-        internalCategoryName:
-          type: string
-          nullable: true
-          description: Otter's internal name for the item's category
-          example: Burgers
-        stationId:
-          type: string
-          nullable: true
-          description: The ID of the station the item is assigned to.
-          readOnly: true
-          example: 5247b8a1-77de-4844-b024-cb59fcec59bd
-        price:
-          type: number
-          nullable: true
-          description: The price of the sold item.
-          example: 5.9
-        modifiers:
-          type: array
-          nullable: true
-          description: Modifiers to the base item.
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/ItemModifier'
+          - COURIER_ASSIGNED
+          - COURIER_ON_ROUTE_TO_PICKUP
+          - COURIER_ARRIVED
+          - COURIER_PICKED_UP_FOOD
+          - COURIER_COMPLETED
+          example: COURIER_ASSIGNED
+        tableIdentifier:
+          type:
+          - string
+          - 'null'
+          description: The table identification for dine-in orders.
+          example: R-45
+      description: Information on order fulfillment.
     ManagerOrderCancelDetails:
       required:
       - cancelSource
@@ -1095,351 +862,6 @@ components:
           - SERVICE_PROVIDER
           example: UNKNOWN
       description: Details about a canceled manager order
-    PaymentDetailsBecs:
-      type: object
-      description: Details of a BECS payment method in Australia.
-      properties:
-        mandateStatus:
-          $ref: '#/components/schemas/MandateStatus'
-        lastFour:
-          type: string
-          description: The last four digits of the BECS account.
-          example: '3210'
-        bsbNumber:
-          type: string
-          description: The BSB number of the BECS account.
-          example: 062-001
-        mandateId:
-          type: string
-          description: The mandate ID for the BECS account.
-          example: becs_mandate_789
-        url:
-          type: string
-          description: The URL for the BECS payment details.
-          example: http://example.com/becs
-    PaymentDetailsCard:
-      type: object
-      description: Details of a card payment method.
-      properties:
-        brandType:
-          $ref: '#/components/schemas/CardBrandType'
-        expiration:
-          type: object
-          properties:
-            year:
-              type: integer
-              description: The expiration year of the card.
-              example: 2025
-            month:
-              type: integer
-              description: The expiration month of the card.
-              example: 12
-        fundingType:
-          $ref: '#/components/schemas/CardFundingType'
-        walletType:
-          $ref: '#/components/schemas/CardWalletType'
-        lastFour:
-          type: string
-          description: The last four digits of the card.
-          example: '1234'
-        walletLastFour:
-          type: string
-          description: The last four digits of the wallet account.
-          example: '5678'
-        authorizationCode:
-          type: string
-          description: The authorization code for the card.
-          example: auth_code_123
-        applicationPreferredName:
-          type: string
-          description: The preferred name of the application.
-          example: MyApp
-        fingerprint:
-          type: string
-          description: The fingerprint of the card.
-          example: fingerprint_abc123
-        readMethod:
-          type: string
-          description: The method used to read the card.
-          example: chip
-    CompositeFinanceLine:
-      required:
-      - breakdown
-      type: object
-      properties:
-        breakdown:
-          type: array
-          minItems: 1
-          description: Breakdown values for the finance line.
-          items:
-            $ref: '#/components/schemas/SimpleFinanceLine'
-      description: composite finance line can represent a value, tax and VAT for a given line as a list of SimpleFinanceLine objects
-    PictureRequirement:
-      type: object
-      nullable: true
-      properties:
-        enabled:
-          type: boolean
-          description: Marks the picture requirement as required.
-          example: true
-      description: Enables and configure the picture requirement.
-    MandateStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
-      - PENDING
-      description: The status of the mandate.
-      example: ACTIVE
-    SignatureRequirement:
-      type: object
-      nullable: true
-      properties:
-        enabled:
-          type: boolean
-          description: Marks the signature requirement as required.
-          example: true
-        collectSignerName:
-          type: boolean
-          description: Whether the signer's name should be collected.
-          example: true
-        collectSignerRelationship:
-          type: boolean
-          description: Whether the signer's relationship with the intended recipient should be collected.
-          example: true
-      description: Enables and configure the signature requirement.
-    PaymentDetailsBacs:
-      type: object
-      description: Details of a BACS payment method in the UK.
-      properties:
-        mandateStatus:
-          $ref: '#/components/schemas/MandateStatus'
-        lastFour:
-          type: string
-          description: The last four digits of the BACS account.
-          example: '9876'
-        sortCode:
-          type: string
-          description: The sort code of the BACS account.
-          example: 12-34-56
-        mandateId:
-          type: string
-          description: The mandate ID for the BACS account.
-          example: mandate_123
-        reference:
-          type: string
-          description: The reference for the BACS payment.
-          example: reference_abc
-        url:
-          type: string
-          description: The URL for the BACS payment details.
-          example: http://example.com/bacs
-    VerificationRequirements:
-      type: object
-      nullable: true
-      properties:
-        signatureRequirement:
-          $ref: '#/components/schemas/SignatureRequirement'
-        pictureRequirement:
-          $ref: '#/components/schemas/PictureRequirement'
-      description: Verification requirements for the delivery.
-    PaymentDetailsAch:
-      type: object
-      description: Details of a debit ACH payment method in the US.
-      properties:
-        accountHolderType:
-          $ref: '#/components/schemas/AccountHolderType'
-        accountType:
-          $ref: '#/components/schemas/AccountType'
-        mandateStatus:
-          $ref: '#/components/schemas/MandateStatus'
-        lastFour:
-          type: string
-          description: The last four digits of the ACH account.
-          example: '7890'
-        routingNumber:
-          type: string
-          description: The routing number of the ACH account.
-          example: '123456789'
-        bankName:
-          type: string
-          description: The name of the bank.
-          example: Example Bank
-        mandateId:
-          type: string
-          description: The mandate ID for the ACH account.
-          example: ach_mandate_345
-    ManagerItemIssue:
-      required:
-      - code
-      type: object
-      properties:
-        code:
-          type: string
-          description: The error code indicating the type of error
-          enum:
-          - UNKNOWN
-          - ITEM_MISMATCH
-          - INCOMPLETE_MENU
-          - NO_PARENT_ENTITY
-          - MULTIPLE_PARENT_ENTITIES
-          - MISCONFIGURED_INTEGRATION
-          - INVALID_PARENT_ENTITY_SETUP
-          - CATEGORY_MISSING
-          - EXTERNAL_MODIFIER_GROUP_MISSING
-          - INTERNAL_MODIFIER_GROUP_MISSING
-          example: ITEM_MISMATCH
-        description:
-          type: string
-          description: A friendly description describing what went wrong
-          example: Item not found
-      description: A detailed issue encountered with this item or modifier
-    QuantityUpdatedModification:
-      required:
-      - customerItemIds
-      - quantity
-      - oldQuantity
-      type: object
-      properties:
-        customerItemIds:
-          type: array
-          description: Unique IDs for the ordered customer items (station item can map to multiple).
-          minItems: 1
-          items:
-            type: string
-        quantity:
-          type: number
-          minimum: 0
-          format: int32
-          description: New quantity (0 to remove item).
-          example: 1.0
-        oldQuantity:
-          type: number
-          minimum: 0
-          format: int32
-          description: Previous quantity.
-          example: 1.0
-    PaymentRecord:
-      type: object
-      description: Represents the details and metadata of a payment method used in transactions.
-      properties:
-        otterPaymentRecordId:
-          type: string
-          description: The identifier for the payment record in the Otter system, for reference.
-          example: otter_123456789
-        recordProviderType:
-          description: The type of payment provider.
-          $ref: '#/components/schemas/RecordProviderType'
-        recordPaymentType:
-          description: The type of payment method.
-          $ref: '#/components/schemas/RecordPaymentType'
-        paymentRecordId:
-          type: string
-          description: The identifier for the payment record from the payment provider.
-          example: pm_123456789
-        payerId:
-          type: string
-          description: The identifier for the payer from the payment provider.
-          example: payer_123456789
-        balanceTransactionId:
-          type: string
-          description: The balance transaction ID from the payment provider.
-          example: ext_bt_123456789
-        paymentDetails:
-          description: One of the possible payment method details, depending on the payment method type.
-          oneOf:
-          - $ref: '#/components/schemas/PaymentDetailsCard'
-          - $ref: '#/components/schemas/PaymentDetailsBacs'
-          - $ref: '#/components/schemas/PaymentDetailsAcss'
-          - $ref: '#/components/schemas/PaymentDetailsBecs'
-          - $ref: '#/components/schemas/PaymentDetailsSepa'
-          - $ref: '#/components/schemas/PaymentDetailsAch'
-    CardWalletType:
-      type: string
-      enum:
-      - UNKNOWN
-      - APPLE_PAY
-      - GOOGLE_PAY
-      description: The type of wallet associated with the card.
-      example: APPLE_PAY
-    PaymentDetailsAcss:
-      type: object
-      description: Details of an ACSS payment method in Canada.
-      properties:
-        mandateStatus:
-          $ref: '#/components/schemas/MandateStatus'
-        acceptedAt:
-          type: string
-          format: date-time
-          description: The timestamp when the mandate was accepted.
-          example: '2023-01-01T12:00:00Z'
-        lastFour:
-          type: string
-          description: The last four digits of the ACSS account.
-          example: '6543'
-        transitNumber:
-          type: string
-          description: The transit number of the ACSS account.
-          example: '11001'
-        institutionNumber:
-          type: string
-          description: The institution number of the ACSS account.
-          example: '001'
-        bankName:
-          type: string
-          description: The name of the bank.
-          example: Bank of Examples
-        mandateId:
-          type: string
-          description: The mandate ID for the ACSS account.
-          example: acss_mandate_456
-        transactionType:
-          type: string
-          description: The type of transaction.
-          example: recurring
-        intervalDescription:
-          type: string
-          description: The description of the transaction interval.
-          example: monthly
-    Payout:
-      type: object
-      nullable: true
-      properties:
-        payoutFromServiceProvider:
-          type: number
-          nullable: true
-          description: Payout amount that will be received from service provider (usually the order source).
-          example: 1
-        payoutFrom3rdParty:
-          type: number
-          nullable: true
-          description: Payout amount that will be received from any 3rd party organization involved.
-          example: 1
-        cashPayout:
-          type: number
-          nullable: true
-          description: Payout amount received from orders paid in cash directly to the store.
-          example: 1
-      description: Details on payout.
-    OrderCustomerItemsUpdateRequest:
-      required:
-      - customerItemModifications
-      type: object
-      properties:
-        currencyCode:
-          type: string
-          description: 3-letter currency code (ISO 4217) for monetary values in this request (e.g. delta in price_adjusted, item/modifier prices in item_added). If omitted, USD is used.
-          minLength: 3
-          maxLength: 3
-          example: USD
-          nullable: true
-        customerItemModifications:
-          type: array
-          description: List of modifications to apply (quantity change, price adjustment, or item added).
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/CustomerItemModification'
-      description: Request to update order customer items. Only supported for dine-in orders when slug is d2c-eater-website and the order tab is open. Modifying party and modification request ID are set by the endpoint.
     CustomerPayment:
       required:
       - paymentMethod
@@ -1470,9 +892,10 @@ components:
           - GIFT_CARD
           example: CASH
         paymentAuthorizer:
-          type: string
+          type:
+          - string
+          - 'null'
           description: A payment system type responsible for a card transaction (containing information for payment network and payment type).
-          nullable: true
           enum:
           - UNKNOWN_TYPE
           - OTHER_TYPE
@@ -1531,22 +954,260 @@ components:
           - PIX
           example: UNKNOWN_TYPE
         cardInfo:
-          nullable: true
           deprecated: true
           $ref: '#/components/schemas/CardInfo'
         externalPaymentType:
-          type: string
+          type:
+          - string
+          - 'null'
           description: External payment type string. Should be only used if not mapped by any value of paymentAuthorizer, and it's value is OTHER_TYPE.
-          nullable: true
           example: string
         paymentRecords:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           description: '[WIP - in development, not supported yet] List of payment records, including method and card details and ids from payment processing entities.'
           items:
             $ref: '#/components/schemas/PaymentRecord'
         loyaltyInfo:
           $ref: '#/components/schemas/LoyaltyInfo'
+    PersonalIdentifiers:
+      type:
+      - object
+      - 'null'
+      properties:
+        taxIdentificationNumber:
+          type:
+          - string
+          - 'null'
+          description: Person tax identification number.
+          example: 1234567890
+        serviceProviderId:
+          type:
+          - string
+          - 'null'
+          description: External service provider ID i.e. Courier Id.
+          example: 12345ba6-789e-123f-4e56-d78db90d123b
+      description: The person's personal identifiers (e.g. tax identification number).
+    VerificationRequirements:
+      type:
+      - object
+      - 'null'
+      properties:
+        signatureRequirement:
+          $ref: '#/components/schemas/SignatureRequirement'
+        pictureRequirement:
+          $ref: '#/components/schemas/PictureRequirement'
+      description: Verification requirements for the delivery.
+    ManagerOrderIssues:
+      type: object
+      properties:
+        orderIssues:
+          type: array
+          description: The specific issues with this order
+          items:
+            $ref: '#/components/schemas/ManagerOrderIssue'
+        itemIssues:
+          type: array
+          description: The specific issues with individual items or modifiers on this order
+          items:
+            $ref: '#/components/schemas/ManagerItemIssues'
+      description: Manager order issues
+    ErrorDetail:
+      type: object
+      properties:
+        attribute:
+          type: string
+          description: The error attribute.
+          example: Order Currency Code
+        message:
+          type: string
+          description: The error detail description.
+          example: Order Currency Code must be exactly 3 characters
+      description: The error detail response object.
+    OrderPrepTimeUpdateRequest:
+      required:
+      - prepTimeMinutes
+      type: object
+      properties:
+        prepTimeMinutes:
+          type: integer
+          description: The requested preparation time to transition the order to.
+          example: 1780000000000
+      description: The request to change an order prep time.
+    MandateStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - PENDING
+      description: The status of the mandate.
+      example: ACTIVE
+    ManagerConfirmOrderRequest:
+      type: object
+      properties:
+        estimatedPrepTimeMinutes:
+          type:
+          - integer
+          - 'null'
+          description: Estimated order preparation time in minutes.
+          example: 15
+      description: The request to confirm an order.
+    CompositeFinanceLine:
+      required:
+      - breakdown
+      type: object
+      properties:
+        breakdown:
+          type: array
+          minItems: 1
+          description: Breakdown values for the finance line.
+          items:
+            $ref: '#/components/schemas/SimpleFinanceLine'
+      description: composite finance line can represent a value, tax and VAT for a given line as a list of SimpleFinanceLine objects
+    OrderWithManagerInfo:
+      required:
+      - order
+      - injectionState
+      - injectionEvent
+      type: object
+      properties:
+        order:
+          $ref: '#/components/schemas/Order'
+        injectionState:
+          type: string
+          description: Current Manager injection state
+          enum:
+          - UNKNOWN
+          - PENDING
+          - SUCCEEDED
+          - FAILED_ATTEMPT
+          - MANUAL_INJECTION_SUCCEEDED
+          - MANUAL_INJECTION_REQUIRED
+          - SUCCEEDED_WITH_UNLINKED_ITEM
+          - ORDER_CANCELED
+          - ORDER_CANCEL_FAILED
+          - ORDER_REJECTED
+          - ORDER_REJECT_FAILED
+          - RE_INJECTION_REQUESTED
+          - RE_INJECTION_PENDING
+          example: UNKNOWN
+        orderCancelDetails:
+          description: If canceled - specific details about why this order was canceled
+          $ref: '#/components/schemas/ManagerOrderCancelDetails'
+        injectionEvent:
+          type: string
+          description: The order event that triggered order injection into manager
+          enum:
+          - UNKNOWN
+          - ORDER_CREATE
+          - ORDER_ACCEPT
+          - ORDER_IMPORT
+          - ORDER_RE_INJECT
+          example: UNKNOWN
+        orderIssues:
+          description: Issues encountered with this manager order
+          $ref: '#/components/schemas/ManagerOrderIssues'
+      description: An order placed by a customer with manager injection details
+    SimpleFinanceLine:
+      required:
+      - subType
+      - name
+      - value
+      type: object
+      properties:
+        subType:
+          type: string
+          enum:
+          - VALUE
+          - TAX
+          - VALUE_WITH_TAX
+          - VAT
+          description: type of the finance line.
+          example: VALUE
+        name:
+          type: string
+          description: name of the finance line.
+          example: sales tax.
+        value:
+          type: number
+          description: money amount.
+          example: 3.4
+      description: simple finance line.
+    CardInfo:
+      required:
+      - paymentNetwork
+      - type
+      type:
+      - object
+      - 'null'
+      deprecated: true
+      description: Additional card information.
+      properties:
+        paymentNetwork:
+          type: string
+          description: The payment network (aka card brand or card scheme) for this card.
+          enum:
+          - MASTERCARD
+          - MASTERCARD_MAESTRO
+          - VISA
+          - AMEX
+          - DINERS
+          - ELO
+          - HIPERCARD
+          - BANRICOMPRAS
+          - NUGO
+          - GOODCARD
+          - ELO_MAIS
+          - GREENCARD
+          - VEROCARD
+          - COOPER
+          - NUTRICARD
+          - VR
+          - SODEXO
+          - OTHER
+          example: MASTERCARD
+        type:
+          type: string
+          description: The payment type of the card.
+          enum:
+          - CREDIT
+          - DEBIT
+          - VOUCHER
+          - OTHER
+          example: CREDIT
+    Courier:
+      type:
+      - object
+      - 'null'
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: The person's name as it should be displayed.
+          example: Jane Doe
+        phone:
+          type:
+          - string
+          - 'null'
+          description: The person's phone number.
+          example: +1-555-555-5555
+        phoneCode:
+          type:
+          - string
+          - 'null'
+          description: A code or extension of the phone number.
+          example: 111 11 111
+        email:
+          type:
+          - string
+          - 'null'
+          description: The person's email address.
+          example: email@email.com
+        personalIdentifiers:
+          $ref: '#/components/schemas/PersonalIdentifiers'
+      description: Details about the delivery courier.
     CustomerItemModification:
       type: object
       description: One modification to apply. Exactly one of quantityUpdated, priceAdjusted, or itemAdded must be set.
@@ -1567,6 +1228,29 @@ components:
         - priceAdjusted
       - required:
         - itemAdded
+    ErrorMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error description.
+          example: The request body is invalid.
+        details:
+          type: array
+          description: The error details.
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+      description: The error response object.
+    PictureRequirement:
+      type:
+      - object
+      - 'null'
+      properties:
+        enabled:
+          type: boolean
+          description: Marks the picture requirement as required.
+          example: true
+      description: Enables and configure the picture requirement.
     OrderPriceAdjustedModification:
       required:
       - delta
@@ -1576,267 +1260,446 @@ components:
           type: number
           description: Total adjustment on the order (positive = up charge, negative = refund).
           example: -2.5
-    FulfillmentInfo:
+    PaymentDetailsBacs:
       type: object
-      nullable: true
+      description: Details of a BACS payment method in the UK.
       properties:
-        pickupTime:
+        mandateStatus:
+          $ref: '#/components/schemas/MandateStatus'
+        lastFour:
           type: string
-          nullable: true
-          description: Time (in UTC) specified by the provider when the courier or customer is expected to pick up the order.
-          format: date-time
-          example: '2007-12-03T10:15:30+01:00'
-        estimatedPickupTime:
+          description: The last four digits of the BACS account.
+          example: '9876'
+        sortCode:
           type: string
-          nullable: true
-          description: Time (in UTC) estimated by the platform when the courier or customer is likely to pick up the order.  This estimation takes into account preparation time, order readiness, and other logistical factors.
-          format: date-time
-          example: '2007-12-03T10:15:30+01:00'
-        deliveryTime:
+          description: The sort code of the BACS account.
+          example: 12-34-56
+        mandateId:
           type: string
-          nullable: true
-          description: Estimated time (in UTC) when the order is expected to be delivered. This should be filled in if FulfillmentMode is delivery.
-          format: date-time
-          example: '2007-12-03T10:15:30+01:00'
-        fulfillmentMode:
+          description: The mandate ID for the BACS account.
+          example: mandate_123
+        reference:
           type: string
-          description: How an order is expected to be fulfilled.
-          default: DELIVERY
-          enum:
-          - DELIVERY
-          - RESTAURANT_DELIVERY
-          - PICKUP
-          - DINE_IN
-          - DRIVE_THROUGH
-          example: DELIVERY
-        schedulingType:
+          description: The reference for the BACS payment.
+          example: reference_abc
+        url:
           type: string
-          nullable: true
-          description: Describes whether this order should be cooked as soon as possible, or some time in the future. Please use the pickupTime and/or deliveryTime to indicate when. If no scheduling type is provided, we assume the order should be prepared as soon as possible.
-          enum:
-          - ASAP
-          - FIXED_TIME
-          example: ASAP
-        courierStatus:
-          type: string
-          nullable: true
-          description: The status of the courier.
-          enum:
-          - COURIER_ASSIGNED
-          - COURIER_ON_ROUTE_TO_PICKUP
-          - COURIER_ARRIVED
-          - COURIER_PICKED_UP_FOOD
-          - COURIER_COMPLETED
-          example: COURIER_ASSIGNED
-        tableIdentifier:
-          type: string
-          nullable: true
-          description: The table identification for dine-in orders.
-          example: R-45
-      description: Information on order fulfillment.
-    DeliveryInfo:
+          description: The URL for the BACS payment details.
+          example: http://example.com/bacs
+    CustomerPaymentV2:
+      type:
+      - object
+      - 'null'
+      properties:
+        customerPaymentDue:
+          type:
+          - number
+          - 'null'
+          description: The portion of the overall order cost that will be collected when the order is delivered, or when picked up by the customer at the store. This field should not be set if the order was pre-paid.
+          example: 1
+        customerPrepayment:
+          type:
+          - number
+          - 'null'
+          description: The portion of the overall order cost that was paid upfront by the customer (online payment), with the remaining portion in the customerPaymentDue. In most cases the order value will be covered entirely by prepayment or entirely by payment_due. But in some cases mixing is allowed.
+          example: 1
+        customerAmountToReturn:
+          type:
+          - number
+          - 'null'
+          description: "Change (cash back) to be returned to the customer by the courier or store when the order has payment due value.\n\n Scenario:\n 1. Customer places an order for $7.50.\n 2. In the service app, after selecting Cash as payment type, the customer is presented with an additional field to indicate that order will be paid with a single $20 bill.\n 3. When the order is delivered, the courier should have $12.50 in cash on hand to complete the transaction.\n"
+          example: 1
+        paymentDueToRestaurant:
+          type:
+          - number
+          - 'null'
+          description: The portion of the overall order cost that was received directly by restaurant/store when the order is delivered or picked up. Should be used when customerPaymentDue is set. If payment due is entirely received by the store, customerPaymentDue and paymentDueToRestaurant will have the same value.
+          example: 1
+      description: Details about customer payment.
+    FinancialData:
+      required:
+      - foodSales
       type: object
-      nullable: true
       properties:
-        courier:
-          $ref: '#/components/schemas/Courier'
-        destination:
-          $ref: '#/components/schemas/Address'
-        licensePlate:
-          type: string
-          nullable: true
-          description: License plate of a vehicle used by the courier.
-          example: ABC 123
-        makeModel:
-          type: string
-          nullable: true
-          description: Make and model of a vehicle used by the courier.
-          example: Honda CR-V
-        lastKnownLocation:
-          $ref: '#/components/schemas/Location'
-        dropoffInstructions:
-          $ref: '#/components/schemas/DropoffInstructions'
-        note:
-          type: string
-          nullable: true
-          description: Special delivery instructions, if any.
-          example: Gate code 123
-      description: Information on order's delivery process.
-    RecordProviderType:
+        foodSales:
+          description: Breakdown of the total value of items within the order.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        feeForRestaurantProvidedDelivery:
+          description: Extra charge to the customer when order is delivered by the store itself.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        restaurantFundedDiscount:
+          description: Discount funded by the restaurant.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        voucherDiscount:
+          description: Discount provided by voucher.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        promotionDiscount:
+          description: Discount provided by item promotion.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        operatorDiscount:
+          description: Discount provided by operator when the order was placed.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        loyaltyDiscount:
+          description: Discount provided by loyalty programs.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        tipForRestaurant:
+          description: Tip for the restaurant.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        adjustments:
+          description: Any adjustments that may happen to the order total value.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        packingFee:
+          description: Fee charged to the customer for the process of packing and fulfilling the order.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        bagFee:
+          description: Fee charged to the customer for providing bags for the order.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        serviceProviderDiscount:
+          description: Discount funded by the service provider (order source).
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        tipForServiceProviderCourier:
+          description: Tip for the courier from the service provider.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        feeForServiceProviderDelivery:
+          description: Fee charged to the customer for a delivery provided by the service provider.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        smallOrderFee:
+          description: Fee charged to the customer when the order value is less than the minimum value.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        serviceFee:
+          description: Any service fees charged by the service provider to the customer.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        otherFee:
+          description: All the extra costs that the customer has to pay, are different from tips, delivery fees, bag fees, packing fees, and service fees.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        netPayout:
+          description: The net payout received by the store.
+          allOf:
+          - $ref: '#/components/schemas/CompositeFinanceLine'
+        couponCodes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Any codes entered by the customer at order checkout.
+          example:
+          - TACOWED5OFF
+      description: "Breakdown of order values. Represents total values, fees, discounts, and any possible adjustments that may happen in the order value.\n\nBreakdown lists can be used to represent aggregate values (e.g. order total value) or, when available, can accurately represent the values of each item/fee/tax/charges related to the order.\n\nAll objects in breakdown lists have a required property \"subType\". Allowed values are:\n\n**VALUE**: represent the net value of the order/item/fee. Should be used in the following cases:\n - when the amount does not contain taxes or VAT\n - when tax/VAT is a known value, in that case, the list must contain an object with subtype TAX or VAT representing this value.\n\n**TAX**: represent the tax value for the order/item/fee. Should be used when tax amount is available, in that case, this information should be part of the breakdown list with the \"VALUE\" as the net amount, example below:\n\n\n  ```\n    \"breakdown\": [\n        {\n            \"name\": \"Item 1\",\n            \"value\": 10,\n            \"subType\": \"VALUE\"\n        },\n        {\n            \"name\": \"Item 1 - Tax\",\n            \"value\": 2,\n            \"subType\": \"TAX\"\n        }\n    ]\n  ```\n\n\n**VAT**: represents the amount for value-added tax. Should be used when the order/item/fee contains VAT. In that case,  this information should be part of the breakdown list with the \"VALUE\" as net amount, example below:\n\n\n  ```\n    \"breakdown\": [\n        {\n            \"name\": \"Item 1\",\n            \"value\": 12,\n            \"subType\": \"VALUE\"\n        },\n        {\n            \"name\": \"Item 1 - Tax\",\n            \"value\": 2,\n            \"subType\": \"VAT\"\n        }\n    ]\n  ```\n\n\n**VALUE_WITH_TAX**: represents the gross value of the order/item/fee. Should be used when the value includes tax/VAT and values related to taxation are not available.\n\n\n  ```\n    \"breakdown\": [\n        {\n            \"name\": \"Item 1\",\n            \"value\": 12,\n            \"subType\": \"VALUE_WITH_TAX\"\n        }\n    ]\n  ```"
+    CardBrandType:
       type: string
       enum:
-      - ALLINPAY
-      - CHECKOUT
-      - CSS
-      - MERCADO_PAGO
-      - OLIVENETWORKS
-      - SHOUQIANBA
-      - STRIPE
-      - UNIONPAY
-      - VAN_DAOU
-      - VAN_JTNET
-      - VAN_KICC
-      - VAN_KIS
-      - VAN_KOVAN
-      - VAN_KSNET
-      - VAN_NICE
-      - VAN_SMARTRO
       - UNKNOWN
-      example: STRIPE
-      description: The type of payment provider.
-    SimpleFinanceLine:
+      - AMEX
+      - DINERS_CLUB
+      - DISCOVER
+      - JCB
+      - MASTERCARD
+      - UNION_PAY
+      - VISA
+      - GIROCARD
+      - EFTPOS_AU
+      - INTERAC
+      description: The brand of the card.
+      example: VISA
+    LoyaltyInfo:
+      type:
+      - object
+      - 'null'
+      description: The customer's loyalty information.
+      properties:
+        hasMembershipPass:
+          type: boolean
+          description: Indicates if the customer has a membership pass.
+          example: true
+    OrderTotalV2:
       required:
-      - subType
-      - name
-      - value
-      type: object
+      - customerTotal
+      type:
+      - object
+      - 'null'
       properties:
-        subType:
-          type: string
-          nullable: false
-          enum:
-          - VALUE
-          - TAX
-          - VALUE_WITH_TAX
-          - VAT
-          description: type of the finance line.
-          example: VALUE
-        name:
-          type: string
-          nullable: false
-          description: name of the finance line.
-          example: sales tax.
-        value:
-          type: number
-          nullable: false
-          description: money amount.
-          example: 3.4
-      description: simple finance line.
-    DropoffInstructions:
-      type: object
-      nullable: true
-      properties:
-        dropoffType:
-          type: string
-          description: The drop-off type for the delivery.
-          enum:
-          - MEET_AT_DOOR
-          - LEAVE_AT_DOOR
-          - MEET_IN_LOBBY
-          example: MEET_AT_DOOR
-        verificationRequirements:
-          $ref: '#/components/schemas/VerificationRequirements'
-      description: Requirements to verify the completion of the delivery.
-    OrderPrepTimeUpdateRequest:
+        customerTotal:
+          allOf:
+          - $ref: '#/components/schemas/FinancialData'
+        customerPayment:
+          description: The customer perspective, each price field in this model is meant to represent the values the customer paid/received and how. Values must match amounts and payment methods described in customerPayments.
+          allOf:
+          - $ref: '#/components/schemas/CustomerPaymentV2'
+        payout:
+          description: Breakdown of net payout received by the store. Optional object, should be provided when payout information is available during the order lifecycle.
+          allOf:
+          - $ref: '#/components/schemas/Payout'
+      description: V2 for details about values of the order, provides richer objects allowing to capture taxes, misc charges, payments more precisely.
+    Item:
       required:
-      - prepTimeMinutes
+      - quantity
       type: object
       properties:
-        prepTimeMinutes:
+        quantity:
+          minimum: 1
+          maximum: 1000
           type: integer
-          description: The requested preparation time to transition the order to.
-          example: 1780000000000
-      description: The request to change an order prep time.
-    Courier:
-      type: object
-      nullable: true
-      properties:
+          description: The quantity of the item ordered by the customer.
+          format: int32
+          example: 1
+        skuPrice:
+          type:
+          - number
+          - 'null'
+          description: The stored sku price of this item
+          readOnly: true
+          example: 5.9
+        id:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the item.
+          example: 33e0418f-3d56-4360-ba03-18fc5f8844a3
+        lineItemId:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the instance of an item in an order. Instances of the same item across different orders will have different line item IDs. Multiple instances of the same item in one order will have different line item IDs if their modifiers are different.
+          readOnly: true
+          example: 2f91f9f3-2d7e-4898-ae81-00fe06ed7dbf
+        skuId:
+          type:
+          - string
+          - 'null'
+          description: sku ID of the item.
+          example: 867b8fdc-cf7b-4fc3-b7e0-4c7b68d8b1cc
         name:
-          type: string
-          description: The person's name as it should be displayed.
-          nullable: true
-          example: Jane Doe
-        phone:
-          type: string
-          description: The person's phone number.
-          nullable: true
-          example: +1-555-555-5555
-        phoneCode:
-          type: string
-          nullable: true
-          description: A code or extension of the phone number.
-          example: 111 11 111
-        email:
-          type: string
-          description: The person's email address.
-          nullable: true
-          example: email@email.com
-        personalIdentifiers:
-          $ref: '#/components/schemas/PersonalIdentifiers'
-      description: Details about the delivery courier.
-    Order:
-      required:
-      - currencyCode
-      - externalIdentifiers
-      - status
-      type: object
-      properties:
-        externalIdentifiers:
-          $ref: '#/components/schemas/OrderExternalIdentifiers'
-        currencyCode:
-          maxLength: 3
-          minLength: 3
-          type: string
-          description: The 3-letter currency code (ISO 4217) to use for all monetary values in this order.
-          example: EUR
-        status:
-          type: string
-          description: The status of the order.
-          enum:
-          - NEW_ORDER
-          - CONFIRMED
-          - PICKED_UP
-          - CANCELED
-          - FULFILLED
-          - PREPARED
-          - REJECTED
-          - UNKNOWN
-          example: NEW_ORDER
-        items:
-          type: array
-          description: Items ordered.
+          type:
+          - string
+          - 'null'
+          description: The name of the item as displayed to the customer.
+          example: Juicy Cheeseburger
+        note:
+          type:
+          - string
+          - 'null'
+          description: An optional item-level note provided by the customer.
+          example: Please cook to well done!
+        categoryId:
+          deprecated: true
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the category of this item.
+          example: 303de078-870d-4349-928b-946869d4d69b
+        internalCategoryId:
+          type:
+          - string
+          - 'null'
+          description: Otter's internal identifier for the item's category
+          example: 76a66bba-48fb-4bac-80ee-2616a5ca1ab9
+        categoryName:
+          deprecated: true
+          type:
+          - string
+          - 'null'
+          description: The name of the category of this item.
+          example: Burgers
+        internalCategoryName:
+          type:
+          - string
+          - 'null'
+          description: Otter's internal name for the item's category
+          example: Burgers
+        stationId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the station the item is assigned to.
+          readOnly: true
+          example: 5247b8a1-77de-4844-b024-cb59fcec59bd
+        price:
+          type:
+          - number
+          - 'null'
+          description: The price of the sold item.
+          example: 5.9
+        modifiers:
+          type:
+          - array
+          - 'null'
+          description: Modifiers to the base item.
           maxItems: 100
           items:
-            $ref: '#/components/schemas/Item'
-        orderedAt:
-          type: string
-          nullable: true
-          description: The date (in UTC) when the order was placed by the customer.
-          format: date-time
-          example: '2007-12-03T10:15:30+01:00'
-        customer:
-          $ref: '#/components/schemas/Person'
-        customerNote:
-          type: string
-          nullable: true
-          description: An order-level note provided by the customer.
-          example: Please include extra napkins!
-        deliveryInfo:
-          $ref: '#/components/schemas/DeliveryInfo'
-        orderTotal:
-          nullable: true
-          $ref: '#/components/schemas/OrderTotal'
-        orderTotalV2:
-          nullable: true
-          $ref: '#/components/schemas/OrderTotalV2'
-        customerPayments:
+            $ref: '#/components/schemas/ItemModifier'
+    AccountHolderType:
+      type: string
+      enum:
+      - INDIVIDUAL
+      - COMPANY
+      description: The type of account holder.
+      example: INDIVIDUAL
+    OrderFeed:
+      required:
+      - orders
+      type: object
+      properties:
+        orders:
           type: array
-          nullable: true
-          description: Details about the payments made by the customer.
+          description: Array of Orders
           items:
-            $ref: '#/components/schemas/CustomerPayment'
-        fulfillmentInfo:
-          $ref: '#/components/schemas/FulfillmentInfo'
-        promotionsDetails:
+            $ref: '#/components/schemas/Order'
+        offsetToken:
+          type: string
+          description: Opaque token used to fetch the following page. If not set, no more orders are available.
+          example: H12MAF2fFaFFFa
+      description: An order feed response
+    OrderCustomerItemsUpdateRequest:
+      required:
+      - customerItemModifications
+      type: object
+      properties:
+        currencyCode:
+          type:
+          - string
+          - 'null'
+          description: 3-letter currency code (ISO 4217) for monetary values in this request (e.g. delta in price_adjusted, item/modifier prices in item_added). If omitted, USD is used.
+          minLength: 3
+          maxLength: 3
+          example: USD
+        customerItemModifications:
           type: array
-          nullable: true
-          description: '[WIP - in development, not supported yet] Details about the promotions applied to this order. The sum of values should be equal to the sum of order total discounts."'
+          description: List of modifications to apply (quantity change, price adjustment, or item added).
+          minItems: 1
           items:
-            $ref: '#/components/schemas/PromotionDetails'
-        preparationTime:
-          nullable: true
-          $ref: '#/components/schemas/PreparationTime'
-      description: An order placed by a customer.
+            $ref: '#/components/schemas/CustomerItemModification'
+      description: Request to update order customer items. Only supported for dine-in orders when slug is d2c-eater-website and the order tab is open. Modifying party and modification request ID are set by the endpoint.
+    Location:
+      required:
+      - latitude
+      - longitude
+      type:
+      - object
+      - 'null'
+      properties:
+        latitude:
+          type: number
+          description: The latitude of the location.
+          format: double
+          example: 38.8977
+        longitude:
+          type: number
+          description: The longitude of the location.
+          format: double
+          example: 77.0365
+      description: Latitude and longitude of the address.
+    PromotionDetails:
+      type:
+      - object
+      - 'null'
+      description: Order promotion details.
+      properties:
+        externalId:
+          type: string
+          description: External promotion identifier.
+          example: store_123
+        name:
+          type: string
+          description: Promotion name.
+          example: 20% off, up to $5
+        value:
+          type: number
+          description: Promotion value.
+          example: 2
+    Payout:
+      type:
+      - object
+      - 'null'
+      properties:
+        payoutFromServiceProvider:
+          type:
+          - number
+          - 'null'
+          description: Payout amount that will be received from service provider (usually the order source).
+          example: 1
+        payoutFrom3rdParty:
+          type:
+          - number
+          - 'null'
+          description: Payout amount that will be received from any 3rd party organization involved.
+          example: 1
+        cashPayout:
+          type:
+          - number
+          - 'null'
+          description: Payout amount received from orders paid in cash directly to the store.
+          example: 1
+      description: Details on payout.
+    OrderTotal:
+      required:
+      - subtotal
+      type: object
+      properties:
+        subtotal:
+          type: number
+          description: The order's subtotal, as the sum of all item and modifier prices.
+          example: 11.97
+        claimedSubtotal:
+          type:
+          - number
+          - 'null'
+          description: The order's claimed subtotal, without guaranteeing this will match calculated subtotal.
+          example: 1.0
+        discount:
+          type:
+          - number
+          - 'null'
+          description: Any discount amount for the order.
+          example: 1
+        tax:
+          type:
+          - number
+          - 'null'
+          description: Tax paid by the customer.
+          example: 1.1
+        tip:
+          type:
+          - number
+          - 'null'
+          description: Tip paid by the customer.
+          example: 2
+        deliveryFee:
+          type:
+          - number
+          - 'null'
+          description: Delivery fee.
+          example: 5
+        total:
+          type:
+          - number
+          - 'null'
+          description: Order total including everything paid by the customer.
+          example: 19.07
+        couponCode:
+          type:
+          - string
+          - 'null'
+          description: Coupon code applied to the order.
+          example: VWXYZ98765
+      description: Details about values of the order.
     RecordPaymentType:
       type: string
       enum:
@@ -1873,269 +1736,6 @@ components:
       - UNKNOWN
       example: CARD
       description: The type of payment method.
-    FinancialData:
-      required:
-      - foodSales
-      type: object
-      properties:
-        foodSales:
-          nullable: false
-          description: Breakdown of the total value of items within the order.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        feeForRestaurantProvidedDelivery:
-          nullable: true
-          description: Extra charge to the customer when order is delivered by the store itself.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        restaurantFundedDiscount:
-          nullable: true
-          description: Discount funded by the restaurant.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        voucherDiscount:
-          nullable: true
-          description: Discount provided by voucher.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        promotionDiscount:
-          nullable: true
-          description: Discount provided by item promotion.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        operatorDiscount:
-          nullable: true
-          description: Discount provided by operator when the order was placed.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        loyaltyDiscount:
-          nullable: true
-          description: Discount provided by loyalty programs.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        tipForRestaurant:
-          nullable: true
-          description: Tip for the restaurant.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        adjustments:
-          nullable: true
-          description: Any adjustments that may happen to the order total value.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        packingFee:
-          nullable: true
-          description: Fee charged to the customer for the process of packing and fulfilling the order.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        bagFee:
-          nullable: true
-          description: Fee charged to the customer for providing bags for the order.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        serviceProviderDiscount:
-          nullable: true
-          description: Discount funded by the service provider (order source).
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        tipForServiceProviderCourier:
-          nullable: true
-          description: Tip for the courier from the service provider.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        feeForServiceProviderDelivery:
-          nullable: true
-          description: Fee charged to the customer for a delivery provided by the service provider.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        smallOrderFee:
-          nullable: true
-          description: Fee charged to the customer when the order value is less than the minimum value.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        serviceFee:
-          nullable: true
-          description: Any service fees charged by the service provider to the customer.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        otherFee:
-          nullable: true
-          description: All the extra costs that the customer has to pay, are different from tips, delivery fees, bag fees, packing fees, and service fees.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        netPayout:
-          nullable: true
-          description: The net payout received by the store.
-          allOf:
-          - $ref: '#/components/schemas/CompositeFinanceLine'
-        couponCodes:
-          nullable: true
-          type: array
-          items:
-            type: string
-          description: Any codes entered by the customer at order checkout.
-          example:
-          - TACOWED5OFF
-      description: "Breakdown of order values. Represents total values, fees, discounts, and any possible adjustments that may happen in the order value.\n\nBreakdown lists can be used to represent aggregate values (e.g. order total value) or, when available, can accurately represent the values of each item/fee/tax/charges related to the order.\n\nAll objects in breakdown lists have a required property \"subType\". Allowed values are:\n\n**VALUE**: represent the net value of the order/item/fee. Should be used in the following cases:\n - when the amount does not contain taxes or VAT\n - when tax/VAT is a known value, in that case, the list must contain an object with subtype TAX or VAT representing this value.\n\n**TAX**: represent the tax value for the order/item/fee. Should be used when tax amount is available, in that case, this information should be part of the breakdown list with the \"VALUE\" as the net amount, example below:\n\n\n  ```\n    \"breakdown\": [\n        {\n            \"name\": \"Item 1\",\n            \"value\": 10,\n            \"subType\": \"VALUE\"\n        },\n        {\n            \"name\": \"Item 1 - Tax\",\n            \"value\": 2,\n            \"subType\": \"TAX\"\n        }\n    ]\n  ```\n\n\n**VAT**: represents the amount for value-added tax. Should be used when the order/item/fee contains VAT. In that case,  this information should be part of the breakdown list with the \"VALUE\" as net amount, example below:\n\n\n  ```\n    \"breakdown\": [\n        {\n            \"name\": \"Item 1\",\n            \"value\": 12,\n            \"subType\": \"VALUE\"\n        },\n        {\n            \"name\": \"Item 1 - Tax\",\n            \"value\": 2,\n            \"subType\": \"VAT\"\n        }\n    ]\n  ```\n\n\n**VALUE_WITH_TAX**: represents the gross value of the order/item/fee. Should be used when the value includes tax/VAT and values related to taxation are not available.\n\n\n  ```\n    \"breakdown\": [\n        {\n            \"name\": \"Item 1\",\n            \"value\": 12,\n            \"subType\": \"VALUE_WITH_TAX\"\n        }\n    ]\n  ```"
-    LoyaltyInfo:
-      type: object
-      nullable: true
-      description: The customer's loyalty information.
-      properties:
-        hasMembershipPass:
-          type: boolean
-          description: Indicates if the customer has a membership pass.
-          example: true
-    PreparationTime:
-      type: object
-      nullable: true
-      description: Preparation time information for an order.
-      properties:
-        estimatedPreparationTime:
-          type: string
-          description: Preparation time estimated by the order provider. Use the Standard ISO 8601 Duration format (E.g. PT1H30M for 1 hour, 30 minutes).
-          example: PT30M
-    PersonalIdentifiers:
-      type: object
-      nullable: true
-      properties:
-        taxIdentificationNumber:
-          type: string
-          nullable: true
-          description: Person tax identification number.
-          example: 1234567890
-        serviceProviderId:
-          type: string
-          nullable: true
-          description: External service provider ID i.e. Courier Id.
-          example: 12345ba6-789e-123f-4e56-d78db90d123b
-      description: The person's personal identifiers (e.g. tax identification number).
-    ItemModifier:
-      required:
-      - quantity
-      type: object
-      properties:
-        quantity:
-          minimum: 1
-          maximum: 1000
-          type: integer
-          description: The number of times the modifier was applied to the given item.
-          format: int32
-          example: 1
-        skuPrice:
-          type: number
-          nullable: true
-          description: The stored sku price of this item
-          readOnly: true
-          example: 1
-        id:
-          type: string
-          nullable: true
-          description: The unique ID of the modifier product.
-          example: d7a21692-9195-43aa-a58f-5395bba8a804
-        lineItemId:
-          type: string
-          nullable: true
-          description: The unique ID of the instance of a modifier in an order. Instances of the same modifier across different orders will have different line item IDs. Multiple instances of the same modifier in one order will have different line item IDs if their modifiers are different.
-          readOnly: true
-          example: 2f91f9f3-2d7e-4898-ae81-00fe06ed7dbf
-        skuId:
-          type: string
-          nullable: true
-          description: sku ID of the item.
-          example: 867b8fdc-cf7b-4fc3-b7e0-4c7b68d8b1cc
-        name:
-          type: string
-          nullable: true
-          description: The name of the modifier as displayed to the customer.
-          example: Avocado
-        price:
-          type: number
-          nullable: true
-          description: The price of the sold modifier.
-          example: 1
-        groupName:
-          type: string
-          nullable: true
-          description: The parent group of the modifier item
-          example: Add ons
-        groupId:
-          type: string
-          nullable: true
-          description: The unique ID of the parent group
-          example: fb52b138-7ac4-42c1-bfd8-664d57113a41
-        stationId:
-          type: string
-          nullable: true
-          description: The ID of the station the modifier item is assigned to.
-          readOnly: true
-          example: a49cbd3e-94e2-462d-a6de-1985e5d98d1c
-        modifiers:
-          type: array
-          nullable: true
-          description: Nested modifiers applied to the item.
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/ItemModifier'
-    OrderWithManagerInfo:
-      required:
-      - order
-      - injectionState
-      - injectionEvent
-      type: object
-      properties:
-        order:
-          $ref: '#/components/schemas/Order'
-        injectionState:
-          type: string
-          description: Current Manager injection state
-          enum:
-          - UNKNOWN
-          - PENDING
-          - SUCCEEDED
-          - FAILED_ATTEMPT
-          - MANUAL_INJECTION_SUCCEEDED
-          - MANUAL_INJECTION_REQUIRED
-          - SUCCEEDED_WITH_UNLINKED_ITEM
-          - ORDER_CANCELED
-          - ORDER_CANCEL_FAILED
-          - ORDER_REJECTED
-          - ORDER_REJECT_FAILED
-          - RE_INJECTION_REQUESTED
-          - RE_INJECTION_PENDING
-          example: UNKNOWN
-        orderCancelDetails:
-          nullable: true
-          description: If canceled - specific details about why this order was canceled
-          $ref: '#/components/schemas/ManagerOrderCancelDetails'
-        injectionEvent:
-          type: string
-          description: The order event that triggered order injection into manager
-          enum:
-          - UNKNOWN
-          - ORDER_CREATE
-          - ORDER_ACCEPT
-          - ORDER_IMPORT
-          - ORDER_RE_INJECT
-          example: UNKNOWN
-        orderIssues:
-          description: Issues encountered with this manager order
-          $ref: '#/components/schemas/ManagerOrderIssues'
-      description: An order placed by a customer with manager injection details
-    ManagerOrderIssues:
-      type: object
-      properties:
-        orderIssues:
-          type: array
-          description: The specific issues with this order
-          items:
-            $ref: '#/components/schemas/ManagerOrderIssue'
-        itemIssues:
-          type: array
-          description: The specific issues with individual items or modifiers on this order
-          items:
-            $ref: '#/components/schemas/ManagerItemIssues'
-      description: Manager order issues
     ManagerItemIssues:
       type: object
       properties:
@@ -2149,80 +1749,485 @@ components:
           items:
             $ref: '#/components/schemas/ManagerItemIssue'
       description: Manager item or modifier issues
-    StoreId:
-      type: string
-      description: The unique identifier of the store in the partner application. This ID, along with the `Application ID`, will be used to match the correct store when performing operations. It cannot be longer than 255 characters and must only contain printable ASCII characters. During on-boarding, this ID will be similar to `onboarding:905bb725-b141-4a9b-832a-1f254f772c94` (where the UUID is the Internal Store ID). During off-boarding, this field will be filled with the last known Store ID, or with an empty string, in case none is found. In that case, please fall back to the provided `internalStoreId` (a.k.a. Sku-Sku ID).
-      example: partner-store-unique-identifier
-    OrderFeed:
+    PaymentDetailsAch:
+      type: object
+      description: Details of a debit ACH payment method in the US.
+      properties:
+        accountHolderType:
+          $ref: '#/components/schemas/AccountHolderType'
+        accountType:
+          $ref: '#/components/schemas/AccountType'
+        mandateStatus:
+          $ref: '#/components/schemas/MandateStatus'
+        lastFour:
+          type: string
+          description: The last four digits of the ACH account.
+          example: '7890'
+        routingNumber:
+          type: string
+          description: The routing number of the ACH account.
+          example: '123456789'
+        bankName:
+          type: string
+          description: The name of the bank.
+          example: Example Bank
+        mandateId:
+          type: string
+          description: The mandate ID for the ACH account.
+          example: ach_mandate_345
+    PaymentDetailsAcss:
+      type: object
+      description: Details of an ACSS payment method in Canada.
+      properties:
+        mandateStatus:
+          $ref: '#/components/schemas/MandateStatus'
+        acceptedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the mandate was accepted.
+          example: '2023-01-01T12:00:00Z'
+        lastFour:
+          type: string
+          description: The last four digits of the ACSS account.
+          example: '6543'
+        transitNumber:
+          type: string
+          description: The transit number of the ACSS account.
+          example: '11001'
+        institutionNumber:
+          type: string
+          description: The institution number of the ACSS account.
+          example: '001'
+        bankName:
+          type: string
+          description: The name of the bank.
+          example: Bank of Examples
+        mandateId:
+          type: string
+          description: The mandate ID for the ACSS account.
+          example: acss_mandate_456
+        transactionType:
+          type: string
+          description: The type of transaction.
+          example: recurring
+        intervalDescription:
+          type: string
+          description: The description of the transaction interval.
+          example: monthly
+    DeliveryInfo:
+      type:
+      - object
+      - 'null'
+      properties:
+        courier:
+          $ref: '#/components/schemas/Courier'
+        destination:
+          $ref: '#/components/schemas/Address'
+        licensePlate:
+          type:
+          - string
+          - 'null'
+          description: License plate of a vehicle used by the courier.
+          example: ABC 123
+        makeModel:
+          type:
+          - string
+          - 'null'
+          description: Make and model of a vehicle used by the courier.
+          example: Honda CR-V
+        lastKnownLocation:
+          $ref: '#/components/schemas/Location'
+        dropoffInstructions:
+          $ref: '#/components/schemas/DropoffInstructions'
+        note:
+          type:
+          - string
+          - 'null'
+          description: Special delivery instructions, if any.
+          example: Gate code 123
+      description: Information on order's delivery process.
+    ItemAddedModification:
       required:
-      - orders
+      - addedItem
       type: object
       properties:
-        orders:
-          type: array
-          description: Array of Orders
-          items:
-            $ref: '#/components/schemas/Order'
-        offsetToken:
+        addedItem:
+          $ref: '#/components/schemas/Item'
+          description: The customer item added to the order. Include any modifiers on this item via its modifiers array.
+    ManagerCancelOrderRequest:
+      required:
+      - cancellationReason
+      type: object
+      properties:
+        cancellationReason:
           type: string
-          description: Opaque token used to fetch the following page. If not set, no more orders are available.
-          example: H12MAF2fFaFFFa
-      description: An order feed response
+          description: The reason for cancellation.
+          enum:
+          - REASON_UNKNOWN
+          - DUPLICATE_ORDER
+          - UNAVAILABLE_ITEM
+          - FRAUDULENT_EATER
+          - RESTAURANT_INTERNAL_ISSUE
+          - KITCHEN_CLOSED
+          - CUSTOMER_CALLED_TO_CANCEL
+          - RESTAURANT_TOO_BUSY
+          - CANNOT_COMPLETE_CUSTOMER_REQUEST
+          - UNACCEPTED_ORDER
+          - RESTAURANT_CANCELED
+          - AUTOMATICALLY_CANCELED
+          - LATE_DELIVERY
+          - COURIER_NOT_FOUND
+          - CUSTOMER_NOT_FOUND
+          - UNABLE_TO_DELIVER
+          - ALL_ITEMS_OUT_OF_STOCK
+          - ALL_ITEMS_EXPIRED
+          - ALL_ITEMS_DAMAGED
+          - LABOR_UNAVAILABLE
+          - REASON_OTHER
+          example: REASON_UNKNOWN
+        cancelingParty:
+          $ref: '#/components/schemas/Person'
+      description: The request to cancel an order.
+    PaymentRecord:
+      type: object
+      description: Represents the details and metadata of a payment method used in transactions.
+      properties:
+        otterPaymentRecordId:
+          type: string
+          description: The identifier for the payment record in the Otter system, for reference.
+          example: otter_123456789
+        recordProviderType:
+          description: The type of payment provider.
+          $ref: '#/components/schemas/RecordProviderType'
+        recordPaymentType:
+          description: The type of payment method.
+          $ref: '#/components/schemas/RecordPaymentType'
+        paymentRecordId:
+          type: string
+          description: The identifier for the payment record from the payment provider.
+          example: pm_123456789
+        payerId:
+          type: string
+          description: The identifier for the payer from the payment provider.
+          example: payer_123456789
+        balanceTransactionId:
+          type: string
+          description: The balance transaction ID from the payment provider.
+          example: ext_bt_123456789
+        paymentDetails:
+          description: One of the possible payment method details, depending on the payment method type.
+          oneOf:
+          - $ref: '#/components/schemas/PaymentDetailsCard'
+          - $ref: '#/components/schemas/PaymentDetailsBacs'
+          - $ref: '#/components/schemas/PaymentDetailsAcss'
+          - $ref: '#/components/schemas/PaymentDetailsBecs'
+          - $ref: '#/components/schemas/PaymentDetailsSepa'
+          - $ref: '#/components/schemas/PaymentDetailsAch'
+    AccountType:
+      type: string
+      enum:
+      - CHECKING
+      - SAVINGS
+      description: The type of ACH account.
+      example: CHECKING
+    Order:
+      required:
+      - currencyCode
+      - externalIdentifiers
+      - status
+      type: object
+      properties:
+        externalIdentifiers:
+          $ref: '#/components/schemas/OrderExternalIdentifiers'
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: The 3-letter currency code (ISO 4217) to use for all monetary values in this order.
+          example: EUR
+        status:
+          type: string
+          description: The status of the order.
+          enum:
+          - NEW_ORDER
+          - CONFIRMED
+          - PICKED_UP
+          - CANCELED
+          - FULFILLED
+          - PREPARED
+          - REJECTED
+          - UNKNOWN
+          example: NEW_ORDER
+        items:
+          type: array
+          description: Items ordered.
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/Item'
+        orderedAt:
+          type:
+          - string
+          - 'null'
+          description: The date (in UTC) when the order was placed by the customer.
+          format: date-time
+          example: '2007-12-03T10:15:30+01:00'
+        customer:
+          $ref: '#/components/schemas/Person'
+        customerNote:
+          type:
+          - string
+          - 'null'
+          description: An order-level note provided by the customer.
+          example: Please include extra napkins!
+        deliveryInfo:
+          $ref: '#/components/schemas/DeliveryInfo'
+        orderTotal:
+          $ref: '#/components/schemas/OrderTotal'
+        orderTotalV2:
+          $ref: '#/components/schemas/OrderTotalV2'
+        customerPayments:
+          type:
+          - array
+          - 'null'
+          description: Details about the payments made by the customer.
+          items:
+            $ref: '#/components/schemas/CustomerPayment'
+        fulfillmentInfo:
+          $ref: '#/components/schemas/FulfillmentInfo'
+        promotionsDetails:
+          type:
+          - array
+          - 'null'
+          description: '[WIP - in development, not supported yet] Details about the promotions applied to this order. The sum of values should be equal to the sum of order total discounts."'
+          items:
+            $ref: '#/components/schemas/PromotionDetails'
+        preparationTime:
+          $ref: '#/components/schemas/PreparationTime'
+      description: An order placed by a customer.
+    CardWalletType:
+      type: string
+      enum:
+      - UNKNOWN
+      - APPLE_PAY
+      - GOOGLE_PAY
+      description: The type of wallet associated with the card.
+      example: APPLE_PAY
+    OrderExternalIdentifiers:
+      required:
+      - friendlyId
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ID for the order that was placed.
+          example: 69f60a06-c335-46d9-b5a1-97f1a211c514
+        friendlyId:
+          type: string
+          description: ID used for driver pickup and restaurant management.
+          example: ABCDE
+        source:
+          type:
+          - string
+          - 'null'
+          description: Describes the source of the order, typically from a food ordering marketplace.
+          example: ubereats
+        sourceType:
+          type:
+          - string
+          - 'null'
+          description: source type of the order
+          enum:
+          - POINT_OF_SALE
+          - ORDERING_MARKETPLACE
+          - AGGREGATOR
+          - CUSTOMER_INTERACTION
+          example: POINT_OF_SALE
+        sourceExternalIdentifiers:
+          $ref: '#/components/schemas/SourceExternalIdentifiers'
+      description: The external identifiers.
+    CardFundingType:
+      type: string
+      enum:
+      - UNKNOWN
+      - CREDIT
+      - DEBIT
+      - PREPAID
+      description: The funding type of the card.
+      example: CREDIT
+    ItemModifier:
+      required:
+      - quantity
+      type: object
+      properties:
+        quantity:
+          minimum: 1
+          maximum: 1000
+          type: integer
+          description: The number of times the modifier was applied to the given item.
+          format: int32
+          example: 1
+        skuPrice:
+          type:
+          - number
+          - 'null'
+          description: The stored sku price of this item
+          readOnly: true
+          example: 1
+        id:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the modifier product.
+          example: d7a21692-9195-43aa-a58f-5395bba8a804
+        lineItemId:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the instance of a modifier in an order. Instances of the same modifier across different orders will have different line item IDs. Multiple instances of the same modifier in one order will have different line item IDs if their modifiers are different.
+          readOnly: true
+          example: 2f91f9f3-2d7e-4898-ae81-00fe06ed7dbf
+        skuId:
+          type:
+          - string
+          - 'null'
+          description: sku ID of the item.
+          example: 867b8fdc-cf7b-4fc3-b7e0-4c7b68d8b1cc
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the modifier as displayed to the customer.
+          example: Avocado
+        price:
+          type:
+          - number
+          - 'null'
+          description: The price of the sold modifier.
+          example: 1
+        groupName:
+          type:
+          - string
+          - 'null'
+          description: The parent group of the modifier item
+          example: Add ons
+        groupId:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the parent group
+          example: fb52b138-7ac4-42c1-bfd8-664d57113a41
+        stationId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the station the modifier item is assigned to.
+          readOnly: true
+          example: a49cbd3e-94e2-462d-a6de-1985e5d98d1c
+        modifiers:
+          type:
+          - array
+          - 'null'
+          description: Nested modifiers applied to the item.
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ItemModifier'
+    ManagerOrderIssue:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          type: string
+          description: The specific issues with this item
+          enum:
+          - UNKNOWN
+          - MENU_RESOLUTION_FAILED
+          - NO_SUPPORTED_POS
+          - VALIDATION_ONLY
+          - POS_VENDOR_ERROR
+          - INTERNAL_ERROR
+          - MISCONFIGURED_INTEGRATION
+          - CANCEL_FAILED
+          example: MENU_RESOLUTION_FAILED
+        description:
+          type: string
+          description: A friendly description describing what went wrong
+          example: Order contains unreconciled items
+      description: Issue codes for issues encountered when processing a manager order
+    PaymentDetailsCard:
+      type: object
+      description: Details of a card payment method.
+      properties:
+        brandType:
+          $ref: '#/components/schemas/CardBrandType'
+        expiration:
+          type: object
+          properties:
+            year:
+              type: integer
+              description: The expiration year of the card.
+              example: 2025
+            month:
+              type: integer
+              description: The expiration month of the card.
+              example: 12
+        fundingType:
+          $ref: '#/components/schemas/CardFundingType'
+        walletType:
+          $ref: '#/components/schemas/CardWalletType'
+        lastFour:
+          type: string
+          description: The last four digits of the card.
+          example: '1234'
+        walletLastFour:
+          type: string
+          description: The last four digits of the wallet account.
+          example: '5678'
+        authorizationCode:
+          type: string
+          description: The authorization code for the card.
+          example: auth_code_123
+        applicationPreferredName:
+          type: string
+          description: The preferred name of the application.
+          example: MyApp
+        fingerprint:
+          type: string
+          description: The fingerprint of the card.
+          example: fingerprint_abc123
+        readMethod:
+          type: string
+          description: The method used to read the card.
+          example: chip
+    OrderComponentId:
+      type: object
+      properties:
+        orderComponentId:
+          type: string
+          description: The id of the order component for the order component ticket.
+          example: 69f60a06-c335-46d9-b5a1-97f1a211c514
+        orderComponentOrderId:
+          type: string
+          description: The id of the order for the order component ticket.
+          example: 69f60a06-c335-46d9-b5a1-97f1a211c514
+    DropoffInstructions:
+      type:
+      - object
+      - 'null'
+      properties:
+        dropoffType:
+          type: string
+          description: The drop-off type for the delivery.
+          enum:
+          - MEET_AT_DOOR
+          - LEAVE_AT_DOOR
+          - MEET_IN_LOBBY
+          example: MEET_AT_DOOR
+        verificationRequirements:
+          $ref: '#/components/schemas/VerificationRequirements'
+      description: Requirements to verify the completion of the delivery.
   parameters:
-    storeIdHeader:
-      name: X-Store-Id
-      in: header
-      required: true
-      schema:
-        $ref: '#/components/schemas/StoreId'
-    opaquePaginationToken:
-      name: token
-      in: query
-      required: false
-      schema:
-        type: string
-        description: Opaque token used for paging. Query parameters must be URL encoded.
-        example: CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)
-    maxDateTime:
-      name: maxDateTime
-      in: query
-      required: false
-      schema:
-        type: string
-        description: Maximum date/time filter in ISO 8601 format with time zone.
-        example: '2023-08-15T10:15:30-05:00'
-    source:
-      name: source
-      in: path
-      required: true
-      schema:
-        type: string
-        description: Describes the source of the order, typically from a food ordering marketplace.
-        example: ubereats
-    minDateTime:
-      name: minDateTime
-      in: query
-      required: false
-      schema:
-        type: string
-        description: Minimum date/time filter in ISO 8601 format with time zone. Limited to the past 20 days.
-        example: '2023-07-20T10:15:30-05:00'
-    eventIdHeader:
-      name: X-Event-Id
-      in: header
-      required: true
-      schema:
-        type: string
-        description: Unique identifier of the event that this callback refers to.
-        example: cf0ce51b-d74e-40d3-b177-1925ab4edc0c
-    orderId:
-      name: orderId
-      in: path
-      required: true
-      schema:
-        type: string
-        description: A unique identifier of the order in a UUID format.
-        example: 295f76b4-5725-4bf5-a8ab-97943dbdc3b4
     limit:
       name: limit
       in: query
@@ -2231,15 +2236,63 @@ components:
         type: string
         description: Max number of orders to retrieve
         example: 5
+    source:
+      name: source
+      in: path
+      required: true
+      schema:
+        type: string
+        description: Describes the source of the order, typically from a food ordering marketplace.
+        example: ubereats
+    maxDateTime:
+      name: maxDateTime
+      in: query
+      required: false
+      schema:
+        type: string
+        description: Maximum date/time filter in ISO 8601 format with time zone.
+        example: '2023-08-15T10:15:30-05:00'
+    storeIdHeader:
+      name: X-Store-Id
+      in: header
+      required: true
+      schema:
+        $ref: '#/components/schemas/StoreId'
+    minDateTime:
+      name: minDateTime
+      in: query
+      required: false
+      schema:
+        type: string
+        description: Minimum date/time filter in ISO 8601 format with time zone. Limited to the past 20 days.
+        example: '2023-07-20T10:15:30-05:00'
+    opaquePaginationToken:
+      name: token
+      in: query
+      required: false
+      schema:
+        type: string
+        description: Opaque token used for paging. Query parameters must be URL encoded.
+        example: CgwI09+kjQYQwOvF2AM=/(urlencoded:CgwI09%2BkjQYQwOvF2AM%3D)
+    orderId:
+      name: orderId
+      in: path
+      required: true
+      schema:
+        type: string
+        description: A unique identifier of the order in a UUID format.
+        example: 295f76b4-5725-4bf5-a8ab-97943dbdc3b4
+    eventIdHeader:
+      name: X-Event-Id
+      in: header
+      required: true
+      schema:
+        type: string
+        description: Unique identifier of the event that this callback refers to.
+        example: cf0ce51b-d74e-40d3-b177-1925ab4edc0c
   responses:
-    '422':
-      description: The request body is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '400':
-      description: The request is malformed.
+    '403':
+      description: Authorization not valid for the requested resource.
       content:
         application/json:
           schema:
@@ -2250,8 +2303,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorMessage'
-    '403':
-      description: Authorization not valid for the requested resource.
+    '400':
+      description: The request is malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '422':
+      description: The request body is not valid.
       content:
         application/json:
           schema:
@@ -2303,1267 +2362,6 @@ components:
           scopes:
             organization.read: Permission to read data for organization/brands/stores on behalf of a user.
             organization.service_integration: Permission to manage the your integration with a given store on behalf of a user.
-x-webhooks:
-  orderCreate:
-    post:
-      tags:
-      - Manager Orders Webhooks
-      summary: Otter Order Creation Webhook
-      operationId: orderCreateWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/Order'
-              - example:
-                  eventType: orders.new_order
-            examples:
-              OrderCreateWebhookRequestExample:
-                summary: Default orderCreateWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.new_order
-                  metadata:
-                    payload:
-                      externalIdentifiers: {}
-                      currencyCode: EUR
-                      status: NEW_ORDER
-                      items:
-                      - {}
-                      orderedAt: '2007-12-03T10:15:30+01:00'
-                      customer: {}
-                      customerNote: Please include extra napkins!
-                      deliveryInfo: {}
-                      orderTotal: {}
-                      orderTotalV2: {}
-                      customerPayments:
-                      - {}
-                      fulfillmentInfo: {}
-                      promotionsDetails:
-                      - {}
-                      preparationTime: {}
-      responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '202':
-          $ref: '#/components/responses/202'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  orderUpdate:
-    post:
-      tags:
-      - Manager Orders Webhooks
-      summary: Otter Order Update Webhook
-      operationId: orderUpdateWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/Order'
-              - example:
-                  eventType: orders.update
-            examples:
-              OrderUpdateWebhookRequestExample:
-                summary: Default orderUpdateWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.update
-                  metadata:
-                    payload:
-                      externalIdentifiers: {}
-                      currencyCode: EUR
-                      status: NEW_ORDER
-                      items:
-                      - {}
-                      orderedAt: '2007-12-03T10:15:30+01:00'
-                      customer: {}
-                      customerNote: Please include extra napkins!
-                      deliveryInfo: {}
-                      orderTotal: {}
-                      orderTotalV2: {}
-                      customerPayments:
-                      - {}
-                      fulfillmentInfo: {}
-                      promotionsDetails:
-                      - {}
-                      preparationTime: {}
-      responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '202':
-          $ref: '#/components/responses/202'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  intentToCancelOrder:
-    post:
-      tags:
-      - Orders Webhooks
-      summary: Otter Intent to Cancel Order Webhook
-      operationId: intentToCancelOrderWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/IntentToCancelEvent'
-              - example:
-                  eventType: orders.cancel_order
-            examples:
-              IntentToCancelOrderWebhookRequestExample:
-                summary: Default intentToCancelOrderWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.cancel_order
-                  metadata:
-                    payload:
-                      externalIdentifiers: {}
-                      cancellationReason: REASON_UNKNOWN
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  orderStatusUpdate:
-    post:
-      tags:
-      - Orders Webhooks
-      summary: Otter Order Status Update Webhook
-      operationId: orderStatusUpdateWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/OrderStatusHistory'
-              - example:
-                  eventType: orders.order_status_update
-            examples:
-              OrderStatusUpdateWebhookRequestExample:
-                summary: Default orderStatusUpdateWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.order_status_update
-                  metadata:
-                    payload:
-                      orderStatusHistory:
-                      - {}
-                      orderAcceptedInfo: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  posInjectionStateUpdate:
-    post:
-      tags:
-      - Orders Webhooks
-      summary: Otter Pos Injection State Update Webhook
-      operationId: posInjectionStateUpdateWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/PosInjectionStateUpdateEvent'
-              - example:
-                  eventType: orders.pos_injection_state_update
-            examples:
-              PosInjectionStateUpdateWebhookRequestExample:
-                summary: Default posInjectionStateUpdateWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.pos_injection_state_update
-                  metadata:
-                    payload:
-                      externalIdentifiers: {}
-                      injectionState: UNKNOWN
-                      injectionIssue: UNKNOWN_INJECTION_ISSUE
-                      additionalData:
-                        ticketData: Some value for the TicketData
-                        customField: customValue
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  orderConfirm:
-    post:
-      tags:
-      - Manager Orders Webhooks
-      summary: Otter Order Confirm Notification Webhook
-      operationId: orderConfirmWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/OrderConfirmEvent'
-              - example:
-                  eventType: orders.confirm
-            examples:
-              OrderConfirmWebhookRequestExample:
-                summary: Default orderConfirmWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.confirm
-                  metadata:
-                    payload:
-                      orderId: 69f60a06-c335-46d9-b5a1-97f1a211c514
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  orderReady:
-    post:
-      tags:
-      - Manager Orders Webhooks
-      summary: Otter Order Ready Status Notification Webhook
-      operationId: orderReady
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/OrderReadyEvent'
-              - example:
-                  eventType: orders.order_ready
-            examples:
-              OrderReadyRequestExample:
-                summary: Default orderReady request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.order_ready
-                  metadata:
-                    payload:
-                      orderId: 69f60a06-c335-46d9-b5a1-97f1a211c514
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  orderHandedOff:
-    post:
-      tags:
-      - Manager Orders Webhooks
-      summary: Otter Order Handed Off Status Notification Webhook
-      operationId: orderHandedOff
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/OrderHandedOffEvent'
-              - example:
-                  eventType: orders.order_handed_off
-            examples:
-              OrderHandedOffRequestExample:
-                summary: Default orderHandedOff request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.order_handed_off
-                  metadata:
-                    payload:
-                      orderId: 69f60a06-c335-46d9-b5a1-97f1a211c514
-                      courierPhone: 415-234-3212
-                      courierBodyTempFahrenheit: 36.6
-                      isCourierWearingMask: true
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  orderFulfilled:
-    post:
-      tags:
-      - Manager Orders Webhooks
-      summary: Otter Order Fulfilled Status Notification Webhook
-      operationId: orderFulfilled
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/OrderFulfilledEvent'
-              - example:
-                  eventType: orders.order_fulfilled
-            examples:
-              OrderFulfilledRequestExample:
-                summary: Default orderFulfilled request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.order_fulfilled
-                  metadata:
-                    payload:
-                      orderId: 69f60a06-c335-46d9-b5a1-97f1a211c514
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  menuPublish:
-    post:
-      tags:
-      - Menus Webhooks
-      summary: Otter Menu Publish Webhook
-      description: 'Webhook to trigger a menu publish.
-
-        If successful, we expect a [**menu publish callback**](/api-reference/#operation/menuPublishCallback). If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead.'
-      operationId: menuPublishWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/MenuPublishEvent'
-              - example:
-                  eventType: menus.menu_publish
-            examples:
-              MenuPublishWebhookRequestExample:
-                summary: Default menuPublishWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: menus.menu_publish
-                  metadata:
-                    payload:
-                      menuData: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  sendMenu:
-    post:
-      tags:
-      - Menus Webhooks
-      summary: Otter Send Menu Webhook
-      description: 'Webhook to trigger a send menu.
-
-        If successful, we expect a [**menu send callback**](/api-reference/#operation/menuSendCallback). If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead.'
-      operationId: sendMenuWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/NullEvent'
-              - example:
-                  eventType: menus.send_menu
-            examples:
-              SendMenuWebhookRequestExample:
-                summary: Default sendMenuWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: menus.send_menu
-                  metadata:
-                    payload: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  updateMenuEntitiesAvailabilities:
-    post:
-      tags:
-      - Menus Webhooks
-      summary: Otter Update Menu Entities Availabilities Webhook
-      description: 'Webhook to trigger an entities availabilities update.
-
-        If successful, we expect an [**update menu entities availabilities callback**](/api-reference/#operation/updateMenuEntitiesAvailabilitiesCallback). If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead.'
-      operationId: updateMenuEntitiesAvailabilitiesWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/BulkUpdateItemStatus'
-              - example:
-                  eventType: menus.update_menu_entities_availabilities
-            examples:
-              UpdateMenuEntitiesAvailabilitiesWebhookRequestExample:
-                summary: Default updateMenuEntitiesAvailabilitiesWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: menus.update_menu_entities_availabilities
-                  metadata:
-                    payload:
-                      updates:
-                      - {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  upsertMenuHours:
-    post:
-      tags:
-      - Menus Webhooks
-      summary: Otter Upsert Menu Hours Webhook
-      description: 'Webhook to trigger a menu hours update.
-
-        If successful, we expect a [**menu upsert hours callback**](/api-reference/#operation/menuUpsertHours). If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead.'
-      operationId: upsertMenuHoursWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/UpsertHoursEvent'
-              - example:
-                  eventType: menus.upsert_hours
-            examples:
-              UpsertMenuHoursWebhookRequestExample:
-                summary: Default upsertMenuHoursWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: menus.upsert_hours
-                  metadata:
-                    payload:
-                      menuHoursData:
-                        da0e4e94-5670-4175-897a-3b7dde45bed5:
-                          timeZone: America/Los_Angeles
-                          regularHours:
-                          - days:
-                            - MONDAY
-                            - TUESDAY
-                            - WEDNESDAY
-                            - THURSDAY
-                            - FRIDAY
-                            timeRanges:
-                            - start: 08:00
-                              end: 1320
-                          specialHours:
-                          - date: '2021-12-31'
-                            timeRanges:
-                            - start: 08:00
-                              end: 1320
-                            type: CLOSED
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  pauseStore:
-    post:
-      tags:
-      - Storefront Webhooks
-      summary: Otter Pause Store Webhook
-      operationId: pauseStoreWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/NullEvent'
-              - example:
-                  eventType: storefront.pause_store
-            examples:
-              PauseStoreWebhookRequestExample:
-                summary: Default pauseStoreWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: storefront.pause_store
-                  metadata:
-                    payload: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  unpauseStore:
-    post:
-      tags:
-      - Storefront Webhooks
-      summary: Otter Unpause Store Webhook
-      operationId: unpauseStoreWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/UnpauseStoreEvent'
-              - example:
-                  eventType: storefront.unpause_store
-            examples:
-              UnpauseStoreWebhookRequestExample:
-                summary: Default unpauseStoreWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: storefront.unpause_store
-                  metadata:
-                    payload: 4109d2c9-8bc5-413c-af3e-1c92aa381e41
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  getStoreAvailability:
-    post:
-      tags:
-      - Storefront Webhooks
-      summary: Otter Get Store Availability Webhook
-      operationId: getStoreAvailabilityWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/NullEvent'
-              - example:
-                  eventType: storefront.get_store_availability
-            examples:
-              GetStoreAvailabilityWebhookRequestExample:
-                summary: Default getStoreAvailabilityWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: storefront.get_store_availability
-                  metadata:
-                    payload: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  getStoreHoursConfiguration:
-    post:
-      tags:
-      - Storefront Webhooks
-      summary: Otter Get Store Hours Configuration Webhook
-      operationId: getStoreHoursConfigurationWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/NullEvent'
-              - example:
-                  eventType: storefront.get_store_hours
-            examples:
-              GetStoreHoursConfigurationWebhookRequestExample:
-                summary: Default getStoreHoursConfigurationWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: storefront.get_store_hours
-                  metadata:
-                    payload: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  deliveryStatusUpdate:
-    post:
-      tags:
-      - Delivery Webhooks
-      summary: Otter Update Delivery Status Webhook
-      operationId: deliveryStatusUpdateWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/DeliveryStatusUpdateEvent'
-              - example:
-                  eventType: delivery.delivery_status_update
-            examples:
-              DeliveryStatusUpdateWebhookRequestExample:
-                summary: Default deliveryStatusUpdateWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: delivery.delivery_status_update
-                  metadata:
-                    payload:
-                      provider: doordash
-                      courier: {}
-                      estimatedDeliveryTime: '2007-12-03T10:15:30+01:00'
-                      estimatedPickupTime: '2007-12-03T10:15:30+01:00'
-                      status: REQUESTED
-                      deliveryStatus: REQUESTED
-                      currencyCode: EUR
-                      baseFee: 1.0
-                      extraFee: 1.0
-                      totalFee: 1.0
-                      distance: {}
-                      updatedTime: '2007-12-03T10:15:30+01:00'
-                      deliveryTrackingUrl: https://www.doordash.com/delivery/track/1234567890
-                      dropoffInfo: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  requestDeliveryQuotes:
-    post:
-      tags:
-      - Delivery Webhooks
-      summary: Otter Request Delivery Quotes Webhook
-      operationId: requestDeliveryQuotesWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/RequestDeliveryQuoteEvent'
-              - example:
-                  eventType: delivery.request_quote
-            examples:
-              RequestDeliveryQuotesWebhookRequestExample:
-                summary: Default requestDeliveryQuotesWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: delivery.request_quote
-                  metadata:
-                    payload:
-                      deliveryReferenceId: d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda
-                      provider: doordash
-                      preferredPickupDuration: 0
-                      pickupAddress: {}
-                      dropoffAddress: {}
-                      destinationAddress: {}
-                      pickUpLocationId: d197bd64-a037-4b6e-aad7-06918e7e2d75
-                      orderSubTotal: 15
-                      currencyCode: KRW
-                      containsAlcoholicItem: true
-                      customerPayments:
-                      - {}
-                      orderExternalIdentifiers: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  acceptDelivery:
-    post:
-      tags:
-      - Delivery Webhooks
-      summary: Otter Accept Delivery Webhook
-      operationId: acceptDeliveryWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/AcceptDeliveryEvent'
-              - example:
-                  eventType: delivery.accept
-            examples:
-              AcceptDeliveryWebhookRequestExample:
-                summary: Default acceptDeliveryWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: delivery.accept
-                  metadata:
-                    payload:
-                      deliveryReferenceId: d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda
-                      provider: doordash
-                      preferredPickupTime: '2007-12-03T10:15:30+01:00'
-                      pickupOrderId: 19dc56c8-4497-4392-a612-9f81beb5fe5f
-                      pickupNote: Left side of the restaurant
-                      pickupAddress: {}
-                      dropoffNote: Please ring the doorbell
-                      dropoffAddress: {}
-                      customer: {}
-                      customerPayments:
-                      - {}
-                      currencyCode: KRW
-                      customerTip: {}
-                      orderSubTotal: 15
-                      pickUpLocationId: d197bd64-a037-4b6e-aad7-06918e7e2d75
-                      containsAlcoholicItem: true
-                      pickUpInstructions: string
-                      store: {}
-                      orderItems:
-                      - {}
-                      ofoDisplayId: 5989
-                      ofoSlug: ifood
-                      pickUpInfo: {}
-                      orderExternalIdentifiers: {}
-                      dropoffInstructions: {}
-                      deliveryFee: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  cancelDelivery:
-    post:
-      tags:
-      - Delivery Webhooks
-      summary: Otter Cancel Delivery Webhook
-      operationId: cancelDeliveryWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/CancelDeliveryEvent'
-              - example:
-                  eventType: delivery.cancel
-            examples:
-              CancelDeliveryWebhookRequestExample:
-                summary: Default cancelDeliveryWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: delivery.cancel
-                  metadata:
-                    payload:
-                      deliveryReferenceId: d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  updateDeliveryRequest:
-    post:
-      tags:
-      - Delivery Webhooks
-      summary: Otter Update Delivery Request Webhook
-      operationId: updateDeliveryRequestWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/UpdateDeliveryRequestEvent'
-              - example:
-                  eventType: delivery.update_request
-            examples:
-              UpdateDeliveryRequestWebhookRequestExample:
-                summary: Default updateDeliveryRequestWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: delivery.update_request
-                  metadata:
-                    payload:
-                      deliveryReferenceId: d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda
-                      provider: doordash
-                      currencyCode: USD
-                      customerPayments:
-                      - {}
-                      customerTip: {}
-                      pickUpInfo: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  reportGenerated:
-    post:
-      tags:
-      - Reports Webhooks
-      summary: Otter Report Generated Webhook
-      operationId: reportGeneratedWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/ReportGeneratedEvent'
-              - example:
-                  eventType: reports.report_generated
-            examples:
-              ReportGeneratedWebhookRequestExample:
-                summary: Default reportGeneratedWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: reports.report_generated
-                  metadata:
-                    payload:
-                      reportUrl: https://example.com/
-                      jobId: 38ab397f-b142-4b06-b70c-40c68a408bea
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  ping:
-    post:
-      tags:
-      - Ping Webhooks
-      summary: Otter Ping Webhook
-      description: Used to validate the integration without side effects
-      operationId: pingWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/PingEvent'
-              - example:
-                  eventType: ping.ping
-            examples:
-              PingWebhookRequestExample:
-                summary: Default pingWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: ping.ping
-                  metadata:
-                    payload:
-                      message: Hello World
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  upsertStore:
-    post:
-      tags:
-      - Account Pairing Webhooks
-      summary: Otter Upsert Store
-      description: Sent when a store is created or updated in `Public API` internal systems.<br/> If metadata contains a `Store ID`, it means a request to update an existent store, otherwise, it's a creation operation.<br/> It provides the store and credentials data needed to validate the store and create a new `Store ID` in the partner application.<br/>      At this point, the  store is in `onboarding state` waiting the partner application to finish the onboarding process by providing the validated `Store ID`.
-      operationId: upsertStorelinkWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/UpsertStorelinkEvent'
-              - example:
-                  eventType: stores.upsert
-            examples:
-              UpsertStorelinkWebhookRequestExample:
-                summary: Default upsertStorelinkWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: stores.upsert
-                  metadata:
-                    payload:
-                      credentialsSchemaVersion: '1.0'
-                      credentials:
-                      - key: email
-                        value: test@email.com
-                      - key: password
-                        value: test-pwd-1234
-                      storeInfo: &id001
-                        name: Store Public Name
-                        address: Some Street, 1234
-                        currencyCode: USD
-                        timezone: America/Los_Angeles
-                        internalStoreId: 51608e41-5d9e-477f-ae02-8c0c68036d5d
-      responses:
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '409':
-          description: The provided credentials already exists in another store.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              examples:
-                UpsertStorelinkWebhook409Example:
-                  summary: Default upsertStorelinkWebhook 409 response
-                  x-microcks-default: true
-                  value:
-                    message: The request body is invalid.
-                    details:
-                    - attribute: Order Currency Code
-                      message: Order Currency Code must be exactly 3 characters
-        '422':
-          description: The provided credentials are not compatible with the provided schema version.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              examples:
-                UpsertStorelinkWebhook422Example:
-                  summary: Default upsertStorelinkWebhook 422 response
-                  x-microcks-default: true
-                  value:
-                    message: The request body is invalid.
-                    details:
-                    - attribute: Order Currency Code
-                      message: Order Currency Code must be exactly 3 characters
-        2XX:
-          description: 'The provided credentials are compatible with the provided schema version, successfully saved in the partner application database and available for the validation process (establishing a connection with the service related to the Application ID, e.g.: UberEats).'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  removeStore:
-    post:
-      tags:
-      - Account Pairing Webhooks
-      summary: Otter Remove Store
-      description: Sent when a store is removed from our system. Contains information about the store for which the event was triggered.
-      operationId: removeStoreWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/RemoveStorelinkEvent'
-              - example:
-                  eventType: stores.remove
-            examples:
-              RemoveStoreWebhookRequestExample:
-                summary: Default removeStoreWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: stores.remove
-                  metadata:
-                    payload:
-                      storeInfo: *id001
-      responses:
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        2XX:
-          description: The store credentials for the service related to the Application ID were successfully removed from the partner application database.
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  fetchCredentials:
-    post:
-      tags:
-      - Account Pairing Webhooks
-      summary: Otter Fetch Credentials (synchronously)
-      description: Synchronously returns the last version of the credentials schema needed to create and validate a store in the partner application. If the request contains the `Store ID`, it also returns the saved store credentials corresponding to the provided `Store ID`.
-      operationId: fetchCredentialsWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotificationBase'
-              - $ref: '#/components/schemas/OptionalStoreIdInMetadata'
-              - example:
-                  eventType: stores.fetch_credentials
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/FetchCredentialsEvent'
-            examples:
-              FetchCredentialsWebhookRequestExample:
-                summary: Default fetchCredentialsWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: stores.fetch_credentials
-                  metadata:
-                    payload:
-                      credentials:
-                      - key: email
-                        value: test@email.com
-                      - key: password
-                        value: test-pwd-1234
-      responses:
-        '200':
-          description: The credentials schema and, if the request contains the Store ID, the correspondent store credentials.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ViewCredentialsArray'
-              examples:
-                FetchCredentialsWebhook200Example:
-                  summary: Default fetchCredentialsWebhook 200 response
-                  x-microcks-default: true
-                  value:
-                    credentialsSchemaVersion: '1.0'
-                    credentials:
-                    - key: email
-                      label: Email
-                      value: foodstore@email.com
-                    - key: password
-                      label: Password
-                      value: test-pwd-1234
-                    - key: language
-                      label: Choose the language
-                      inputType: SELECT
-                      selectOptions:
-                      - English
-                      - Portuguese
-                    - key: supported_sizes
-                      label: Choose all supported sizes
-                      inputType: SELECT
-                      selectOptions:
-                      - SMALL
-                      - MEDIUM
-                      - LARGE
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
 x-tagGroups:
 - name: Endpoints
   tags:

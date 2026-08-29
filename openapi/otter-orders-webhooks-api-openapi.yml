@@ -1,0 +1,261 @@
+openapi: 3.2.0
+info:
+  title: Otter Orders Webhooks API
+  version: v1
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  license:
+    name: Proprietary
+  x-generated-from: documentation
+  x-last-validated: '2026-06-03'
+  x-source-url: https://developer-guides.tryotter.com/api-reference/
+  description: 'Operations tagged Orders Webhooks across 19 of this provider''s published API definitions: otter-account-pairing-endpoints-api-openapi.yml, otter-auth-endpoints-api-openapi.yml, otter-callback-endpoints-api-openapi.yml, otter-delivery-endpoints-api-openapi.yml, otter-direct-orders-endpoints-api-openapi.yml, otter-finance-endpoints-api-openapi.yml, otter-inventory-endpoints-api-openapi.yml, otter-manager-loyalty-endpoints-api-openapi.yml, otter-manager-menu-endpoints-api-openapi.yml, otter-manager-order-endpoints-api-openapi.yml, otter-manager-storefront-endpoints-api-openapi.yml, otter-market-intel-endpoints-api-openapi.yml, otter-menus-endpoints-api-openapi.yml, otter-orders-endpoints-api-openapi.yml, otter-organization-endpoints-api-openapi.yml, otter-ping-endpoints-api-openapi.yml, otter-reports-endpoints-api-openapi.yml, otter-reviews-endpoints-api-openapi.yml, otter-storefront-endpoints-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://{public-api-url}/
+  description: Otter Public API base URL. The concrete host is provisioned per integration partner/account via your Otter account representative; substitute the value provided during onboarding.
+  variables:
+    public-api-url:
+      default: public-api-url
+      description: Account-specific Public API host provided by Otter during onboarding.
+tags:
+- name: Orders Webhooks
+paths: {}
+webhooks:
+  intentToCancelOrder:
+    post:
+      tags:
+      - Orders Webhooks
+      summary: Otter Intent to Cancel Order Webhook
+      operationId: intentToCancelOrderWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventNotification'
+              - type: object
+                properties:
+                  metadata:
+                    type: object
+                    properties:
+                      payload:
+                        $ref: '#/components/schemas/IntentToCancelEvent'
+              - example:
+                  eventType: orders.cancel_order
+            examples:
+              IntentToCancelOrderWebhookRequestExample:
+                summary: Default intentToCancelOrderWebhook request
+                x-microcks-default: true
+                value:
+                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
+                  eventTime: '2007-12-03T10:15:30+01:00'
+                  eventType: orders.cancel_order
+                  metadata:
+                    payload:
+                      externalIdentifiers: {}
+                      cancellationReason: REASON_UNKNOWN
+      responses:
+        2XX:
+          $ref: '#/components/responses/2XX'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    servers:
+    - url: https://{public-api-url}/
+      description: Otter Public API base URL. The concrete host is provisioned per integration partner/account via your Otter account representative; substitute the value provided during onboarding.
+      variables:
+        public-api-url:
+          default: public-api-url
+          description: Account-specific Public API host provided by Otter during onboarding.
+  orderStatusUpdate:
+    post:
+      tags:
+      - Orders Webhooks
+      summary: Otter Order Status Update Webhook
+      operationId: orderStatusUpdateWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventNotification'
+              - type: object
+                properties:
+                  metadata:
+                    type: object
+                    properties:
+                      payload:
+                        $ref: '#/components/schemas/OrderStatusHistory'
+              - example:
+                  eventType: orders.order_status_update
+            examples:
+              OrderStatusUpdateWebhookRequestExample:
+                summary: Default orderStatusUpdateWebhook request
+                x-microcks-default: true
+                value:
+                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
+                  eventTime: '2007-12-03T10:15:30+01:00'
+                  eventType: orders.order_status_update
+                  metadata:
+                    payload:
+                      orderStatusHistory:
+                      - {}
+                      orderAcceptedInfo: {}
+      responses:
+        2XX:
+          $ref: '#/components/responses/2XX'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    servers:
+    - url: https://{public-api-url}/
+      description: Otter Public API base URL. The concrete host is provisioned per integration partner/account via your Otter account representative; substitute the value provided during onboarding.
+      variables:
+        public-api-url:
+          default: public-api-url
+          description: Account-specific Public API host provided by Otter during onboarding.
+  posInjectionStateUpdate:
+    post:
+      tags:
+      - Orders Webhooks
+      summary: Otter Pos Injection State Update Webhook
+      operationId: posInjectionStateUpdateWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventNotification'
+              - type: object
+                properties:
+                  metadata:
+                    type: object
+                    properties:
+                      payload:
+                        $ref: '#/components/schemas/PosInjectionStateUpdateEvent'
+              - example:
+                  eventType: orders.pos_injection_state_update
+            examples:
+              PosInjectionStateUpdateWebhookRequestExample:
+                summary: Default posInjectionStateUpdateWebhook request
+                x-microcks-default: true
+                value:
+                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
+                  eventTime: '2007-12-03T10:15:30+01:00'
+                  eventType: orders.pos_injection_state_update
+                  metadata:
+                    payload:
+                      externalIdentifiers: {}
+                      injectionState: UNKNOWN
+                      injectionIssue: UNKNOWN_INJECTION_ISSUE
+                      additionalData:
+                        ticketData: Some value for the TicketData
+                        customField: customValue
+      responses:
+        2XX:
+          $ref: '#/components/responses/2XX'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    servers:
+    - url: https://{public-api-url}/
+      description: Otter Public API base URL. The concrete host is provisioned per integration partner/account via your Otter account representative; substitute the value provided during onboarding.
+      variables:
+        public-api-url:
+          default: public-api-url
+          description: Account-specific Public API host provided by Otter during onboarding.
+components:
+  securitySchemes:
+    OAuth2.0:
+      type: oauth2
+      description: "The **Authorization API** is based on the [OAuth2.0 protocol](https://tools.ietf.org/html/rfc6749), supporting the (Client Credentials)[https://datatracker.ietf.org/doc/html/rfc6749#section-4.4] and the (Authorization Code)[https://datatracker.ietf.org/doc/html/rfc6749#section-4.1] flows. Resources expect a valid token sent as a `Bearer` token in the HTTP `Authorization` header.\n### Scopes\nScopes must be configured by our internal team to be enabled for an app. Once the scopes are configured they can be enabled on the Application Settings Page in Developer Portal. Each endpoint requires a given scope that can be verified on each endpoint documentation. When generating an OAuth2.0 token multiple scopes can be requested.\n\n### Authorization Code Flow\nTo perform this flow, the authorization code flow must be enabled in the Application Settings Page in Developer Portal. When enabling the flow it is mandatory to provide a redirect URI pointing to your application. Once the flow is complete we will redirect the user to this URI passing the 'code' and 'state' parameters.\nThe Authorization Code flow provides a temporary code that the client application can exchange for an access token. To start the flow the application must request the user authorization. This is done by sending a request to https://{{public-api-url}}/v1/auth/oauth2/authorize.\nExample\n```\ncurl --location 'https://{{public-api-url}}/v1/auth/oauth2/authorize?client_id=[CLIENT_ID]&redirect_uri=[REDIRECT_URI]&response_type=code&scope=organization.read&state=8A9D16B4C3E25F6A'\n```\nThis call will return a 302 redirecting the user to our authorization page. If the user approves the application, we will redirect to configured URI passing the authorization code in the query parameter 'code'. The 'state' parameter is also sent to ensure the source of the data.\nWith the authorization code, the client application can generate the token.\n### Client Credentials Flow\nThe client_credentials flow does not require any steps before generating the token. Once your application is ready, and the client_id and client_secret are available, the token can be generated by following the instructions in the next section.\n\n### Generate Token\nTo generate the token, use the `Client ID` and `Client Secret` (provided during onboarding), and optionally the authorization code obtained after performing the Authorization Code flow, to the [Token Auth endpoint](#operation/requestToken) endpoint. The result of this invocation is a token that is valid for a pre-determined time or until it is manually revoked.\n\nThe access token obtained will be sent as a `Bearer` value of the `Authorization` HTTP header.\n\nClient credentials in the request-body and HTTP Basic Auth are supported.\n\n#### Request Example for client_credentials\n```\ncurl --location --request POST 'https://{{public-api-url}}/v1/auth/token' \\\n  --header 'Content-Type: application/x-www-form-urlencoded' \\\n  --data-urlencode 'scope=ping' \\\n  --data-urlencode 'grant_type=client_credentials' \\\n  --data-urlencode 'client_id=[APPLICATION_ID]' \\\n  --data-urlencode 'client_secret=[CLIENT_SECRET]'\n\n```\n#### Request Example for authorization_code\n```\ncurl --location --request POST 'https://{{public-api-url}}/v1/auth/token' \\\n  --header 'Content-Type: application/x-www-form-urlencoded' \\\n  --data-urlencode 'scope=ping' \\\n  --data-urlencode 'grant_type=authorization_code' \\\n  --data-urlencode 'client_id=[APPLICATION_ID]' \\\n  --data-urlencode 'client_secret=[CLIENT_SECRET]' \\\n  --data-urlencode 'code=[code]' \\\n  --data-urlencode 'redirect_uri=[redirect_uri]'\n\n```\n#### Response Example\n```\n{\n  \"access_token\": \"oMahtBwBbnZeh4Q66mSuLFmk2V0_CLCKVt0aYcNJlcg.yditzjwCP7yp0PgR6AzQR3wQ1rTdCjkcPeAMuyfK-NU\",\n  \"expires_in\": 2627999,\n  \"scope\": \"ping orders.create\",\n  \"token_type\": \"bearer\"\n}\n```\n\n### Token Usage\n\nThe token provided in field `access_token` is used to authenticate when consuming the API endpoints. Send the token value in the `Authorization` header of every request. The token expiration time is represented in the field `expired_in`, in seconds. Currently, all tokens are valid for 30 days and should be stored and re-used while still valid.\n\nNote that occasionally, a 401 error may be returned for a valid token due to an internal service issue. Such occurrences should be rare. To prevent exposing potential vulnerabilities to attackers, the Public API does not disclose other types of errors in the authentication flow if for any reason the token can't be validated (when it's a valid token then it's ok to return 5XX or other 4XX though - such as 403). In such scenarios, although the internal auth flow avoids retries to prevent attacks, if the token is known to be valid and not expired, a retry with a backoff interval by the client is advised. Another option is to request a new token.\n\n#### Example\n\n```\ncurl --location --request GET 'https://{{public-api-url}}/v1/ping' \\\n  --header 'Authorization: Bearer <access_token>' \\\n  --header 'X-Store-Id: <storeId>'\n\n```\n"
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            catalog: Permission to interact with product inventory for existing stores.
+            delivery.provider: Permission to provide delivery services for existing orders.
+            finance: Permission to provide financial data for orders/stores.
+            manager.menus: Permission to manage menus.
+            manager.orders: Permission to manage orders.
+            manager.storefront: Permission to manage storefront.
+            menus.async_job.read: Permission to read the status of a menu upsert job.
+            menus.entity_suspension: Permission to notify the result of a menu entity availability update, after being requested by a webhook event.
+            menus.get_current: Permission to send the current state of a menu, after being requested by a webhook event.
+            menus.publish: Permission to notify the result of a publish menus operation for a given store.
+            menus.read: Permission to read the current menus for a given store.
+            menus.upsert: Permission to create/update menus for a given store.
+            menus.upsert_hours: Permission to notify the receiving of the upsert hours menu event, after being requested by a webhook event.
+            orders.create: Permission to create new order for a given store.
+            orders.read: Permission to read orders and connected data.
+            orders.update: Permission to create and update new orders for a given store.
+            ping: Permission to ping the system.
+            reports.generate_report: Permission to request reports for given store(s) and period of time.
+            reviews.reply: Permission to reply to reviews.
+            storefront.store_pause_unpause: Permission to notify the result of a pause/unpause operation, after being requested by a webhook event.
+            storefront.store_availability: Permission to send the current state of store.
+            storefront.store_hours_configuration: Permission to send the current store hours configuration.
+            stores.manage: Permission to onboard stores and update the identifier.
+            callback.error.write: Token has permission to send failed webhook event results.
+            manager.loyalty: Permission to interact with loyalty services.
+            direct.orders: Permission to interact with direct order services.
+            store.read: Permission to query store information.
+        authorizationCode:
+          authorizationUrl: /v1/auth/oauth2/authorize
+          tokenUrl: /v1/auth/token
+          scopes:
+            organization.read: Permission to read data for organization/brands/stores on behalf of a user.
+            organization.service_integration: Permission to manage the your integration with a given store on behalf of a user.
+x-refined-from:
+- otter-account-pairing-endpoints-api-openapi.yml
+- otter-auth-endpoints-api-openapi.yml
+- otter-callback-endpoints-api-openapi.yml
+- otter-delivery-endpoints-api-openapi.yml
+- otter-direct-orders-endpoints-api-openapi.yml
+- otter-finance-endpoints-api-openapi.yml
+- otter-inventory-endpoints-api-openapi.yml
+- otter-manager-loyalty-endpoints-api-openapi.yml
+- otter-manager-menu-endpoints-api-openapi.yml
+- otter-manager-order-endpoints-api-openapi.yml
+- otter-manager-storefront-endpoints-api-openapi.yml
+- otter-market-intel-endpoints-api-openapi.yml
+- otter-menus-endpoints-api-openapi.yml
+- otter-orders-endpoints-api-openapi.yml
+- otter-organization-endpoints-api-openapi.yml
+- otter-ping-endpoints-api-openapi.yml
+- otter-reports-endpoints-api-openapi.yml
+- otter-reviews-endpoints-api-openapi.yml
+- otter-storefront-endpoints-api-openapi.yml
+x-tagGroups:
+- name: Endpoints
+  tags:
+  - Account Pairing Endpoints
+  - Auth Endpoints
+  - Callback Endpoints
+  - Delivery Endpoints
+  - Finance Endpoints
+  - Inventory Endpoints
+  - Manager Menu Endpoints
+  - Manager Order Endpoints
+  - Manager Storefront Endpoints
+  - Menus Endpoints
+  - Orders Endpoints
+  - Organization Endpoints
+  - Ping Endpoints
+  - Reports Endpoints
+  - Reviews Endpoints
+  - Storefront Endpoints
+  - Manager Loyalty Endpoints
+  - Direct Orders Endpoints
+  - Store Endpoints
+- name: Webhooks
+  tags:
+  - Account Pairing Webhooks
+  - Delivery Webhooks
+  - Manager Orders Webhooks
+  - Menus Webhooks
+  - Orders Webhooks
+  - Ping Webhooks
+  - Reports Webhooks
+  - Storefront Webhooks

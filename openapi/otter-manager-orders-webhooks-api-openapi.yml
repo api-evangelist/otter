@@ -1,16 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Public Account Pairing Endpoints Orders Endpoints API
-  description: "# Overview\n\nThe API endpoints are developed around [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) principles secure via the OAuth2.0 protocol.\n\nBeyond the entry points, the API also provides a line of communication into your system via [webhooks](https://en.wikipedia.org/wiki/Webhook).\n\nFor testing purposes, we offer a staging environment. Also, more detailed information about the business rules and workflows can be found on the [**Documentation Section**](/docs/)\n\n## Versioning\nEach API is versioned individually, but we follow these rules:\n- Non breaking changes (eg: adding new fields) are added in the current version without previous communication\n- Breaking changes (fields removal, semantic changed or schema update) have the version incremented\n- Users will be notified about new versions and will be given time to migrate (the time will be set on a case by case basis)\n- Once users migrate to the new version, we will deprecate the old ones\n- Once there is a new version for an API, we won't accept new integrations targeting old versions\n\n## API General Definitions\nThe APIs use resource-oriented URLs communicating, primarily, via JSON and leveraging the HTTP headers, [response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), and verbs.\n\nTo exemplify how the API is to be consumed, consider a fake GET resource endpoint invocation below:\n\n```\ncurl --request GET 'https://{{public-api-url}}/v1/resource/123' \\\n--header 'Authorization: Bearer 34fdabeeafds=' --header 'X-Store-Id: 321'\n```\n\n|      Header      | Description |\n| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n|`Authorization`   | Standard HTTP header is used to associate the request with the originating invoker. The content of this header is a `Bearer` token generated from you client_secret, defined in the [API Auth](#/section/Guides/API-Auth) guide.|\n|`X-Store-Id`      | The ID of the store in your system this call acts on behalf of. |\n\n_All resource endpoints expect the `Authorization` header, the remaining headers are explicitly stated in the individual endpoint documentation section._\n\nWith these headers, the system will:\n - Validate the client token, making sure the call is originating from a trusted source.\n - Validate that the Application has the permission to access the `v1/resource/{id}` resource via the Application's pre-configured scopes.\n - Translate your X-Store-Id to our internal store ID (e.g. `AAA`).\n - Validate and retrieve resource `AAA`, that is associated to your Application via store id `321`.\n\nPOST/PUT methods will look similar to the GET calls, but they'll take in a body in the HTTP request (default to the application/json content-type).\n\n```\ncurl --location --request POST 'https://{{public-api-url}}/v1/resource' \\\n--header 'Authorization: Bearer 34fdabeeafds=' --header 'X-Store-Id: 321'\n--data '{\"foo\": \"bar\"}'\n```\n\n## API Authentication/Authorization\n\n<SecurityDefinitions />\n\n## Webhook\n\nThe Public API is able to send notifications to your system via HTTP POST requests.\n\nEvery webhook is signed using HMAC-SHA256 that is present in the header `X-HMAC-SHA256`, and you can also authenticate the requests using Basic Auth, Bearer Token or HMAC-SHA1 (legacy). Please, refer to [**Webhook Authentication Guide**](/docs/guides-webhook-authentication/) for more details.\n\n_Please work with your Account Representative to setup your Application's Webhook configurations._\n\n```\nExample Base-URL = https://{{your-server-url}}/webhook\n```\n\n### Notification Schema\n\n| **Name**                | **Type** | **Description**                                                      |\n| ------------------------| ---------| -------------------------------------------------------------------- |\n| eventId                 | string   | Unique id of the event.                                              |\n| eventTime               | string   | The time the event occurred.                                         |\n| eventType               | string   | The type of event (e.g. create_order).                               |\n| metadata.storeId        | string   | Id of the store for which the event is being published.              |\n| metadata.applicationId  | string   | Id of the application for which the event is being published.        |\n| metadata.resourceId     | string   | The external identifier of the resource that this event refers to.   |\n| metadata.resourceHref   | string   | The endpoint to fetch the details of the resource.                   |\n| metadata.payload        | object   | The event object which will be detailed in each Webhook description. |\n\n### Notification Request Example\n\n```\ncurl --location --request POST 'https://{{your-server-url}}/webhook' \\\n--header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36' \\\n--header 'Authorization: MAC <hash signature>' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n   \"eventId\": \"123456\",\n   \"eventTime\": \"2020-10-10T20:06:02:123Z\",\n   \"eventType\": \"orders.new_order\",\n   \"metadata\": {\n      \"storeId\": \"755fd19a-7562-487a-b615-171a9f89d669\",\n      \"applicationId\": \"e22f94b3-967c-4e26-bf39-9e364066b68b\",\n      \"resourceHref\": \"https://{{public-api-url}}/v1/orders/bf9f1d81-f213-496e-a026-91b6af44996c\",\n      \"resourceId\": \"bf9f1d81-f213-496e-a026-91b6af44996c\",\n      \"payload\": {}\n   }\n}\n```\n\n### Expected Response\n\nThe partner application should return an HTTP 200 response code with an empty response body to acknowledge receipt of the webhook event.\n## Rate Limiting\nPlease, refer to [**Rate Limiting Guide**](/docs/guides-rate-limiting/) for more details.\n\n## Error codes\nThe APIs use standard HTTP status codes to indicate the success or failure of a request. Error codes are divided into two categories: 4XX codes for client-side errors and 5xx codes for server-side errors.\n### 4XX Client-Side Errors\nClient-side errors are indicated by status codes in the 4xx range. These errors are typically the result of a problem with the request made by your application.\nIf a client-side error occurs, our API will return a response that includes an appropriate error message. This message will provide information about the cause of the error. The aim of these messages is to assist you in identifying and resolving the issue.\nFor example, if you submit a request with missing or invalid parameters, you might receive a 400 Bad Request error with a message indicating which parameters were missing or incorrect.\n### 5XX Server-Side Errors\nServer-side errors are represented by status codes in the 5xx range. These errors suggest a problem with our server, not with your application's request.\nServer-side errors are typically transient, meaning they are temporary. If a server-side error occurs, we recommend that the client retries the same request with the exact same parameters.\nFor example, if you get a 500 Internal Server Error, it's possible that our server is suffering a temporary problem. In such cases, retrying the request after a short delay is often successful.\nIf you continually receive server-side errors, reach out to our support team for further assistance."
+  title: Otter Manager Orders Webhooks API
   version: v1
-  license:
-    name: Proprietary
   contact:
     name: Kin Lane
     email: kin@apievangelist.com
+  license:
+    name: Proprietary
   x-generated-from: documentation
-  x-source-url: https://developer-guides.tryotter.com/api-reference/
   x-last-validated: '2026-06-03'
+  x-source-url: https://developer-guides.tryotter.com/api-reference/
+  description: 'Operations tagged Manager Orders Webhooks across 19 of this provider''s published API definitions: otter-account-pairing-endpoints-api-openapi.yml, otter-auth-endpoints-api-openapi.yml, otter-callback-endpoints-api-openapi.yml, otter-delivery-endpoints-api-openapi.yml, otter-direct-orders-endpoints-api-openapi.yml, otter-finance-endpoints-api-openapi.yml, otter-inventory-endpoints-api-openapi.yml, otter-manager-loyalty-endpoints-api-openapi.yml, otter-manager-menu-endpoints-api-openapi.yml, otter-manager-order-endpoints-api-openapi.yml, otter-manager-storefront-endpoints-api-openapi.yml, otter-market-intel-endpoints-api-openapi.yml, otter-menus-endpoints-api-openapi.yml, otter-orders-endpoints-api-openapi.yml, otter-organization-endpoints-api-openapi.yml, otter-ping-endpoints-api-openapi.yml, otter-reports-endpoints-api-openapi.yml, otter-reviews-endpoints-api-openapi.yml, otter-storefront-endpoints-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://{public-api-url}/
   description: Otter Public API base URL. The concrete host is provisioned per integration partner/account via your Otter account representative; substitute the value provided during onboarding.
@@ -19,513 +19,318 @@ servers:
       default: public-api-url
       description: Account-specific Public API host provided by Otter during onboarding.
 tags:
-- name: Orders Endpoints
-  description: Endpoints to manage orders for a store.
-  x-displayName: Orders
-paths:
-  /v1/orders:
+- name: Manager Orders Webhooks
+paths: {}
+webhooks:
+  orderCreate:
     post:
       tags:
-      - Orders Endpoints
-      summary: Otter Create Order
-      description: '`RATE LIMIT: 32 per minute`
-
-        '
-      operationId: createOrder
-      parameters:
-      - $ref: '#/components/parameters/storeIdHeader'
+      - Manager Orders Webhooks
+      summary: Otter Order Creation Webhook
+      operationId: orderCreateWebhook
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Order'
+              allOf:
+              - $ref: '#/components/schemas/EventNotification'
+              - type: object
+                properties:
+                  metadata:
+                    type: object
+                    properties:
+                      payload:
+                        $ref: '#/components/schemas/Order'
+              - example:
+                  eventType: orders.new_order
             examples:
-              CreateOrderRequestExample:
-                summary: Default createOrder request
+              OrderCreateWebhookRequestExample:
+                summary: Default orderCreateWebhook request
                 x-microcks-default: true
                 value:
-                  externalIdentifiers:
-                    id: 69f60a06-c335-46d9-b5a1-97f1a211c514
-                    friendlyId: ABCDE
-                    source: ubereats
-                    sourceType: POINT_OF_SALE
-                    sourceExternalIdentifiers: {}
-                  currencyCode: EUR
-                  status: NEW_ORDER
-                  items:
-                  - quantity: 1
-                    skuPrice: 5.9
-                    id: 33e0418f-3d56-4360-ba03-18fc5f8844a3
-                    lineItemId: 2f91f9f3-2d7e-4898-ae81-00fe06ed7dbf
-                    skuId: 867b8fdc-cf7b-4fc3-b7e0-4c7b68d8b1cc
-                    name: Juicy Cheeseburger
-                    note: Please cook to well done!
-                    categoryId: 303de078-870d-4349-928b-946869d4d69b
-                    internalCategoryId: 76a66bba-48fb-4bac-80ee-2616a5ca1ab9
-                    categoryName: Burgers
-                    internalCategoryName: Burgers
-                    stationId: 5247b8a1-77de-4844-b024-cb59fcec59bd
-                    price: 5.9
-                    modifiers:
-                    - {}
-                  orderedAt: '2007-12-03T10:15:30+01:00'
-                  customer:
-                    name: Jane Doe
-                    phone: +1-555-555-5555
-                    phoneCode: 111 11 111
-                    email: email@email.com
-                    personalIdentifiers: {}
-                  customerNote: Please include extra napkins!
-                  deliveryInfo:
-                    courier: {}
-                    destination: {}
-                    licensePlate: ABC 123
-                    makeModel: Honda CR-V
-                    lastKnownLocation: {}
-                    dropoffInstructions: {}
-                    note: Gate code 123
-                  orderTotal:
-                    subtotal: 11.97
-                    claimedSubtotal: 1.0
-                    discount: 1
-                    tax: 1.1
-                    tip: 2
-                    deliveryFee: 5
-                    total: 19.07
-                    couponCode: VWXYZ98765
-                  orderTotalV2:
-                    customerTotal: {}
-                    customerPayment: {}
-                    payout: {}
-                  customerPayments:
-                  - value: 2
-                    processingStatus: COLLECTABLE
-                    paymentMethod: CASH
-                    paymentAuthorizer: UNKNOWN_TYPE
-                    cardInfo: {}
-                    externalPaymentType: string
-                    paymentRecords:
-                    - {}
-                    loyaltyInfo: {}
-                  fulfillmentInfo:
-                    pickupTime: '2007-12-03T10:15:30+01:00'
-                    estimatedPickupTime: '2007-12-03T10:15:30+01:00'
-                    deliveryTime: '2007-12-03T10:15:30+01:00'
-                    fulfillmentMode: DELIVERY
-                    schedulingType: ASAP
-                    courierStatus: COURIER_ASSIGNED
-                    tableIdentifier: R-45
-                  promotionsDetails:
-                  - externalId: store_123
-                    name: 20% off, up to $5
-                    value: 2
-                  preparationTime:
-                    estimatedPreparationTime: PT30M
-        required: true
+                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
+                  eventTime: '2007-12-03T10:15:30+01:00'
+                  eventType: orders.new_order
+                  metadata:
+                    payload:
+                      externalIdentifiers: {}
+                      currencyCode: EUR
+                      status: NEW_ORDER
+                      items:
+                      - {}
+                      orderedAt: '2007-12-03T10:15:30+01:00'
+                      customer: {}
+                      customerNote: Please include extra napkins!
+                      deliveryInfo: {}
+                      orderTotal: {}
+                      orderTotalV2: {}
+                      customerPayments:
+                      - {}
+                      fulfillmentInfo: {}
+                      promotionsDetails:
+                      - {}
+                      preparationTime: {}
       responses:
         '200':
-          description: The order was successfully created.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderReference'
-              examples:
-                CreateOrder200Example:
-                  summary: Default createOrder 200 response
-                  x-microcks-default: true
-                  value:
-                    externalIdentifiers:
-                      id: 69f60a06-c335-46d9-b5a1-97f1a211c514
-                      friendlyId: ABCDE
-                      source: ubereats
-                      sourceType: POINT_OF_SALE
-                      sourceExternalIdentifiers: {}
-                    storeId: ckdss-store-id
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '422':
-          $ref: '#/components/responses/422'
-      security:
-      - OAuth2.0:
-        - orders.create
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /v1/orders/{orderId}:
-    put:
-      tags:
-      - Orders Endpoints
-      summary: Otter Update Order
-      description: '`RATE LIMIT: 32 per minute`
-
-        '
-      operationId: updateOrder
-      parameters:
-      - $ref: '#/components/parameters/storeIdHeader'
-      - $ref: '#/components/parameters/orderId'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Order'
-            examples:
-              UpdateOrderRequestExample:
-                summary: Default updateOrder request
-                x-microcks-default: true
-                value:
-                  externalIdentifiers:
-                    id: 69f60a06-c335-46d9-b5a1-97f1a211c514
-                    friendlyId: ABCDE
-                    source: ubereats
-                    sourceType: POINT_OF_SALE
-                    sourceExternalIdentifiers: {}
-                  currencyCode: EUR
-                  status: NEW_ORDER
-                  items:
-                  - quantity: 1
-                    skuPrice: 5.9
-                    id: 33e0418f-3d56-4360-ba03-18fc5f8844a3
-                    lineItemId: 2f91f9f3-2d7e-4898-ae81-00fe06ed7dbf
-                    skuId: 867b8fdc-cf7b-4fc3-b7e0-4c7b68d8b1cc
-                    name: Juicy Cheeseburger
-                    note: Please cook to well done!
-                    categoryId: 303de078-870d-4349-928b-946869d4d69b
-                    internalCategoryId: 76a66bba-48fb-4bac-80ee-2616a5ca1ab9
-                    categoryName: Burgers
-                    internalCategoryName: Burgers
-                    stationId: 5247b8a1-77de-4844-b024-cb59fcec59bd
-                    price: 5.9
-                    modifiers:
-                    - {}
-                  orderedAt: '2007-12-03T10:15:30+01:00'
-                  customer:
-                    name: Jane Doe
-                    phone: +1-555-555-5555
-                    phoneCode: 111 11 111
-                    email: email@email.com
-                    personalIdentifiers: {}
-                  customerNote: Please include extra napkins!
-                  deliveryInfo:
-                    courier: {}
-                    destination: {}
-                    licensePlate: ABC 123
-                    makeModel: Honda CR-V
-                    lastKnownLocation: {}
-                    dropoffInstructions: {}
-                    note: Gate code 123
-                  orderTotal:
-                    subtotal: 11.97
-                    claimedSubtotal: 1.0
-                    discount: 1
-                    tax: 1.1
-                    tip: 2
-                    deliveryFee: 5
-                    total: 19.07
-                    couponCode: VWXYZ98765
-                  orderTotalV2:
-                    customerTotal: {}
-                    customerPayment: {}
-                    payout: {}
-                  customerPayments:
-                  - value: 2
-                    processingStatus: COLLECTABLE
-                    paymentMethod: CASH
-                    paymentAuthorizer: UNKNOWN_TYPE
-                    cardInfo: {}
-                    externalPaymentType: string
-                    paymentRecords:
-                    - {}
-                    loyaltyInfo: {}
-                  fulfillmentInfo:
-                    pickupTime: '2007-12-03T10:15:30+01:00'
-                    estimatedPickupTime: '2007-12-03T10:15:30+01:00'
-                    deliveryTime: '2007-12-03T10:15:30+01:00'
-                    fulfillmentMode: DELIVERY
-                    schedulingType: ASAP
-                    courierStatus: COURIER_ASSIGNED
-                    tableIdentifier: R-45
-                  promotionsDetails:
-                  - externalId: store_123
-                    name: 20% off, up to $5
-                    value: 2
-                  preparationTime:
-                    estimatedPreparationTime: PT30M
-        required: true
-      responses:
-        '200':
-          description: The order was successfully updated.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderReference'
-              examples:
-                UpdateOrder200Example:
-                  summary: Default updateOrder 200 response
-                  x-microcks-default: true
-                  value:
-                    externalIdentifiers:
-                      id: 69f60a06-c335-46d9-b5a1-97f1a211c514
-                      friendlyId: ABCDE
-                      source: ubereats
-                      sourceType: POINT_OF_SALE
-                      sourceExternalIdentifiers: {}
-                    storeId: ckdss-store-id
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '422':
-          $ref: '#/components/responses/422'
-      security:
-      - OAuth2.0:
-        - orders.update
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /v1/orders/{orderId}/status:
-    post:
-      tags:
-      - Orders Endpoints
-      summary: Otter Update Order Status
-      description: '`RATE LIMIT: 32 per minute`
-
-        '
-      operationId: updateOrderStatus
-      parameters:
-      - $ref: '#/components/parameters/storeIdHeader'
-      - $ref: '#/components/parameters/eventIdOptionalHeader'
-      - $ref: '#/components/parameters/orderId'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OrderStatusUpdateRequest'
-            examples:
-              UpdateOrderStatusRequestExample:
-                summary: Default updateOrderStatus request
-                x-microcks-default: true
-                value:
-                  orderStatus: PREPARED
-        required: true
-      responses:
+          $ref: '#/components/responses/200'
         '202':
-          description: The order status was successfully accepted.
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '422':
-          $ref: '#/components/responses/422'
-      security:
-      - OAuth2.0:
-        - orders.update
+          $ref: '#/components/responses/202'
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-  /v1/orders/{orderId}/payments:
-    put:
-      tags:
-      - Orders Endpoints
-      summary: Otter Update Order Customer Payment
-      description: '`RATE LIMIT: 8 per minute`
-
-
-        Notice that this operation do not completely replace the existent customer payment, instead, it overwrites the field if the latest update is a non-null value. If the update value is null, the existent value will continue to be used.
-
-        '
-      operationId: updateOrderCustomerPayment
-      parameters:
-      - $ref: '#/components/parameters/storeIdHeader'
-      - $ref: '#/components/parameters/orderId'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OrderCustomerPaymentUpdateRequest'
-            examples:
-              UpdateOrderCustomerPaymentRequestExample:
-                summary: Default updateOrderCustomerPayment request
-                x-microcks-default: true
-                value:
-                  currencyCode: EUR
-                  customerPayment:
-                  - value: 2
-                    processingStatus: COLLECTABLE
-                    paymentMethod: CASH
-                    paymentAuthorizer: UNKNOWN_TYPE
-                    cardInfo: {}
-                    externalPaymentType: string
-                    paymentRecords:
-                    - {}
-                    loyaltyInfo: {}
-                  orderTotal:
-                    subtotal: 11.97
-                    claimedSubtotal: 1.0
-                    discount: 1
-                    tax: 1.1
-                    tip: 2
-                    deliveryFee: 5
-                    total: 19.07
-                    couponCode: VWXYZ98765
-                  orderTotalsV2:
-                    customerTotal: {}
-                    customerPayment: {}
-                    payout: {}
-        required: true
-      responses:
-        '200':
-          description: The order payment information was successfully updated.
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '422':
-          $ref: '#/components/responses/422'
-      security:
-      - OAuth2.0:
-        - orders.update
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /v1/orders/{orderId}/delivery:
-    put:
-      tags:
-      - Orders Endpoints
-      summary: Otter Update Order Delivery Information
-      description: '`RATE LIMIT: 8 per minute`
-
-        '
-      operationId: updateOrderDeliveryInfo
-      parameters:
-      - $ref: '#/components/parameters/storeIdHeader'
-      - $ref: '#/components/parameters/orderId'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OrderDeliveryInfoUpdateRequest'
-            examples:
-              UpdateOrderDeliveryInfoRequestExample:
-                summary: Default updateOrderDeliveryInfo request
-                x-microcks-default: true
-                value:
-                  deliveryInfo:
-                    courier: {}
-                    destination: {}
-                    licensePlate: ABC 123
-                    makeModel: Honda CR-V
-                    lastKnownLocation: {}
-                    dropoffInstructions: {}
-                    note: Gate code 123
-        required: true
-      responses:
-        '202':
-          description: The order delivery information was successfully accepted.
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '422':
-          $ref: '#/components/responses/422'
-      security:
-      - OAuth2.0:
-        - orders.update
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /v1/orders/past-orders:
+    servers:
+    - url: https://{public-api-url}/
+      description: Otter Public API base URL. The concrete host is provisioned per integration partner/account via your Otter account representative; substitute the value provided during onboarding.
+      variables:
+        public-api-url:
+          default: public-api-url
+          description: Account-specific Public API host provided by Otter during onboarding.
+  orderUpdate:
     post:
       tags:
-      - Orders Endpoints
-      summary: Otter Upload Past Orders
-      description: '`RATE LIMIT: 32 per minute`; orders must have a status of FULFILLED, REJECTED, or CANCELED
-
-        '
-      operationId: uploadPastOrders
-      parameters:
-      - $ref: '#/components/parameters/storeIdHeader'
+      - Manager Orders Webhooks
+      summary: Otter Order Update Webhook
+      operationId: orderUpdateWebhook
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UploadPastOrdersRequest'
+              allOf:
+              - $ref: '#/components/schemas/EventNotification'
+              - type: object
+                properties:
+                  metadata:
+                    type: object
+                    properties:
+                      payload:
+                        $ref: '#/components/schemas/Order'
+              - example:
+                  eventType: orders.update
             examples:
-              UploadPastOrdersRequestExample:
-                summary: Default uploadPastOrders request
+              OrderUpdateWebhookRequestExample:
+                summary: Default orderUpdateWebhook request
                 x-microcks-default: true
                 value:
-                  orders:
-                  - externalIdentifiers: {}
-                    currencyCode: EUR
-                    status: NEW_ORDER
-                    items:
-                    - {}
-                    orderedAt: '2007-12-03T10:15:30+01:00'
-                    customer: {}
-                    customerNote: Please include extra napkins!
-                    deliveryInfo: {}
-                    orderTotal: {}
-                    orderTotalV2: {}
-                    customerPayments:
-                    - {}
-                    fulfillmentInfo: {}
-                    promotionsDetails:
-                    - {}
-                    preparationTime: {}
-        required: true
+                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
+                  eventTime: '2007-12-03T10:15:30+01:00'
+                  eventType: orders.update
+                  metadata:
+                    payload:
+                      externalIdentifiers: {}
+                      currencyCode: EUR
+                      status: NEW_ORDER
+                      items:
+                      - {}
+                      orderedAt: '2007-12-03T10:15:30+01:00'
+                      customer: {}
+                      customerNote: Please include extra napkins!
+                      deliveryInfo: {}
+                      orderTotal: {}
+                      orderTotalV2: {}
+                      customerPayments:
+                      - {}
+                      fulfillmentInfo: {}
+                      promotionsDetails:
+                      - {}
+                      preparationTime: {}
       responses:
         '200':
-          description: The orders was successfully uploaded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UploadPastOrdersResponse'
-              examples:
-                UploadPastOrders200Example:
-                  summary: Default uploadPastOrders 200 response
-                  x-microcks-default: true
-                  value:
-                    orderReferences:
-                    - externalIdentifiers: {}
-                      storeId: ckdss-store-id
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '422':
-          $ref: '#/components/responses/422'
-      security:
-      - OAuth2.0:
-        - orders.create
+          $ref: '#/components/responses/200'
+        '202':
+          $ref: '#/components/responses/202'
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+    servers:
+    - url: https://{public-api-url}/
+      description: Otter Public API base URL. The concrete host is provisioned per integration partner/account via your Otter account representative; substitute the value provided during onboarding.
+      variables:
+        public-api-url:
+          default: public-api-url
+          description: Account-specific Public API host provided by Otter during onboarding.
+  orderConfirm:
+    post:
+      tags:
+      - Manager Orders Webhooks
+      summary: Otter Order Confirm Notification Webhook
+      operationId: orderConfirmWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventNotification'
+              - type: object
+                properties:
+                  metadata:
+                    type: object
+                    properties:
+                      payload:
+                        $ref: '#/components/schemas/OrderConfirmEvent'
+              - example:
+                  eventType: orders.confirm
+            examples:
+              OrderConfirmWebhookRequestExample:
+                summary: Default orderConfirmWebhook request
+                x-microcks-default: true
+                value:
+                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
+                  eventTime: '2007-12-03T10:15:30+01:00'
+                  eventType: orders.confirm
+                  metadata:
+                    payload:
+                      orderId: 69f60a06-c335-46d9-b5a1-97f1a211c514
+      responses:
+        2XX:
+          $ref: '#/components/responses/2XX'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    servers:
+    - url: https://{public-api-url}/
+      description: Otter Public API base URL. The concrete host is provisioned per integration partner/account via your Otter account representative; substitute the value provided during onboarding.
+      variables:
+        public-api-url:
+          default: public-api-url
+          description: Account-specific Public API host provided by Otter during onboarding.
+  orderReady:
+    post:
+      tags:
+      - Manager Orders Webhooks
+      summary: Otter Order Ready Status Notification Webhook
+      operationId: orderReady
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventNotification'
+              - type: object
+                properties:
+                  metadata:
+                    type: object
+                    properties:
+                      payload:
+                        $ref: '#/components/schemas/OrderReadyEvent'
+              - example:
+                  eventType: orders.order_ready
+            examples:
+              OrderReadyRequestExample:
+                summary: Default orderReady request
+                x-microcks-default: true
+                value:
+                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
+                  eventTime: '2007-12-03T10:15:30+01:00'
+                  eventType: orders.order_ready
+                  metadata:
+                    payload:
+                      orderId: 69f60a06-c335-46d9-b5a1-97f1a211c514
+      responses:
+        2XX:
+          $ref: '#/components/responses/2XX'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    servers:
+    - url: https://{public-api-url}/
+      description: Otter Public API base URL. The concrete host is provisioned per integration partner/account via your Otter account representative; substitute the value provided during onboarding.
+      variables:
+        public-api-url:
+          default: public-api-url
+          description: Account-specific Public API host provided by Otter during onboarding.
+  orderHandedOff:
+    post:
+      tags:
+      - Manager Orders Webhooks
+      summary: Otter Order Handed Off Status Notification Webhook
+      operationId: orderHandedOff
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventNotification'
+              - type: object
+                properties:
+                  metadata:
+                    type: object
+                    properties:
+                      payload:
+                        $ref: '#/components/schemas/OrderHandedOffEvent'
+              - example:
+                  eventType: orders.order_handed_off
+            examples:
+              OrderHandedOffRequestExample:
+                summary: Default orderHandedOff request
+                x-microcks-default: true
+                value:
+                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
+                  eventTime: '2007-12-03T10:15:30+01:00'
+                  eventType: orders.order_handed_off
+                  metadata:
+                    payload:
+                      orderId: 69f60a06-c335-46d9-b5a1-97f1a211c514
+                      courierPhone: 415-234-3212
+                      courierBodyTempFahrenheit: 36.6
+                      isCourierWearingMask: true
+      responses:
+        2XX:
+          $ref: '#/components/responses/2XX'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    servers:
+    - url: https://{public-api-url}/
+      description: Otter Public API base URL. The concrete host is provisioned per integration partner/account via your Otter account representative; substitute the value provided during onboarding.
+      variables:
+        public-api-url:
+          default: public-api-url
+          description: Account-specific Public API host provided by Otter during onboarding.
+  orderFulfilled:
+    post:
+      tags:
+      - Manager Orders Webhooks
+      summary: Otter Order Fulfilled Status Notification Webhook
+      operationId: orderFulfilled
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/EventNotification'
+              - type: object
+                properties:
+                  metadata:
+                    type: object
+                    properties:
+                      payload:
+                        $ref: '#/components/schemas/OrderFulfilledEvent'
+              - example:
+                  eventType: orders.order_fulfilled
+            examples:
+              OrderFulfilledRequestExample:
+                summary: Default orderFulfilled request
+                x-microcks-default: true
+                value:
+                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
+                  eventTime: '2007-12-03T10:15:30+01:00'
+                  eventType: orders.order_fulfilled
+                  metadata:
+                    payload:
+                      orderId: 69f60a06-c335-46d9-b5a1-97f1a211c514
+      responses:
+        2XX:
+          $ref: '#/components/responses/2XX'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    servers:
+    - url: https://{public-api-url}/
+      description: Otter Public API base URL. The concrete host is provisioned per integration partner/account via your Otter account representative; substitute the value provided during onboarding.
+      variables:
+        public-api-url:
+          default: public-api-url
+          description: Account-specific Public API host provided by Otter during onboarding.
 components:
   schemas:
     PreparationTime:
@@ -578,22 +383,6 @@ components:
           type: string
           description: The URL for the BECS payment details.
           example: http://example.com/becs
-    StoreId:
-      type: string
-      description: The unique identifier of the store in the partner application. This ID, along with the `Application ID`, will be used to match the correct store when performing operations. It cannot be longer than 255 characters and must only contain printable ASCII characters. During on-boarding, this ID will be similar to `onboarding:905bb725-b141-4a9b-832a-1f254f772c94` (where the UUID is the Internal Store ID). During off-boarding, this field will be filled with the last known Store ID, or with an empty string, in case none is found. In that case, please fall back to the provided `internalStoreId` (a.k.a. Sku-Sku ID).
-      example: partner-store-unique-identifier
-    UploadPastOrdersRequest:
-      required:
-      - orders
-      type: object
-      properties:
-        orders:
-          type: array
-          description: The past orders you are trying to upload
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/Order'
-      description: The request to create past orders (read only).
     RecordProviderType:
       type: string
       enum:
@@ -616,19 +405,6 @@ components:
       - UNKNOWN
       example: STRIPE
       description: The type of payment provider.
-    OrderReference:
-      required:
-      - externalIdentifiers
-      - storeId
-      type: object
-      properties:
-        externalIdentifiers:
-          $ref: '#/components/schemas/OrderExternalIdentifiers'
-        storeId:
-          type: string
-          description: The identifier of the store.
-          example: ckdss-store-id
-      description: An order reference.
     SourceExternalIdentifiers:
       type:
       - object
@@ -658,40 +434,6 @@ components:
         sourceExternalIdentifiers:
           $ref: '#/components/schemas/SourceExternalIdentifiers'
       description: The external identifiers.
-    PaymentDetailsSepa:
-      type: object
-      description: Details of a SEPA payment method in EU countries.
-      properties:
-        mandateStatus:
-          $ref: '#/components/schemas/MandateStatus'
-        lastFour:
-          type: string
-          description: The last four digits of the SEPA account.
-          example: '4321'
-        branchCode:
-          type: string
-          description: The branch code of the SEPA account.
-          example: branch_001
-        bankCode:
-          type: string
-          description: The bank code of the SEPA account.
-          example: bank_001
-        countryCode:
-          type: string
-          description: The country code of the SEPA account.
-          example: DE
-        mandateId:
-          type: string
-          description: The mandate ID for the SEPA account.
-          example: sepa_mandate_012
-        reference:
-          type: string
-          description: The reference for the SEPA payment.
-          example: reference_xyz
-        url:
-          type: string
-          description: The URL for the SEPA payment details.
-          example: http://example.com/sepa
     Address:
       type:
       - object
@@ -743,6 +485,40 @@ components:
         location:
           $ref: '#/components/schemas/Location'
       description: Order delivery address.
+    PaymentDetailsSepa:
+      type: object
+      description: Details of a SEPA payment method in EU countries.
+      properties:
+        mandateStatus:
+          $ref: '#/components/schemas/MandateStatus'
+        lastFour:
+          type: string
+          description: The last four digits of the SEPA account.
+          example: '4321'
+        branchCode:
+          type: string
+          description: The branch code of the SEPA account.
+          example: branch_001
+        bankCode:
+          type: string
+          description: The bank code of the SEPA account.
+          example: bank_001
+        countryCode:
+          type: string
+          description: The country code of the SEPA account.
+          example: DE
+        mandateId:
+          type: string
+          description: The mandate ID for the SEPA account.
+          example: sepa_mandate_012
+        reference:
+          type: string
+          description: The reference for the SEPA payment.
+          example: reference_xyz
+        url:
+          type: string
+          description: The URL for the SEPA payment details.
+          example: http://example.com/sepa
     FulfillmentInfo:
       type:
       - object
@@ -980,18 +756,6 @@ components:
         pictureRequirement:
           $ref: '#/components/schemas/PictureRequirement'
       description: Verification requirements for the delivery.
-    ErrorDetail:
-      type: object
-      properties:
-        attribute:
-          type: string
-          description: The error attribute.
-          example: Order Currency Code
-        message:
-          type: string
-          description: The error detail description.
-          example: Order Currency Code must be exactly 3 characters
-      description: The error detail response object.
     MandateStatus:
       type: string
       enum:
@@ -1000,17 +764,6 @@ components:
       - PENDING
       description: The status of the mandate.
       example: ACTIVE
-    UploadPastOrdersResponse:
-      required:
-      - orderReferences
-      type: object
-      properties:
-        orderReferences:
-          type: array
-          description: References for orders that were successfully uploaded.
-          items:
-            $ref: '#/components/schemas/OrderReference'
-      description: The response to create a past order (read only).
     CompositeFinanceLine:
       required:
       - breakdown
@@ -1023,14 +776,6 @@ components:
           items:
             $ref: '#/components/schemas/SimpleFinanceLine'
       description: composite finance line can represent a value, tax and VAT for a given line as a list of SimpleFinanceLine objects
-    OrderDeliveryInfoUpdateRequest:
-      required:
-      - deliveryInfo
-      type: object
-      properties:
-        deliveryInfo:
-          $ref: '#/components/schemas/RequiredDeliveryInfo'
-      description: The request to update an order delivery info status.
     SimpleFinanceLine:
       required:
       - subType
@@ -1098,28 +843,6 @@ components:
           - VOUCHER
           - OTHER
           example: CREDIT
-    OrderCustomerPaymentUpdateRequest:
-      required:
-      - currencyCode
-      - customerPayment
-      type: object
-      properties:
-        currencyCode:
-          maxLength: 3
-          minLength: 3
-          type: string
-          description: The 3-letter currency code (ISO 4217) to use for all monetary values in this order.
-          example: EUR
-        customerPayment:
-          type: array
-          description: The requested customer payment to transition the order to.
-          items:
-            $ref: '#/components/schemas/CustomerPayment'
-        orderTotal:
-          $ref: '#/components/schemas/OrderTotal'
-        orderTotalsV2:
-          $ref: '#/components/schemas/OrderTotalV2'
-      description: The request to update customer payment for an order.
     Courier:
       type:
       - object
@@ -1152,19 +875,6 @@ components:
         personalIdentifiers:
           $ref: '#/components/schemas/PersonalIdentifiers'
       description: Details about the delivery courier.
-    ErrorMessage:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error description.
-          example: The request body is invalid.
-        details:
-          type: array
-          description: The error details.
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-      description: The error response object.
     PictureRequirement:
       type:
       - object
@@ -1334,6 +1044,16 @@ components:
       - INTERAC
       description: The brand of the card.
       example: VISA
+    LoyaltyInfo:
+      type:
+      - object
+      - 'null'
+      description: The customer's loyalty information.
+      properties:
+        hasMembershipPass:
+          type: boolean
+          description: Indicates if the customer has a membership pass.
+          example: true
     OrderTotalV2:
       required:
       - customerTotal
@@ -1353,16 +1073,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/Payout'
       description: V2 for details about values of the order, provides richer objects allowing to capture taxes, misc charges, payments more precisely.
-    LoyaltyInfo:
-      type:
-      - object
-      - 'null'
-      description: The customer's loyalty information.
-      properties:
-        hasMembershipPass:
-          type: boolean
-          description: Indicates if the customer has a membership pass.
-          example: true
     AccountHolderType:
       type: string
       enum:
@@ -1713,36 +1423,6 @@ components:
           description: Special delivery instructions, if any.
           example: Gate code 123
       description: Information on order's delivery process.
-    RequiredDeliveryInfo:
-      type: object
-      properties:
-        courier:
-          $ref: '#/components/schemas/Courier'
-        destination:
-          $ref: '#/components/schemas/Address'
-        licensePlate:
-          type:
-          - string
-          - 'null'
-          description: License plate of a vehicle used by the courier.
-          example: ABC 123
-        makeModel:
-          type:
-          - string
-          - 'null'
-          description: Make and model of a vehicle used by the courier.
-          example: Honda CR-V
-        lastKnownLocation:
-          $ref: '#/components/schemas/Location'
-        dropoffInstructions:
-          $ref: '#/components/schemas/DropoffInstructions'
-        note:
-          type:
-          - string
-          - 'null'
-          description: Special delivery instructions, if any.
-          example: Gate code 123
-      description: Information on order's delivery process.
     PaymentRecord:
       type: object
       description: Represents the details and metadata of a payment method used in transactions.
@@ -1778,20 +1458,6 @@ components:
           - $ref: '#/components/schemas/PaymentDetailsBecs'
           - $ref: '#/components/schemas/PaymentDetailsSepa'
           - $ref: '#/components/schemas/PaymentDetailsAch'
-    OrderStatusUpdateRequest:
-      required:
-      - orderStatus
-      type: object
-      properties:
-        orderStatus:
-          type: string
-          description: The requested status to transition the order to.
-          enum:
-          - PREPARED
-          - CANCELED
-          - FULFILLED
-          example: PREPARED
-      description: The request to change an order status.
     AccountType:
       type: string
       enum:
@@ -1807,40 +1473,6 @@ components:
       - GOOGLE_PAY
       description: The type of wallet associated with the card.
       example: APPLE_PAY
-    OrderExternalIdentifiers:
-      required:
-      - friendlyId
-      - id
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique ID for the order that was placed.
-          example: 69f60a06-c335-46d9-b5a1-97f1a211c514
-        friendlyId:
-          type: string
-          description: ID used for driver pickup and restaurant management.
-          example: ABCDE
-        source:
-          type:
-          - string
-          - 'null'
-          description: Describes the source of the order, typically from a food ordering marketplace.
-          example: ubereats
-        sourceType:
-          type:
-          - string
-          - 'null'
-          description: source type of the order
-          enum:
-          - POINT_OF_SALE
-          - ORDERING_MARKETPLACE
-          - AGGREGATOR
-          - CUSTOMER_INTERACTION
-          example: POINT_OF_SALE
-        sourceExternalIdentifiers:
-          $ref: '#/components/schemas/SourceExternalIdentifiers'
-      description: The external identifiers.
     Order:
       required:
       - currencyCode
@@ -1915,6 +1547,40 @@ components:
         preparationTime:
           $ref: '#/components/schemas/PreparationTime'
       description: An order placed by a customer.
+    OrderExternalIdentifiers:
+      required:
+      - friendlyId
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ID for the order that was placed.
+          example: 69f60a06-c335-46d9-b5a1-97f1a211c514
+        friendlyId:
+          type: string
+          description: ID used for driver pickup and restaurant management.
+          example: ABCDE
+        source:
+          type:
+          - string
+          - 'null'
+          description: Describes the source of the order, typically from a food ordering marketplace.
+          example: ubereats
+        sourceType:
+          type:
+          - string
+          - 'null'
+          description: source type of the order
+          enum:
+          - POINT_OF_SALE
+          - ORDERING_MARKETPLACE
+          - AGGREGATOR
+          - CUSTOMER_INTERACTION
+          example: POINT_OF_SALE
+        sourceExternalIdentifiers:
+          $ref: '#/components/schemas/SourceExternalIdentifiers'
+      description: The external identifiers.
     CardFundingType:
       type: string
       enum:
@@ -2062,60 +1728,6 @@ components:
         verificationRequirements:
           $ref: '#/components/schemas/VerificationRequirements'
       description: Requirements to verify the completion of the delivery.
-  responses:
-    '403':
-      description: Authorization not valid for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '401':
-      description: Invalid authorization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '400':
-      description: The request is malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '422':
-      description: The request body is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '404':
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-  parameters:
-    eventIdOptionalHeader:
-      name: X-Event-Id
-      in: header
-      required: false
-      schema:
-        type: string
-        description: Optional unique identifier of the event that this callback refers to.
-        example: cf0ce51b-d74e-40d3-b177-1925ab4edc0c
-    storeIdHeader:
-      name: X-Store-Id
-      in: header
-      required: true
-      schema:
-        $ref: '#/components/schemas/StoreId'
-    orderId:
-      name: orderId
-      in: path
-      required: true
-      schema:
-        type: string
-        description: A unique identifier of the order in a UUID format.
-        example: 295f76b4-5725-4bf5-a8ab-97943dbdc3b4
   securitySchemes:
     OAuth2.0:
       type: oauth2
@@ -2157,6 +1769,26 @@ components:
           scopes:
             organization.read: Permission to read data for organization/brands/stores on behalf of a user.
             organization.service_integration: Permission to manage the your integration with a given store on behalf of a user.
+x-refined-from:
+- otter-account-pairing-endpoints-api-openapi.yml
+- otter-auth-endpoints-api-openapi.yml
+- otter-callback-endpoints-api-openapi.yml
+- otter-delivery-endpoints-api-openapi.yml
+- otter-direct-orders-endpoints-api-openapi.yml
+- otter-finance-endpoints-api-openapi.yml
+- otter-inventory-endpoints-api-openapi.yml
+- otter-manager-loyalty-endpoints-api-openapi.yml
+- otter-manager-menu-endpoints-api-openapi.yml
+- otter-manager-order-endpoints-api-openapi.yml
+- otter-manager-storefront-endpoints-api-openapi.yml
+- otter-market-intel-endpoints-api-openapi.yml
+- otter-menus-endpoints-api-openapi.yml
+- otter-orders-endpoints-api-openapi.yml
+- otter-organization-endpoints-api-openapi.yml
+- otter-ping-endpoints-api-openapi.yml
+- otter-reports-endpoints-api-openapi.yml
+- otter-reviews-endpoints-api-openapi.yml
+- otter-storefront-endpoints-api-openapi.yml
 x-tagGroups:
 - name: Endpoints
   tags:

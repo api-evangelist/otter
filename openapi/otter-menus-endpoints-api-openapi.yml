@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Public Account Pairing Endpoints Menus Endpoints API
   description: "# Overview\n\nThe API endpoints are developed around [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) principles secure via the OAuth2.0 protocol.\n\nBeyond the entry points, the API also provides a line of communication into your system via [webhooks](https://en.wikipedia.org/wiki/Webhook).\n\nFor testing purposes, we offer a staging environment. Also, more detailed information about the business rules and workflows can be found on the [**Documentation Section**](/docs/)\n\n## Versioning\nEach API is versioned individually, but we follow these rules:\n- Non breaking changes (eg: adding new fields) are added in the current version without previous communication\n- Breaking changes (fields removal, semantic changed or schema update) have the version incremented\n- Users will be notified about new versions and will be given time to migrate (the time will be set on a case by case basis)\n- Once users migrate to the new version, we will deprecate the old ones\n- Once there is a new version for an API, we won't accept new integrations targeting old versions\n\n## API General Definitions\nThe APIs use resource-oriented URLs communicating, primarily, via JSON and leveraging the HTTP headers, [response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), and verbs.\n\nTo exemplify how the API is to be consumed, consider a fake GET resource endpoint invocation below:\n\n```\ncurl --request GET 'https://{{public-api-url}}/v1/resource/123' \\\n--header 'Authorization: Bearer 34fdabeeafds=' --header 'X-Store-Id: 321'\n```\n\n|      Header      | Description |\n| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n|`Authorization`   | Standard HTTP header is used to associate the request with the originating invoker. The content of this header is a `Bearer` token generated from you client_secret, defined in the [API Auth](#/section/Guides/API-Auth) guide.|\n|`X-Store-Id`      | The ID of the store in your system this call acts on behalf of. |\n\n_All resource endpoints expect the `Authorization` header, the remaining headers are explicitly stated in the individual endpoint documentation section._\n\nWith these headers, the system will:\n - Validate the client token, making sure the call is originating from a trusted source.\n - Validate that the Application has the permission to access the `v1/resource/{id}` resource via the Application's pre-configured scopes.\n - Translate your X-Store-Id to our internal store ID (e.g. `AAA`).\n - Validate and retrieve resource `AAA`, that is associated to your Application via store id `321`.\n\nPOST/PUT methods will look similar to the GET calls, but they'll take in a body in the HTTP request (default to the application/json content-type).\n\n```\ncurl --location --request POST 'https://{{public-api-url}}/v1/resource' \\\n--header 'Authorization: Bearer 34fdabeeafds=' --header 'X-Store-Id: 321'\n--data '{\"foo\": \"bar\"}'\n```\n\n## API Authentication/Authorization\n\n<SecurityDefinitions />\n\n## Webhook\n\nThe Public API is able to send notifications to your system via HTTP POST requests.\n\nEvery webhook is signed using HMAC-SHA256 that is present in the header `X-HMAC-SHA256`, and you can also authenticate the requests using Basic Auth, Bearer Token or HMAC-SHA1 (legacy). Please, refer to [**Webhook Authentication Guide**](/docs/guides-webhook-authentication/) for more details.\n\n_Please work with your Account Representative to setup your Application's Webhook configurations._\n\n```\nExample Base-URL = https://{{your-server-url}}/webhook\n```\n\n### Notification Schema\n\n| **Name**                | **Type** | **Description**                                                      |\n| ------------------------| ---------| -------------------------------------------------------------------- |\n| eventId                 | string   | Unique id of the event.                                              |\n| eventTime               | string   | The time the event occurred.                                         |\n| eventType               | string   | The type of event (e.g. create_order).                               |\n| metadata.storeId        | string   | Id of the store for which the event is being published.              |\n| metadata.applicationId  | string   | Id of the application for which the event is being published.        |\n| metadata.resourceId     | string   | The external identifier of the resource that this event refers to.   |\n| metadata.resourceHref   | string   | The endpoint to fetch the details of the resource.                   |\n| metadata.payload        | object   | The event object which will be detailed in each Webhook description. |\n\n### Notification Request Example\n\n```\ncurl --location --request POST 'https://{{your-server-url}}/webhook' \\\n--header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36' \\\n--header 'Authorization: MAC <hash signature>' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n   \"eventId\": \"123456\",\n   \"eventTime\": \"2020-10-10T20:06:02:123Z\",\n   \"eventType\": \"orders.new_order\",\n   \"metadata\": {\n      \"storeId\": \"755fd19a-7562-487a-b615-171a9f89d669\",\n      \"applicationId\": \"e22f94b3-967c-4e26-bf39-9e364066b68b\",\n      \"resourceHref\": \"https://{{public-api-url}}/v1/orders/bf9f1d81-f213-496e-a026-91b6af44996c\",\n      \"resourceId\": \"bf9f1d81-f213-496e-a026-91b6af44996c\",\n      \"payload\": {}\n   }\n}\n```\n\n### Expected Response\n\nThe partner application should return an HTTP 200 response code with an empty response body to acknowledge receipt of the webhook event.\n## Rate Limiting\nPlease, refer to [**Rate Limiting Guide**](/docs/guides-rate-limiting/) for more details.\n\n## Error codes\nThe APIs use standard HTTP status codes to indicate the success or failure of a request. Error codes are divided into two categories: 4XX codes for client-side errors and 5xx codes for server-side errors.\n### 4XX Client-Side Errors\nClient-side errors are indicated by status codes in the 4xx range. These errors are typically the result of a problem with the request made by your application.\nIf a client-side error occurs, our API will return a response that includes an appropriate error message. This message will provide information about the cause of the error. The aim of these messages is to assist you in identifying and resolving the issue.\nFor example, if you submit a request with missing or invalid parameters, you might receive a 400 Bad Request error with a message indicating which parameters were missing or incorrect.\n### 5XX Server-Side Errors\nServer-side errors are represented by status codes in the 5xx range. These errors suggest a problem with our server, not with your application's request.\nServer-side errors are typically transient, meaning they are temporary. If a server-side error occurs, we recommend that the client retries the same request with the exact same parameters.\nFor example, if you get a 500 Internal Server Error, it's possible that our server is suffering a temporary problem. In such cases, retrying the request after a short delay is often successful.\nIf you continually receive server-side errors, reach out to our support team for further assistance."
@@ -548,87 +548,55 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Photo:
-      title: All photos for the store, indexed by ID
+    DefaultModifierSelectionData:
       required:
-      - contentType
-      - fileName
-      - id
-      - url
+      - defaultModifierSelections
       type: object
       properties:
-        url:
-          type: string
-          description: URL of the photo.
-          example: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
-        fileName:
-          type: string
-          description: File name
-          example: image.jpg
-        id:
-          type: string
-          description: Identifier of the Photo.
-          example: e9174f75-a293-4908-bba7-9db69871ad81
-        contentType:
-          type: string
-          description: 'The media type of the file. Deprecated: Use the media type served from the photo URL instead.'
-          example: image/jpeg, image/png
-          deprecated: true
-      description: All data required to represent a Photo for an entity in menus.
-    ItemStatus:
+        defaultModifierSelections:
+          type: array
+          description: The default modifier selections for this modifier group.
+          items:
+            $ref: '#/components/schemas/DefaultModifierSelection'
+      description: The default modifiers selections for a modifier group.
+    SendMenuEventCallback:
       required:
-      - saleStatus
+      - menuData
       type: object
       properties:
-        saleStatus:
-          type: string
-          description: The sale status of the item.
-          example: TEMPORARILY_NOT_FOR_SALE
-          enum:
-          - FOR_SALE
-          - INDEFINITELY_NOT_FOR_SALE
-          - TEMPORARILY_NOT_FOR_SALE
-        suspendedUntil:
-          type: string
-          nullable: true
-          description: 'ISO-8601 timestamp representing the time the saleStatus value is supposed to change to FOR_SALE. Set only when current saleStatus value is TEMPORARILY_NOT_FOR_SALE. E.g.: 2020-11-23T21:33:51Z, 2007-12-03T10:15:30+01:00'
-          format: date-time
-          example: '2007-12-03T10:15:30+01:00'
-      description: Represents whether an Item is for sale, indefinitely not for sale, or not for sale until a specific time.
-    AdditionalCharge:
+        menuData:
+          $ref: '#/components/schemas/MenuData'
+    UpsertFullMenuEventCallback:
       required:
-      - chargeType
+      - requestedToCreatedEntityIds
       type: object
       properties:
-        chargeType:
-          type: string
-          description: The type of the additional charge.
-          enum:
-          - PACKAGING_CHARGE
-          - CONTAINER_DEPOSIT
-          example: PACKAGING_CHARGE
-        flatCharge:
-          $ref: '#/components/schemas/Money'
-        percentageCharge:
-          $ref: '#/components/schemas/PercentageValue'
-        unitPriceAndCount:
-          $ref: '#/components/schemas/UnitPriceAndCount'
-      description: Additional charge to apply. Exactly one of either flatCharge or percentageCharge should be provided.
-    UnitPriceAndCount:
-      required:
-      - unitPrice
-      - count
+        requestedToCreatedEntityIds:
+          type: object
+          additionalProperties:
+            x-additionalPropertiesName: menuId
+            type: string
+          example:
+            1ecd8573-c033-4a55-9d69-4e99bb0397b4: ABCDEFGHIJK1234
+          description: A map for entities created by the Upsert containing the IDs of the requested entities mapped to the IDs of entities created by the request. Our system will use the IDs returned in this map to send updates to these entities in future requests. **NOTE -** A empty map can be used on requestedToCreatedEntityIds to use the same menu IDs that were previously defined.
+    NutritionalInfo:
       type: object
       properties:
-        unitPrice:
-          $ref: '#/components/schemas/Money'
-        count:
-          minimum: 1
-          type: integer
-          description: The count for the additional charge.
-          example: 3
-      description: Unit price and count for additional charges.
-      example: 3 x $25.21
+        energyKcal:
+          $ref: '#/components/schemas/EnergyKcal'
+        nutritionContent:
+          $ref: '#/components/schemas/NutritionContent'
+      description: The nutritional information of an item.
+    OverrideRule:
+      required:
+      - externalServiceSlug
+      type: object
+      properties:
+        externalServiceSlug:
+          type: string
+          description: 'The service slug for which this rule should apply. E.g.: If externalServiceSlug is UberEats, then the priceOverride should be applied to UberEats.'
+          example: ubereats
+      description: Override rule for when to apply price overrides
     HoursData:
       required:
       - regularHours
@@ -652,45 +620,52 @@ components:
           items:
             $ref: '#/components/schemas/SpecialHours'
       description: Represents hours configuration with regular hours and special hours.
-    RegularHours:
+    OverrideRule_3PD:
       required:
-      - days
-      - timeRanges
+      - type
       type: object
       properties:
-        days:
-          type: array
-          description: The day of the week this configuration applies.
-          items:
-            type: string
-            description: Day of the week.
-            enum:
-            - MONDAY
-            - TUESDAY
-            - WEDNESDAY
-            - THURSDAY
-            - FRIDAY
-            - SATURDAY
-            - SUNDAY
-        timeRanges:
-          type: array
-          description: Hours range applied to the provided day of the week
-          items:
-            $ref: '#/components/schemas/TimeRange'
-      description: Describes the configuration of regular hours.
-    UpsertFullMenuEventCallback:
-      required:
-      - requestedToCreatedEntityIds
+        type:
+          type: string
+          example: string
+      description: Specification for rules to apply overrides (e.g. PriceOverride).
+      discriminator:
+        propertyName: type
+        mapping:
+          PATH: '#/components/schemas/EntityPathOverrideRule'
+          FULFILLMENT_MODE: '#/components/schemas/FulfillmentModeOverrideRule'
+          SERVICE: '#/components/schemas/ServiceOverrideRule'
+    PosMenuSyncResponse:
       type: object
       properties:
-        requestedToCreatedEntityIds:
-          type: object
-          additionalProperties:
-            x-additionalPropertiesName: menuId
-            type: string
-          example:
-            1ecd8573-c033-4a55-9d69-4e99bb0397b4: ABCDEFGHIJK1234
-          description: A map for entities created by the Upsert containing the IDs of the requested entities mapped to the IDs of entities created by the request. Our system will use the IDs returned in this map to send updates to these entities in future requests. **NOTE -** A empty map can be used on requestedToCreatedEntityIds to use the same menu IDs that were previously defined.
+        jobId:
+          type:
+          - string
+          - 'null'
+          description: Only present if the request succeeds. Job ID to check on the status with the MenuAsyncJob endpoint.
+          format: uuid
+          example: c75d9460-5d48-423d-8d01-f825fd5b1672
+    StoreId:
+      type: string
+      description: The unique identifier of the store in the partner application. This ID, along with the `Application ID`, will be used to match the correct store when performing operations. It cannot be longer than 255 characters and must only contain printable ASCII characters. During on-boarding, this ID will be similar to `onboarding:905bb725-b141-4a9b-832a-1f254f772c94` (where the UUID is the Internal Store ID). During off-boarding, this field will be filled with the last known Store ID, or with an empty string, in case none is found. In that case, please fall back to the provided `internalStoreId` (a.k.a. Sku-Sku ID).
+      example: partner-store-unique-identifier
+    DefaultModifierSelection:
+      required:
+      - itemId
+      - selectionQuantity
+      type: object
+      properties:
+        itemId:
+          type: string
+          description: The id of the modifier item that this default selection pertains to. This id must be present in the item ids of the modifier group.
+          example: da0e4e94-5670-4175-897a-3b7dde45bed5
+        selectionQuantity:
+          minimum: 0
+          type: integer
+          description: The default quantity of the modifier item to be selected.
+          format: int32
+          example: 0
+      description: A default modifier selection consists of a reference to the modifier and the default selected quantity of that modifier.
     NutritionContent:
       type: object
       properties:
@@ -783,41 +758,239 @@ components:
           description: The energy in kcal per serving size.
           example: 991.3
       description: The nutrition content of the item.
-    PriceOverride:
+    CustomBulkResolutionOptions:
+      type:
+      - object
+      - 'null'
+      properties:
+        updateNames:
+          type: boolean
+          description: Update the linked entity's names to match the linked external entity's.
+          example: true
+        updatePrices:
+          type: boolean
+          description: Update the linked entity's price to match the linked external entity's.
+          example: true
+        updateDescriptions:
+          type: boolean
+          description: Update the linked entity's description to match the linked external entity's.
+          example: true
+        createUnmatchedEntities:
+          type: boolean
+          description: Create unmatched external entities in the menu.
+          example: true
+        deleteMissingEntities:
+          type: boolean
+          description: Delete entities that are missing external links.
+          example: true
+        bootstrapPhotosToEntities:
+          type: boolean
+          description: Bootstrap linked item photos.
+          example: true
+        copyEntityPaths:
+          type: boolean
+          description: Copies the entity paths from the external menu.
+          example: true
+        updateItemSuspensionStatus:
+          type: boolean
+          description: Update Item suspension status.
+          example: true
+        updateHours:
+          type: boolean
+          description: Update menu hours.
+          example: true
+        assignItemsToLocations:
+          type: boolean
+          description: If an item exists at a location in the POS, it will automatically be assigned to that location.
+          example: true
+        unassignItemsFromLocations:
+          type: boolean
+          description: If an item is removed from a location in the POS, it will automatically be unassigned from that location.
+          example: true
+        updateMenuOrganization:
+          type: boolean
+          description: The organization of modifiers into modifier groups, modifier groups into items and items into categories will be replicated from the POS menu.
+          example: true
+        updateItemArrangement:
+          type: boolean
+          description: The arrangement of menu products as displayed in your POS will be replicated.
+          example: true
+        updateModifierGroupRules:
+          type: boolean
+          description: Update modifier group selection rules.
+          example: true
+        updateTaxes:
+          type: boolean
+          description: Update taxes.
+          example: true
+    ItemTax:
       required:
-      - price
-      - rules
+      - percentageValue
+      - isValueAddedTax
       type: object
       properties:
-        price:
-          $ref: '#/components/schemas/Money'
-        rules:
-          type: array
-          minItems: 1
-          description: Override rules for when this price override should be applied.
-          items:
-            $ref: '#/components/schemas/OverrideRule_3PD'
-      description: Price override for an item
-    Money:
+        percentageValue:
+          $ref: '#/components/schemas/PercentageValue'
+          description: Specify the percentage value of the tax.
+        isValueAddedTax:
+          type: boolean
+          description: Whether this tax is a value-added tax.
+          example: true
+      description: The tax configuration.
+    Menu_3PD:
+      title: All Menus for the store, indexed by ID
       required:
-      - amount
-      - currencyCode
+      - id
+      - name
       type: object
       properties:
-        currencyCode:
-          maxLength: 3
-          minLength: 3
+        id:
           type: string
-          description: The 3-letter currency code (ISO 4217) to use for all monetary values.
-          example: EUR
-        amount:
-          minimum: 0
-          exclusiveMinimum: false
-          type: number
-          description: Amount value.
-          example: 25.21
-      description: Money amount.
-      example: 25.21
+          description: The identifier that exists in the third party system. During a menu publish event, uuidV4 ids will be generated for new entities that do not yet exist in the internal menu.
+          example: da0e4e94-5670-4175-897a-3b7dde45bed5
+        name:
+          type: string
+          description: Name of the Menu.
+          example: Tasty BBQ
+        categoryIds:
+          type: array
+          default: []
+          description: Identifiers of the categories within this Menu.
+          items:
+            type: string
+        fulfillmentModes:
+          type: array
+          default: []
+          description: The ways in which this menu may be fulfilled. If no values are specified, it is assumed that all fulfillment types are allowed.
+          items:
+            type: string
+            description: How an item from a menu is allowed to be fulfilled when ordered by a user.
+            enum:
+            - DELIVERY
+            - PICK_UP
+            - DINE_IN
+        description:
+          type: string
+          description: Description of the Menu.
+          example: Cooking up BBQ deliciousness from around the globe!
+        hoursData:
+          $ref: '#/components/schemas/HoursData'
+        additionalCharges:
+          type:
+          - array
+          - 'null'
+          description: Additional charges to apply for this menu. All additional charges specified on a menu will only be applied once per order.
+          items:
+            $ref: '#/components/schemas/AdditionalCharge'
+        exposedThirdPartyInfos:
+          type: array
+          default: []
+          description: Additional information about the menu that should be exposed to third party
+          items:
+            $ref: '#/components/schemas/ExposedThirdPartyInfo'
+      description: A Menu for a store.
+    Menu_POS:
+      title: All Menus for the store, indexed by ID
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          description: Internal identifier for Menu.
+          example: ff6dd693-5e55-4a92-a359-ea61b23ed423
+        name:
+          type: string
+          description: Name of the Menu.
+          example: Tasty BBQ
+        categoryIds:
+          type: array
+          default: []
+          description: Identifiers of the categories within this Menu.
+          items:
+            type: string
+        fulfillmentModes:
+          type: array
+          default: []
+          description: The ways in which this menu may be fulfilled. If no values are specified, it is assumed that all fulfillment types are allowed.
+          items:
+            type: string
+            description: How an item from a menu is allowed to be fulfilled when ordered by a user.
+            enum:
+            - DELIVERY
+            - PICK_UP
+            - DINE_IN
+        description:
+          type: string
+          description: Description of the Menu.
+          example: Cooking up BBQ deliciousness from around the globe!
+        hours:
+          $ref: '#/components/schemas/Hours'
+        additionalCharges:
+          type:
+          - array
+          - 'null'
+          description: Additional charges to apply for this menu. All additional charges specified on a menu will only be applied once per order.
+          items:
+            $ref: '#/components/schemas/AdditionalCharge'
+      description: A menu for a store.
+    PosMenuSyncRequest:
+      type: object
+      properties:
+        shouldPublishChanges:
+          type:
+          - boolean
+          - 'null'
+          description: Whether or not to publish changes to external services after bulk resolution.
+          example: true
+        useCustomOptions:
+          type:
+          - boolean
+          - 'null'
+          description: If true, use `customBulkResolutionOptions` instead of menu configuration.
+          example: true
+        customBulkResolutionOptions:
+          $ref: '#/components/schemas/CustomBulkResolutionOptions'
+    DietaryClassification:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: The type of dietary classification.
+          enum:
+          - VEGAN
+          - VEGETARIAN
+          - NON_VEGETARIAN
+          - EGG
+          - KOSHER
+          - HALAL
+          - PLANT_BASED
+          - PALEO
+          - KETO
+          example: VEGAN
+      description: Dietary classification information.
+    ItemStatus:
+      required:
+      - saleStatus
+      type: object
+      properties:
+        saleStatus:
+          type: string
+          description: The sale status of the item.
+          example: TEMPORARILY_NOT_FOR_SALE
+          enum:
+          - FOR_SALE
+          - INDEFINITELY_NOT_FOR_SALE
+          - TEMPORARILY_NOT_FOR_SALE
+        suspendedUntil:
+          type:
+          - string
+          - 'null'
+          description: 'ISO-8601 timestamp representing the time the saleStatus value is supposed to change to FOR_SALE. Set only when current saleStatus value is TEMPORARILY_NOT_FOR_SALE. E.g.: 2020-11-23T21:33:51Z, 2007-12-03T10:15:30+01:00'
+          format: date-time
+          example: '2007-12-03T10:15:30+01:00'
+      description: Represents whether an Item is for sale, indefinitely not for sale, or not for sale until a specific time.
     SkuDetails:
       type: object
       properties:
@@ -887,6 +1060,24 @@ components:
           description: Information about the distributor of this product. May or may not be the same as the producer.
           example: The Coca-Cola Company
       description: Details of the product being prepared or a pre-packaged good being sold. Includes information such as UPC barcode, unique identifiers, or classification information.
+    JobReference:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the job.
+          format: uuid
+          example: c75d9460-5d48-423d-8d01-f825fd5b1672
+        status:
+          type: string
+          description: The status of the job.
+          enum:
+          - PENDING
+          - FAILED
+          - SUCCESS
+          - UNKNOWN
+          example: PENDING
+      description: The job reference.
     ErrorDetail:
       type: object
       properties:
@@ -899,186 +1090,6 @@ components:
           description: The error detail description.
           example: Order Currency Code must be exactly 3 characters
       description: The error detail response object.
-    ErrorMessage:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error description.
-          example: The request body is invalid.
-        details:
-          type: array
-          description: The error details.
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-      description: The error response object.
-    MenuAsynchronousJob:
-      type: object
-      properties:
-        jobReference:
-          $ref: '#/components/schemas/JobReference'
-        jobType:
-          $ref: '#/components/schemas/MenuJobType'
-        publishJobState:
-          $ref: '#/components/schemas/MenuJobPublishState'
-      description: The job created to process the menu request.
-    PosMenuSyncResponse:
-      type: object
-      properties:
-        jobId:
-          type: string
-          nullable: true
-          description: Only present if the request succeeds. Job ID to check on the status with the MenuAsyncJob endpoint.
-          format: uuid
-          example: c75d9460-5d48-423d-8d01-f825fd5b1672
-    MenuItem_3PD:
-      title: All Items for the store, indexed by ID
-      required:
-      - id
-      - name
-      - photoIds
-      - price
-      - priceOverrides
-      - status
-      type: object
-      properties:
-        id:
-          type: string
-          minLength: 1
-          description: The identifier that exists in the third party system. During a menu publish event, uuidV4 ids will be generated for new entities that do not yet exist in the internal menu.
-          example: da0e4e94-5670-4175-897a-3b7dde45bed5
-        name:
-          type: string
-          description: Name of this Item
-          example: Bagel
-        photoIds:
-          type: array
-          description: A list of Photo references associated with the Item.
-          items:
-            type: string
-        price:
-          $ref: '#/components/schemas/Money'
-        priceOverrides:
-          type: array
-          description: Specify price overrides.
-          items:
-            $ref: '#/components/schemas/PriceOverride'
-        status:
-          $ref: '#/components/schemas/ItemStatus'
-        description:
-          type: string
-          description: Description of this Item
-          example: Delicious bagel!
-        modifierGroupIds:
-          type: array
-          default: []
-          description: Identifiers of each ModifierGroup within this Item.
-          items:
-            type: string
-            example: 7152ee6e-e941-45c1-9008-2e306b479114
-        skuDetails:
-          $ref: '#/components/schemas/SkuDetails'
-        additionalCharges:
-          type: array
-          nullable: true
-          description: Additional charges to apply for this item. Additional charges will be applied for every instance of this item within an order.
-          items:
-            $ref: '#/components/schemas/AdditionalCharge'
-        tax:
-          $ref: '#/components/schemas/ItemTax'
-          description: The tax configuration for the menu item.
-        exposedThirdPartyInfos:
-          type: array
-          default: []
-          description: Additional information about the menu that should be exposed to third party
-          items:
-            $ref: '#/components/schemas/ExposedThirdPartyInfo'
-      description: Items are sold on the Menu. Modifiers to items are items themselves and their relationship is defined by ModifierGroup.
-    StorageRequirement:
-      type: object
-      properties:
-        tag:
-          type: string
-          description: Storage requirements for the product.
-          enum:
-          - FROZEN
-          - COLD
-          - DRY
-          - ROOM_TEMPERATURE
-          - AVOID_SUNLIGHT
-          example: FROZEN
-      description: Storage requirements for the product.
-    Menu_POS:
-      title: All Menus for the store, indexed by ID
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          type: string
-          description: Internal identifier for Menu.
-          example: ff6dd693-5e55-4a92-a359-ea61b23ed423
-        name:
-          type: string
-          description: Name of the Menu.
-          example: Tasty BBQ
-        categoryIds:
-          type: array
-          default: []
-          description: Identifiers of the categories within this Menu.
-          items:
-            type: string
-        fulfillmentModes:
-          type: array
-          default: []
-          description: The ways in which this menu may be fulfilled. If no values are specified, it is assumed that all fulfillment types are allowed.
-          items:
-            type: string
-            description: How an item from a menu is allowed to be fulfilled when ordered by a user.
-            enum:
-            - DELIVERY
-            - PICK_UP
-            - DINE_IN
-        description:
-          type: string
-          description: Description of the Menu.
-          example: Cooking up BBQ deliciousness from around the globe!
-        hours:
-          $ref: '#/components/schemas/Hours'
-        additionalCharges:
-          type: array
-          nullable: true
-          description: Additional charges to apply for this menu. All additional charges specified on a menu will only be applied once per order.
-          items:
-            $ref: '#/components/schemas/AdditionalCharge'
-      description: A menu for a store.
-    MenuJobPublishState:
-      type: object
-      nullable: true
-      additionalProperties:
-        x-additionalPropertiesName: menuPublishTarget
-        $ref: '#/components/schemas/MenuPublishJobState'
-      description: Only present if the MenuJobType is PUBLISH. Contains a map of MenuPublishTarget services to their corresponding statuses.
-      example:
-        rappi:
-          status: FAILED
-          message: Failed to publish menu due to error ...
-    ExposedThirdPartyInfo:
-      required:
-      - externalId
-      - externalServiceSlug
-      type: object
-      properties:
-        externalId:
-          type: string
-          description: 'The identifier that exists in the third party system. '
-          example: da0e4e94-5670-4175-897a-3b7dde45bed5
-        externalServiceSlug:
-          type: string
-          description: The slug of the third party service.
-          example: tasty-bbq
-      description: Information about a third party service that is exposed to the another service. Usually, this is used to expose an POS ID to an OFO.
     ModifierGroupUpdateRequest:
       title: All ModifierGroups for the Store, indexed by ID
       required:
@@ -1129,76 +1140,240 @@ components:
           description: 'Experimental: The type of this modifier group, for informative purposes. It can be one of the following values: `DEFAULT`, `UPSELL`, `INGREDIENT_REMOVAL`, `INGREDIENT_ADD`, `PREPARE_INSTRUCTIONS`, `SIZE_MODIFICATION`, `PACKAGING_INSTRUCTION` and `CONDIMENT`.'
           example: DEFAULT
       description: Items are sold on the menu. Modifiers to items are items themselves and their relationship is defined by ModifierGroup.
-    NutritionalInfo:
+    PriceOverride:
+      required:
+      - price
+      - rules
       type: object
       properties:
-        energyKcal:
-          $ref: '#/components/schemas/EnergyKcal'
-        nutritionContent:
-          $ref: '#/components/schemas/NutritionContent'
-      description: The nutritional information of an item.
-    DietaryClassification:
+        price:
+          $ref: '#/components/schemas/Money'
+        rules:
+          type: array
+          minItems: 1
+          description: Override rules for when this price override should be applied.
+          items:
+            $ref: '#/components/schemas/OverrideRule_3PD'
+      description: Price override for an item
+    AdditionalCharge:
+      required:
+      - chargeType
+      type: object
+      properties:
+        chargeType:
+          type: string
+          description: The type of the additional charge.
+          enum:
+          - PACKAGING_CHARGE
+          - CONTAINER_DEPOSIT
+          example: PACKAGING_CHARGE
+        flatCharge:
+          $ref: '#/components/schemas/Money'
+        percentageCharge:
+          $ref: '#/components/schemas/PercentageValue'
+        unitPriceAndCount:
+          $ref: '#/components/schemas/UnitPriceAndCount'
+      description: Additional charge to apply. Exactly one of either flatCharge or percentageCharge should be provided.
+    StorageRequirement:
       type: object
       properties:
         tag:
           type: string
-          description: The type of dietary classification.
+          description: Storage requirements for the product.
           enum:
-          - VEGAN
-          - VEGETARIAN
-          - NON_VEGETARIAN
-          - EGG
-          - KOSHER
-          - HALAL
-          - PLANT_BASED
-          - PALEO
-          - KETO
-          example: VEGAN
-      description: Dietary classification information.
-    HourInterval:
+          - FROZEN
+          - COLD
+          - DRY
+          - ROOM_TEMPERATURE
+          - AVOID_SUNLIGHT
+          example: FROZEN
+      description: Storage requirements for the product.
+    ErrorMessage:
       type: object
       properties:
-        day:
+        message:
           type: string
-          description: Day of the week.
-          example: Monday
+          description: The error description.
+          example: The request body is invalid.
+        details:
+          type: array
+          description: The error details.
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+      description: The error response object.
+    Category:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          description: The identifier that exists in the third party system. During a menu publish event, uuidV4 ids will be generated for new entities that do not yet exist in the internal menu.
+          example: b01485b0-034a-47c5-8a0a-0eeca08bf994
+        name:
+          type: string
+          description: Name of Category.
+          example: Drinks
+        description:
+          type: string
+          description: Description of Category.
+          example: All drink items served up nice and fresh!
+        itemIds:
+          type: array
+          default: []
+          description: All items in the category.
+          items:
+            type: string
+          example:
+          - fa4f0192-4c4e-4455-9db8-61d428c34969
+        photoIds:
+          type: array
+          description: A list of Photo references associated with the Category.
+          default: []
+          items:
+            type: string
+        exposedThirdPartyInfos:
+          type: array
+          default: []
+          description: Additional information about the menu that should be exposed to third party
+          items:
+            $ref: '#/components/schemas/ExposedThirdPartyInfo'
+      description: Categories contain a list of Item references.
+    MenuPublishJobState:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the menu publish.
           enum:
-          - MONDAY
-          - TUESDAY
-          - WEDNESDAY
-          - THURSDAY
-          - FRIDAY
-          - SATURDAY
-          - SUNDAY
-        fromHour:
-          maximum: 23
+          - PENDING
+          - FAILED
+          - SUCCESS
+          - UNKNOWN
+          example: PENDING
+        message:
+          type:
+          - string
+          - 'null'
+          description: Only present if status is FAILED. Contains the error message returned by our menu systems.
+          example: string
+      description: Information about the menu publish target.
+    ModifierGroup:
+      title: All ModifierGroups for the Store, indexed by ID
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          description: The identifier that exists in the third party system. During a menu publish event, uuidV4 ids will be generated for new entities that do not yet exist in the internal menu.
+          example: da0e4e94-5670-4175-897a-3b7dde45bed5
+        name:
+          type: string
+          description: Name of ModifierGroup.
+          example: Choose your type of bagel
+        minimumSelections:
           minimum: 0
           type: integer
-          description: Beginning hour of interval.
-          format: int32
-          example: 8
-        fromMinute:
-          maximum: 59
-          minimum: 0
-          type: integer
-          description: Beginning minute of interval.
+          description: Minimum number of selections customers can make in this ModifierGroup. 0 means no min limits.
           format: int32
           example: 0
-        toHour:
-          maximum: 23
+        maximumSelections:
           minimum: 0
           type: integer
-          description: Ending hour of interval.
+          description: Maximum number of selections customers can make in this ModifierGroup. 0 means no max limits.
           format: int32
-          example: 20
-        toMinute:
-          maximum: 59
+          example: 0
+        maxPerModifierSelectionQuantity:
           minimum: 0
+          default: 1
           type: integer
-          description: Ending minute of interval.
+          description: Maximum number of selections customers can make for each modifier item in this ModifierGroup. 0 means there is no limit to how many times they can select a single modifier item. If not specified, a value of 1 will be used as the default value.
           format: int32
-          example: 45
-      description: Represents the beginning and ending of operating time for a menu specific to a Day.
+          example: 0
+        defaultModifierSelectionData:
+          $ref: '#/components/schemas/DefaultModifierSelectionData'
+        itemIds:
+          type: array
+          default: []
+          description: Identifiers of each Item within this ModifierGroup.
+          items:
+            type: string
+        description:
+          type: string
+          description: The description for this modifier group.
+          example: Choose any of these delicious types of bagels
+        type:
+          type: string
+          description: 'Experimental: The type of this modifier group, for informative purposes. It can be one of the following values: `DEFAULT`, `UPSELL`, `INGREDIENT_REMOVAL`, `INGREDIENT_ADD`, `PREPARE_INSTRUCTIONS`, `SIZE_MODIFICATION`, `PACKAGING_INSTRUCTION` and `CONDIMENT`.'
+          example: DEFAULT
+        exposedThirdPartyInfos:
+          type: array
+          default: []
+          description: Additional information about the menu that should be exposed to third party
+          items:
+            $ref: '#/components/schemas/ExposedThirdPartyInfo'
+      description: Items are sold on the menu. Modifiers to items are items themselves and their relationship is defined by ModifierGroup.
+    ItemPriceOverride:
+      required:
+      - amount
+      - currencyCode
+      - rules
+      type: object
+      properties:
+        rules:
+          type: array
+          minItems: 1
+          description: Override rules for when this price override should be applied.
+          items:
+            $ref: '#/components/schemas/OverrideRule'
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: The 3-letter currency code (ISO 4217) to use for all monetary values.
+          example: EUR
+        amount:
+          type: number
+          description: Amount the Item costs
+          example: 25.21
+      description: Price override for an item
+    TimeRange:
+      required:
+      - end
+      - start
+      type: object
+      properties:
+        start:
+          type: string
+          description: Start time of the range in 24 hour format.
+          example: 08:00
+        end:
+          type: string
+          description: End time of the range in 24 hour format.
+          example: 1320
+      description: Time range in a given date.
+    Money:
+      required:
+      - amount
+      - currencyCode
+      type: object
+      properties:
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: The 3-letter currency code (ISO 4217) to use for all monetary values.
+          example: EUR
+        amount:
+          minimum: 0
+          type: number
+          description: Amount value.
+          example: 25.21
+      description: Money amount.
+      example: 25.21
     MenuData:
       required:
       - categories
@@ -1392,156 +1567,6 @@ components:
               fileName: c75d9460-5d48-423d-8d01-f825fd5b1672.jpeg
               url: https://example.com/photos/c75d9460-5d48-423d-8d01-f825fd5b1672.jpeg
       description: MenuData contains all menu entities, and their relations.
-    DefaultModifierSelectionData:
-      required:
-      - defaultModifierSelections
-      type: object
-      properties:
-        defaultModifierSelections:
-          type: array
-          description: The default modifier selections for this modifier group.
-          items:
-            $ref: '#/components/schemas/DefaultModifierSelection'
-      description: The default modifiers selections for a modifier group.
-    Hours:
-      required:
-      - intervals
-      type: object
-      properties:
-        intervals:
-          type: array
-          minItems: 1
-          description: List of HourIntervals.
-          items:
-            $ref: '#/components/schemas/HourInterval'
-      description: Hours are represented as a list of HourIntervals.
-    ItemUpdateRequest:
-      title: All Items for the store, indexed by ID
-      required:
-      - id
-      - name
-      - price
-      - status
-      - description
-      type: object
-      properties:
-        id:
-          type: string
-          description: Identifier of this Item.
-          example: faa4c79f-480d-4de1-bc34-5fb74ef082ef
-        name:
-          type: string
-          description: Name of this Item
-          example: Bagel
-        price:
-          $ref: '#/components/schemas/Money'
-        status:
-          $ref: '#/components/schemas/ItemStatus'
-        description:
-          type: string
-          description: Description of this Item
-          example: Delicious bagel!
-        modifierGroupIds:
-          type: array
-          default: []
-          description: Identifiers of each ModifierGroup within this Item.
-          items:
-            type: string
-            example: 7152ee6e-e941-45c1-9008-2e306b479114
-        priceOverrides:
-          type: array
-          nullable: true
-          description: Specify price overrides for different service slugs.
-          items:
-            $ref: '#/components/schemas/ItemPriceOverride'
-        photoUrls:
-          type: array
-          nullable: true
-          description: List of photoUrls to associate with the Item. This is used only for POST/PUT requests.
-          items:
-            type: string
-        skuDetails:
-          $ref: '#/components/schemas/SkuDetails'
-      description: Items are sold on the Menu. Modifiers to items are items themselves and their relationship is defined by ModifierGroup.
-    JobReference:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the job.
-          format: uuid
-          example: c75d9460-5d48-423d-8d01-f825fd5b1672
-        status:
-          type: string
-          description: The status of the job.
-          enum:
-          - PENDING
-          - FAILED
-          - SUCCESS
-          - UNKNOWN
-          example: PENDING
-      description: The job reference.
-    MenuJobType:
-      type: string
-      description: Type of job.
-      enum:
-      - UPSERT
-      - PUBLISH
-      - UPDATE_AVAILABILITY
-      - SYNC
-      - UNKNOWN
-      example: PUBLISH
-    Category:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          type: string
-          description: The identifier that exists in the third party system. During a menu publish event, uuidV4 ids will be generated for new entities that do not yet exist in the internal menu.
-          example: b01485b0-034a-47c5-8a0a-0eeca08bf994
-        name:
-          type: string
-          description: Name of Category.
-          example: Drinks
-        description:
-          type: string
-          description: Description of Category.
-          example: All drink items served up nice and fresh!
-        itemIds:
-          type: array
-          default: []
-          description: All items in the category.
-          items:
-            type: string
-          example:
-          - fa4f0192-4c4e-4455-9db8-61d428c34969
-        photoIds:
-          type: array
-          description: A list of Photo references associated with the Category.
-          default: []
-          items:
-            type: string
-        exposedThirdPartyInfos:
-          type: array
-          default: []
-          description: Additional information about the menu that should be exposed to third party
-          items:
-            $ref: '#/components/schemas/ExposedThirdPartyInfo'
-      description: Categories contain a list of Item references.
-    EnergyKcal:
-      type: object
-      properties:
-        low:
-          type: number
-          description: The minimum calorie value for an item.
-          example: 1
-        high:
-          type: number
-          description: The maximum calorie value for an item.
-          example: 100
-      description: The calorie range of the item. If only one calorie value is known, set both low and high to that value.
     SkuBarcode:
       type: object
       properties:
@@ -1559,398 +1584,6 @@ components:
           description: The value of the barcode.
           example: 049000028904 (UPC)
       description: A barcode for the product which may be common types like UPC, GTIN, ASIN or an internal type.
-    Menu_3PD:
-      title: All Menus for the store, indexed by ID
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          type: string
-          description: The identifier that exists in the third party system. During a menu publish event, uuidV4 ids will be generated for new entities that do not yet exist in the internal menu.
-          example: da0e4e94-5670-4175-897a-3b7dde45bed5
-        name:
-          type: string
-          description: Name of the Menu.
-          example: Tasty BBQ
-        categoryIds:
-          type: array
-          default: []
-          description: Identifiers of the categories within this Menu.
-          items:
-            type: string
-        fulfillmentModes:
-          type: array
-          default: []
-          description: The ways in which this menu may be fulfilled. If no values are specified, it is assumed that all fulfillment types are allowed.
-          items:
-            type: string
-            description: How an item from a menu is allowed to be fulfilled when ordered by a user.
-            enum:
-            - DELIVERY
-            - PICK_UP
-            - DINE_IN
-        description:
-          type: string
-          description: Description of the Menu.
-          example: Cooking up BBQ deliciousness from around the globe!
-        hoursData:
-          $ref: '#/components/schemas/HoursData'
-        additionalCharges:
-          type: array
-          nullable: true
-          description: Additional charges to apply for this menu. All additional charges specified on a menu will only be applied once per order.
-          items:
-            $ref: '#/components/schemas/AdditionalCharge'
-        exposedThirdPartyInfos:
-          type: array
-          default: []
-          description: Additional information about the menu that should be exposed to third party
-          items:
-            $ref: '#/components/schemas/ExposedThirdPartyInfo'
-      description: A Menu for a store.
-    TimeRange:
-      required:
-      - end
-      - start
-      type: object
-      properties:
-        start:
-          type: string
-          description: Start time of the range in 24 hour format.
-          example: 08:00
-        end:
-          type: string
-          description: End time of the range in 24 hour format.
-          example: 1320
-      description: Time range in a given date.
-    CustomBulkResolutionOptions:
-      type: object
-      nullable: true
-      properties:
-        updateNames:
-          type: boolean
-          description: Update the linked entity's names to match the linked external entity's.
-          example: true
-        updatePrices:
-          type: boolean
-          description: Update the linked entity's price to match the linked external entity's.
-          example: true
-        updateDescriptions:
-          type: boolean
-          description: Update the linked entity's description to match the linked external entity's.
-          example: true
-        createUnmatchedEntities:
-          type: boolean
-          description: Create unmatched external entities in the menu.
-          example: true
-        deleteMissingEntities:
-          type: boolean
-          description: Delete entities that are missing external links.
-          example: true
-        bootstrapPhotosToEntities:
-          type: boolean
-          description: Bootstrap linked item photos.
-          example: true
-        copyEntityPaths:
-          type: boolean
-          description: Copies the entity paths from the external menu.
-          example: true
-        updateItemSuspensionStatus:
-          type: boolean
-          description: Update Item suspension status.
-          example: true
-        updateHours:
-          type: boolean
-          description: Update menu hours.
-          example: true
-        assignItemsToLocations:
-          type: boolean
-          description: If an item exists at a location in the POS, it will automatically be assigned to that location.
-          example: true
-        unassignItemsFromLocations:
-          type: boolean
-          description: If an item is removed from a location in the POS, it will automatically be unassigned from that location.
-          example: true
-        updateMenuOrganization:
-          type: boolean
-          description: The organization of modifiers into modifier groups, modifier groups into items and items into categories will be replicated from the POS menu.
-          example: true
-        updateItemArrangement:
-          type: boolean
-          description: The arrangement of menu products as displayed in your POS will be replicated.
-          example: true
-        updateModifierGroupRules:
-          type: boolean
-          description: Update modifier group selection rules.
-          example: true
-        updateTaxes:
-          type: boolean
-          description: Update taxes.
-          example: true
-    PercentageValue:
-      required:
-      - decimalValue
-      type: object
-      properties:
-        decimalValue:
-          minimum: 0
-          type: number
-          description: Percentage value in decimal format.
-          example: 0.513
-      description: Percentage value in decimal format.
-      example: A decimalValue of 0.513 will equate to 51.3%
-    Servings:
-      type: object
-      properties:
-        min:
-          type: integer
-          description: The minimum value of servings.
-          example: 1
-        max:
-          type: integer
-          description: The maximum value of servings.
-          example: 2
-      description: The number of people an item serves. If only one serving value is known, set both min and max to that value.
-    ModifierGroup:
-      title: All ModifierGroups for the Store, indexed by ID
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          type: string
-          description: The identifier that exists in the third party system. During a menu publish event, uuidV4 ids will be generated for new entities that do not yet exist in the internal menu.
-          example: da0e4e94-5670-4175-897a-3b7dde45bed5
-        name:
-          type: string
-          description: Name of ModifierGroup.
-          example: Choose your type of bagel
-        minimumSelections:
-          minimum: 0
-          type: integer
-          description: Minimum number of selections customers can make in this ModifierGroup. 0 means no min limits.
-          format: int32
-          example: 0
-        maximumSelections:
-          minimum: 0
-          type: integer
-          description: Maximum number of selections customers can make in this ModifierGroup. 0 means no max limits.
-          format: int32
-          example: 0
-        maxPerModifierSelectionQuantity:
-          minimum: 0
-          default: 1
-          type: integer
-          description: Maximum number of selections customers can make for each modifier item in this ModifierGroup. 0 means there is no limit to how many times they can select a single modifier item. If not specified, a value of 1 will be used as the default value.
-          format: int32
-          example: 0
-        defaultModifierSelectionData:
-          $ref: '#/components/schemas/DefaultModifierSelectionData'
-        itemIds:
-          type: array
-          default: []
-          description: Identifiers of each Item within this ModifierGroup.
-          items:
-            type: string
-        description:
-          type: string
-          description: The description for this modifier group.
-          example: Choose any of these delicious types of bagels
-        type:
-          type: string
-          description: 'Experimental: The type of this modifier group, for informative purposes. It can be one of the following values: `DEFAULT`, `UPSELL`, `INGREDIENT_REMOVAL`, `INGREDIENT_ADD`, `PREPARE_INSTRUCTIONS`, `SIZE_MODIFICATION`, `PACKAGING_INSTRUCTION` and `CONDIMENT`.'
-          example: DEFAULT
-        exposedThirdPartyInfos:
-          type: array
-          default: []
-          description: Additional information about the menu that should be exposed to third party
-          items:
-            $ref: '#/components/schemas/ExposedThirdPartyInfo'
-      description: Items are sold on the menu. Modifiers to items are items themselves and their relationship is defined by ModifierGroup.
-    AllergenClassification:
-      type: object
-      properties:
-        tag:
-          type: string
-          description: The type of allergen classification.
-          enum:
-          - GLUTEN
-          - DAIRY
-          - WHEAT
-          - RYE
-          - BARLEY
-          - OAT
-          - SPELT
-          - KAMUT
-          - CRUSTACEAN
-          - MOLLUSK
-          - EGG
-          - FISH
-          - PEANUT
-          - SOYBEAN
-          - NUT
-          - ALMOND
-          - HAZELNUT
-          - WALNUT
-          - CASHEW
-          - PECAN
-          - BRAZIL_NUT
-          - PISTACHIO
-          - MACADAMIA_NUT
-          - QUEENSLAND_NUT
-          - LUPIN
-          - CELERY
-          - MUSTARD
-          - SESAME_SEED
-          - SULFITE
-          - CAFFEINE
-          - PHENYLALANINE
-          example: GLUTEN
-        containsAllergen:
-          type: boolean
-          description: Indication of whether or not the product contains this allergen. If the status of the allergen is unknown, a classification should not be provided for this product.
-          example: true
-      description: Allergen classification information.
-    ItemPriceOverride:
-      required:
-      - amount
-      - currencyCode
-      - rules
-      type: object
-      properties:
-        rules:
-          type: array
-          minItems: 1
-          description: Override rules for when this price override should be applied.
-          items:
-            $ref: '#/components/schemas/OverrideRule'
-        currencyCode:
-          maxLength: 3
-          minLength: 3
-          type: string
-          description: The 3-letter currency code (ISO 4217) to use for all monetary values.
-          example: EUR
-        amount:
-          type: number
-          description: Amount the Item costs
-          example: 25.21
-      description: Price override for an item
-    SendMenuEventCallback:
-      required:
-      - menuData
-      type: object
-      properties:
-        menuData:
-          $ref: '#/components/schemas/MenuData'
-    PosMenuSyncRequest:
-      type: object
-      properties:
-        shouldPublishChanges:
-          type: boolean
-          nullable: true
-          description: Whether or not to publish changes to external services after bulk resolution.
-          example: true
-        useCustomOptions:
-          type: boolean
-          nullable: true
-          description: If true, use `customBulkResolutionOptions` instead of menu configuration.
-          example: true
-        customBulkResolutionOptions:
-          nullable: true
-          $ref: '#/components/schemas/CustomBulkResolutionOptions'
-    OverrideRule:
-      required:
-      - externalServiceSlug
-      type: object
-      properties:
-        externalServiceSlug:
-          type: string
-          description: 'The service slug for which this rule should apply. E.g.: If externalServiceSlug is UberEats, then the priceOverride should be applied to UberEats.'
-          example: ubereats
-      description: Override rule for when to apply price overrides
-    OverrideRule_3PD:
-      required:
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          example: string
-      description: Specification for rules to apply overrides (e.g. PriceOverride).
-      discriminator:
-        propertyName: type
-        mapping:
-          PATH: '#/components/schemas/EntityPathOverrideRule'
-          FULFILLMENT_MODE: '#/components/schemas/FulfillmentModeOverrideRule'
-          SERVICE: '#/components/schemas/ServiceOverrideRule'
-    DefaultModifierSelection:
-      required:
-      - itemId
-      - selectionQuantity
-      type: object
-      properties:
-        itemId:
-          type: string
-          description: The id of the modifier item that this default selection pertains to. This id must be present in the item ids of the modifier group.
-          example: da0e4e94-5670-4175-897a-3b7dde45bed5
-        selectionQuantity:
-          minimum: 0
-          type: integer
-          description: The default quantity of the modifier item to be selected.
-          format: int32
-          example: 0
-      description: A default modifier selection consists of a reference to the modifier and the default selected quantity of that modifier.
-    MenuPublishJobState:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status of the menu publish.
-          enum:
-          - PENDING
-          - FAILED
-          - SUCCESS
-          - UNKNOWN
-          example: PENDING
-        message:
-          type: string
-          nullable: true
-          description: Only present if status is FAILED. Contains the error message returned by our menu systems.
-          example: string
-      description: Information about the menu publish target.
-    StoreId:
-      type: string
-      description: The unique identifier of the store in the partner application. This ID, along with the `Application ID`, will be used to match the correct store when performing operations. It cannot be longer than 255 characters and must only contain printable ASCII characters. During on-boarding, this ID will be similar to `onboarding:905bb725-b141-4a9b-832a-1f254f772c94` (where the UUID is the Internal Store ID). During off-boarding, this field will be filled with the last known Store ID, or with an empty string, in case none is found. In that case, please fall back to the provided `internalStoreId` (a.k.a. Sku-Sku ID).
-      example: partner-store-unique-identifier
-    SpecialHours:
-      required:
-      - date
-      - timeRanges
-      - type
-      type: object
-      properties:
-        date:
-          type: string
-          description: Date the special hour configuration applies.
-          format: date
-          example: '2021-10-01'
-        timeRanges:
-          type: array
-          minItems: 0
-          description: Hours range applied to configured date. For open days, the timeRanges field is required. For closed days, the timeRanges field is ignored.
-          items:
-            $ref: '#/components/schemas/TimeRange'
-        type:
-          type: string
-          description: Store state that should be applied during the configured special hour. If this field is set to CLOSED, the timeRanges field is ignored.
-          enum:
-          - OPEN
-          - CLOSED
-          example: OPEN
-      description: Describes the configuration of special store hours.
     MenusUpsertRequest:
       required:
       - categories
@@ -2068,20 +1701,428 @@ components:
                 saleStatus: FOR_SALE
               type: DEFAULT
       description: All menus associated with a store.
-    ItemTax:
+    UnitPriceAndCount:
       required:
-      - percentageValue
-      - isValueAddedTax
+      - unitPrice
+      - count
       type: object
       properties:
-        percentageValue:
-          $ref: '#/components/schemas/PercentageValue'
-          description: Specify the percentage value of the tax.
-        isValueAddedTax:
+        unitPrice:
+          $ref: '#/components/schemas/Money'
+        count:
+          minimum: 1
+          type: integer
+          description: The count for the additional charge.
+          example: 3
+      description: Unit price and count for additional charges.
+      example: 3 x $25.21
+    HourInterval:
+      type: object
+      properties:
+        day:
+          type: string
+          description: Day of the week.
+          example: Monday
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+        fromHour:
+          maximum: 23
+          minimum: 0
+          type: integer
+          description: Beginning hour of interval.
+          format: int32
+          example: 8
+        fromMinute:
+          maximum: 59
+          minimum: 0
+          type: integer
+          description: Beginning minute of interval.
+          format: int32
+          example: 0
+        toHour:
+          maximum: 23
+          minimum: 0
+          type: integer
+          description: Ending hour of interval.
+          format: int32
+          example: 20
+        toMinute:
+          maximum: 59
+          minimum: 0
+          type: integer
+          description: Ending minute of interval.
+          format: int32
+          example: 45
+      description: Represents the beginning and ending of operating time for a menu specific to a Day.
+    MenuItem_3PD:
+      title: All Items for the store, indexed by ID
+      required:
+      - id
+      - name
+      - photoIds
+      - price
+      - priceOverrides
+      - status
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: The identifier that exists in the third party system. During a menu publish event, uuidV4 ids will be generated for new entities that do not yet exist in the internal menu.
+          example: da0e4e94-5670-4175-897a-3b7dde45bed5
+        name:
+          type: string
+          description: Name of this Item
+          example: Bagel
+        photoIds:
+          type: array
+          description: A list of Photo references associated with the Item.
+          items:
+            type: string
+        price:
+          $ref: '#/components/schemas/Money'
+        priceOverrides:
+          type: array
+          description: Specify price overrides.
+          items:
+            $ref: '#/components/schemas/PriceOverride'
+        status:
+          $ref: '#/components/schemas/ItemStatus'
+        description:
+          type: string
+          description: Description of this Item
+          example: Delicious bagel!
+        modifierGroupIds:
+          type: array
+          default: []
+          description: Identifiers of each ModifierGroup within this Item.
+          items:
+            type: string
+            example: 7152ee6e-e941-45c1-9008-2e306b479114
+        skuDetails:
+          $ref: '#/components/schemas/SkuDetails'
+        additionalCharges:
+          type:
+          - array
+          - 'null'
+          description: Additional charges to apply for this item. Additional charges will be applied for every instance of this item within an order.
+          items:
+            $ref: '#/components/schemas/AdditionalCharge'
+        tax:
+          $ref: '#/components/schemas/ItemTax'
+          description: The tax configuration for the menu item.
+        exposedThirdPartyInfos:
+          type: array
+          default: []
+          description: Additional information about the menu that should be exposed to third party
+          items:
+            $ref: '#/components/schemas/ExposedThirdPartyInfo'
+      description: Items are sold on the Menu. Modifiers to items are items themselves and their relationship is defined by ModifierGroup.
+    MenuJobPublishState:
+      type:
+      - object
+      - 'null'
+      additionalProperties:
+        x-additionalPropertiesName: menuPublishTarget
+        $ref: '#/components/schemas/MenuPublishJobState'
+      description: Only present if the MenuJobType is PUBLISH. Contains a map of MenuPublishTarget services to their corresponding statuses.
+      example:
+        rappi:
+          status: FAILED
+          message: Failed to publish menu due to error ...
+    PercentageValue:
+      required:
+      - decimalValue
+      type: object
+      properties:
+        decimalValue:
+          minimum: 0
+          type: number
+          description: Percentage value in decimal format.
+          example: 0.513
+      description: Percentage value in decimal format.
+      example: A decimalValue of 0.513 will equate to 51.3%
+    MenuAsynchronousJob:
+      type: object
+      properties:
+        jobReference:
+          $ref: '#/components/schemas/JobReference'
+        jobType:
+          $ref: '#/components/schemas/MenuJobType'
+        publishJobState:
+          $ref: '#/components/schemas/MenuJobPublishState'
+      description: The job created to process the menu request.
+    Servings:
+      type: object
+      properties:
+        min:
+          type: integer
+          description: The minimum value of servings.
+          example: 1
+        max:
+          type: integer
+          description: The maximum value of servings.
+          example: 2
+      description: The number of people an item serves. If only one serving value is known, set both min and max to that value.
+    Photo:
+      title: All photos for the store, indexed by ID
+      required:
+      - contentType
+      - fileName
+      - id
+      - url
+      type: object
+      properties:
+        url:
+          type: string
+          description: URL of the photo.
+          example: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+        fileName:
+          type: string
+          description: File name
+          example: image.jpg
+        id:
+          type: string
+          description: Identifier of the Photo.
+          example: e9174f75-a293-4908-bba7-9db69871ad81
+        contentType:
+          type: string
+          description: 'The media type of the file. Deprecated: Use the media type served from the photo URL instead.'
+          example: image/jpeg, image/png
+          deprecated: true
+      description: All data required to represent a Photo for an entity in menus.
+    ItemUpdateRequest:
+      title: All Items for the store, indexed by ID
+      required:
+      - id
+      - name
+      - price
+      - status
+      - description
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifier of this Item.
+          example: faa4c79f-480d-4de1-bc34-5fb74ef082ef
+        name:
+          type: string
+          description: Name of this Item
+          example: Bagel
+        price:
+          $ref: '#/components/schemas/Money'
+        status:
+          $ref: '#/components/schemas/ItemStatus'
+        description:
+          type: string
+          description: Description of this Item
+          example: Delicious bagel!
+        modifierGroupIds:
+          type: array
+          default: []
+          description: Identifiers of each ModifierGroup within this Item.
+          items:
+            type: string
+            example: 7152ee6e-e941-45c1-9008-2e306b479114
+        priceOverrides:
+          type:
+          - array
+          - 'null'
+          description: Specify price overrides for different service slugs.
+          items:
+            $ref: '#/components/schemas/ItemPriceOverride'
+        photoUrls:
+          type:
+          - array
+          - 'null'
+          description: List of photoUrls to associate with the Item. This is used only for POST/PUT requests.
+          items:
+            type: string
+        skuDetails:
+          $ref: '#/components/schemas/SkuDetails'
+      description: Items are sold on the Menu. Modifiers to items are items themselves and their relationship is defined by ModifierGroup.
+    Hours:
+      required:
+      - intervals
+      type: object
+      properties:
+        intervals:
+          type: array
+          minItems: 1
+          description: List of HourIntervals.
+          items:
+            $ref: '#/components/schemas/HourInterval'
+      description: Hours are represented as a list of HourIntervals.
+    RegularHours:
+      required:
+      - days
+      - timeRanges
+      type: object
+      properties:
+        days:
+          type: array
+          description: The day of the week this configuration applies.
+          items:
+            type: string
+            description: Day of the week.
+            enum:
+            - MONDAY
+            - TUESDAY
+            - WEDNESDAY
+            - THURSDAY
+            - FRIDAY
+            - SATURDAY
+            - SUNDAY
+        timeRanges:
+          type: array
+          description: Hours range applied to the provided day of the week
+          items:
+            $ref: '#/components/schemas/TimeRange'
+      description: Describes the configuration of regular hours.
+    EnergyKcal:
+      type: object
+      properties:
+        low:
+          type: number
+          description: The minimum calorie value for an item.
+          example: 1
+        high:
+          type: number
+          description: The maximum calorie value for an item.
+          example: 100
+      description: The calorie range of the item. If only one calorie value is known, set both low and high to that value.
+    ExposedThirdPartyInfo:
+      required:
+      - externalId
+      - externalServiceSlug
+      type: object
+      properties:
+        externalId:
+          type: string
+          description: 'The identifier that exists in the third party system. '
+          example: da0e4e94-5670-4175-897a-3b7dde45bed5
+        externalServiceSlug:
+          type: string
+          description: The slug of the third party service.
+          example: tasty-bbq
+      description: Information about a third party service that is exposed to the another service. Usually, this is used to expose an POS ID to an OFO.
+    MenuJobType:
+      type: string
+      description: Type of job.
+      enum:
+      - UPSERT
+      - PUBLISH
+      - UPDATE_AVAILABILITY
+      - SYNC
+      - UNKNOWN
+      example: PUBLISH
+    SpecialHours:
+      required:
+      - date
+      - timeRanges
+      - type
+      type: object
+      properties:
+        date:
+          type: string
+          description: Date the special hour configuration applies.
+          format: date
+          example: '2021-10-01'
+        timeRanges:
+          type: array
+          minItems: 0
+          description: Hours range applied to configured date. For open days, the timeRanges field is required. For closed days, the timeRanges field is ignored.
+          items:
+            $ref: '#/components/schemas/TimeRange'
+        type:
+          type: string
+          description: Store state that should be applied during the configured special hour. If this field is set to CLOSED, the timeRanges field is ignored.
+          enum:
+          - OPEN
+          - CLOSED
+          example: OPEN
+      description: Describes the configuration of special store hours.
+    AllergenClassification:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: The type of allergen classification.
+          enum:
+          - GLUTEN
+          - DAIRY
+          - WHEAT
+          - RYE
+          - BARLEY
+          - OAT
+          - SPELT
+          - KAMUT
+          - CRUSTACEAN
+          - MOLLUSK
+          - EGG
+          - FISH
+          - PEANUT
+          - SOYBEAN
+          - NUT
+          - ALMOND
+          - HAZELNUT
+          - WALNUT
+          - CASHEW
+          - PECAN
+          - BRAZIL_NUT
+          - PISTACHIO
+          - MACADAMIA_NUT
+          - QUEENSLAND_NUT
+          - LUPIN
+          - CELERY
+          - MUSTARD
+          - SESAME_SEED
+          - SULFITE
+          - CAFFEINE
+          - PHENYLALANINE
+          example: GLUTEN
+        containsAllergen:
           type: boolean
-          description: Whether this tax is a value-added tax.
+          description: Indication of whether or not the product contains this allergen. If the status of the allergen is unknown, a classification should not be provided for this product.
           example: true
-      description: The tax configuration.
+      description: Allergen classification information.
+  responses:
+    '403':
+      description: Authorization not valid for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '401':
+      description: Invalid authorization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '400':
+      description: The request is malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '422':
+      description: The request body is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '404':
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
   parameters:
     storeIdHeader:
       name: X-Store-Id
@@ -2097,37 +2138,6 @@ components:
         type: string
         description: Unique identifier of the event that this callback refers to.
         example: cf0ce51b-d74e-40d3-b177-1925ab4edc0c
-  responses:
-    '422':
-      description: The request body is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '400':
-      description: The request is malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '403':
-      description: Authorization not valid for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '404':
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '401':
-      description: Invalid authorization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
   securitySchemes:
     OAuth2.0:
       type: oauth2
@@ -2169,1267 +2179,6 @@ components:
           scopes:
             organization.read: Permission to read data for organization/brands/stores on behalf of a user.
             organization.service_integration: Permission to manage the your integration with a given store on behalf of a user.
-x-webhooks:
-  orderCreate:
-    post:
-      tags:
-      - Manager Orders Webhooks
-      summary: Otter Order Creation Webhook
-      operationId: orderCreateWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/Order'
-              - example:
-                  eventType: orders.new_order
-            examples:
-              OrderCreateWebhookRequestExample:
-                summary: Default orderCreateWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.new_order
-                  metadata:
-                    payload:
-                      externalIdentifiers: {}
-                      currencyCode: EUR
-                      status: NEW_ORDER
-                      items:
-                      - {}
-                      orderedAt: '2007-12-03T10:15:30+01:00'
-                      customer: {}
-                      customerNote: Please include extra napkins!
-                      deliveryInfo: {}
-                      orderTotal: {}
-                      orderTotalV2: {}
-                      customerPayments:
-                      - {}
-                      fulfillmentInfo: {}
-                      promotionsDetails:
-                      - {}
-                      preparationTime: {}
-      responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '202':
-          $ref: '#/components/responses/202'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  orderUpdate:
-    post:
-      tags:
-      - Manager Orders Webhooks
-      summary: Otter Order Update Webhook
-      operationId: orderUpdateWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/Order'
-              - example:
-                  eventType: orders.update
-            examples:
-              OrderUpdateWebhookRequestExample:
-                summary: Default orderUpdateWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.update
-                  metadata:
-                    payload:
-                      externalIdentifiers: {}
-                      currencyCode: EUR
-                      status: NEW_ORDER
-                      items:
-                      - {}
-                      orderedAt: '2007-12-03T10:15:30+01:00'
-                      customer: {}
-                      customerNote: Please include extra napkins!
-                      deliveryInfo: {}
-                      orderTotal: {}
-                      orderTotalV2: {}
-                      customerPayments:
-                      - {}
-                      fulfillmentInfo: {}
-                      promotionsDetails:
-                      - {}
-                      preparationTime: {}
-      responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '202':
-          $ref: '#/components/responses/202'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  intentToCancelOrder:
-    post:
-      tags:
-      - Orders Webhooks
-      summary: Otter Intent to Cancel Order Webhook
-      operationId: intentToCancelOrderWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/IntentToCancelEvent'
-              - example:
-                  eventType: orders.cancel_order
-            examples:
-              IntentToCancelOrderWebhookRequestExample:
-                summary: Default intentToCancelOrderWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.cancel_order
-                  metadata:
-                    payload:
-                      externalIdentifiers: {}
-                      cancellationReason: REASON_UNKNOWN
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  orderStatusUpdate:
-    post:
-      tags:
-      - Orders Webhooks
-      summary: Otter Order Status Update Webhook
-      operationId: orderStatusUpdateWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/OrderStatusHistory'
-              - example:
-                  eventType: orders.order_status_update
-            examples:
-              OrderStatusUpdateWebhookRequestExample:
-                summary: Default orderStatusUpdateWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.order_status_update
-                  metadata:
-                    payload:
-                      orderStatusHistory:
-                      - {}
-                      orderAcceptedInfo: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  posInjectionStateUpdate:
-    post:
-      tags:
-      - Orders Webhooks
-      summary: Otter Pos Injection State Update Webhook
-      operationId: posInjectionStateUpdateWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/PosInjectionStateUpdateEvent'
-              - example:
-                  eventType: orders.pos_injection_state_update
-            examples:
-              PosInjectionStateUpdateWebhookRequestExample:
-                summary: Default posInjectionStateUpdateWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.pos_injection_state_update
-                  metadata:
-                    payload:
-                      externalIdentifiers: {}
-                      injectionState: UNKNOWN
-                      injectionIssue: UNKNOWN_INJECTION_ISSUE
-                      additionalData:
-                        ticketData: Some value for the TicketData
-                        customField: customValue
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  orderConfirm:
-    post:
-      tags:
-      - Manager Orders Webhooks
-      summary: Otter Order Confirm Notification Webhook
-      operationId: orderConfirmWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/OrderConfirmEvent'
-              - example:
-                  eventType: orders.confirm
-            examples:
-              OrderConfirmWebhookRequestExample:
-                summary: Default orderConfirmWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.confirm
-                  metadata:
-                    payload:
-                      orderId: 69f60a06-c335-46d9-b5a1-97f1a211c514
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  orderReady:
-    post:
-      tags:
-      - Manager Orders Webhooks
-      summary: Otter Order Ready Status Notification Webhook
-      operationId: orderReady
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/OrderReadyEvent'
-              - example:
-                  eventType: orders.order_ready
-            examples:
-              OrderReadyRequestExample:
-                summary: Default orderReady request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.order_ready
-                  metadata:
-                    payload:
-                      orderId: 69f60a06-c335-46d9-b5a1-97f1a211c514
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  orderHandedOff:
-    post:
-      tags:
-      - Manager Orders Webhooks
-      summary: Otter Order Handed Off Status Notification Webhook
-      operationId: orderHandedOff
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/OrderHandedOffEvent'
-              - example:
-                  eventType: orders.order_handed_off
-            examples:
-              OrderHandedOffRequestExample:
-                summary: Default orderHandedOff request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.order_handed_off
-                  metadata:
-                    payload:
-                      orderId: 69f60a06-c335-46d9-b5a1-97f1a211c514
-                      courierPhone: 415-234-3212
-                      courierBodyTempFahrenheit: 36.6
-                      isCourierWearingMask: true
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  orderFulfilled:
-    post:
-      tags:
-      - Manager Orders Webhooks
-      summary: Otter Order Fulfilled Status Notification Webhook
-      operationId: orderFulfilled
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/OrderFulfilledEvent'
-              - example:
-                  eventType: orders.order_fulfilled
-            examples:
-              OrderFulfilledRequestExample:
-                summary: Default orderFulfilled request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: orders.order_fulfilled
-                  metadata:
-                    payload:
-                      orderId: 69f60a06-c335-46d9-b5a1-97f1a211c514
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  menuPublish:
-    post:
-      tags:
-      - Menus Webhooks
-      summary: Otter Menu Publish Webhook
-      description: 'Webhook to trigger a menu publish.
-
-        If successful, we expect a [**menu publish callback**](/api-reference/#operation/menuPublishCallback). If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead.'
-      operationId: menuPublishWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/MenuPublishEvent'
-              - example:
-                  eventType: menus.menu_publish
-            examples:
-              MenuPublishWebhookRequestExample:
-                summary: Default menuPublishWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: menus.menu_publish
-                  metadata:
-                    payload:
-                      menuData: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  sendMenu:
-    post:
-      tags:
-      - Menus Webhooks
-      summary: Otter Send Menu Webhook
-      description: 'Webhook to trigger a send menu.
-
-        If successful, we expect a [**menu send callback**](/api-reference/#operation/menuSendCallback). If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead.'
-      operationId: sendMenuWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/NullEvent'
-              - example:
-                  eventType: menus.send_menu
-            examples:
-              SendMenuWebhookRequestExample:
-                summary: Default sendMenuWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: menus.send_menu
-                  metadata:
-                    payload: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  updateMenuEntitiesAvailabilities:
-    post:
-      tags:
-      - Menus Webhooks
-      summary: Otter Update Menu Entities Availabilities Webhook
-      description: 'Webhook to trigger an entities availabilities update.
-
-        If successful, we expect an [**update menu entities availabilities callback**](/api-reference/#operation/updateMenuEntitiesAvailabilitiesCallback). If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead.'
-      operationId: updateMenuEntitiesAvailabilitiesWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/BulkUpdateItemStatus'
-              - example:
-                  eventType: menus.update_menu_entities_availabilities
-            examples:
-              UpdateMenuEntitiesAvailabilitiesWebhookRequestExample:
-                summary: Default updateMenuEntitiesAvailabilitiesWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: menus.update_menu_entities_availabilities
-                  metadata:
-                    payload:
-                      updates:
-                      - {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  upsertMenuHours:
-    post:
-      tags:
-      - Menus Webhooks
-      summary: Otter Upsert Menu Hours Webhook
-      description: 'Webhook to trigger a menu hours update.
-
-        If successful, we expect a [**menu upsert hours callback**](/api-reference/#operation/menuUpsertHours). If an error occurred, please publish a [**callback error**](/api-reference/#operation/publishError) instead.'
-      operationId: upsertMenuHoursWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/UpsertHoursEvent'
-              - example:
-                  eventType: menus.upsert_hours
-            examples:
-              UpsertMenuHoursWebhookRequestExample:
-                summary: Default upsertMenuHoursWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: menus.upsert_hours
-                  metadata:
-                    payload:
-                      menuHoursData:
-                        da0e4e94-5670-4175-897a-3b7dde45bed5:
-                          timeZone: America/Los_Angeles
-                          regularHours:
-                          - days:
-                            - MONDAY
-                            - TUESDAY
-                            - WEDNESDAY
-                            - THURSDAY
-                            - FRIDAY
-                            timeRanges:
-                            - start: 08:00
-                              end: 1320
-                          specialHours:
-                          - date: '2021-12-31'
-                            timeRanges:
-                            - start: 08:00
-                              end: 1320
-                            type: CLOSED
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  pauseStore:
-    post:
-      tags:
-      - Storefront Webhooks
-      summary: Otter Pause Store Webhook
-      operationId: pauseStoreWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/NullEvent'
-              - example:
-                  eventType: storefront.pause_store
-            examples:
-              PauseStoreWebhookRequestExample:
-                summary: Default pauseStoreWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: storefront.pause_store
-                  metadata:
-                    payload: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  unpauseStore:
-    post:
-      tags:
-      - Storefront Webhooks
-      summary: Otter Unpause Store Webhook
-      operationId: unpauseStoreWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/UnpauseStoreEvent'
-              - example:
-                  eventType: storefront.unpause_store
-            examples:
-              UnpauseStoreWebhookRequestExample:
-                summary: Default unpauseStoreWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: storefront.unpause_store
-                  metadata:
-                    payload: 4109d2c9-8bc5-413c-af3e-1c92aa381e41
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  getStoreAvailability:
-    post:
-      tags:
-      - Storefront Webhooks
-      summary: Otter Get Store Availability Webhook
-      operationId: getStoreAvailabilityWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/NullEvent'
-              - example:
-                  eventType: storefront.get_store_availability
-            examples:
-              GetStoreAvailabilityWebhookRequestExample:
-                summary: Default getStoreAvailabilityWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: storefront.get_store_availability
-                  metadata:
-                    payload: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  getStoreHoursConfiguration:
-    post:
-      tags:
-      - Storefront Webhooks
-      summary: Otter Get Store Hours Configuration Webhook
-      operationId: getStoreHoursConfigurationWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/NullEvent'
-              - example:
-                  eventType: storefront.get_store_hours
-            examples:
-              GetStoreHoursConfigurationWebhookRequestExample:
-                summary: Default getStoreHoursConfigurationWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: storefront.get_store_hours
-                  metadata:
-                    payload: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  deliveryStatusUpdate:
-    post:
-      tags:
-      - Delivery Webhooks
-      summary: Otter Update Delivery Status Webhook
-      operationId: deliveryStatusUpdateWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/DeliveryStatusUpdateEvent'
-              - example:
-                  eventType: delivery.delivery_status_update
-            examples:
-              DeliveryStatusUpdateWebhookRequestExample:
-                summary: Default deliveryStatusUpdateWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: delivery.delivery_status_update
-                  metadata:
-                    payload:
-                      provider: doordash
-                      courier: {}
-                      estimatedDeliveryTime: '2007-12-03T10:15:30+01:00'
-                      estimatedPickupTime: '2007-12-03T10:15:30+01:00'
-                      status: REQUESTED
-                      deliveryStatus: REQUESTED
-                      currencyCode: EUR
-                      baseFee: 1.0
-                      extraFee: 1.0
-                      totalFee: 1.0
-                      distance: {}
-                      updatedTime: '2007-12-03T10:15:30+01:00'
-                      deliveryTrackingUrl: https://www.doordash.com/delivery/track/1234567890
-                      dropoffInfo: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  requestDeliveryQuotes:
-    post:
-      tags:
-      - Delivery Webhooks
-      summary: Otter Request Delivery Quotes Webhook
-      operationId: requestDeliveryQuotesWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/RequestDeliveryQuoteEvent'
-              - example:
-                  eventType: delivery.request_quote
-            examples:
-              RequestDeliveryQuotesWebhookRequestExample:
-                summary: Default requestDeliveryQuotesWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: delivery.request_quote
-                  metadata:
-                    payload:
-                      deliveryReferenceId: d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda
-                      provider: doordash
-                      preferredPickupDuration: 0
-                      pickupAddress: {}
-                      dropoffAddress: {}
-                      destinationAddress: {}
-                      pickUpLocationId: d197bd64-a037-4b6e-aad7-06918e7e2d75
-                      orderSubTotal: 15
-                      currencyCode: KRW
-                      containsAlcoholicItem: true
-                      customerPayments:
-                      - {}
-                      orderExternalIdentifiers: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  acceptDelivery:
-    post:
-      tags:
-      - Delivery Webhooks
-      summary: Otter Accept Delivery Webhook
-      operationId: acceptDeliveryWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/AcceptDeliveryEvent'
-              - example:
-                  eventType: delivery.accept
-            examples:
-              AcceptDeliveryWebhookRequestExample:
-                summary: Default acceptDeliveryWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: delivery.accept
-                  metadata:
-                    payload:
-                      deliveryReferenceId: d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda
-                      provider: doordash
-                      preferredPickupTime: '2007-12-03T10:15:30+01:00'
-                      pickupOrderId: 19dc56c8-4497-4392-a612-9f81beb5fe5f
-                      pickupNote: Left side of the restaurant
-                      pickupAddress: {}
-                      dropoffNote: Please ring the doorbell
-                      dropoffAddress: {}
-                      customer: {}
-                      customerPayments:
-                      - {}
-                      currencyCode: KRW
-                      customerTip: {}
-                      orderSubTotal: 15
-                      pickUpLocationId: d197bd64-a037-4b6e-aad7-06918e7e2d75
-                      containsAlcoholicItem: true
-                      pickUpInstructions: string
-                      store: {}
-                      orderItems:
-                      - {}
-                      ofoDisplayId: 5989
-                      ofoSlug: ifood
-                      pickUpInfo: {}
-                      orderExternalIdentifiers: {}
-                      dropoffInstructions: {}
-                      deliveryFee: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  cancelDelivery:
-    post:
-      tags:
-      - Delivery Webhooks
-      summary: Otter Cancel Delivery Webhook
-      operationId: cancelDeliveryWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/CancelDeliveryEvent'
-              - example:
-                  eventType: delivery.cancel
-            examples:
-              CancelDeliveryWebhookRequestExample:
-                summary: Default cancelDeliveryWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: delivery.cancel
-                  metadata:
-                    payload:
-                      deliveryReferenceId: d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  updateDeliveryRequest:
-    post:
-      tags:
-      - Delivery Webhooks
-      summary: Otter Update Delivery Request Webhook
-      operationId: updateDeliveryRequestWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/UpdateDeliveryRequestEvent'
-              - example:
-                  eventType: delivery.update_request
-            examples:
-              UpdateDeliveryRequestWebhookRequestExample:
-                summary: Default updateDeliveryRequestWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: delivery.update_request
-                  metadata:
-                    payload:
-                      deliveryReferenceId: d1a5e7c6-a79a-49bc-83bf-4169cd9c9dda
-                      provider: doordash
-                      currencyCode: USD
-                      customerPayments:
-                      - {}
-                      customerTip: {}
-                      pickUpInfo: {}
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  reportGenerated:
-    post:
-      tags:
-      - Reports Webhooks
-      summary: Otter Report Generated Webhook
-      operationId: reportGeneratedWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/ReportGeneratedEvent'
-              - example:
-                  eventType: reports.report_generated
-            examples:
-              ReportGeneratedWebhookRequestExample:
-                summary: Default reportGeneratedWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: reports.report_generated
-                  metadata:
-                    payload:
-                      reportUrl: https://example.com/
-                      jobId: 38ab397f-b142-4b06-b70c-40c68a408bea
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  ping:
-    post:
-      tags:
-      - Ping Webhooks
-      summary: Otter Ping Webhook
-      description: Used to validate the integration without side effects
-      operationId: pingWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/PingEvent'
-              - example:
-                  eventType: ping.ping
-            examples:
-              PingWebhookRequestExample:
-                summary: Default pingWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: ping.ping
-                  metadata:
-                    payload:
-                      message: Hello World
-      responses:
-        2XX:
-          $ref: '#/components/responses/2XX'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  upsertStore:
-    post:
-      tags:
-      - Account Pairing Webhooks
-      summary: Otter Upsert Store
-      description: Sent when a store is created or updated in `Public API` internal systems.<br/> If metadata contains a `Store ID`, it means a request to update an existent store, otherwise, it's a creation operation.<br/> It provides the store and credentials data needed to validate the store and create a new `Store ID` in the partner application.<br/>      At this point, the  store is in `onboarding state` waiting the partner application to finish the onboarding process by providing the validated `Store ID`.
-      operationId: upsertStorelinkWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/UpsertStorelinkEvent'
-              - example:
-                  eventType: stores.upsert
-            examples:
-              UpsertStorelinkWebhookRequestExample:
-                summary: Default upsertStorelinkWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: stores.upsert
-                  metadata:
-                    payload:
-                      credentialsSchemaVersion: '1.0'
-                      credentials:
-                      - key: email
-                        value: test@email.com
-                      - key: password
-                        value: test-pwd-1234
-                      storeInfo: &id001
-                        name: Store Public Name
-                        address: Some Street, 1234
-                        currencyCode: USD
-                        timezone: America/Los_Angeles
-                        internalStoreId: 51608e41-5d9e-477f-ae02-8c0c68036d5d
-      responses:
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '409':
-          description: The provided credentials already exists in another store.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              examples:
-                UpsertStorelinkWebhook409Example:
-                  summary: Default upsertStorelinkWebhook 409 response
-                  x-microcks-default: true
-                  value:
-                    message: The request body is invalid.
-                    details:
-                    - attribute: Order Currency Code
-                      message: Order Currency Code must be exactly 3 characters
-        '422':
-          description: The provided credentials are not compatible with the provided schema version.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              examples:
-                UpsertStorelinkWebhook422Example:
-                  summary: Default upsertStorelinkWebhook 422 response
-                  x-microcks-default: true
-                  value:
-                    message: The request body is invalid.
-                    details:
-                    - attribute: Order Currency Code
-                      message: Order Currency Code must be exactly 3 characters
-        2XX:
-          description: 'The provided credentials are compatible with the provided schema version, successfully saved in the partner application database and available for the validation process (establishing a connection with the service related to the Application ID, e.g.: UberEats).'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  removeStore:
-    post:
-      tags:
-      - Account Pairing Webhooks
-      summary: Otter Remove Store
-      description: Sent when a store is removed from our system. Contains information about the store for which the event was triggered.
-      operationId: removeStoreWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotification'
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/RemoveStorelinkEvent'
-              - example:
-                  eventType: stores.remove
-            examples:
-              RemoveStoreWebhookRequestExample:
-                summary: Default removeStoreWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: stores.remove
-                  metadata:
-                    payload:
-                      storeInfo: *id001
-      responses:
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        2XX:
-          description: The store credentials for the service related to the Application ID were successfully removed from the partner application database.
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  fetchCredentials:
-    post:
-      tags:
-      - Account Pairing Webhooks
-      summary: Otter Fetch Credentials (synchronously)
-      description: Synchronously returns the last version of the credentials schema needed to create and validate a store in the partner application. If the request contains the `Store ID`, it also returns the saved store credentials corresponding to the provided `Store ID`.
-      operationId: fetchCredentialsWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/EventNotificationBase'
-              - $ref: '#/components/schemas/OptionalStoreIdInMetadata'
-              - example:
-                  eventType: stores.fetch_credentials
-              - type: object
-                properties:
-                  metadata:
-                    type: object
-                    properties:
-                      payload:
-                        $ref: '#/components/schemas/FetchCredentialsEvent'
-            examples:
-              FetchCredentialsWebhookRequestExample:
-                summary: Default fetchCredentialsWebhook request
-                x-microcks-default: true
-                value:
-                  eventId: c75d9460-5d48-423d-8d01-f825fd5b1672
-                  eventTime: '2007-12-03T10:15:30+01:00'
-                  eventType: stores.fetch_credentials
-                  metadata:
-                    payload:
-                      credentials:
-                      - key: email
-                        value: test@email.com
-                      - key: password
-                        value: test-pwd-1234
-      responses:
-        '200':
-          description: The credentials schema and, if the request contains the Store ID, the correspondent store credentials.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ViewCredentialsArray'
-              examples:
-                FetchCredentialsWebhook200Example:
-                  summary: Default fetchCredentialsWebhook 200 response
-                  x-microcks-default: true
-                  value:
-                    credentialsSchemaVersion: '1.0'
-                    credentials:
-                    - key: email
-                      label: Email
-                      value: foodstore@email.com
-                    - key: password
-                      label: Password
-                      value: test-pwd-1234
-                    - key: language
-                      label: Choose the language
-                      inputType: SELECT
-                      selectOptions:
-                      - English
-                      - Portuguese
-                    - key: supported_sizes
-                      label: Choose all supported sizes
-                      inputType: SELECT
-                      selectOptions:
-                      - SMALL
-                      - MEDIUM
-                      - LARGE
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
 x-tagGroups:
 - name: Endpoints
   tags:
