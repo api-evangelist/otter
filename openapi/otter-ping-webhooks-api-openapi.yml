@@ -10,7 +10,7 @@ info:
   x-generated-from: documentation
   x-last-validated: '2026-06-03'
   x-source-url: https://developer-guides.tryotter.com/api-reference/
-  description: 'Operations tagged Ping Webhooks across 19 of this provider''s published API definitions: otter-account-pairing-endpoints-api-openapi.yml, otter-auth-endpoints-api-openapi.yml, otter-callback-endpoints-api-openapi.yml, otter-delivery-endpoints-api-openapi.yml, otter-direct-orders-endpoints-api-openapi.yml, otter-finance-endpoints-api-openapi.yml, otter-inventory-endpoints-api-openapi.yml, otter-manager-loyalty-endpoints-api-openapi.yml, otter-manager-menu-endpoints-api-openapi.yml, otter-manager-order-endpoints-api-openapi.yml, otter-manager-storefront-endpoints-api-openapi.yml, otter-market-intel-endpoints-api-openapi.yml, otter-menus-endpoints-api-openapi.yml, otter-orders-endpoints-api-openapi.yml, otter-organization-endpoints-api-openapi.yml, otter-ping-endpoints-api-openapi.yml, otter-reports-endpoints-api-openapi.yml, otter-reviews-endpoints-api-openapi.yml, otter-storefront-endpoints-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Ping Webhooks across 2 of this provider''s published API definitions: otter-public-api-openapi.yml, otter-ping-webhooks-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://{public-api-url}/
   description: Otter Public API base URL. The concrete host is provisioned per integration partner/account via your Otter account representative; substitute the value provided during onboarding.
@@ -20,6 +20,8 @@ servers:
       description: Account-specific Public API host provided by Otter during onboarding.
 tags:
 - name: Ping Webhooks
+  description: Webhooks to ping and test the system integration.
+  x-displayName: Ping Webhooks
 paths: {}
 webhooks:
   ping:
@@ -69,6 +71,61 @@ webhooks:
           default: public-api-url
           description: Account-specific Public API host provided by Otter during onboarding.
 components:
+  schemas:
+    StoreId:
+      type: string
+      description: The unique identifier of the store in the partner application. This ID, along with the `Application ID`, will be used to match the correct store when performing operations. It cannot be longer than 255 characters and must only contain printable ASCII characters. During on-boarding, this ID will be similar to `onboarding:905bb725-b141-4a9b-832a-1f254f772c94` (where the UUID is the Internal Store ID). During off-boarding, this field will be filled with the last known Store ID, or with an empty string, in case none is found. In that case, please fall back to the provided `internalStoreId` (a.k.a. Sku-Sku ID).
+      example: partner-store-unique-identifier
+    MetadataObject:
+      type: object
+      properties:
+        storeId:
+          $ref: '#/components/schemas/StoreId'
+        applicationId:
+          type: string
+          description: The plain-text Application ID, provided at partner onboarding, also available on Developer Portal.
+          example: ad4ff59d-04c0-4c7d-8ca3-e3a673f8443d
+        resourceId:
+          type: string
+          description: Identifier of the resource that this event refers to, if needed.
+          example: resource-id-if-needed
+        payload:
+          type: object
+          description: Object containing details of the given event, if needed.
+        resourceHref:
+          type: string
+          description: The full endpoint to fetch the details of the resource, if needed.
+          example: resource-href-id-if-needed
+      description: Information about the event.
+    EventNotification:
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: Unique identifier of the event.
+          format: uuid
+          example: c75d9460-5d48-423d-8d01-f825fd5b1672
+        eventTime:
+          type: string
+          description: Date of event occurrence.
+          format: date-time
+          example: '2007-12-03T10:15:30+01:00'
+        eventType:
+          type: string
+          description: The type of the event.
+          example: string
+        metadata:
+          $ref: '#/components/schemas/MetadataObject'
+      description: Notification message sent on relevant events.
+    PingEvent:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Hello World
+  responses:
+    2XX:
+      description: Return any 2XX status to indicate that the data was received successfully
   securitySchemes:
     OAuth2.0:
       type: oauth2
@@ -111,25 +168,8 @@ components:
             organization.read: Permission to read data for organization/brands/stores on behalf of a user.
             organization.service_integration: Permission to manage the your integration with a given store on behalf of a user.
 x-refined-from:
-- otter-account-pairing-endpoints-api-openapi.yml
-- otter-auth-endpoints-api-openapi.yml
-- otter-callback-endpoints-api-openapi.yml
-- otter-delivery-endpoints-api-openapi.yml
-- otter-direct-orders-endpoints-api-openapi.yml
-- otter-finance-endpoints-api-openapi.yml
-- otter-inventory-endpoints-api-openapi.yml
-- otter-manager-loyalty-endpoints-api-openapi.yml
-- otter-manager-menu-endpoints-api-openapi.yml
-- otter-manager-order-endpoints-api-openapi.yml
-- otter-manager-storefront-endpoints-api-openapi.yml
-- otter-market-intel-endpoints-api-openapi.yml
-- otter-menus-endpoints-api-openapi.yml
-- otter-orders-endpoints-api-openapi.yml
-- otter-organization-endpoints-api-openapi.yml
-- otter-ping-endpoints-api-openapi.yml
-- otter-reports-endpoints-api-openapi.yml
-- otter-reviews-endpoints-api-openapi.yml
-- otter-storefront-endpoints-api-openapi.yml
+- otter-public-api-openapi.yml
+- otter-ping-webhooks-api-openapi.yml
 x-tagGroups:
 - name: Endpoints
   tags:
