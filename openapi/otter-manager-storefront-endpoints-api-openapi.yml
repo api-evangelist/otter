@@ -224,53 +224,141 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    '401':
-      description: Invalid authorization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '404':
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '403':
-      description: Authorization not valid for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '400':
-      description: The request is malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '422':
-      description: The request body is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-  parameters:
-    requestId:
-      name: requestId
-      in: path
-      required: true
-      schema:
-        type: string
-        description: A unique identifier of the order in a UUID format.
-        example: 295f76b4-5725-4bf5-a8ab-97943dbdc3b4
-    storeIdHeader:
-      name: X-Store-Id
-      in: header
-      required: true
-      schema:
-        $ref: '#/components/schemas/StoreId'
   schemas:
+    UnpauseRequest:
+      type: object
+      properties:
+        comment:
+          type:
+          - string
+          - 'null'
+          description: Comment for the unpause
+          example: Some comment
+      description: Unpause request parameters
+    ProcessingStatusResponse:
+      type: object
+      properties:
+        processRequestStatuses:
+          type: array
+          minItems: 0
+          description: List of provider level requests
+          items:
+            $ref: '#/components/schemas/ProcessStoreServiceProviderStatus'
+      description: Processing status response
+    PauseRequest:
+      type: object
+      properties:
+        start:
+          type:
+          - string
+          - 'null'
+          description: Start time for the pause. Executed immediately if not set.
+          format: date-time
+          example: '2007-12-03T10:15:30+01:00'
+        end:
+          type:
+          - string
+          - 'null'
+          description: Time when the pause should expire. If not provided, uses the default which is 4 AM at store timezone.
+          format: date-time
+          example: '2007-12-03T10:15:30+01:00'
+        comment:
+          type:
+          - string
+          - 'null'
+          description: Comment for the pause
+          example: Some comment
+        reason:
+          $ref: '#/components/schemas/PauseReason'
+      description: Pause request parameters
+    PauseReason:
+      type: string
+      description: Reason for pausing the storefronts
+      enum:
+      - STORE_MAINTENANCE
+      - OTHER
+    StorefrontError:
+      type: object
+      properties:
+        errorType:
+          type: string
+          description: The type of the error.
+          example: string
+        message:
+          type: string
+          description: The error messageß.
+          example: string
+      description: Unpause response details
+    ErrorDetail:
+      type: object
+      properties:
+        attribute:
+          type: string
+          description: The error attribute.
+          example: Order Currency Code
+        message:
+          type: string
+          description: The error detail description.
+          example: Order Currency Code must be exactly 3 characters
+      description: The error detail response object.
+    RequestAction:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/OperationType'
+        status:
+          $ref: '#/components/schemas/Status'
+        retryAttempt:
+          type: number
+          description: The current retry attempt.
+          example: 2
+        error:
+          $ref: '#/components/schemas/StorefrontError'
+      description: Request action details of the current state
+    Status:
+      type: string
+      description: Status of the operation
+      enum:
+      - UNKNOWN
+      - SUCCESS
+      - FAIL
+      - IN_PROGRESS
+    OperationType:
+      type: string
+      description: Type of the operation
+      enum:
+      - UNKNOWN
+      - PAUSE
+      - UNPAUSE
+    StoreId:
+      type: string
+      description: The unique identifier of the store in the partner application. This ID, along with the `Application ID`, will be used to match the correct store when performing operations. It cannot be longer than 255 characters and must only contain printable ASCII characters. During on-boarding, this ID will be similar to `onboarding:905bb725-b141-4a9b-832a-1f254f772c94` (where the UUID is the Internal Store ID). During off-boarding, this field will be filled with the last known Store ID, or with an empty string, in case none is found. In that case, please fall back to the provided `internalStoreId` (a.k.a. Sku-Sku ID).
+      example: partner-store-unique-identifier
+    ErrorMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error description.
+          example: The request body is invalid.
+        details:
+          type: array
+          description: The error details.
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+      description: The error response object.
+    RequestState:
+      type: string
+      description: State of the requested operation
+      enum:
+      - UNKNOWN
+      - QUEUED
+      - IN_PROGRESS
+      - PROVIDER_REQUEST_IN_PROGRESS
+      - VALIDATION
+      - COMPLETED
+      - FAILED
+      - CANCELLED
     ProcessStoreServiceProviderStatus:
       type: object
       properties:
@@ -307,92 +395,6 @@ components:
         currentState:
           $ref: '#/components/schemas/RequestState'
       description: Provider level request status details
-    UnpauseResponse:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: The requestId of the unpause request.
-          example: store_123
-      description: Unpause response details
-    StorefrontError:
-      type: object
-      properties:
-        errorType:
-          type: string
-          description: The type of the error.
-          example: string
-        message:
-          type: string
-          description: The error messageß.
-          example: string
-      description: Unpause response details
-    Status:
-      type: string
-      description: Status of the operation
-      enum:
-      - UNKNOWN
-      - SUCCESS
-      - FAIL
-      - IN_PROGRESS
-    StoreId:
-      type: string
-      description: The unique identifier of the store in the partner application. This ID, along with the `Application ID`, will be used to match the correct store when performing operations. It cannot be longer than 255 characters and must only contain printable ASCII characters. During on-boarding, this ID will be similar to `onboarding:905bb725-b141-4a9b-832a-1f254f772c94` (where the UUID is the Internal Store ID). During off-boarding, this field will be filled with the last known Store ID, or with an empty string, in case none is found. In that case, please fall back to the provided `internalStoreId` (a.k.a. Sku-Sku ID).
-      example: partner-store-unique-identifier
-    ErrorDetail:
-      type: object
-      properties:
-        attribute:
-          type: string
-          description: The error attribute.
-          example: Order Currency Code
-        message:
-          type: string
-          description: The error detail description.
-          example: Order Currency Code must be exactly 3 characters
-      description: The error detail response object.
-    PauseReason:
-      type: string
-      description: Reason for pausing the storefronts
-      enum:
-      - STORE_MAINTENANCE
-      - OTHER
-    UnpauseRequest:
-      type: object
-      properties:
-        comment:
-          type:
-          - string
-          - 'null'
-          description: Comment for the unpause
-          example: Some comment
-      description: Unpause request parameters
-    PauseRequest:
-      type: object
-      properties:
-        start:
-          type:
-          - string
-          - 'null'
-          description: Start time for the pause. Executed immediately if not set.
-          format: date-time
-          example: '2007-12-03T10:15:30+01:00'
-        end:
-          type:
-          - string
-          - 'null'
-          description: Time when the pause should expire. If not provided, uses the default which is 4 AM at store timezone.
-          format: date-time
-          example: '2007-12-03T10:15:30+01:00'
-        comment:
-          type:
-          - string
-          - 'null'
-          description: Comment for the pause
-          example: Some comment
-        reason:
-          $ref: '#/components/schemas/PauseReason'
-      description: Pause request parameters
     RequestStateInfo:
       type: object
       properties:
@@ -423,62 +425,6 @@ components:
         error:
           $ref: '#/components/schemas/StorefrontError'
       description: Request state details
-    ErrorMessage:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error description.
-          example: The request body is invalid.
-        details:
-          type: array
-          description: The error details.
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-      description: The error response object.
-    OperationType:
-      type: string
-      description: Type of the operation
-      enum:
-      - UNKNOWN
-      - PAUSE
-      - UNPAUSE
-    ProcessingStatusResponse:
-      type: object
-      properties:
-        processRequestStatuses:
-          type: array
-          minItems: 0
-          description: List of provider level requests
-          items:
-            $ref: '#/components/schemas/ProcessStoreServiceProviderStatus'
-      description: Processing status response
-    RequestState:
-      type: string
-      description: State of the requested operation
-      enum:
-      - UNKNOWN
-      - QUEUED
-      - IN_PROGRESS
-      - PROVIDER_REQUEST_IN_PROGRESS
-      - VALIDATION
-      - COMPLETED
-      - FAILED
-      - CANCELLED
-    RequestAction:
-      type: object
-      properties:
-        operationType:
-          $ref: '#/components/schemas/OperationType'
-        status:
-          $ref: '#/components/schemas/Status'
-        retryAttempt:
-          type: number
-          description: The current retry attempt.
-          example: 2
-        error:
-          $ref: '#/components/schemas/StorefrontError'
-      description: Request action details of the current state
     PauseResponse:
       type: object
       properties:
@@ -487,6 +433,60 @@ components:
           description: The requestId of the pause request.
           example: store_123
       description: Pause response details
+    UnpauseResponse:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: The requestId of the unpause request.
+          example: store_123
+      description: Unpause response details
+  responses:
+    '401':
+      description: Invalid authorization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '422':
+      description: The request body is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '404':
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '403':
+      description: Authorization not valid for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '400':
+      description: The request is malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+  parameters:
+    requestId:
+      name: requestId
+      in: path
+      required: true
+      schema:
+        type: string
+        description: A unique identifier of the order in a UUID format.
+        example: 295f76b4-5725-4bf5-a8ab-97943dbdc3b4
+    storeIdHeader:
+      name: X-Store-Id
+      in: header
+      required: true
+      schema:
+        $ref: '#/components/schemas/StoreId'
   securitySchemes:
     OAuth2.0:
       type: oauth2

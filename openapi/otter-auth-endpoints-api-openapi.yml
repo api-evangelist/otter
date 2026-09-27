@@ -139,25 +139,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    '401':
-      description: Invalid authorization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '422':
-      description: The request body is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '400':
-      description: The request is malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
   schemas:
     ErrorMessage:
       type: object
@@ -249,6 +230,25 @@ components:
           type: string
           description: The token type is always "bearer".
           example: bearer
+  responses:
+    '400':
+      description: The request is malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '422':
+      description: The request body is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '401':
+      description: Invalid authorization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
   securitySchemes:
     OAuth2.0:
       type: oauth2

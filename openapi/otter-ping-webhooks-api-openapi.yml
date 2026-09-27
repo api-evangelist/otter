@@ -72,10 +72,26 @@ webhooks:
           description: Account-specific Public API host provided by Otter during onboarding.
 components:
   schemas:
-    StoreId:
-      type: string
-      description: The unique identifier of the store in the partner application. This ID, along with the `Application ID`, will be used to match the correct store when performing operations. It cannot be longer than 255 characters and must only contain printable ASCII characters. During on-boarding, this ID will be similar to `onboarding:905bb725-b141-4a9b-832a-1f254f772c94` (where the UUID is the Internal Store ID). During off-boarding, this field will be filled with the last known Store ID, or with an empty string, in case none is found. In that case, please fall back to the provided `internalStoreId` (a.k.a. Sku-Sku ID).
-      example: partner-store-unique-identifier
+    EventNotification:
+      type: object
+      properties:
+        eventId:
+          type: string
+          description: Unique identifier of the event.
+          format: uuid
+          example: c75d9460-5d48-423d-8d01-f825fd5b1672
+        eventTime:
+          type: string
+          description: Date of event occurrence.
+          format: date-time
+          example: '2007-12-03T10:15:30+01:00'
+        eventType:
+          type: string
+          description: The type of the event.
+          example: string
+        metadata:
+          $ref: '#/components/schemas/MetadataObject'
+      description: Notification message sent on relevant events.
     MetadataObject:
       type: object
       properties:
@@ -97,32 +113,16 @@ components:
           description: The full endpoint to fetch the details of the resource, if needed.
           example: resource-href-id-if-needed
       description: Information about the event.
-    EventNotification:
-      type: object
-      properties:
-        eventId:
-          type: string
-          description: Unique identifier of the event.
-          format: uuid
-          example: c75d9460-5d48-423d-8d01-f825fd5b1672
-        eventTime:
-          type: string
-          description: Date of event occurrence.
-          format: date-time
-          example: '2007-12-03T10:15:30+01:00'
-        eventType:
-          type: string
-          description: The type of the event.
-          example: string
-        metadata:
-          $ref: '#/components/schemas/MetadataObject'
-      description: Notification message sent on relevant events.
     PingEvent:
       type: object
       properties:
         message:
           type: string
           example: Hello World
+    StoreId:
+      type: string
+      description: The unique identifier of the store in the partner application. This ID, along with the `Application ID`, will be used to match the correct store when performing operations. It cannot be longer than 255 characters and must only contain printable ASCII characters. During on-boarding, this ID will be similar to `onboarding:905bb725-b141-4a9b-832a-1f254f772c94` (where the UUID is the Internal Store ID). During off-boarding, this field will be filled with the last known Store ID, or with an empty string, in case none is found. In that case, please fall back to the provided `internalStoreId` (a.k.a. Sku-Sku ID).
+      example: partner-store-unique-identifier
   responses:
     2XX:
       description: Return any 2XX status to indicate that the data was received successfully

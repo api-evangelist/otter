@@ -78,98 +78,44 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    '401':
-      description: Invalid authorization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '422':
-      description: The request body is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '403':
-      description: Authorization not valid for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '400':
-      description: The request is malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
   schemas:
-    Address:
-      type:
-      - object
-      - 'null'
+    Item-3:
+      required:
+      - name
+      type: object
       properties:
-        fullAddress:
+        quantity:
+          minimum: 1
+          maximum: 1000
+          type: integer
+          description: The quantity of the item ordered by the customer.
+          format: int32
+          example: 1
+        id:
           type:
           - string
           - 'null'
-          description: Full, human comprehensible address. It is usually formatted in the order appropriate for your locale.
-          example: 123 Sample Street Ste 100, San Francisco, CA 94103
-        postalCode:
-          type: string
-          description: Postal code of the address.
-          example: '20500'
-        city:
-          type: string
-          description: The city/town portion of the address.
-          example: Washington
-        state:
-          type: string
-          description: Highest administrative subdivision which is used for postal addresses of a country or region. For example, this can be a state, a province, or a prefecture.
-          example: DC
-        countryCode:
-          type: string
-          description: CLDR country code. See http://cldr.unicode.org/
-          example: US
-        addressLines:
+          description: The unique ID of the item.
+          example: 33e0418f-3d56-4360-ba03-18fc5f8844a3
+        name:
           type:
-          - array
+          - string
           - 'null'
-          description: Address lines (e.g. street, PO Box, or company name) or the full single line address (e.g. street, city, state, country, zip).
-          example:
-          - 1600 Pennsylvania Avenue NW
-          - 123 Sample Street Ste 100, San Francisco, CA 94103
-          items:
-            type: string
-        linesOfAddress:
-          type:
-          - array
-          - 'null'
-          deprecated: true
-          description: 'Deprecated: use addressLines. Address lines (e.g. street, PO Box, or company name) or the full single line address (e.g. street, city, state, country, zip).'
-          example:
-          - 1600 Pennsylvania Avenue NW
-          - 123 Sample Street Ste 100, San Francisco, CA 94103
-          items:
-            type: string
-        location:
-          $ref: '#/components/schemas/Location'
-      description: Order delivery address.
-    EaterOrderHistoryResponse:
-      required:
-      - orders
+          description: The name of the item as displayed to the customer.
+          example: Juicy Cheeseburger
+    ErrorMessage:
       type: object
       properties:
-        orders:
-          type: array
-          description: List of orders placed by the user. Each item contains details about a specific order.
-          items:
-            $ref: '#/components/schemas/EaterOrder'
-        nextPageToken:
+        message:
           type: string
-          description: Opaque token used to fetch the following page. If not set, no more orders are available.
-          example: H12MAF2fFaFFFa
-      description: Response body containing the user's order history.
+          description: The error description.
+          example: The request body is invalid.
+        details:
+          type: array
+          description: The error details.
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+      description: The error response object.
     EaterOrderHistoryRequest:
       required:
       - limit
@@ -194,25 +140,18 @@ components:
           description: Order placed from which source
           example: venmo
       description: Request parameters to fetch eater's order history
-    Location:
-      required:
-      - latitude
-      - longitude
-      type:
-      - object
-      - 'null'
+    ErrorDetail:
+      type: object
       properties:
-        latitude:
-          type: number
-          description: The latitude of the location.
-          format: double
-          example: 38.8977
-        longitude:
-          type: number
-          description: The longitude of the location.
-          format: double
-          example: 77.0365
-      description: Latitude and longitude of the address.
+        attribute:
+          type: string
+          description: The error attribute.
+          example: Order Currency Code
+        message:
+          type: string
+          description: The error detail description.
+          example: Order Currency Code must be exactly 3 characters
+      description: The error detail response object.
     EaterOrder:
       required:
       - currencyCode
@@ -275,55 +214,21 @@ components:
           description: The link url for reordering.
           example: /store/0179860e-8a89-39c2-b9b1-7276683d09f1
       description: An order placed by a customer.
-    Item-3:
+    EaterOrderHistoryResponse:
       required:
-      - name
+      - orders
       type: object
       properties:
-        quantity:
-          minimum: 1
-          maximum: 1000
-          type: integer
-          description: The quantity of the item ordered by the customer.
-          format: int32
-          example: 1
-        id:
-          type:
-          - string
-          - 'null'
-          description: The unique ID of the item.
-          example: 33e0418f-3d56-4360-ba03-18fc5f8844a3
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the item as displayed to the customer.
-          example: Juicy Cheeseburger
-    ErrorMessage:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error description.
-          example: The request body is invalid.
-        details:
+        orders:
           type: array
-          description: The error details.
+          description: List of orders placed by the user. Each item contains details about a specific order.
           items:
-            $ref: '#/components/schemas/ErrorDetail'
-      description: The error response object.
-    ErrorDetail:
-      type: object
-      properties:
-        attribute:
+            $ref: '#/components/schemas/EaterOrder'
+        nextPageToken:
           type: string
-          description: The error attribute.
-          example: Order Currency Code
-        message:
-          type: string
-          description: The error detail description.
-          example: Order Currency Code must be exactly 3 characters
-      description: The error detail response object.
+          description: Opaque token used to fetch the following page. If not set, no more orders are available.
+          example: H12MAF2fFaFFFa
+      description: Response body containing the user's order history.
     Store-2:
       required:
       - id
@@ -353,6 +258,101 @@ components:
           example: 2124567890
         address:
           $ref: '#/components/schemas/Address'
+    Location:
+      required:
+      - latitude
+      - longitude
+      type:
+      - object
+      - 'null'
+      properties:
+        latitude:
+          type: number
+          description: The latitude of the location.
+          format: double
+          example: 38.8977
+        longitude:
+          type: number
+          description: The longitude of the location.
+          format: double
+          example: 77.0365
+      description: Latitude and longitude of the address.
+    Address:
+      type:
+      - object
+      - 'null'
+      properties:
+        fullAddress:
+          type:
+          - string
+          - 'null'
+          description: Full, human comprehensible address. It is usually formatted in the order appropriate for your locale.
+          example: 123 Sample Street Ste 100, San Francisco, CA 94103
+        postalCode:
+          type: string
+          description: Postal code of the address.
+          example: '20500'
+        city:
+          type: string
+          description: The city/town portion of the address.
+          example: Washington
+        state:
+          type: string
+          description: Highest administrative subdivision which is used for postal addresses of a country or region. For example, this can be a state, a province, or a prefecture.
+          example: DC
+        countryCode:
+          type: string
+          description: CLDR country code. See http://cldr.unicode.org/
+          example: US
+        addressLines:
+          type:
+          - array
+          - 'null'
+          description: Address lines (e.g. street, PO Box, or company name) or the full single line address (e.g. street, city, state, country, zip).
+          example:
+          - 1600 Pennsylvania Avenue NW
+          - 123 Sample Street Ste 100, San Francisco, CA 94103
+          items:
+            type: string
+        linesOfAddress:
+          type:
+          - array
+          - 'null'
+          deprecated: true
+          description: 'Deprecated: use addressLines. Address lines (e.g. street, PO Box, or company name) or the full single line address (e.g. street, city, state, country, zip).'
+          example:
+          - 1600 Pennsylvania Avenue NW
+          - 123 Sample Street Ste 100, San Francisco, CA 94103
+          items:
+            type: string
+        location:
+          $ref: '#/components/schemas/Location'
+      description: Order delivery address.
+  responses:
+    '403':
+      description: Authorization not valid for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '400':
+      description: The request is malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '422':
+      description: The request body is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '401':
+      description: Invalid authorization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
   securitySchemes:
     OAuth2.0:
       type: oauth2

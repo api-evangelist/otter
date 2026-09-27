@@ -125,42 +125,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    '401':
-      description: Invalid authorization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '422':
-      description: The request body is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '404':
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '403':
-      description: Authorization not valid for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '400':
-      description: The request is malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
   schemas:
-    JobId:
-      type: string
-      description: ID used to track the job created for generating report.
-      example: 38ab397f-b142-4b06-b70c-40c68a408bea
     GenerateReportMultiRequest:
       type: object
       properties:
@@ -213,12 +178,6 @@ components:
           description: Language of the report. Ignored by ORDER_STORES report Optional. Falls back to English if empty.
           example: string
       description: The request to generate a report for multiple stores.
-    GenerateReportResponse:
-      type: object
-      properties:
-        jobId:
-          $ref: '#/components/schemas/JobId'
-      description: The response to a generate report request
     ErrorMessage:
       type: object
       properties:
@@ -232,18 +191,6 @@ components:
           items:
             $ref: '#/components/schemas/ErrorDetail'
       description: The error response object.
-    ErrorDetail:
-      type: object
-      properties:
-        attribute:
-          type: string
-          description: The error attribute.
-          example: Order Currency Code
-        message:
-          type: string
-          description: The error detail description.
-          example: Order Currency Code must be exactly 3 characters
-      description: The error detail response object.
     GetReportStatusResponse:
       type: object
       properties:
@@ -271,6 +218,59 @@ components:
               - 'null'
               description: Error message. It will be available only if status is "ERROR"
               example: Report generation error. Please reach out to support and provide jobId
+    ErrorDetail:
+      type: object
+      properties:
+        attribute:
+          type: string
+          description: The error attribute.
+          example: Order Currency Code
+        message:
+          type: string
+          description: The error detail description.
+          example: Order Currency Code must be exactly 3 characters
+      description: The error detail response object.
+    JobId:
+      type: string
+      description: ID used to track the job created for generating report.
+      example: 38ab397f-b142-4b06-b70c-40c68a408bea
+    GenerateReportResponse:
+      type: object
+      properties:
+        jobId:
+          $ref: '#/components/schemas/JobId'
+      description: The response to a generate report request
+  responses:
+    '403':
+      description: Authorization not valid for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '400':
+      description: The request is malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '422':
+      description: The request body is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '404':
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '401':
+      description: Invalid authorization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
   parameters:
     jobId:
       name: jobId

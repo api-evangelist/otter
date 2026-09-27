@@ -87,6 +87,58 @@ components:
           description: The longitude and latitude of a location.
           $ref: '#/components/schemas/Location'
       description: The geographical coordinates of a location.
+    Marketintel_LocationBasedInformation:
+      type: object
+      properties:
+        estimatedDeliveryTimeInSeconds:
+          type:
+          - integer
+          - 'null'
+          description: The estimated delivery time in seconds
+          example: 1200
+        distanceInMeters:
+          type:
+          - integer
+          - 'null'
+          description: The distance in meters
+          example: 3000
+      description: The estimated delivery time of the store and delivery distance from the store. At least one of the attributes need to be set.
+    Marketintel_StoreChain:
+      type: object
+      properties:
+        chainId:
+          type:
+          - string
+          - 'null'
+          description: The external chain id.
+          example: 1
+        chainName:
+          type:
+          - string
+          - 'null'
+          description: The name of the chain.
+          example: Macdonalds
+      description: The Store Chain information.
+    Marketintel_StoreMenu:
+      type: object
+      properties:
+        category:
+          type:
+          - string
+          - 'null'
+          description: The grouping category name.
+          example: Fast Food
+        ids:
+          type: array
+          description: The list of external store ids in the list in rank order.
+          items:
+            type: string
+            description: The external id the store
+            example: 123456
+        location:
+          type: object
+          description: The geographic location of the stores that was searched from.
+      description: The Store listing in ranking order based on category.
     Marketintel_SpecialHours:
       required:
       - date
@@ -113,37 +165,6 @@ components:
           - CLOSED
           example: OPEN
       description: Describes the configuration of special store hours.
-    Marketintel_TimeRange:
-      required:
-      - end
-      - start
-      type: object
-      properties:
-        start:
-          type: string
-          description: Start time of the range in 24 hour format.
-          example: 08:00
-        end:
-          type: string
-          description: End time of the range in 24 hour format.
-          example: 1320
-      description: Time range in a given date.
-    Marketintel_StoreChain:
-      type: object
-      properties:
-        chainId:
-          type:
-          - string
-          - 'null'
-          description: The external chain id.
-          example: 1
-        chainName:
-          type:
-          - string
-          - 'null'
-          description: The name of the chain.
-          example: Macdonalds
-      description: The Store Chain information.
     Marketintel_StoreDetails:
       type: object
       properties:
@@ -268,6 +289,26 @@ components:
           description: The estimated delivery time in minutes.
           $ref: '#/components/schemas/Marketintel_StorePriceLevel'
       description: The Store delivery information.
+    Marketintel_StoreListing:
+      type: object
+      properties:
+        category:
+          type:
+          - string
+          - 'null'
+          description: The grouping category name.
+          example: Fast Food
+        ids:
+          type: array
+          description: The list of external store ids in the list in rank order.
+          items:
+            type: string
+            description: The external id the store
+            example: 123456
+        location:
+          type: object
+          description: The geographic location of the stores that was searched from.
+      description: The Store listing in ranking order based on category.
     DiscoverStoresEventResult:
       type: object
       properties:
@@ -284,41 +325,18 @@ components:
           items:
             $ref: '#/components/schemas/Marketintel_StoreListing'
       description: The result of an event that request to find stores at the provided geolocations.
-    Marketintel_LocationBasedInformation:
+    ErrorDetail:
       type: object
       properties:
-        estimatedDeliveryTimeInSeconds:
-          type:
-          - integer
-          - 'null'
-          description: The estimated delivery time in seconds
-          example: 1200
-        distanceInMeters:
-          type:
-          - integer
-          - 'null'
-          description: The distance in meters
-          example: 3000
-      description: The estimated delivery time of the store and delivery distance from the store. At least one of the attributes need to be set.
-    Location:
-      required:
-      - latitude
-      - longitude
-      type:
-      - object
-      - 'null'
-      properties:
-        latitude:
-          type: number
-          description: The latitude of the location.
-          format: double
-          example: 38.8977
-        longitude:
-          type: number
-          description: The longitude of the location.
-          format: double
-          example: 77.0365
-      description: Latitude and longitude of the address.
+        attribute:
+          type: string
+          description: The error attribute.
+          example: Order Currency Code
+        message:
+          type: string
+          description: The error detail description.
+          example: Order Currency Code must be exactly 3 characters
+      description: The error detail response object.
     Marketintel_RegularHours:
       required:
       - days
@@ -345,79 +363,6 @@ components:
           items:
             $ref: '#/components/schemas/Marketintel_TimeRange'
       description: Describes the configuration of regular hours.
-    ErrorDetail:
-      type: object
-      properties:
-        attribute:
-          type: string
-          description: The error attribute.
-          example: Order Currency Code
-        message:
-          type: string
-          description: The error detail description.
-          example: Order Currency Code must be exactly 3 characters
-      description: The error detail response object.
-    Marketintel_StorePromotion:
-      type: object
-      properties:
-        displayName:
-          type:
-          - string
-          - 'null'
-          description: The name of the promotion.
-          example: Flat rate discount on Christmas day
-        promotionType:
-          type:
-          - string
-          - 'null'
-          description: The type of promotion.
-          example: Flat rate discount
-        campaignType:
-          type:
-          - string
-          - 'null'
-          description: The type of promotion campaign.
-          example: Christmas
-        promotionId:
-          type:
-          - string
-          - 'null'
-          description: The external promotion id.
-          example: 12345
-      description: The Store Promotion information. At least one of the displayName, promotionType, campaignType or promotionId need to be present.
-    Marketintel_StoreListing:
-      type: object
-      properties:
-        category:
-          type:
-          - string
-          - 'null'
-          description: The grouping category name.
-          example: Fast Food
-        ids:
-          type: array
-          description: The list of external store ids in the list in rank order.
-          items:
-            type: string
-            description: The external id the store
-            example: 123456
-        location:
-          type: object
-          description: The geographic location of the stores that was searched from.
-      description: The Store listing in ranking order based on category.
-    ErrorMessage:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error description.
-          example: The request body is invalid.
-        details:
-          type: array
-          description: The error details.
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-      description: The error response object.
     Marketintel_GeoLocationInformation:
       type: object
       properties:
@@ -448,45 +393,34 @@ components:
           description: The address of the geographical location.
           $ref: '#/components/schemas/Address'
       description: The geographical location information used to discover stores.  This information will need be pass back with the result.
-    Marketintel_HoursData:
-      required:
-      - regularHours
-      - specialHours
-      - timeZone
+    Marketintel_StoreDeliveryInformation:
       type: object
       properties:
-        timeZone:
-          type: string
-          description: TimeZone of all times under it. (https://www.joda.org/joda-time/timezones.html)
-          format: timezone-id
-          example: America/Los_Angeles
-        regularHours:
-          type: array
-          description: List of regular hours configuration.
-          items:
-            $ref: '#/components/schemas/Marketintel_RegularHours'
-        specialHours:
-          type: array
-          description: List of special hours configuration, for occasions like Christmas, Thanksgiving, or any other holidays.
-          items:
-            $ref: '#/components/schemas/Marketintel_SpecialHours'
-      description: Represents hours configuration with regular hours and special hours.
-    Marketintel_StorePriceLevel:
-      type: object
-      properties:
-        priceLevel:
+        minDeliveryBasketSize:
           type:
-          - number
+          - object
           - 'null'
-          description: The price level of the store in numeric rating.
-          example: 3
-        priceLevelName:
+          description: The minimum basket value of the order needed for delivery
+          $ref: '#/components/schemas/Money'
+        deliveryFee:
+          type:
+          - object
+          - 'null'
+          description: The delivery fee for the order
+          $ref: '#/components/schemas/Money'
+        deliveryType:
           type:
           - string
           - 'null'
-          description: The price level of the store in text.
-          example: $$$
-      description: The Store Price Level information. At least one of the price level or price level name need to be present.
+          description: The delivery type for the order
+          example: Third Party
+        deliveryTimeMinutes:
+          type:
+          - integer
+          - 'null'
+          description: The estimated delivery time in minutes
+          example: 30
+      description: The Store delivery information.
     Marketintel_StoreRating:
       type: object
       properties:
@@ -511,6 +445,80 @@ components:
           - 20+
           - 20
       description: The Store rating information. At least one of the ratingScore, estimatedRatingCount or displayRatingCount need to be present.
+    ErrorMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The error description.
+          example: The request body is invalid.
+        details:
+          type: array
+          description: The error details.
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+      description: The error response object.
+    DiscoveredStore:
+      type: object
+      properties:
+        storeDetails:
+          type: object
+          description: The store details.
+          $ref: '#/components/schemas/Marketintel_StoreDetails'
+        locationBasedInformation:
+          type:
+          - object
+          - 'null'
+          description: The location information of the store.
+          $ref: '#/components/schemas/Marketintel_LocationBasedInformation'
+      description: The discovered store information.
+    Money:
+      required:
+      - amount
+      - currencyCode
+      type: object
+      properties:
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: The 3-letter currency code (ISO 4217) to use for all monetary values.
+          example: EUR
+        amount:
+          minimum: 0
+          type: number
+          description: Amount value.
+          example: 25.21
+      description: Money amount.
+      example: 25.21
+    Marketintel_StorePromotion:
+      type: object
+      properties:
+        displayName:
+          type:
+          - string
+          - 'null'
+          description: The name of the promotion.
+          example: Flat rate discount on Christmas day
+        promotionType:
+          type:
+          - string
+          - 'null'
+          description: The type of promotion.
+          example: Flat rate discount
+        campaignType:
+          type:
+          - string
+          - 'null'
+          description: The type of promotion campaign.
+          example: Christmas
+        promotionId:
+          type:
+          - string
+          - 'null'
+          description: The external promotion id.
+          example: 12345
+      description: The Store Promotion information. At least one of the displayName, promotionType, campaignType or promotionId need to be present.
     Address:
       type:
       - object
@@ -562,68 +570,6 @@ components:
         location:
           $ref: '#/components/schemas/Location'
       description: Order delivery address.
-    Marketintel_StoreDeliveryInformation:
-      type: object
-      properties:
-        minDeliveryBasketSize:
-          type:
-          - object
-          - 'null'
-          description: The minimum basket value of the order needed for delivery
-          $ref: '#/components/schemas/Money'
-        deliveryFee:
-          type:
-          - object
-          - 'null'
-          description: The delivery fee for the order
-          $ref: '#/components/schemas/Money'
-        deliveryType:
-          type:
-          - string
-          - 'null'
-          description: The delivery type for the order
-          example: Third Party
-        deliveryTimeMinutes:
-          type:
-          - integer
-          - 'null'
-          description: The estimated delivery time in minutes
-          example: 30
-      description: The Store delivery information.
-    Marketintel_StoreMenu:
-      type: object
-      properties:
-        category:
-          type:
-          - string
-          - 'null'
-          description: The grouping category name.
-          example: Fast Food
-        ids:
-          type: array
-          description: The list of external store ids in the list in rank order.
-          items:
-            type: string
-            description: The external id the store
-            example: 123456
-        location:
-          type: object
-          description: The geographic location of the stores that was searched from.
-      description: The Store listing in ranking order based on category.
-    DiscoveredStore:
-      type: object
-      properties:
-        storeDetails:
-          type: object
-          description: The store details.
-          $ref: '#/components/schemas/Marketintel_StoreDetails'
-        locationBasedInformation:
-          type:
-          - object
-          - 'null'
-          description: The location information of the store.
-          $ref: '#/components/schemas/Marketintel_LocationBasedInformation'
-      description: The discovered store information.
     Marketintel_StoreSales:
       type: object
       properties:
@@ -648,28 +594,97 @@ components:
           - 20
           - 20+
       description: The Store Sales information. At least one of the periodType, numberOfSales or displayNumberOfSales need to be present.
-    Money:
+    Location:
       required:
-      - amount
-      - currencyCode
+      - latitude
+      - longitude
+      type:
+      - object
+      - 'null'
+      properties:
+        latitude:
+          type: number
+          description: The latitude of the location.
+          format: double
+          example: 38.8977
+        longitude:
+          type: number
+          description: The longitude of the location.
+          format: double
+          example: 77.0365
+      description: Latitude and longitude of the address.
+    Marketintel_StorePriceLevel:
       type: object
       properties:
-        currencyCode:
-          maxLength: 3
-          minLength: 3
+        priceLevel:
+          type:
+          - number
+          - 'null'
+          description: The price level of the store in numeric rating.
+          example: 3
+        priceLevelName:
+          type:
+          - string
+          - 'null'
+          description: The price level of the store in text.
+          example: $$$
+      description: The Store Price Level information. At least one of the price level or price level name need to be present.
+    Marketintel_HoursData:
+      required:
+      - regularHours
+      - specialHours
+      - timeZone
+      type: object
+      properties:
+        timeZone:
           type: string
-          description: The 3-letter currency code (ISO 4217) to use for all monetary values.
-          example: EUR
-        amount:
-          minimum: 0
-          type: number
-          description: Amount value.
-          example: 25.21
-      description: Money amount.
-      example: 25.21
+          description: TimeZone of all times under it. (https://www.joda.org/joda-time/timezones.html)
+          format: timezone-id
+          example: America/Los_Angeles
+        regularHours:
+          type: array
+          description: List of regular hours configuration.
+          items:
+            $ref: '#/components/schemas/Marketintel_RegularHours'
+        specialHours:
+          type: array
+          description: List of special hours configuration, for occasions like Christmas, Thanksgiving, or any other holidays.
+          items:
+            $ref: '#/components/schemas/Marketintel_SpecialHours'
+      description: Represents hours configuration with regular hours and special hours.
+    Marketintel_TimeRange:
+      required:
+      - end
+      - start
+      type: object
+      properties:
+        start:
+          type: string
+          description: Start time of the range in 24 hour format.
+          example: 08:00
+        end:
+          type: string
+          description: End time of the range in 24 hour format.
+          example: 1320
+      description: Time range in a given date.
+  parameters:
+    eventIdOptionalHeader:
+      name: X-Event-Id
+      in: header
+      required: false
+      schema:
+        type: string
+        description: Optional unique identifier of the event that this callback refers to.
+        example: cf0ce51b-d74e-40d3-b177-1925ab4edc0c
   responses:
     '401':
       description: Invalid authorization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '422':
+      description: The request body is not valid.
       content:
         application/json:
           schema:
@@ -692,21 +707,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorMessage'
-    '422':
-      description: The request body is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-  parameters:
-    eventIdOptionalHeader:
-      name: X-Event-Id
-      in: header
-      required: false
-      schema:
-        type: string
-        description: Optional unique identifier of the event that this callback refers to.
-        example: cf0ce51b-d74e-40d3-b177-1925ab4edc0c
   securitySchemes:
     OAuth2.0:
       type: oauth2
