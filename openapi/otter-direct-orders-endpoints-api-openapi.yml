@@ -79,43 +79,35 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Item-3:
+    Store-2:
       required:
+      - id
       - name
+      - address
       type: object
       properties:
-        quantity:
-          minimum: 1
-          maximum: 1000
-          type: integer
-          description: The quantity of the item ordered by the customer.
-          format: int32
-          example: 1
         id:
-          type:
-          - string
-          - 'null'
-          description: The unique ID of the item.
-          example: 33e0418f-3d56-4360-ba03-18fc5f8844a3
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the item as displayed to the customer.
-          example: Juicy Cheeseburger
-    ErrorMessage:
-      type: object
-      properties:
-        message:
           type: string
-          description: The error description.
-          example: The request body is invalid.
-        details:
-          type: array
-          description: The error details.
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-      description: The error response object.
+          description: Store identifier.
+          example: 9208071e-5f7a-444a-b3a7-4a57ff3f614e
+        name:
+          type: string
+          description: Store name.
+          example: Store name 1
+        logoUrl:
+          type: string
+          description: store's logo image url.
+          example: https://blob-storage.com/photos/storefront-photos/228da7b3-a254-47f4-b82f-5cf29e89b2b9.jpeg
+        bannerUrl:
+          type: string
+          description: store's banner image url.
+          example: https://blob-storage.com/photos/storefront-photos/4abd6b2e-e0f1-467c-a60b-c2e33922573f.jpeg
+        phoneNumber:
+          type: string
+          description: store's phone number.
+          example: 2124567890
+        address:
+          $ref: '#/components/schemas/Address'
     EaterOrderHistoryRequest:
       required:
       - limit
@@ -140,6 +132,57 @@ components:
           description: Order placed from which source
           example: venmo
       description: Request parameters to fetch eater's order history
+    Address:
+      type:
+      - object
+      - 'null'
+      properties:
+        fullAddress:
+          type:
+          - string
+          - 'null'
+          description: Full, human comprehensible address. It is usually formatted in the order appropriate for your locale.
+          example: 123 Sample Street Ste 100, San Francisco, CA 94103
+        postalCode:
+          type: string
+          description: Postal code of the address.
+          example: '20500'
+        city:
+          type: string
+          description: The city/town portion of the address.
+          example: Washington
+        state:
+          type: string
+          description: Highest administrative subdivision which is used for postal addresses of a country or region. For example, this can be a state, a province, or a prefecture.
+          example: DC
+        countryCode:
+          type: string
+          description: CLDR country code. See http://cldr.unicode.org/
+          example: US
+        addressLines:
+          type:
+          - array
+          - 'null'
+          description: Address lines (e.g. street, PO Box, or company name) or the full single line address (e.g. street, city, state, country, zip).
+          example:
+          - 1600 Pennsylvania Avenue NW
+          - 123 Sample Street Ste 100, San Francisco, CA 94103
+          items:
+            type: string
+        linesOfAddress:
+          type:
+          - array
+          - 'null'
+          deprecated: true
+          description: 'Deprecated: use addressLines. Address lines (e.g. street, PO Box, or company name) or the full single line address (e.g. street, city, state, country, zip).'
+          example:
+          - 1600 Pennsylvania Avenue NW
+          - 123 Sample Street Ste 100, San Francisco, CA 94103
+          items:
+            type: string
+        location:
+          $ref: '#/components/schemas/Location'
+      description: Order delivery address.
     ErrorDetail:
       type: object
       properties:
@@ -152,6 +195,30 @@ components:
           description: The error detail description.
           example: Order Currency Code must be exactly 3 characters
       description: The error detail response object.
+    Item-3:
+      required:
+      - name
+      type: object
+      properties:
+        quantity:
+          minimum: 1
+          maximum: 1000
+          type: integer
+          description: The quantity of the item ordered by the customer.
+          format: int32
+          example: 1
+        id:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the item.
+          example: 33e0418f-3d56-4360-ba03-18fc5f8844a3
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the item as displayed to the customer.
+          example: Juicy Cheeseburger
     EaterOrder:
       required:
       - currencyCode
@@ -214,50 +281,6 @@ components:
           description: The link url for reordering.
           example: /store/0179860e-8a89-39c2-b9b1-7276683d09f1
       description: An order placed by a customer.
-    EaterOrderHistoryResponse:
-      required:
-      - orders
-      type: object
-      properties:
-        orders:
-          type: array
-          description: List of orders placed by the user. Each item contains details about a specific order.
-          items:
-            $ref: '#/components/schemas/EaterOrder'
-        nextPageToken:
-          type: string
-          description: Opaque token used to fetch the following page. If not set, no more orders are available.
-          example: H12MAF2fFaFFFa
-      description: Response body containing the user's order history.
-    Store-2:
-      required:
-      - id
-      - name
-      - address
-      type: object
-      properties:
-        id:
-          type: string
-          description: Store identifier.
-          example: 9208071e-5f7a-444a-b3a7-4a57ff3f614e
-        name:
-          type: string
-          description: Store name.
-          example: Store name 1
-        logoUrl:
-          type: string
-          description: store's logo image url.
-          example: https://blob-storage.com/photos/storefront-photos/228da7b3-a254-47f4-b82f-5cf29e89b2b9.jpeg
-        bannerUrl:
-          type: string
-          description: store's banner image url.
-          example: https://blob-storage.com/photos/storefront-photos/4abd6b2e-e0f1-467c-a60b-c2e33922573f.jpeg
-        phoneNumber:
-          type: string
-          description: store's phone number.
-          example: 2124567890
-        address:
-          $ref: '#/components/schemas/Address'
     Location:
       required:
       - latitude
@@ -277,70 +300,35 @@ components:
           format: double
           example: 77.0365
       description: Latitude and longitude of the address.
-    Address:
-      type:
-      - object
-      - 'null'
+    ErrorMessage:
+      type: object
       properties:
-        fullAddress:
-          type:
-          - string
-          - 'null'
-          description: Full, human comprehensible address. It is usually formatted in the order appropriate for your locale.
-          example: 123 Sample Street Ste 100, San Francisco, CA 94103
-        postalCode:
+        message:
           type: string
-          description: Postal code of the address.
-          example: '20500'
-        city:
-          type: string
-          description: The city/town portion of the address.
-          example: Washington
-        state:
-          type: string
-          description: Highest administrative subdivision which is used for postal addresses of a country or region. For example, this can be a state, a province, or a prefecture.
-          example: DC
-        countryCode:
-          type: string
-          description: CLDR country code. See http://cldr.unicode.org/
-          example: US
-        addressLines:
-          type:
-          - array
-          - 'null'
-          description: Address lines (e.g. street, PO Box, or company name) or the full single line address (e.g. street, city, state, country, zip).
-          example:
-          - 1600 Pennsylvania Avenue NW
-          - 123 Sample Street Ste 100, San Francisco, CA 94103
+          description: The error description.
+          example: The request body is invalid.
+        details:
+          type: array
+          description: The error details.
           items:
-            type: string
-        linesOfAddress:
-          type:
-          - array
-          - 'null'
-          deprecated: true
-          description: 'Deprecated: use addressLines. Address lines (e.g. street, PO Box, or company name) or the full single line address (e.g. street, city, state, country, zip).'
-          example:
-          - 1600 Pennsylvania Avenue NW
-          - 123 Sample Street Ste 100, San Francisco, CA 94103
+            $ref: '#/components/schemas/ErrorDetail'
+      description: The error response object.
+    EaterOrderHistoryResponse:
+      required:
+      - orders
+      type: object
+      properties:
+        orders:
+          type: array
+          description: List of orders placed by the user. Each item contains details about a specific order.
           items:
-            type: string
-        location:
-          $ref: '#/components/schemas/Location'
-      description: Order delivery address.
+            $ref: '#/components/schemas/EaterOrder'
+        nextPageToken:
+          type: string
+          description: Opaque token used to fetch the following page. If not set, no more orders are available.
+          example: H12MAF2fFaFFFa
+      description: Response body containing the user's order history.
   responses:
-    '403':
-      description: Authorization not valid for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '400':
-      description: The request is malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
     '422':
       description: The request body is not valid.
       content:
@@ -349,6 +337,18 @@ components:
             $ref: '#/components/schemas/ErrorMessage'
     '401':
       description: Invalid authorization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '403':
+      description: Authorization not valid for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '400':
+      description: The request is malformed.
       content:
         application/json:
           schema:

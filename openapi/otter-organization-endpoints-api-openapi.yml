@@ -343,24 +343,44 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    '409':
+      description: The connection between the partner application and the store already exists.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '400':
+      description: The request is malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '422':
+      description: The request body is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '404':
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '401':
+      description: Invalid authorization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '403':
+      description: Authorization not valid for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
   schemas:
-    Store:
-      required:
-      - id
-      - name
-      - address
-      type: object
-      properties:
-        id:
-          type: string
-          description: Store identifier.
-          example: 9208071e-5f7a-444a-b3a7-4a57ff3f614e
-        name:
-          type: string
-          description: Store name.
-          example: Store name 1
-        address:
-          $ref: '#/components/schemas/Address'
     CreateConnectionRequest:
       required:
       - storeId
@@ -384,18 +404,15 @@ components:
           type: string
           description: Opaque token used to fetch the following page. If not set, no more stores are available.
           example: H12MAF2fFaFFFa
-    ErrorDetail:
+    Connection:
+      required:
+      - storeId
       type: object
       properties:
-        attribute:
+        storeId:
           type: string
-          description: The error attribute.
-          example: Order Currency Code
-        message:
-          type: string
-          description: The error detail description.
-          example: Order Currency Code must be exactly 3 characters
-      description: The error detail response object.
+          description: The unique identifier of the store in the partner application. This is the ID, along with the Application ID, used to match the correct store when performing operations.
+          example: 9208071e-5f7a-444a-b3a7-4a57ff3f614e
     ErrorMessage:
       type: object
       properties:
@@ -409,15 +426,51 @@ components:
           items:
             $ref: '#/components/schemas/ErrorDetail'
       description: The error response object.
-    Connection:
+    Organization:
       required:
-      - storeId
+      - id
+      - name
       type: object
       properties:
-        storeId:
+        id:
           type: string
-          description: The unique identifier of the store in the partner application. This is the ID, along with the Application ID, used to match the correct store when performing operations.
+          description: Organization identifier.
           example: 9208071e-5f7a-444a-b3a7-4a57ff3f614e
+        name:
+          type: string
+          description: Organization name.
+          example: Organization name 1
+    Brand:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          description: Brand identifier.
+          example: 9208071e-5f7a-444a-b3a7-4a57ff3f614e
+        name:
+          type: string
+          description: Brand name.
+          example: Brand name 1
+    Store:
+      required:
+      - id
+      - name
+      - address
+      type: object
+      properties:
+        id:
+          type: string
+          description: Store identifier.
+          example: 9208071e-5f7a-444a-b3a7-4a57ff3f614e
+        name:
+          type: string
+          description: Store name.
+          example: Store name 1
+        address:
+          $ref: '#/components/schemas/Address'
     Address:
       type:
       - object
@@ -469,20 +522,32 @@ components:
         location:
           $ref: '#/components/schemas/Location'
       description: Order delivery address.
-    Organization:
+    ListBrandsResponse:
       required:
-      - id
-      - name
+      - items
       type: object
       properties:
-        id:
+        items:
+          type: array
+          description: Array of brands.
+          items:
+            $ref: '#/components/schemas/Brand'
+        offsetToken:
           type: string
-          description: Organization identifier.
-          example: 9208071e-5f7a-444a-b3a7-4a57ff3f614e
-        name:
+          description: Opaque token used to fetch the following page. If not set, no more brands are available.
+          example: H12MAF2fFaFFFa
+    ErrorDetail:
+      type: object
+      properties:
+        attribute:
           type: string
-          description: Organization name.
-          example: Organization name 1
+          description: The error attribute.
+          example: Order Currency Code
+        message:
+          type: string
+          description: The error detail description.
+          example: Order Currency Code must be exactly 3 characters
+      description: The error detail response object.
     Location:
       required:
       - latitude
@@ -502,88 +567,7 @@ components:
           format: double
           example: 77.0365
       description: Latitude and longitude of the address.
-    ListBrandsResponse:
-      required:
-      - items
-      type: object
-      properties:
-        items:
-          type: array
-          description: Array of brands.
-          items:
-            $ref: '#/components/schemas/Brand'
-        offsetToken:
-          type: string
-          description: Opaque token used to fetch the following page. If not set, no more brands are available.
-          example: H12MAF2fFaFFFa
-    Brand:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          type: string
-          description: Brand identifier.
-          example: 9208071e-5f7a-444a-b3a7-4a57ff3f614e
-        name:
-          type: string
-          description: Brand name.
-          example: Brand name 1
-  responses:
-    '401':
-      description: Invalid authorization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '422':
-      description: The request body is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '409':
-      description: The connection between the partner application and the store already exists.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '404':
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '403':
-      description: Authorization not valid for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '400':
-      description: The request is malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
   parameters:
-    brandId:
-      name: brandId
-      in: path
-      required: true
-      schema:
-        type: string
-        description: A unique identifier of a brand in a UUID format.
-        example: 295f76b4-5725-4bf5-a8ab-97943dbdc3b4
-    storeId:
-      name: storeId
-      in: path
-      required: true
-      schema:
-        type: string
-        description: A unique identifier of a store in a UUID format.
-        example: 295f76b4-5725-4bf5-a8ab-97943dbdc3b4
     opaquePaginationToken:
       name: token
       in: query
@@ -600,6 +584,22 @@ components:
         type: string
         description: Max number of stores to retrieve
         example: 5
+    storeId:
+      name: storeId
+      in: path
+      required: true
+      schema:
+        type: string
+        description: A unique identifier of a store in a UUID format.
+        example: 295f76b4-5725-4bf5-a8ab-97943dbdc3b4
+    brandId:
+      name: brandId
+      in: path
+      required: true
+      schema:
+        type: string
+        description: A unique identifier of a brand in a UUID format.
+        example: 295f76b4-5725-4bf5-a8ab-97943dbdc3b4
   securitySchemes:
     OAuth2.0:
       type: oauth2
