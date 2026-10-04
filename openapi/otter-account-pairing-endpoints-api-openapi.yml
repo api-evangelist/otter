@@ -120,27 +120,38 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    '401':
+      description: Invalid authorization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '403':
+      description: Authorization not valid for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '422':
+      description: The request body is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '400':
+      description: The request is malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '404':
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
   schemas:
-    StoreId:
-      type: string
-      description: The unique identifier of the store in the partner application. This ID, along with the `Application ID`, will be used to match the correct store when performing operations. It cannot be longer than 255 characters and must only contain printable ASCII characters. During on-boarding, this ID will be similar to `onboarding:905bb725-b141-4a9b-832a-1f254f772c94` (where the UUID is the Internal Store ID). During off-boarding, this field will be filled with the last known Store ID, or with an empty string, in case none is found. In that case, please fall back to the provided `internalStoreId` (a.k.a. Sku-Sku ID).
-      example: partner-store-unique-identifier
-    ErrorDetail:
-      type: object
-      properties:
-        attribute:
-          type: string
-          description: The error attribute.
-          example: Order Currency Code
-        message:
-          type: string
-          description: The error detail description.
-          example: Order Currency Code must be exactly 3 characters
-      description: The error detail response object.
-    ApplicationId:
-      type: string
-      description: The plain-text Application ID, provided at partner onboarding, also available on Developer Portal.
-      example: 5045c1c3-694f-4392-b43b-e765cd89c8b8
     ErrorMessage:
       type: object
       properties:
@@ -154,6 +165,33 @@ components:
           items:
             $ref: '#/components/schemas/ErrorDetail'
       description: The error response object.
+    ApplicationId:
+      type: string
+      description: The plain-text Application ID, provided at partner onboarding, also available on Developer Portal.
+      example: 5045c1c3-694f-4392-b43b-e765cd89c8b8
+    StoreId:
+      type: string
+      description: The unique identifier of the store in the partner application. This ID, along with the `Application ID`, will be used to match the correct store when performing operations. It cannot be longer than 255 characters and must only contain printable ASCII characters. During on-boarding, this ID will be similar to `onboarding:905bb725-b141-4a9b-832a-1f254f772c94` (where the UUID is the Internal Store ID). During off-boarding, this field will be filled with the last known Store ID, or with an empty string, in case none is found. In that case, please fall back to the provided `internalStoreId` (a.k.a. Sku-Sku ID).
+      example: partner-store-unique-identifier
+    UpdateStorelinkStatusRequest:
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          type: string
+          description: 'The new status of the store. ACTIVE: store ready to perform operations again; SUSPENDED: temporarily disables the store; INVALID: current credentials will no longer work, new credentials needed.'
+          enum:
+          - ACTIVE
+          - SUSPENDED
+          - INVALID
+          example: SUSPENDED
+        message:
+          type:
+          - string
+          - 'null'
+          description: Optional message to explain the reason of the status update.
+          example: Authentication is failing with current credentials.  Suspending store while the retry process is in progress.
     UpsertStorelinkEventResultRequest:
       required:
       - success
@@ -184,26 +222,25 @@ components:
               items:
                 $ref: '#/components/schemas/ErrorDetail'
           description: The error response object.
-    UpdateStorelinkStatusRequest:
-      required:
-      - status
+    ErrorDetail:
       type: object
       properties:
-        status:
+        attribute:
           type: string
-          description: 'The new status of the store. ACTIVE: store ready to perform operations again; SUSPENDED: temporarily disables the store; INVALID: current credentials will no longer work, new credentials needed.'
-          enum:
-          - ACTIVE
-          - SUSPENDED
-          - INVALID
-          example: SUSPENDED
+          description: The error attribute.
+          example: Order Currency Code
         message:
-          type:
-          - string
-          - 'null'
-          description: Optional message to explain the reason of the status update.
-          example: Authentication is failing with current credentials.  Suspending store while the retry process is in progress.
+          type: string
+          description: The error detail description.
+          example: Order Currency Code must be exactly 3 characters
+      description: The error detail response object.
   parameters:
+    applicationIdHeader:
+      name: X-Application-Id
+      in: header
+      required: true
+      schema:
+        $ref: '#/components/schemas/ApplicationId'
     storeIdHeader:
       name: X-Store-Id
       in: header
@@ -218,43 +255,6 @@ components:
         type: string
         description: Unique identifier of the event that this callback refers to.
         example: cf0ce51b-d74e-40d3-b177-1925ab4edc0c
-    applicationIdHeader:
-      name: X-Application-Id
-      in: header
-      required: true
-      schema:
-        $ref: '#/components/schemas/ApplicationId'
-  responses:
-    '422':
-      description: The request body is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '404':
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '401':
-      description: Invalid authorization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '403':
-      description: Authorization not valid for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '400':
-      description: The request is malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
   securitySchemes:
     OAuth2.0:
       type: oauth2

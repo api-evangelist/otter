@@ -125,38 +125,51 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    '401':
+      description: Invalid authorization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '403':
+      description: Authorization not valid for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '400':
+      description: The request is malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '422':
+      description: The request body is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    '404':
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
   schemas:
-    JobId:
-      type: string
-      description: ID used to track the job created for generating report.
-      example: 38ab397f-b142-4b06-b70c-40c68a408bea
-    GetReportStatusResponse:
+    ErrorMessage:
       type: object
       properties:
-        status:
-          description: Report export status
+        message:
           type: string
-          enum:
-          - IN_PROGRESS
-          - READY
-          - ERROR
-          - EXPIRED
-          example: IN_PROGRESS
-        payload:
-          type: object
-          properties:
-            reportUrl:
-              type:
-              - string
-              - 'null'
-              description: Url to download the report. It will be available only if status is "READY"
-              example: https://example.com/path/to/report.csv.gz
-            errorMessage:
-              type:
-              - string
-              - 'null'
-              description: Error message. It will be available only if status is "ERROR"
-              example: Report generation error. Please reach out to support and provide jobId
+          description: The error description.
+          example: The request body is invalid.
+        details:
+          type: array
+          description: The error details.
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+      description: The error response object.
     GenerateReportMultiRequest:
       type: object
       properties:
@@ -209,12 +222,43 @@ components:
           description: Language of the report. Ignored by ORDER_STORES report Optional. Falls back to English if empty.
           example: string
       description: The request to generate a report for multiple stores.
+    GetReportStatusResponse:
+      type: object
+      properties:
+        status:
+          description: Report export status
+          type: string
+          enum:
+          - IN_PROGRESS
+          - READY
+          - ERROR
+          - EXPIRED
+          example: IN_PROGRESS
+        payload:
+          type: object
+          properties:
+            reportUrl:
+              type:
+              - string
+              - 'null'
+              description: Url to download the report. It will be available only if status is "READY"
+              example: https://example.com/path/to/report.csv.gz
+            errorMessage:
+              type:
+              - string
+              - 'null'
+              description: Error message. It will be available only if status is "ERROR"
+              example: Report generation error. Please reach out to support and provide jobId
     GenerateReportResponse:
       type: object
       properties:
         jobId:
           $ref: '#/components/schemas/JobId'
       description: The response to a generate report request
+    JobId:
+      type: string
+      description: ID used to track the job created for generating report.
+      example: 38ab397f-b142-4b06-b70c-40c68a408bea
     ErrorDetail:
       type: object
       properties:
@@ -227,50 +271,6 @@ components:
           description: The error detail description.
           example: Order Currency Code must be exactly 3 characters
       description: The error detail response object.
-    ErrorMessage:
-      type: object
-      properties:
-        message:
-          type: string
-          description: The error description.
-          example: The request body is invalid.
-        details:
-          type: array
-          description: The error details.
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-      description: The error response object.
-  responses:
-    '404':
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '422':
-      description: The request body is not valid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '401':
-      description: Invalid authorization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '403':
-      description: Authorization not valid for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    '400':
-      description: The request is malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
   parameters:
     jobId:
       name: jobId
