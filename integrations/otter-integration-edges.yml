@@ -8,9 +8,9 @@ marketplace_apps:
   channel: provider-built
   app: otter
   url: https://www.tryotter.com/integrations
-  app_count: 81
+  app_count: 82
   adapter: sweep-restaurant-pos.py:otter
-  listed: 81
+  listed: 82
 edges:
 - partner_name: Squirrel Systems
   partner: null
@@ -306,10 +306,24 @@ edges:
   operations: []
   detected_by: sweep-restaurant-pos.py
   detected: '2026-10-14'
-- partner_name: Uber Eats
+- partner_name: Oneplustwo
   partner: null
   partner_match: null
-  partner_candidate: cornershop
+  partner_candidate: null
+  type: contract
+  channel: provider-built
+  relationship: system-coverage
+  direction: provider-built
+  evidence: https://www.tryotter.com/integrations
+  category: Point of Sale
+  partner_domain: oneplustwo.co.uk
+  operations: []
+  detected_by: sweep-restaurant-pos.py
+  detected: '2026-10-14'
+- partner_name: Uber Eats
+  partner: uber-eats
+  partner_match: domain
+  partner_candidate: null
   type: contract
   channel: provider-built
   relationship: system-coverage

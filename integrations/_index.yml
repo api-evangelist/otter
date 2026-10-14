@@ -243,8 +243,20 @@
   relationship: system-coverage
   status: not-a-workflow
   arazzo: null
+- slug: otter-oneplustwo
+  label: Oneplustwo
+  partner_name: Oneplustwo
+  category: Point of Sale
+  type: contract
+  channel: provider-built
+  evidence: https://www.tryotter.com/integrations
+  source: edge
+  relationship: system-coverage
+  status: not-a-workflow
+  arazzo: null
 - slug: otter-uber-eats
   label: Uber Eats
+  partner: uber-eats
   partner_name: Uber Eats
   category: Online ordering
   type: contract
